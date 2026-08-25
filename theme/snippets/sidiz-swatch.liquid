@@ -1,0 +1,104 @@
+{%- comment -%}
+  Resolves a colour option value to a hex and prints the chip.
+
+  This was previously done with a CSS attribute map keyed off
+  data-colour="{{ value | handleize }}". That failed silently: an option value
+  is a drop rather than a string, so handleize returned nothing, every selector
+  missed, and the swatches rendered empty. Resolving in Liquid and writing the
+  colour inline removes the whole class of failure — nothing depends on an
+  attribute matching a stylesheet.
+
+  Order of preference:
+    1. a swatch the merchant set on the option value in admin
+    2. the SIDIZ palette below, matched on the colour name
+    3. a neutral placeholder, so a chip never renders invisibly
+
+  Accepts: value (option value), selected (boolean)
+{%- endcomment -%}
+
+{%- comment -%}
+  capture, not a filter chain. An option value is a drop: it prints its name
+  through {{ }}, but passing it straight into strip or downcase yields an empty
+  string, so every lookup missed and every chip fell through to the placeholder.
+  Capturing forces the drop to render to text first.
+{%- endcomment -%}
+{%- capture value_text %}{{ value }}{% endcapture -%}
+
+{%- liquid
+  assign name = value_text | strip
+  assign key = name | downcase | replace: ' ', '' | replace: '-', ''
+
+  assign hex = ''
+  if value.swatch.color
+    assign hex = value.swatch.color
+  endif
+
+  if hex == ''
+    case key
+      when 'shadowgrey'
+        assign hex = '#4a4744'
+      when 'tanbrown'
+        assign hex = '#835740'
+      when 'creambeige'
+        assign hex = '#d4d1c3'
+      when 'greenblack'
+        assign hex = '#222728'
+      when 'grey', 'gray'
+        assign hex = '#989b98'
+      when 'black'
+        assign hex = '#2c2d2f'
+      when 'dryrose'
+        assign hex = '#946661'
+      when 'daisyyellow'
+        assign hex = '#ba8b42'
+      when 'greyishmint', 'grayishmint'
+        assign hex = '#87999b'
+      when 'tealblue'
+        assign hex = '#4e686d'
+      when 'deepnavy'
+        assign hex = '#2f3842'
+      when 'ivory'
+        assign hex = '#f0eadf'
+      when 'lightgrey', 'lightgray'
+        assign hex = '#c4c8cb'
+      when 'darkgrey', 'darkgray'
+        assign hex = '#5a5d60'
+      when 'warmgrey', 'warmgray'
+        assign hex = '#a39c95'
+      when 'deepgreen'
+        assign hex = '#38463c'
+      when 'terracotta'
+        assign hex = '#b56a4d'
+      when 'khaki'
+        assign hex = '#7c7455'
+      when 'warmblue'
+        assign hex = '#6b8199'
+      when 'ashgreen'
+        assign hex = '#9aa694'
+      when 'rosiepink'
+        assign hex = '#e0a9ae'
+      when 'lavenderblue'
+        assign hex = '#b3bcd8'
+      when 'soymilkbeige'
+        assign hex = '#e8ddc9'
+      when 'white'
+        assign hex = '#f4f4f4'
+      else
+        assign hex = '#d6dade'
+    endcase
+  endif
+-%}
+
+{%- comment -%}
+  Drawn as an SVG rather than a coloured div.
+
+  The div version kept rendering as an empty ring: its size comes from a
+  four-level descendant chain in the KR sheet, and wherever that chain does not
+  match the box collapses and the colour has nothing to paint. An SVG carries
+  its own intrinsic size and paints via fill, so no stylesheet can flatten it.
+{%- endcomment -%}
+<span class="color-chip" data-colour="{{ key }}" title="{{ name | escape }}">
+  <svg width="28" height="28" viewBox="0 0 28 28" role="img" aria-label="{{ name | escape }}" focusable="false">
+    <circle cx="14" cy="14" r="10" fill="{{ hex }}" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+  </svg>
+</span>

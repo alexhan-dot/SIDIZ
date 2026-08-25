@@ -12,39 +12,39 @@
 
 /* --------------------------------------------------------------------------
    Colour chips
-   KR renders the swatch colour on the inner 20px div; the 28px parent is the
-   selection ring. Keyed by the handleized option value so any product reusing
-   these colour names is covered without per-product setup. A merchant-set
-   swatch on the option value wins, since that is written inline.
+
+   The colour itself is resolved in Liquid and written inline by the
+   sidiz-swatch snippet — see that file for why. Only the placeholder for a
+   chip with no colour resolved stays here.
    -------------------------------------------------------------------------- */
 
-.color-chip > div {
-  background: var(--chip, var(--gray-200, #eaedf0));
+/* The Liquid resolves the colour and writes it inline; what was missing is
+   size. KR only gives the inner dot its 20x20 through a four-level descendant
+   chain, and where that chain does not match the div collapses to zero height
+   and the chip reads as empty. Declaring the geometry here makes the swatch
+   independent of that selector. */
+.color-chip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 1000px;
+  border: 1px solid #fff;
+  flex: 0 0 28px;
 }
 
-.color-chip[data-colour='shadow-grey'] > div    { --chip: #4a4744; }
-.color-chip[data-colour='tan-brown'] > div      { --chip: #8b5e3c; }
-.color-chip[data-colour='cream-beige'] > div    { --chip: #e3d6c0; }
-.color-chip[data-colour='green-black'] > div    { --chip: #2f3a33; }
-.color-chip[data-colour='grey'] > div           { --chip: #9a9ea2; }
-.color-chip[data-colour='black'] > div          { --chip: #1a1a1a; }
-.color-chip[data-colour='dry-rose'] > div       { --chip: #c9a0a0; }
-.color-chip[data-colour='daisy-yellow'] > div   { --chip: #e5c55b; }
-.color-chip[data-colour='greyish-mint'] > div   { --chip: #a8bfb4; }
-.color-chip[data-colour='teal-blue'] > div      { --chip: #3e6e7e; }
-.color-chip[data-colour='deep-navy'] > div      { --chip: #2b3a55; }
-.color-chip[data-colour='ivory'] > div          { --chip: #f0eadf; }
-.color-chip[data-colour='light-grey'] > div     { --chip: #c4c8cb; }
-.color-chip[data-colour='dark-grey'] > div      { --chip: #5a5d60; }
-.color-chip[data-colour='warm-grey'] > div      { --chip: #a39c95; }
-.color-chip[data-colour='deep-green'] > div     { --chip: #38463c; }
-.color-chip[data-colour='terracotta'] > div     { --chip: #b56a4d; }
-.color-chip[data-colour='khaki'] > div          { --chip: #7c7455; }
-.color-chip[data-colour='warm-blue'] > div      { --chip: #6b8199; }
-.color-chip[data-colour='ash-green'] > div      { --chip: #9aa694; }
-.color-chip[data-colour='rosie-pink'] > div     { --chip: #e0a9ae; }
-.color-chip[data-colour='lavender-blue'] > div  { --chip: #b3bcd8; }
-.color-chip[data-colour='soy-milk-beige'] > div { --chip: #e8ddc9; }
+.product-variant input:checked + label .color-chip {
+  border-color: #434548;
+}
+
+.color-chip > div {
+  width: 20px;
+  height: 20px;
+  border-radius: 1000px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--gray-200, #eaedf0);
+}
 
 /* --------------------------------------------------------------------------
    AU-only additions

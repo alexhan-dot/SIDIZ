@@ -234,11 +234,7 @@
                         >
                         <label class="product-variant__label" for="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
                           {%- if is_colour -%}
-                            <div class="color-chip" data-colour="{{ value | handleize }}">
-                              <div
-                                {% if value.swatch.color %}style="background: {{ value.swatch.color }};"{% endif %}
-                              ></div>
-                            </div>
+                            {% render 'sidiz-swatch', value: value %}
                           {%- endif -%}
                           <div class="option-name">{{ value }}</div>
                         </label>
