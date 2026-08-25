@@ -54,6 +54,8 @@ def main():
             continue
         krw = float(v["price_krw"])
         raw = krw * rate
+        # Confirmed rule: end in 99 at $100 and above, end in 9 below $100.
+        final = up9(raw) if raw < 100 else up99(raw)
         rows.append({
             "product_handle": v["product_handle"],
             "product_title_ko": v["product_title_ko"],
@@ -61,8 +63,8 @@ def main():
             "sku": v["sku"],
             "price_krw": int(krw),
             "aud_raw": round(raw, 2),
-            "aud_x99": up99(raw),
-            "aud_x9_if_under_100": up9(raw) if raw < 100 else "",
+            "aud_final": final,
+            "rule": "x9" if raw < 100 else "x99",
             "band": "under $100" if raw < 100 else "$100+",
         })
 
@@ -82,16 +84,16 @@ def main():
         rs = by_handle.get(h)
         if not rs:
             continue
-        lo = min(r["aud_x99"] for r in rs)
-        hi = max(r["aud_x99"] for r in rs)
+        lo = min(r["aud_final"] for r in rs)
+        hi = max(r["aud_final"] for r in rs)
         live = AU_LIVE.get(h, "")
         delta = f"{(lo - live) / live * 100:+.0f}%" if live else ""
         summary.append({
             "handle": h,
             "title_ko": p["title_ko"],
             "krw_min": p["price_krw_min"],
-            "aud_x99_min": lo,
-            "aud_x99_max": hi,
+            "aud_final_min": lo,
+            "aud_final_max": hi,
             "au_live_price": live,
             "change_vs_live": delta,
         })
@@ -111,7 +113,7 @@ def main():
     for s in summary:
         if s["au_live_price"]:
             print(f"  {s['title_ko'][:26]:26} ${s['au_live_price']:>5} -> "
-                  f"${s['aud_x99_min']:>5}   {s['change_vs_live']}")
+                  f"${s['aud_final_min']:>5}   {s['change_vs_live']}")
 
 
 if __name__ == "__main__":
