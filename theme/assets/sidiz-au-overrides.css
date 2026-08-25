@@ -102,3 +102,64 @@
 .variant-image.hidden {
   display: none;
 }
+
+/* --------------------------------------------------------------------------
+   Header overlay
+
+   The KR stylesheet supplies the sticky positioning and the
+   mix-blend-mode: difference that recolours the nav against the page. These
+   are the few pieces KR renders from theme settings rather than CSS.
+   -------------------------------------------------------------------------- */
+
+/* The white plate that slides in behind the nav once the visitor scrolls past
+   the top tier. section-header.js toggles its display. */
+#gnb--overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #fff;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Blending must not bleed onto the submenu, or an open mega-menu inverts too. */
+.site-header-container .submenu {
+  mix-blend-mode: normal;
+}
+
+/* Announcement bar */
+.section-announcement-bar .announcement--wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 36px;
+  background: var(--bar-bg, #000);
+  color: var(--bar-fg, #fff);
+  font-size: 13px;
+  line-height: 160%;
+  letter-spacing: -0.26px;
+}
+
+.section-announcement-bar .announcement--title,
+.section-announcement-bar .announcement--title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.section-announcement-bar .announcement--close {
+  position: absolute;
+  right: 16px;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.section-announcement-bar {
+  position: relative;
+}

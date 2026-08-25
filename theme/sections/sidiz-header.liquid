@@ -1,25 +1,48 @@
 {%- comment -%}
   Port of the KR site header.
 
-  Two tiers, as on kr.sidiz.com:
-    .header-container--top    logo + utility links (registration, business,
-                              stockists, sign up, log in)
-    .header-container--bottom logo + the main nav, each item optionally opening
-                              a mega-menu with a titled left column and one or
-                              more link columns
+  The behaviour that matters, and which I got wrong first time round: this
+  header is not a block that pushes the page down. It sits over the content and
+  recolours itself against whatever is behind it.
 
-  Korean-market utility links are dropped rather than translated: there is no
-  Korean business-purchase flow or showroom network to point at.
+  From section-header.css:
+    .site-header-container { position: sticky; top: 0; z-index: 1000;
+                             mix-blend-mode: difference; }
+    a.invert-colors        { filter: invert(1); }
+    .no-touchevents .site-header-container:hover { mix-blend-mode: normal; }
+    .no-touchevents .site-header-container:hover .site-header { background: #fff; }
+
+  mix-blend-mode: difference is the whole trick — the nav turns white over dark
+  footage and black over a light page with no JavaScript at all. The logo is an
+  image, so it takes filter: invert(1) to travel with it. On hover the blend is
+  switched off and a white plate drops in so the menu stays readable while open.
+
+  From section-header.js: once the visitor scrolls past the top tier,
+  #gnb--overlay is shown and #logo_pc_bottom appears in the nav row. Both
+  elements have to exist for that script to work.
+
+  The hover rules are scoped to .no-touchevents, a class the KR theme sets on
+  <html>; Dawn does not, so it is set below for pointer devices only.
 {%- endcomment -%}
 
 {{ 'theme.css' | asset_url | stylesheet_tag }}
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'section-header.js' | asset_url }}" defer="defer"></script>
+
+<script>
+  // KR scopes its header hover states to .no-touchevents on <html>.
+  if (!window.matchMedia('(hover: none)').matches) {
+    document.documentElement.classList.add('no-touchevents');
+  }
+</script>
 
 {%- liquid
   assign utility = section.blocks | where: 'type', 'utility'
   assign menus = section.blocks | where: 'type', 'menu'
 -%}
+
+<div id="gnb--overlay"></div>
 
 <main-header id="site-header" class="site-header site-header--alignment-left">
   <div class="header-container header-container--top">
@@ -47,7 +70,11 @@
       <div class="header__menu site-nav style--classic">
         <div class="site-nav-container">
           <nav>
-            <div id="logo_pc_bottom" class="logo">
+            {%- comment -%}
+              Hidden until the visitor scrolls past the top tier, at which point
+              section-header.js reveals it alongside the overlay.
+            {%- endcomment -%}
+            <div id="logo_pc_bottom" class="logo" style="display: none;">
               <a class="logo-img invert-colors" title="{{ shop.name | escape }}" href="{{ routes.root_url }}">
                 <img src="{{ 'sidiz_symbol.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="24" height="24">
               </a>
@@ -57,7 +84,7 @@
               {%- for block in menus -%}
                 {%- liquid
                   assign handle = block.settings.label | handleize
-                  assign groups = block.settings.columns | newline_to_br | split: '<br />'
+                  assign rows = block.settings.columns | newline_to_br | split: '<br />'
                   assign has_submenu = false
                   if block.settings.columns != blank
                     assign has_submenu = true
@@ -89,12 +116,10 @@
 
                             <div class="submenu--list">
                               <div class="submenu--list-inner">
-                                {%- for group in groups -%}
-                                  {%- assign parts = group | strip | split: '|' -%}
+                                {%- for row in rows -%}
+                                  {%- assign parts = row | strip | split: '|' -%}
                                   {%- if parts.size > 1 -%}
-                                    <a class="submenu--item" href="{{ parts[1] | strip }}">
-                                      {{ parts[0] | strip }}
-                                    </a>
+                                    <a class="submenu--item" href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a>
                                   {%- elsif parts[0] != blank -%}
                                     <div class="submenu--group-title">{{ parts[0] | strip }}</div>
                                   {%- endif -%}
@@ -111,11 +136,11 @@
             </ul>
 
             <div class="header__icons">
-              <a class="icon-button" href="{{ routes.search_url }}" aria-label="{{ 'general.search.search' | t }}">
+              <a class="icon-button invert-colors" href="{{ routes.search_url }}" aria-label="{{ 'general.search.search' | t }}">
                 <img src="{{ 'icon-search-line-bk.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
               </a>
-              <a class="icon-button" href="{{ routes.cart_url }}" aria-label="{{ 'sections.header.cart' | t }}">
-                <span class="icon-button__text">{{ cart.item_count }}</span>
+              <a class="icon-button invert-colors" href="{{ routes.cart_url }}" aria-label="{{ 'sections.header.cart' | t }}">
+                <img src="{{ 'icon-bookmark-line-bk-28.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
               </a>
             </div>
           </nav>
@@ -128,12 +153,12 @@
 {% schema %}
 {
   "name": "SIDIZ header",
-  "tag": "header",
+  "tag": "div",
   "class": "shopify-section-group-header-group site-header-container mount-header",
   "settings": [
     {
       "type": "paragraph",
-      "content": "Main menu items take their submenu from the Columns field: one entry per line, as 'Label | /url'. A line with no pipe becomes a group heading."
+      "content": "The header floats over the page and recolours itself against whatever is behind it, so the first section below should be full-bleed media. Submenu links are one per line, as 'Label | /url'; a line with no pipe becomes a group heading."
     }
   ],
   "blocks": [
@@ -156,11 +181,6 @@
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "SIDIZ header",
-      "blocks": [{ "type": "menu" }, { "type": "menu" }]
-    }
-  ]
+  "presets": [{ "name": "SIDIZ header", "blocks": [{ "type": "menu" }, { "type": "menu" }] }]
 }
 {% endschema %}

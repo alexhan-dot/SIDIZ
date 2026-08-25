@@ -1,0 +1,63 @@
+{%- comment -%}
+  Port of the KR announcement bar.
+
+  The class name matters beyond styling: section-header.js measures
+  `.section-announcement-bar` to work out when the header should switch to its
+  scrolled state, and reads `.style.display` on it without a null check. Dawn's
+  own announcement bar carries a different class, so leaving it in place breaks
+  the header's scroll handler outright.
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-announcement-bar.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-announcement-bar.js' | asset_url }}" defer="defer"></script>
+
+{%- if section.settings.text != blank -%}
+  <div class="container announcement--wrapper" style="--bar-bg: {{ section.settings.background }}; --bar-fg: {{ section.settings.text_colour }};">
+    <div class="announcement--title">
+      {%- if section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}">{{ section.settings.text }}</a>
+      {%- else -%}
+        {{ section.settings.text }}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.dismissible -%}
+      <button class="announcement--close" type="button" data-sidiz-dismiss aria-label="Dismiss">
+        <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+          <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.4" fill="none"/>
+        </svg>
+      </button>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.dismissible -%}
+    <script>
+      (function () {
+        var bar = document.currentScript.previousElementSibling;
+        var btn = bar && bar.querySelector('[data-sidiz-dismiss]');
+        if (!btn) return;
+        // The header measures this element, so hide rather than remove it.
+        btn.addEventListener('click', function () {
+          bar.parentElement.style.display = 'none';
+        });
+      })();
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "SIDIZ announcement",
+  "tag": "div",
+  "class": "shopify-section-group-header-group section-announcement-bar",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "checkbox", "id": "dismissible", "label": "Allow dismissing", "default": true },
+    { "type": "color", "id": "background", "label": "Background", "default": "#000000" },
+    { "type": "color", "id": "text_colour", "label": "Text", "default": "#ffffff" }
+  ],
+  "presets": [{ "name": "SIDIZ announcement" }]
+}
+{% endschema %}
