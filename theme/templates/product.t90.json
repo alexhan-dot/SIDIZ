@@ -1,0 +1,273 @@
+{
+  "sections": {
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "warranty": {
+          "type": "assurance",
+          "settings": {
+            "label": "15-year warranty",
+            "detail": "with product registration. This is in addition to your rights under the Australian Consumer Law."
+          }
+        },
+        "delivery": {
+          "type": "assurance",
+          "settings": {
+            "label": "Australia-wide delivery",
+            "detail": "Natural Leather Limited Palette is made to order."
+          }
+        },
+        "repair": {
+          "type": "assurance",
+          "settings": {
+            "label": "Easy Repair",
+            "detail": "replace a single part instead of the whole chair."
+          }
+        }
+      },
+      "block_order": ["warranty", "delivery", "repair"],
+      "settings": {
+        "eyebrow": "Performance engineered",
+        "tagline": "Whatever your posture, whatever the device, the T90 supports you — flexibly, and without interrupting your focus.",
+        "tax_note": "Price includes GST. Shipping calculated at checkout."
+      }
+    },
+
+    "intro": {
+      "type": "sidiz-content-row",
+      "settings": {
+        "width": "narrow",
+        "media_side": "above",
+        "text_align": "center",
+        "padding_block": 96,
+        "eyebrow": "For the multi-device era",
+        "heading": "A performance engineered chair",
+        "body": "<p>The SIDIZ T90 is an ergonomic office chair designed for long hours of computer work. Panorama 4D armrests, Perfect Fitting Lumbar Support and a flexible backrest work together to support the changes in posture and movement that happen naturally through a working day. The result is stable seating across office, work-from-home and multi-device setups — and a chair suited to work that demands sustained concentration.</p>",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+
+    "ergonomics": {
+      "type": "sidiz-content-row",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": { "label": "Lumbar support", "value": "Perfect Fitting" }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": { "label": "Backrest", "value": "Flexible" }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": { "label": "Cushioning", "value": "High Comfort Foam" }
+        }
+      },
+      "block_order": ["f1", "f2", "f3"],
+      "settings": {
+        "width": "wide",
+        "media_side": "left",
+        "anchor_id": "ergonomics",
+        "eyebrow": "Optimised for performance",
+        "heading": "Change posture without breaking focus",
+        "body": "<p>Designed so your concentration holds even when your posture drifts through a long stretch of work. Twist your upper body or lean to one side and the T90 responds smoothly, keeping your back and lower back supported.</p><p><small>Perfect Fitting Lumbar Support — Korean Patent No. 10-2468097</small></p>",
+        "background": "#f5f6f7",
+        "text_colour": "#000000",
+        "padding_block": 0
+      }
+    },
+
+    "armrests": {
+      "type": "sidiz-content-row",
+      "blocks": {
+        "a1": { "type": "fact", "settings": { "label": "Height", "value": "70 mm" } },
+        "a2": { "type": "fact", "settings": { "label": "Depth", "value": "60 mm" } },
+        "a3": { "type": "fact", "settings": { "label": "Lateral", "value": "35°" } },
+        "a4": { "type": "fact", "settings": { "label": "Rotation", "value": "230°" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4"],
+      "settings": {
+        "width": "wide",
+        "media_side": "right",
+        "anchor_id": "armrests",
+        "eyebrow": "Move without limits",
+        "heading": "Panorama 4D armrests",
+        "body": "<p>Modern work moves between PC, laptop, tablet and phone, which makes the movement of your arms and upper body matter more than it used to. The T90's 4D armrests offer a wide adjustment range, supporting your arms and shoulders in whatever posture the task calls for.</p><p>Soft silicone pads reduce pressure where your arms make contact, staying comfortable through long sessions.</p><p><small>Korean Patent No. 10-2779705</small></p>",
+        "background": "#ffffff",
+        "text_colour": "#000000",
+        "padding_block": 0
+      }
+    },
+
+    "tilt": {
+      "type": "sidiz-content-row",
+      "blocks": {
+        "t1": { "type": "fact", "settings": { "label": "Components", "value": "138+" } },
+        "t2": { "type": "fact", "settings": { "label": "Co-developed with", "value": "ITO Design" } }
+      },
+      "block_order": ["t1", "t2"],
+      "settings": {
+        "width": "wide",
+        "media_side": "left",
+        "anchor_id": "tilt",
+        "eyebrow": "Zero gap between you and the chair",
+        "heading": "Lumbar support and Ultimate Sync Tilt",
+        "body": "<p>A chair that responds precisely, as though it were part of you, is the baseline for comfortable seating and sustained work performance. Perfect Fitting Lumbar Support and the Ultimate Sync Tilt mechanism minimise the gap between your body and the backrest, while backrest and seat move together to hold a stable posture.</p><p>More than 138 precisely assembled components produce a tilt mechanism that moves close to the way the body does.</p><p><small>Korean Patent No. 10-1533650 · Co-designed and developed over six years with ITO Design, the German ergonomics design studio</small></p>",
+        "background": "#f5f6f7",
+        "text_colour": "#000000",
+        "padding_block": 0
+      }
+    },
+
+    "comfort": {
+      "type": "sidiz-content-row",
+      "blocks": {
+        "c1": { "type": "fact", "settings": { "label": "Headrest height", "value": "70 mm" } },
+        "c2": { "type": "fact", "settings": { "label": "Headrest angle", "value": "65°" } }
+      },
+      "block_order": ["c1", "c2"],
+      "settings": {
+        "width": "wide",
+        "media_side": "right",
+        "anchor_id": "comfort",
+        "eyebrow": "Until you forget you are sitting at all",
+        "heading": "Comfortable, because rest is part of focus",
+        "body": "<p>The headrest cushioning is engineered so the frame never presses directly against you, with height and angle adjustment to suit different bodies and postures.</p><p>Ultra Comfort Foam — resilient 100% MDI foam with a scooping technique applied — distributes body weight evenly, and the waterfall seat edge falls away gently to reduce pressure on the thighs.</p><p><small>Scooping technique applies to Double Raschel and Aquatex · Korean Patents No. 10-2779707 and No. 10-2779714</small></p>",
+        "background": "#ffffff",
+        "text_colour": "#000000",
+        "padding_block": 0
+      }
+    },
+
+    "materials": {
+      "type": "sidiz-content-row",
+      "settings": {
+        "width": "narrow",
+        "media_side": "above",
+        "text_align": "center",
+        "padding_block": 96,
+        "heading": "Premium mesh, fabric and full-grain leather",
+        "body": "<p><strong>Double Raschel dual mesh</strong> — a two-layer mesh structure forms an air pocket, improving breathability and durability. A stain-resistant, water-repellent finish keeps it resistant to marks.</p><p><strong>Aquatex fabric</strong> — easy to care for and durable, resistant to water, staining and scratching, so it stays easy to maintain even in a home with pets.</p><p><strong>Natural Leather Limited Palette</strong> — a five-piece collection of top-grade natural leathers carrying the heritage of Mastrotto Group and Montebello, Italian leather houses with 50 years of tradition. Made to order; please allow approximately three weeks including production.</p>",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+
+    "leather_care": {
+      "type": "sidiz-content-row",
+      "settings": {
+        "width": "narrow",
+        "media_side": "above",
+        "text_align": "left",
+        "padding_block": 80,
+        "heading": "About natural leather",
+        "body": "<p>SIDIZ uses natural cowhide. Natural leather carries the traces of the animal's whole life. Scars, wrinkles and variations in colour picked up as the animal grew are characteristics of natural leather, not defects.</p><p><strong>Marks and wrinkles</strong> — cattle hide carries marks large and small. They do not weaken the durability of the leather, and they are proof the material is natural rather than synthetic.</p><p><strong>Variation in texture</strong> — wrinkle density and skin texture differ across the hide, so the surface grain is not uniform.</p><p><strong>Variation in colour</strong> — natural leather can vary slightly in colour depending on when it was dyed and which part of the hide it came from. Colour can also look different under sunlight or indoor lighting.</p><p><strong>Please note:</strong> light-coloured natural leather can pick up colour transfer when rubbed against dark clothing such as denim.</p>",
+        "background": "#fdfaf6",
+        "text_colour": "#2a1f1a"
+      }
+    },
+
+    "specs": {
+      "type": "sidiz-content-row",
+      "blocks": {
+        "s1": { "type": "fact", "settings": { "label": "Maximum load", "value": "125 kg" } },
+        "s2": { "type": "fact", "settings": { "label": "Product weight", "value": "28.7 kg" } },
+        "s3": { "type": "fact", "settings": { "label": "Warranty", "value": "15 years" } },
+        "s4": { "type": "fact", "settings": { "label": "Design award", "value": "iF 2025" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"],
+      "settings": {
+        "width": "contained",
+        "media_side": "above",
+        "text_align": "center",
+        "anchor_id": "specifications",
+        "padding_block": 80,
+        "heading": "Specifications",
+        "body": "<p>Materials: Double Raschel, natural leather, moulded foam, urethane, plastic, steel, aluminium, Aquatex fabric.</p>",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+
+    "faq": {
+      "type": "sidiz-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "What is the SIDIZ T90 designed for?",
+            "answer": "<p>The SIDIZ T90 is an ergonomic office chair designed around long hours of computer work. It is built to respond flexibly to changes in posture and movement — particularly in modern multi-device setups — so it works equally well for working from home, the office, or specialist work environments.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "How is the SIDIZ T90 different from an ordinary office chair?",
+            "answer": "<p>The T90 is a premium office chair built on performance engineering. Its flexible backrest, Perfect Fitting Lumbar Support and 4D armrests respond to your body and your working posture, and the design is recognised by seven registered industrial property rights.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "Will my back and neck still be comfortable after sitting for a long time?",
+            "answer": "<p>The T90 is an ergonomic chair designed to stay comfortable through long working days. Lumbar support holds your lower back steady and the backrest moves naturally with you, helping you hold a good posture and reducing the fatigue that builds up over a day.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "Who would you recommend the SIDIZ T90 to?",
+            "answer": "<p>The T90 suits people who spend most of the day at a desk — developers, designers, planners and remote workers who are at a computer for long stretches.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it suitable for working from home?",
+            "answer": "<p>Yes. The T90 suits home offices well. Beyond the design, it is built around a range of working postures, so you get office-grade comfort and concentration at home. It also won a prize in the office chair category at the iF Design Award 2025 in Germany.</p>"
+          }
+        },
+        "q6": {
+          "type": "faq",
+          "settings": {
+            "question": "Can it be adjusted to fit my body?",
+            "answer": "<p>Yes. Seat height and depth, backrest, headrest, lumbar support and armrests can all be adjusted to build a seating setup optimised for you.</p>"
+          }
+        },
+        "q7": {
+          "type": "faq",
+          "settings": {
+            "question": "What kind of work setup does the T90 suit?",
+            "answer": "<p>The T90 suits setups using multiple monitors, laptops and tablets. It provides stable support and flexible movement even where posture changes frequently.</p>"
+          }
+        },
+        "q8": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it suitable for bulk orders for an office?",
+            "answer": "<p>Yes. The T90 is a premium office chair designed for professional work environments and suits business and office use. Its durability and wide adjustment range make it practical where people of different builds share the same chairs.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"],
+      "settings": {
+        "heading": "Frequently asked questions",
+        "open_first": true,
+        "background": "#f5f6f7"
+      }
+    }
+  },
+  "order": [
+    "pdp_head",
+    "intro",
+    "ergonomics",
+    "armrests",
+    "tilt",
+    "comfort",
+    "materials",
+    "leather_care",
+    "specs",
+    "faq"
+  ]
+}

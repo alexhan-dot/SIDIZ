@@ -1,0 +1,180 @@
+/* SIDIZ PDP head — replaces KR product_pdp_head + configurator buy box */
+
+.sidiz-pdp__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media screen and (min-width: 834px) {
+  .sidiz-pdp__inner {
+    grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+    align-items: start;
+  }
+}
+
+/* ---- gallery ------------------------------------------------------------- */
+
+.sidiz-pdp__gallery {
+  display: grid;
+  gap: 2px;
+  background: var(--gray-100);
+}
+
+.sidiz-pdp__media {
+  margin: 0;
+}
+
+.sidiz-pdp__media img,
+.sidiz-pdp__media video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- buy box ------------------------------------------------------------- */
+
+.sidiz-pdp__buybox-inner {
+  padding: var(--gutter-large) var(--gutter-container);
+}
+
+@media screen and (min-width: 834px) {
+  .sidiz-pdp__buybox {
+    position: sticky;
+    top: var(--header-vertical-space);
+  }
+}
+
+.sidiz-pdp__eyebrow {
+  margin: 0 0 var(--gutter-small);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sidiz-blue);
+}
+
+.sidiz-pdp__title {
+  margin: 0 0 var(--gutter-small);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.sidiz-pdp__tagline {
+  margin: 0 0 var(--gutter-regular);
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+.sidiz-pdp__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--gutter-small);
+  margin-bottom: 0.25rem;
+}
+
+.sidiz-pdp__price-now {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.sidiz-pdp__price-was {
+  color: var(--gray-400);
+}
+
+.sidiz-pdp__tax-note {
+  margin: 0 0 var(--gutter-large);
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+/* ---- options ------------------------------------------------------------- */
+
+.sidiz-pdp__option {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--gutter-regular);
+}
+
+.sidiz-pdp__option-label {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0;
+  margin-bottom: 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.sidiz-pdp__option-value {
+  color: var(--gray-900);
+  font-weight: 500;
+}
+
+.sidiz-pdp__option input[type='radio'] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidiz-pdp__option label {
+  display: inline-block;
+  margin: 0 6px 6px 0;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--gray-300);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.sidiz-pdp__option input[type='radio']:checked + label {
+  border-color: var(--gray-900);
+  color: var(--gray-900);
+  font-weight: 500;
+}
+
+.sidiz-pdp__option input[type='radio']:focus-visible + label {
+  outline: 2px solid var(--sidiz-blue);
+  outline-offset: 2px;
+}
+
+/* ---- add to cart --------------------------------------------------------- */
+
+.sidiz-pdp__atc {
+  width: 100%;
+  height: var(--button-product);
+  border: 0;
+  background: var(--sidiz-blue);
+  color: var(--gray-000);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.sidiz-pdp__atc:hover:not(:disabled) {
+  background: var(--light-blue);
+}
+
+.sidiz-pdp__atc:disabled {
+  background: var(--gray-300);
+  cursor: not-allowed;
+}
+
+/* ---- assurances ---------------------------------------------------------- */
+
+.sidiz-pdp__assurances {
+  margin: var(--gutter-large) 0 0;
+  padding: var(--gutter-regular) 0 0;
+  border-top: 1px solid var(--gray-200);
+  list-style: none;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--gray-600);
+}
+
+.sidiz-pdp__assurances strong {
+  color: var(--gray-900);
+}

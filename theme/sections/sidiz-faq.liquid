@@ -1,0 +1,119 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-faq.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  FAQ accordion. Renders as real, crawlable text — never behind JavaScript —
+  so search engines and AI assistants can read the answers directly. The
+  <details> element gives us the collapse behaviour with no script at all.
+{%- endcomment -%}
+
+{%- liquid
+  assign faqs = section.blocks | where: 'type', 'faq'
+-%}
+
+{%- if faqs.size > 0 -%}
+  <section class="sidiz-faq sidiz-section" style="--faq-bg: {{ section.settings.background }};">
+    <div class="sidiz-container">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sidiz-faq__heading sidiz-display">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.intro != blank -%}
+        <p class="sidiz-faq__intro">{{ section.settings.intro }}</p>
+      {%- endif -%}
+
+      <div class="sidiz-faq__list">
+        {%- for block in faqs -%}
+          <details
+            class="sidiz-faq__item"
+            {% if forloop.first and section.settings.open_first %}open{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <summary class="sidiz-faq__question">
+              <span>{{ block.settings.question }}</span>
+              <svg class="sidiz-faq__icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+                <path d="M10 4v12M4 10h12" fill="none" stroke="currentColor" stroke-width="1.5" />
+              </svg>
+            </summary>
+            <div class="sidiz-faq__answer rte">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%}
+    FAQPage structured data, built from the same blocks that render above so the
+    markup can never drift from what the visitor sees.
+  {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for block in faqs -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.question | strip_html | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ block.settings.answer | strip_html | strip_newlines | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "SIDIZ FAQ",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently asked questions"
+    },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "Intro"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open the first question by default",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "paragraph",
+      "content": "Answers are emitted as FAQPage structured data. Write them as complete, self-contained sentences — that is what search engines and AI assistants quote back."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SIDIZ FAQ",
+      "blocks": [{ "type": "faq" }, { "type": "faq" }, { "type": "faq" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,137 @@
+{%- comment -%}
+  Structured data for a SIDIZ product page.
+
+  Emits Product + Offer + BreadcrumbList, and FAQPage when the page carries FAQ
+  blocks. This is what search engines and AI assistants read to answer questions
+  about the product, so the facts here must match the visible page exactly --
+  a mismatch is both a rich-result disqualifier and, for price and availability,
+  a misleading-conduct risk under Australian Consumer Law.
+
+  Accepts:
+    product  - required
+    faqs     - optional array of {question, answer}
+{%- endcomment -%}
+
+{%- liquid
+  assign p = product
+  assign brand = p.vendor | default: 'SIDIZ'
+  assign img_count = p.images.size
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "@id": {{ request.origin | append: p.url | append: '#product' | json }},
+  "name": {{ p.title | json }},
+  "sku": {{ p.selected_or_first_available_variant.sku | json }},
+  "description": {{ p.description | strip_html | strip_newlines | truncate: 500 | json }},
+  {%- if img_count > 0 %}
+  "image": [
+    {%- for image in p.images limit: 8 -%}
+      {{ image | image_url: width: 1600 | prepend: 'https:' | json }}{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ],
+  {%- endif %}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ brand | json }}
+  },
+  {%- if p.metafields.custom.material != blank %}
+  "material": {{ p.metafields.custom.material | json }},
+  {%- endif %}
+  {%- if p.metafields.custom.weight_kg != blank %}
+  "weight": {
+    "@type": "QuantitativeValue",
+    "value": {{ p.metafields.custom.weight_kg }},
+    "unitCode": "KGM"
+  },
+  {%- endif %}
+  {%- if p.metafields.custom.warranty_years != blank %}
+  "hasMerchantReturnPolicy": {
+    "@type": "MerchantReturnPolicy",
+    "applicableCountry": "AU",
+    "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+    "merchantReturnDays": 30,
+    "returnMethod": "https://schema.org/ReturnByMail",
+    "returnFees": "https://schema.org/FreeReturn"
+  },
+  {%- endif %}
+  "offers": {
+    "@type": "AggregateOffer",
+    "offerCount": {{ p.variants.size }},
+    "lowPrice": {{ p.price_min | divided_by: 100.0 | json }},
+    "highPrice": {{ p.price_max | divided_by: 100.0 | json }},
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "offers": [
+      {%- for v in p.variants -%}
+      {
+        "@type": "Offer",
+        "sku": {{ v.sku | json }},
+        "name": {{ v.title | json }},
+        "url": {{ request.origin | append: p.url | append: '?variant=' | append: v.id | json }},
+        "price": {{ v.price | divided_by: 100.0 | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "availability": {% if v.available %}"https://schema.org/InStock"{% else %}"https://schema.org/OutOfStock"{% endif %},
+        "itemCondition": "https://schema.org/NewCondition",
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "AU"
+          }
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": {{ request.origin | json }}
+    }{%- if collection != blank %},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ collection.title | json }},
+      "item": {{ request.origin | append: collection.url | json }}
+    }{% endif %},
+    {
+      "@type": "ListItem",
+      "position": {% if collection != blank %}3{% else %}2{% endif %},
+      "name": {{ p.title | json }},
+      "item": {{ request.origin | append: p.url | json }}
+    }
+  ]
+}
+</script>
+
+{%- if faqs != blank and faqs.size > 0 -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for faq in faqs -%}
+      {
+        "@type": "Question",
+        "name": {{ faq.question | strip_html | json }},
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": {{ faq.answer | strip_html | strip_newlines | json }}
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+{%- endif -%}

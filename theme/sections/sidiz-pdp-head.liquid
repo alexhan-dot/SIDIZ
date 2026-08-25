@@ -1,0 +1,146 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-pdp-head.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign p = product
+  assign v = p.selected_or_first_available_variant
+-%}
+
+<section class="sidiz-pdp" id="sidiz-pdp-head">
+  <div class="sidiz-pdp__inner">
+    <div class="sidiz-pdp__gallery">
+      {%- for media in p.media limit: 10 -%}
+        <figure class="sidiz-pdp__media">
+          {%- if media.media_type == 'image' -%}
+            {{
+              media
+              | image_url: width: 1800
+              | image_tag:
+                loading: forloop.first | default: 'lazy',
+                sizes: '(min-width: 834px) 58vw, 100vw',
+                widths: '480,760,1100,1500,1800',
+                alt: media.alt
+            }}
+          {%- else -%}
+            {{ media | media_tag: image_size: '1800x', autoplay: false, loop: true, controls: true }}
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+
+    <div class="sidiz-pdp__buybox">
+      <div class="sidiz-pdp__buybox-inner">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="sidiz-pdp__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h1 class="sidiz-pdp__title sidiz-display">{{ p.title }}</h1>
+
+        {%- if section.settings.tagline != blank -%}
+          <p class="sidiz-pdp__tagline">{{ section.settings.tagline }}</p>
+        {%- endif -%}
+
+        <div class="sidiz-pdp__price" id="sidiz-price">
+          <span class="sidiz-pdp__price-now">{{ v.price | money_with_currency }}</span>
+          {%- if v.compare_at_price > v.price -%}
+            <s class="sidiz-pdp__price-was">{{ v.compare_at_price | money }}</s>
+          {%- endif -%}
+        </div>
+        <p class="sidiz-pdp__tax-note">{{ section.settings.tax_note }}</p>
+
+        {%- form 'product', p, id: 'sidiz-product-form', class: 'sidiz-pdp__form' -%}
+          {%- unless p.has_only_default_variant -%}
+            <variant-selects class="sidiz-pdp__options" data-section="{{ section.id }}">
+              {%- for option in p.options_with_values -%}
+                <fieldset class="sidiz-pdp__option">
+                  <legend class="sidiz-pdp__option-label">
+                    {{ option.name }}
+                    <span class="sidiz-pdp__option-value">{{ option.selected_value }}</span>
+                  </legend>
+                  {%- for value in option.values -%}
+                    <input
+                      type="radio"
+                      id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                      name="{{ option.name }}-{{ option.position }}"
+                      value="{{ value | escape }}"
+                      form="sidiz-product-form"
+                      {% if option.selected_value == value %}checked{% endif %}
+                    >
+                    <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                      {{ value }}
+                    </label>
+                  {%- endfor -%}
+                </fieldset>
+              {%- endfor -%}
+              <script type="application/json">
+                {{ p.variants | json }}
+              </script>
+            </variant-selects>
+          {%- endunless -%}
+
+          <input type="hidden" name="id" value="{{ v.id }}" disabled>
+
+          <button
+            type="submit"
+            name="add"
+            class="sidiz-pdp__atc"
+            {% if v.available == false %}disabled{% endif %}
+          >
+            {%- if v.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="sidiz-pdp__assurances">
+            {%- for block in section.blocks -%}
+              <li {{ block.shopify_attributes }}>
+                <strong>{{ block.settings.label }}</strong>
+                {%- if block.settings.detail != blank %} {{ block.settings.detail }}{% endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% render 'sidiz-product-schema', product: p %}
+
+{% schema %}
+{
+  "name": "SIDIZ PDP head",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "tagline", "label": "Tagline" },
+    {
+      "type": "text",
+      "id": "tax_note",
+      "label": "Tax note",
+      "default": "Price includes GST. Shipping calculated at checkout.",
+      "info": "Australian retail prices are shown GST-inclusive."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "assurance",
+      "name": "Assurance",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "detail", "label": "Detail" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SIDIZ PDP head",
+      "blocks": [{ "type": "assurance" }]
+    }
+  ]
+}
+{% endschema %}

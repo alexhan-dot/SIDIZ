@@ -1,0 +1,88 @@
+/* SIDIZ FAQ accordion — replaces KR product_faq */
+
+.sidiz-faq {
+  background: var(--faq-bg, var(--gray-000));
+}
+
+.sidiz-faq__heading {
+  margin: 0 0 var(--gutter-regular);
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  text-align: center;
+}
+
+.sidiz-faq__intro {
+  margin: 0 auto var(--gutter-large);
+  max-width: 60ch;
+  text-align: center;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.sidiz-faq__list {
+  max-width: 860px;
+  margin-inline: auto;
+  border-top: 1px solid var(--gray-200);
+}
+
+.sidiz-faq__item {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.sidiz-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gutter-regular);
+  padding: var(--gutter-regular) 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.4;
+  list-style: none;
+}
+
+.sidiz-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.sidiz-faq__question:hover {
+  color: var(--sidiz-blue);
+}
+
+.sidiz-faq__question:focus-visible {
+  outline: 2px solid var(--sidiz-blue);
+  outline-offset: 4px;
+}
+
+.sidiz-faq__icon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.sidiz-faq__item[open] .sidiz-faq__icon {
+  transform: rotate(45deg);
+}
+
+.sidiz-faq__answer {
+  padding: 0 0 var(--gutter-regular);
+  max-width: 68ch;
+  color: var(--gray-700);
+  line-height: 1.75;
+}
+
+.sidiz-faq__answer > :first-child {
+  margin-top: 0;
+}
+
+.sidiz-faq__answer > :last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidiz-faq__icon {
+    transition: none;
+  }
+}
