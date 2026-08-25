@@ -1,0 +1,95 @@
+/* ==========================================================================
+   SIDIZ Australia — overrides on top of the ported KR stylesheets.
+
+   The KR theme CSS supplies all layout, spacing and type. This file only adds
+   what the Australian store needs on top: the colour-chip palette (KR drives
+   chips from a CMS field we do not have), and the few AU-only elements that
+   replaced Korean-market modules.
+
+   Keep this file small. Anything that changes KR layout belongs in a bug
+   report, not here — the whole point is that the two pages match.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Colour chips
+   KR renders the swatch colour on the inner 20px div; the 28px parent is the
+   selection ring. Keyed by the handleized option value so any product reusing
+   these colour names is covered without per-product setup. A merchant-set
+   swatch on the option value wins, since that is written inline.
+   -------------------------------------------------------------------------- */
+
+.color-chip > div {
+  background: var(--chip, var(--gray-200, #eaedf0));
+}
+
+.color-chip[data-colour='shadow-grey'] > div    { --chip: #4a4744; }
+.color-chip[data-colour='tan-brown'] > div      { --chip: #8b5e3c; }
+.color-chip[data-colour='cream-beige'] > div    { --chip: #e3d6c0; }
+.color-chip[data-colour='green-black'] > div    { --chip: #2f3a33; }
+.color-chip[data-colour='grey'] > div           { --chip: #9a9ea2; }
+.color-chip[data-colour='black'] > div          { --chip: #1a1a1a; }
+.color-chip[data-colour='dry-rose'] > div       { --chip: #c9a0a0; }
+.color-chip[data-colour='daisy-yellow'] > div   { --chip: #e5c55b; }
+.color-chip[data-colour='greyish-mint'] > div   { --chip: #a8bfb4; }
+.color-chip[data-colour='teal-blue'] > div      { --chip: #3e6e7e; }
+.color-chip[data-colour='deep-navy'] > div      { --chip: #2b3a55; }
+.color-chip[data-colour='ivory'] > div          { --chip: #f0eadf; }
+.color-chip[data-colour='light-grey'] > div     { --chip: #c4c8cb; }
+.color-chip[data-colour='dark-grey'] > div      { --chip: #5a5d60; }
+.color-chip[data-colour='warm-grey'] > div      { --chip: #a39c95; }
+.color-chip[data-colour='deep-green'] > div     { --chip: #38463c; }
+.color-chip[data-colour='terracotta'] > div     { --chip: #b56a4d; }
+.color-chip[data-colour='khaki'] > div          { --chip: #7c7455; }
+.color-chip[data-colour='warm-blue'] > div      { --chip: #6b8199; }
+.color-chip[data-colour='ash-green'] > div      { --chip: #9aa694; }
+.color-chip[data-colour='rosie-pink'] > div     { --chip: #e0a9ae; }
+.color-chip[data-colour='lavender-blue'] > div  { --chip: #b3bcd8; }
+.color-chip[data-colour='soy-milk-beige'] > div { --chip: #e8ddc9; }
+
+/* --------------------------------------------------------------------------
+   AU-only additions
+   -------------------------------------------------------------------------- */
+
+/* GST note under the price — Australian retail prices are GST-inclusive. */
+.product-price--tax {
+  margin-top: 8px;
+  color: #7c8084;
+  font-size: 12px;
+  line-height: 160%;
+  letter-spacing: -0.24px;
+}
+
+/* Replaces the Korean card interest-free instalment panel. */
+.product-payment--note {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #e3edff;
+  color: #434548;
+  font-size: 13px;
+  line-height: 160%;
+  letter-spacing: -0.26px;
+}
+
+.product-payment--note p {
+  margin: 0;
+}
+
+/* Variant values that cannot combine with the current selection. */
+.product-variant__input:disabled + .product-variant__label {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.product-variant__input:disabled + .product-variant__label .option-name {
+  text-decoration: line-through;
+}
+
+.product-variant__input:focus-visible + .product-variant__label {
+  outline: 2px solid #003eff;
+  outline-offset: 2px;
+}
+
+/* Hide a variant image that is not the selected one. */
+.variant-image.hidden {
+  display: none;
+}

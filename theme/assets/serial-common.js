@@ -1,0 +1,2 @@
+async function fetchSerialInfo(serial_number){try{const data=await(await fetch("https://sidiz-shopify.sidiz.com/v1/db/serial-info",{method:"POST",headers:{Accept:"application/json","Content-Type":"application/json"},body:JSON.stringify({serial_number})})).json();return data.code===200&&data.success===!0?data.data:null}catch(err){return console.error("\uC2DC\uB9AC\uC5BC \uC870\uD68C \uC624\uB958:",err),null}}
+//# sourceMappingURL=/cdn/shop/t/152/assets/serial-common.js.map

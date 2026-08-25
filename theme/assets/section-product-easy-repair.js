@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",()=>{setEasyRepairSwiper()});function setEasyRepairSwiper(){new Swiper(".section-product-easy-repair .swiper",{slidesPerView:"auto",spaceBetween:8,navigation:{nextEl:".easy-repair-navigation .navigation-next",prevEl:".easy-repair-navigation .navigation-prev"}})}Shopify.designMode&&document.addEventListener("shopify:section:load",e=>{e.target.classList.contains("section-product-easy-repair")&&setEasyRepairSwiper()});
+//# sourceMappingURL=/cdn/shop/t/152/assets/section-product-easy-repair.js.map

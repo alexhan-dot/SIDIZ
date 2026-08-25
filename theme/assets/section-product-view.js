@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",()=>{setContainerHeight()});function setContainerHeight(){document.querySelectorAll(".section-product-view").forEach(section=>{if(section.querySelector(".block--wrapper")){let margin=600;section.classList.contains("vertical")&&(margin=800);let container=section.querySelector(".container"),height=container.clientHeight+margin;container.style.height=`${height}px`}})}
+//# sourceMappingURL=/cdn/shop/t/152/assets/section-product-view.js.map

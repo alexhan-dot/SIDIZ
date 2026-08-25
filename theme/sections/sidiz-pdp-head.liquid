@@ -1,80 +1,88 @@
-{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'sidiz-configurator.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'sidiz-configurator.js' | asset_url }}" defer="defer"></script>
-
 {%- comment -%}
-  Rebuild of the kr.sidiz.com `configurator` section.
+  Faithful rebuild of the kr.sidiz.com `configurator` section.
 
-  Layout matches the Korean page exactly:
-    .product-gallery--wrapper  62.5vw, a two-column grid of 3:4 media tiles
-    .product-text--wrapper     420px, sticky at top:46px, margin-top 120px
+  The markup below reproduces the Korean DOM exactly — same element names,
+  same class names, same nesting — and loads the Korean theme's own compiled
+  stylesheets. Layout, spacing and type are therefore identical to kr.sidiz.com
+  rather than approximated; only the copy is Australian English and the
+  Korean-market modules are dropped.
 
-  The first gallery tile is the variant image with the 360 VIEW control over it;
-  every other tile is a looping product video.
-
-  Korean-market pieces are dropped rather than translated: KakaoTalk sharing,
-  card interest-free instalment info, Jeju Island surcharge, KC certification.
+  Key structure, straight from the KR stylesheet:
+    product-page                display:flex; gap:3.75vw
+    .product-gallery--wrapper   width:62.5vw, 2-col grid of 3:4 tiles
+    .product-text--wrapper      max-width:420px; sticky top:46px; margin:120px 24px 0 0
+    .color-chip                 28px ring, with a 20px inner div carrying the colour
 {%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-configurator.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-variants.css' | asset_url | stylesheet_tag }}
+{{ 'component-product-item.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-configurator.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign p = product
   assign v = p.selected_or_first_available_variant
-  assign on_sale = false
-  if v.compare_at_price > v.price
-    assign on_sale = true
-  endif
+  assign display_title = section.settings.display_title | default: p.title
+  assign gallery = section.blocks | where: 'type', 'media'
+  assign addons = section.blocks | where: 'type', 'addon'
+  assign facts = section.blocks | where: 'type', 'fact'
+  assign info = section.blocks | where: 'type', 'info'
 -%}
 
-<section class="sidiz-configurator" id="sidiz-pdp-head" data-sidiz-configurator>
-  <div class="product-gallery--wrapper">
-    {%- comment -%} Mobile: one swiper-style scroller. Desktop: the 2-col grid. {%- endcomment -%}
-    <div class="product-gallery product-gallery--web">
-      <div class="product-media--item variant-media">
-        {%- for variant in p.variants -%}
-          {%- if variant.image != blank -%}
-            <img
-              class="variant-image{% unless variant.id == v.id %} is-hidden{% endunless %}"
-              data-variant-id="{{ variant.id }}"
-              src="{{ variant.image | image_url: width: 1200 }}"
-              srcset="{{ variant.image | image_url: width: 600 }} 600w, {{ variant.image | image_url: width: 1200 }} 1200w, {{ variant.image | image_url: width: 1800 }} 1800w"
-              sizes="(min-width: 1024px) 31vw, 100vw"
-              width="1200"
-              height="1600"
-              alt="{{ variant.image.alt | default: variant.title | escape }}"
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              {% if forloop.first %}fetchpriority="high"{% endif %}
-              decoding="async"
-            >
-          {%- endif -%}
-        {%- endfor -%}
+<div class="container" data-sidiz-configurator>
+  <product-page>
+    <div class="product-gallery--wrapper">
+      <div class="product-gallery web">
+        <div class="product-media--wrapper">
+          <div class="product-media--item variant-media">
+            {%- for variant in p.variants -%}
+              {%- if variant.image != blank -%}
+                <img
+                  class="variant-image{% unless variant.id == v.id %} hidden{% endunless %}"
+                  data-variant-id="{{ variant.id }}"
+                  src="{{ variant.image | image_url: width: 1200 }}"
+                  srcset="{{ variant.image | image_url: width: 600 }} 600w, {{ variant.image | image_url: width: 1200 }} 1200w, {{ variant.image | image_url: width: 1800 }} 1800w"
+                  sizes="(min-width: 1024px) 31vw, 100vw"
+                  width="1200"
+                  height="1600"
+                  alt="{{ variant.image.alt | default: variant.title | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% endif %}
+                  decoding="async"
+                >
+              {%- endif -%}
+            {%- endfor -%}
 
-        {%- if section.settings.show_360 -%}
-          <button class="btn-img-360" type="button" data-sidiz-360>
-            <span class="btn--icon" aria-hidden="true">
-              <svg viewBox="0 0 16 16" width="14" height="14">
-                <path d="M8 3.5c3.6 0 6.5 1.3 6.5 3s-2.9 3-6.5 3-6.5-1.3-6.5-3 2.9-3 6.5-3Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
-                <path d="M5.5 12.5 8 14.5l2.5-2" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-            <span class="btn--text">360 VIEW</span>
-          </button>
-        {%- endif -%}
-      </div>
+            {%- if section.settings.show_360 -%}
+              <div class="btn-img-360" role="button" tabindex="0" data-sidiz-360>
+                <div class="btn--icon">
+                  <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+                    <ellipse cx="8" cy="7" rx="6.4" ry="3" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                    <path d="M5.6 12.2 8 14.3l2.4-2.1" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div class="btn--text">360 VIEW</div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
 
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'media' -%}
+        {%- for block in gallery -%}
           <div class="product-media--item" {{ block.shopify_attributes }}>
             {%- if block.settings.video_url != blank -%}
               <video
-                src="{{ block.settings.video_url }}"
-                {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
                 autoplay
                 loop
                 muted
                 playsinline
                 preload="metadata"
+                {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
                 {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
-              ></video>
+              >
+                <source src="{{ block.settings.video_url }}" type="video/mp4">
+              </video>
             {%- elsif block.settings.image != blank -%}
               {{
                 block.settings.image
@@ -98,226 +106,249 @@
               >
             {%- endif -%}
           </div>
-        {%- endif -%}
-      {%- endfor -%}
-    </div>
-  </div>
-
-  <div class="product-text--wrapper">
-    <div class="product-title--wrapper">
-      <div class="wrapper--header">
-        <h1>{{ p.title | remove: 'SIDIZ ' | remove: ' Ergonomic Office Chair' }}</h1>
-        <button class="button--share" type="button" data-sidiz-share aria-label="Share this product">
-          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
-            <path d="M13.5 6.5a2 2 0 1 0-1.9-2.6L7.9 5.8a2 2 0 1 0 0 2.9l3.7 1.9a2 2 0 1 0 .6-1.1L8.5 7.6a2 2 0 0 0 0-.9l3.7-1.9c.36.44.9.7 1.3.7Z" fill="currentColor"/>
-          </svg>
-        </button>
+        {%- endfor -%}
       </div>
     </div>
 
-    {%- if v.sku != blank -%}
-      <p class="product--sku" data-sidiz-sku>{{ v.sku }}</p>
-    {%- endif -%}
+    <div class="product-text--wrapper">
+      <div class="product-title--wrapper web">
+        <div class="wrapper--header">
+          <h1>{{ display_title }}</h1>
+        </div>
+        {%- if section.settings.subtitle != blank -%}
+          <div class="product-configuration--desc">{{ section.settings.subtitle }}</div>
+        {%- endif -%}
+      </div>
 
-    <div class="product-link--row">
-      {%- if section.settings.compare_link != blank -%}
-        <a class="button--compare" href="{{ section.settings.compare_link }}">Compare models</a>
+      {%- if v.sku != blank -%}
+        <div class="product--sku" data-sidiz-sku>{{ v.sku }}</div>
       {%- endif -%}
-      {%- if section.settings.guide_link != blank -%}
-        <a class="button--compare" href="{{ section.settings.guide_link }}">Product guide</a>
-      {%- endif -%}
-      <a class="button--compare" href="#reviews">Reviews</a>
-    </div>
 
-    {%- unless p.has_only_default_variant -%}
-      <div class="product-variant--wrapper">
-        {%- for option in p.options_with_values -%}
-          {%- liquid
-            assign is_colour = false
-            assign lower = option.name | downcase
-            if lower contains 'colour' or lower contains 'color'
-              assign is_colour = true
-            endif
-          -%}
-          <div class="product-variant depth-{{ forloop.index }}{% if is_colour %} product-variant--colour{% endif %}">
-            <span class="product-variant__name">
-              {{ option.name }}
-              <em data-sidiz-option-value="{{ option.position }}">{{ option.selected_value }}</em>
-            </span>
-            <div class="product-variant__container">
-              {%- for value in option.values -%}
-                <div class="product-variant__item">
-                  <input
-                    class="product-variant__input"
-                    type="radio"
-                    id="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-                    name="opt-{{ section.id }}-{{ option.position }}"
-                    value="{{ value | escape }}"
-                    data-option-position="{{ option.position }}"
-                    {% if option.selected_value == value %}checked{% endif %}
-                  >
-                  <label class="product-variant__label" for="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-                    {%- if is_colour -%}
-                      {%- comment -%}
-                        Colour comes from the swatch when the merchant has set
-                        one, otherwise from the theme's colour map in
-                        sidiz-configurator.css keyed by the handleized name.
-                      {%- endcomment -%}
-                      <span
-                        class="color-chip"
-                        data-colour="{{ value | handleize }}"
-                        {% if value.swatch.color %}style="--chip: {{ value.swatch.color }};"
-                        {% elsif value.swatch.image %}style="background-image: url({{ value.swatch.image | image_url: width: 56 }});"
-                        {% endif %}
-                      ></span>
-                    {%- endif -%}
-                    <span class="option-name">{{ value }}</span>
-                  </label>
+      <div class="product-link--row">
+        {%- if section.settings.compare_link != blank -%}
+          <div class="button--compare btn-hover--bk">
+            <a href="{{ section.settings.compare_link }}">Compare models</a>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.guide_link != blank -%}
+          <div class="button--compare btn-hover--bk">
+            <a href="{{ section.settings.guide_link }}">Product guide</a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- unless p.has_only_default_variant -%}
+        <div class="product-variant--wrapper">
+          <product-variants>
+            <div class="product-variants">
+              {%- for option in p.options_with_values -%}
+                {%- liquid
+                  assign lower = option.name | downcase
+                  assign is_colour = false
+                  if lower contains 'colour' or lower contains 'color'
+                    assign is_colour = true
+                  endif
+                -%}
+                <div class="product-variant depth-{{ forloop.index }}">
+                  {%- if is_colour -%}
+                    <span class="product-variant__name">{{ option.name }}</span>
+                  {%- endif -%}
+                  <div class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap">
+                    {%- for value in option.values -%}
+                      <div class="product-variant__item product-variant__item--radio">
+                        <input
+                          class="product-variant__input product-variant-value"
+                          type="radio"
+                          id="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+                          name="opt-{{ section.id }}-{{ option.position }}"
+                          value="{{ value | escape }}"
+                          data-option-position="{{ option.position }}"
+                          {% if option.selected_value == value %}checked{% endif %}
+                        >
+                        <label class="product-variant__label" for="opt-{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                          {%- if is_colour -%}
+                            <div class="color-chip" data-colour="{{ value | handleize }}">
+                              <div
+                                {% if value.swatch.color %}style="background: {{ value.swatch.color }};"{% endif %}
+                              ></div>
+                            </div>
+                          {%- endif -%}
+                          <div class="option-name">{{ value }}</div>
+                        </label>
+                      </div>
+                    {%- endfor -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+          </product-variants>
+        </div>
+      {%- endunless -%}
+
+      <div class="product-price--wrapper">
+        <div class="product-price">
+          <div class="product-discount--wrapper">
+            <div class="member--discount">
+              <div class="discount--details" data-sidiz-price>
+                <div class="discount--details-top">
+                  {%- if v.compare_at_price > v.price -%}
+                    <div class="product-discount--percent">
+                      {{ v.compare_at_price | minus: v.price | times: 100.0 | divided_by: v.compare_at_price | round }}%
+                    </div>
+                  {%- endif -%}
+                  <div class="product-price--best">{{ v.price | money }}</div>
+                </div>
+                {%- if v.compare_at_price > v.price -%}
+                  <div class="product-price--original">{{ v.compare_at_price | money }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+        {%- if section.settings.tax_note != blank -%}
+          <div class="product-price--tax">{{ section.settings.tax_note }}</div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.payment_note != blank -%}
+        <div class="product-payment--note">{{ section.settings.payment_note }}</div>
+      {%- endif -%}
+
+      {%- if addons.size > 0 -%}
+        <div class="product-complementary--wrapper">
+          <div class="wrapper--header">
+            <div class="title">{{ section.settings.addons_title }}</div>
+          </div>
+          <div class="wrapper--body">
+            <div class="complementary--content">
+              {%- for block in addons -%}
+                {%- assign item = block.settings.product -%}
+                {%- if item != blank -%}
+                  <div class="product-item-compact" {{ block.shopify_attributes }}>
+                    <div class="product-item--image">
+                      <a href="{{ item.url }}">
+                        {%- if item.featured_media != blank -%}
+                          {{
+                            item.featured_media.preview_image
+                            | image_url: width: 300
+                            | image_tag: loading: 'lazy', widths: '150,300', alt: item.title
+                          }}
+                        {%- endif -%}
+                      </a>
+                    </div>
+                    <div class="product-item-details">
+                      <div class="title">{{ item.title }}</div>
+                      <div class="product-item-price">
+                        <div class="discount-price">{{ item.price | money }}</div>
+                      </div>
+                    </div>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+
+      <div class="product-actions">
+        {%- form 'product', p, id: 'sidiz-product-form', class: 'product-form' -%}
+          <input type="hidden" name="id" value="{{ v.id }}" data-sidiz-variant-id>
+          <div class="product__cart-functions">
+            <div class="button__cart-div">
+              <button
+                class="add-to-cart button button--solid button--product"
+                type="submit"
+                name="add"
+                {% if v.available == false %}disabled{% endif %}
+              >
+                <span class="button__text" data-sidiz-atc-label>
+                  {%- if v.available -%}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {%- else -%}
+                    {{ 'products.product.sold_out' | t }}
+                  {%- endif -%}
+                </span>
+              </button>
+            </div>
+          </div>
+        {%- endform -%}
+      </div>
+
+      {%- if facts.size > 0 -%}
+        <div class="product-delivery-and-warranty--wrapper">
+          <div class="product-delivery--wrapper">
+            <div class="delivery--header">
+              <div class="delivery--title">{{ section.settings.delivery_title }}</div>
+            </div>
+            <div class="delivery--body">
+              {%- for block in facts -%}
+                <div class="product--data" {{ block.shopify_attributes }}>
+                  <div class="data--title"><span>{{ block.settings.label }}</span></div>
+                  <div class="data--text">{{ block.settings.value }}</div>
                 </div>
               {%- endfor -%}
             </div>
           </div>
-        {%- endfor -%}
-      </div>
-    {%- endunless -%}
 
-    <div class="product-price--wrapper">
-      <div class="product-price" data-sidiz-price>
-        {%- if on_sale -%}
-          <div class="discount--details-top">
-            <span class="product-discount--percent">
-              {{ v.compare_at_price | minus: v.price | times: 100.0 | divided_by: v.compare_at_price | round }}%
-            </span>
-            <span class="product-price--best">{{ v.price | money }}</span>
-          </div>
-          <s class="product-price--original">{{ v.compare_at_price | money }}</s>
-        {%- else -%}
-          <div class="discount--details-top">
-            <span class="product-price--best">{{ v.price | money }}</span>
-          </div>
-        {%- endif -%}
-      </div>
-      <p class="product-price--tax">{{ section.settings.tax_note }}</p>
-    </div>
-
-    {%- if section.settings.payment_note != blank -%}
-      <div class="product-payment--note">{{ section.settings.payment_note }}</div>
-    {%- endif -%}
-
-    {%- assign addons = section.blocks | where: 'type', 'addon' -%}
-    {%- if addons.size > 0 -%}
-      <div class="product-complementary--wrapper">
-        <div class="wrapper--header">
-          <span class="title">{{ section.settings.addons_title }}</span>
+          {%- if section.settings.warranty_value != blank -%}
+            <div class="product-warranty--wrapper">
+              <div class="product--data warranty--period">
+                <div class="data--title">{{ section.settings.warranty_label }}</div>
+                <div class="data--text">{{ section.settings.warranty_value }}</div>
+              </div>
+            </div>
+          {%- endif -%}
         </div>
-        <div class="complementary--content">
-          {%- for block in addons -%}
-            {%- assign item = block.settings.product -%}
-            {%- if item != blank -%}
-              <div class="product-item-compact" {{ block.shopify_attributes }}>
-                <a class="product-item--image" href="{{ item.url }}">
-                  {%- if item.featured_media != blank -%}
-                    {{
-                      item.featured_media.preview_image
-                      | image_url: width: 300
-                      | image_tag: loading: 'lazy', widths: '150,300', alt: item.title
-                    }}
-                  {%- endif -%}
-                </a>
-                <div class="product-item-details">
-                  <span class="title">{{ item.title }}</span>
-                  <span class="discount-price">{{ item.price | money }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.notice != blank -%}
+        <div class="notice--title product-notice--title">{{ section.settings.notice_title }}</div>
+        <div class="product-notice--wrapper">
+          <div class="notice--content rich-text-area">{{ section.settings.notice }}</div>
+        </div>
+      {%- endif -%}
+
+      {%- if info.size > 0 -%}
+        <div class="product-basic-info--wrapper">
+          <details>
+            <summary class="basic-info--header">
+              <div class="basic-info--title">BASIC INFO</div>
+              <div class="arrow"></div>
+            </summary>
+            <div class="basic-info--body">
+              {%- for block in info -%}
+                <div class="product--data" {{ block.shopify_attributes }}>
+                  <div class="data--title">{{ block.settings.label }}</div>
+                  <div class="data--text">{{ block.settings.value }}</div>
                 </div>
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
+              {%- endfor -%}
+            </div>
+          </details>
         </div>
-      </div>
-    {%- endif -%}
-
-    <div class="product-actions">
-      {%- form 'product', p, id: 'sidiz-product-form', class: 'product-form' -%}
-        <input type="hidden" name="id" value="{{ v.id }}" data-sidiz-variant-id>
-        <div class="product__cart-functions">
-          <button class="add-to-cart" type="submit" name="add" {% if v.available == false %}disabled{% endif %}>
-            <span class="button__text" data-sidiz-atc-label>
-              {%- if v.available -%}
-                {{ 'products.product.add_to_cart' | t }}
-              {%- else -%}
-                {{ 'products.product.sold_out' | t }}
-              {%- endif -%}
-            </span>
-          </button>
-        </div>
-      {%- endform -%}
+      {%- endif -%}
     </div>
-
-    {%- assign facts = section.blocks | where: 'type', 'fact' -%}
-    {%- if facts.size > 0 -%}
-      <div class="product-delivery-and-warranty--wrapper">
-        <div class="product-delivery--wrapper">
-          <div class="delivery--header">
-            <span class="delivery--title">{{ section.settings.delivery_title }}</span>
-          </div>
-          <div class="delivery--body">
-            {%- for block in facts -%}
-              <div class="product--data" {{ block.shopify_attributes }}>
-                <div class="data--title">{{ block.settings.label }}</div>
-                <div class="data--text">{{ block.settings.value }}</div>
-              </div>
-            {%- endfor -%}
-          </div>
-        </div>
-
-        {%- if section.settings.warranty_value != blank -%}
-          <div class="product-warranty--wrapper">
-            <div class="product--data warranty--period">
-              <div class="data--title">{{ section.settings.warranty_label }}</div>
-              <div class="data--text">{{ section.settings.warranty_value }}</div>
-            </div>
-          </div>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-
-    {%- if section.settings.notice != blank -%}
-      <div class="notice--title">{{ section.settings.notice_title }}</div>
-      <div class="product-notice--wrapper">
-        <div class="notice--content rte">{{ section.settings.notice }}</div>
-      </div>
-    {%- endif -%}
-
-    {%- assign info = section.blocks | where: 'type', 'info' -%}
-    {%- if info.size > 0 -%}
-      <details class="product-basic-info--wrapper">
-        <summary class="basic-info--header">
-          <span class="basic-info--title">BASIC INFO</span>
-          <span class="arrow" aria-hidden="true"></span>
-        </summary>
-        <div class="basic-info--body">
-          {%- for block in info -%}
-            <div class="product--data" {{ block.shopify_attributes }}>
-              <div class="data--title">{{ block.settings.label }}</div>
-              <div class="data--text">{{ block.settings.value }}</div>
-            </div>
-          {%- endfor -%}
-        </div>
-      </details>
-    {%- endif -%}
-  </div>
+  </product-page>
 
   <script type="application/json" data-sidiz-variants>
     {{ p.variants | json }}
   </script>
-</section>
+</div>
 
 {% render 'sidiz-product-schema', product: p %}
 
 {% schema %}
 {
   "name": "SIDIZ PDP head",
-  "tag": "section",
+  "tag": "div",
+  "class": "mount-product-page mount-show-more section-product-configurator",
   "settings": [
+    {
+      "type": "text",
+      "id": "display_title",
+      "label": "Display title",
+      "info": "Shown as the H1. Leave blank to use the full product title."
+    },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
     { "type": "checkbox", "id": "show_360", "label": "Show the 360 VIEW control", "default": true },
     { "type": "url", "id": "compare_link", "label": "Compare models link" },
     { "type": "url", "id": "guide_link", "label": "Product guide link" },
@@ -326,15 +357,9 @@
       "type": "text",
       "id": "tax_note",
       "label": "Tax note",
-      "default": "Price includes GST. Shipping calculated at checkout.",
-      "info": "Australian retail prices must be shown GST-inclusive."
+      "default": "Price includes GST. Shipping calculated at checkout."
     },
-    {
-      "type": "richtext",
-      "id": "payment_note",
-      "label": "Payment note",
-      "info": "e.g. Afterpay or Zip availability. Replaces the Korean card instalment panel."
-    },
+    { "type": "richtext", "id": "payment_note", "label": "Payment note" },
     { "type": "header", "content": "Add-ons" },
     { "type": "text", "id": "addons_title", "label": "Add-ons heading", "default": "Add to your setup" },
     { "type": "header", "content": "Delivery and warranty" },

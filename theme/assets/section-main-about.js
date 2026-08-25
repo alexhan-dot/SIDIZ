@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",function(){const container=document.querySelector(".section-main-about .container"),{animate,scroll}=Motion;scroll(animate(".section-main-about .motion-wrapper img",{filter:["blur(0px)","blur(10px)"]}),{target:container,offset:["start end","start start"]}),scroll(animate(".section-main-about .video-wrap",{transform:["translateY(100%)","translateY(0%)"]}),{target:container,offset:["start end","start start"]})});
+//# sourceMappingURL=/cdn/shop/t/152/assets/section-main-about.js.map
