@@ -12,7 +12,9 @@
 {{ 'section-product-wb.css' | asset_url | stylesheet_tag }}
 {{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
 
-<div class="container">
+{%- assign scope = 'section-' | append: section.id -%}
+
+<div class="container {{ scope }}">
   <div class="container--body align-{{ section.settings.align }} align-vertical-{{ section.settings.align_vertical }}">
     <div class="wrapper--background">
       {%- if section.settings.video_url != blank -%}
@@ -68,7 +70,7 @@
       {%- endif -%}
     </div>
 
-    <div class="wrapper--text" style="--wb-fg: {{ section.settings.text_colour }};">
+    <div class="wrapper--text">
       {%- if section.settings.tag != blank -%}
         <div class="tag">{{ section.settings.tag }}</div>
       {%- endif -%}
@@ -80,12 +82,33 @@
       {%- endif -%}
     </div>
   </div>
+
+  {%- comment -%}
+    KR sets these per section, not in the shared stylesheet. On T90 the tilt
+    banner runs tag #000000 on #eaedf0, title #ffffff, description #a4aab0.
+  {%- endcomment -%}
+  <style data-shopify>
+    .{{ scope }} .container--body .wrapper--text .tag {
+      color: {{ section.settings.tag_colour }};
+      background-color: {{ section.settings.tag_background }};
+    }
+    .{{ scope }} .container--body .wrapper--text .title { color: {{ section.settings.title_colour }}; }
+    .{{ scope }} .container--body .wrapper--text .description { color: {{ section.settings.description_colour }}; }
+    @media screen and (max-width: 1023px) {
+      .{{ scope }} .container--body .wrapper--text .tag {
+        color: {{ section.settings.tag_colour }};
+        background-color: {{ section.settings.tag_background }};
+      }
+      .{{ scope }} .container--body .wrapper--text .title { color: {{ section.settings.title_colour }}; }
+      .{{ scope }} .container--body .wrapper--text .description { color: {{ section.settings.description_colour }}; }
+    }
+  </style>
 </div>
 
 {% schema %}
 {
   "name": "SIDIZ WB banner",
-  "tag": "div",
+  "tag": "section",
   "class": "section-product-wb-banner",
   "settings": [
     { "type": "text", "id": "tag", "label": "Tag" },
@@ -113,7 +136,10 @@
       ],
       "default": "bottom"
     },
-    { "type": "color", "id": "text_colour", "label": "Text colour", "default": "#ffffff" },
+    { "type": "color", "id": "tag_colour", "label": "Tag text colour", "default": "#000000" },
+    { "type": "color", "id": "tag_background", "label": "Tag background", "default": "#eaedf0" },
+    { "type": "color", "id": "title_colour", "label": "Title colour", "default": "#ffffff" },
+    { "type": "color", "id": "description_colour", "label": "Description colour", "default": "#a4aab0" },
     { "type": "header", "content": "Media" },
     { "type": "text", "id": "video_url", "label": "Video URL (desktop)" },
     { "type": "text", "id": "poster_url", "label": "Poster URL (desktop)" },

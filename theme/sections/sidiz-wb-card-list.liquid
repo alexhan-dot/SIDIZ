@@ -12,7 +12,9 @@
 {{ 'section-product-wb.css' | asset_url | stylesheet_tag }}
 {{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
 
-<div class="container">
+{%- assign scope = 'section-' | append: section.id -%}
+
+<div class="container {{ scope }}">
   {%- if section.settings.heading != blank -%}
     <div class="container--header">
       <h2 class="title">{{ section.settings.heading }}</h2>
@@ -21,7 +23,7 @@
 
   <div class="wrapper--card-list">
     {%- for block in section.blocks -%}
-      <div class="card--item" {{ block.shopify_attributes }}>
+      <div class="card--item block-{{ block.id }}" {{ block.shopify_attributes }}>
         <div class="card--content">
           <div class="card--media">
             {%- if block.settings.video_url != blank -%}
@@ -66,6 +68,11 @@
           </div>
         </div>
       </div>
+
+      <style data-shopify>
+        .block-{{ block.id }} .card--text .title { color: {{ block.settings.title_colour }}; }
+        .block-{{ block.id }} .card--text .description { color: {{ block.settings.description_colour }}; }
+      </style>
     {%- endfor -%}
   </div>
 </div>
@@ -73,7 +80,7 @@
 {% schema %}
 {
   "name": "SIDIZ WB card list",
-  "tag": "div",
+  "tag": "section",
   "class": "section-product-wb-card-list",
   "settings": [
     { "type": "html", "id": "heading", "label": "Heading" }
@@ -84,7 +91,9 @@
       "name": "Card",
       "settings": [
         { "type": "text", "id": "title", "label": "Title" },
+        { "type": "color", "id": "title_colour", "label": "Title colour", "default": "#000000" },
         { "type": "richtext", "id": "description", "label": "Description" },
+        { "type": "color", "id": "description_colour", "label": "Description colour", "default": "#7c8084" },
         {
           "type": "select",
           "id": "align",

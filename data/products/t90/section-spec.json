@@ -1,0 +1,755 @@
+{
+ "configurator": {
+  "wrapper": "shopify-section mount-product-page mount-show-more section-product-configurator",
+  "colours": {
+   "#notice_TAHBDn :: background-color": "#eaedf0",
+   ".notice--title :: color": "#000000",
+   ".notice--content :: color": "#434548"
+  },
+  "media": 144,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "T90"
+   },
+   {
+    "kind": "title",
+    "text": "카카오톡"
+   },
+   {
+    "kind": "title",
+    "text": "페이스북"
+   },
+   {
+    "kind": "title",
+    "text": "엑스"
+   },
+   {
+    "kind": "title",
+    "text": "URL 복사"
+   },
+   {
+    "kind": "title",
+    "text": "T90"
+   },
+   {
+    "kind": "title",
+    "text": "카카오톡"
+   },
+   {
+    "kind": "title",
+    "text": "페이스북"
+   },
+   {
+    "kind": "title",
+    "text": "엑스"
+   },
+   {
+    "kind": "title",
+    "text": "URL 복사"
+   },
+   {
+    "kind": "title",
+    "text": "회원 할인가"
+   },
+   {
+    "kind": "title",
+    "text": "최대 혜택가"
+   },
+   {
+    "kind": "title",
+    "text": "쿠폰 할인"
+   },
+   {
+    "kind": "title",
+    "text": "별도 구매 (선택)"
+   }
+  ]
+ },
+ "product_row_1_wide": {
+  "wrapper": "shopify-section section-product-row row-1 wide",
+  "colours": {
+   "#section-template--26518846669090__product_row_1_wide_GMk3FK :: background-color": "#ffffff",
+   "#section-template--26518846669090__product_row_1_wide_GMk3FK :: color": "#000000"
+  },
+  "media": 0,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "시디즈 T90 인체공학 사무용 의자"
+   },
+   {
+    "kind": "description",
+    "text": "인체공학 사무용 의자 – 장시간 컴퓨터 작업을 고려해 설계된 프리미엄 업무용 의자 파노라마 4D 팔걸이 – 높이·앞뒤·좌우·각도 조절로 다양한 작업 자세 지원 퍼펙트 피팅 럼버서포트 – 사용자 체형에 맞춰 안정적인 허리 지지 제공 플렉서블 등판 구조 – 움직임에 따라 자연스럽게 반응하는 등판 설계 사무실·재택근무·멀티 디바이스 환경에 최적화된 인체공학 의자"
+   }
+  ]
+ },
+ "product-option-compare": {
+  "wrapper": "shopify-section section-product-option-compare",
+  "colours": {},
+  "media": 18,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "나에게 맞는 T90 옵션"
+   },
+   {
+    "kind": "title",
+    "text": "천연가죽 리미티드 팔레트"
+   },
+   {
+    "kind": "description",
+    "text": "등, 좌판 천연가죽"
+   },
+   {
+    "kind": "title",
+    "text": "천연가죽"
+   },
+   {
+    "kind": "description",
+    "text": "등, 좌판 천연가죽"
+   },
+   {
+    "kind": "title",
+    "text": "아쿠아텍스 패브릭"
+   },
+   {
+    "kind": "description",
+    "text": "등, 좌판 아쿠아텍스 패브릭"
+   },
+   {
+    "kind": "title",
+    "text": "더블라셀"
+   },
+   {
+    "kind": "description",
+    "text": "등, 좌판 더블라셀"
+   },
+   {
+    "kind": "title",
+    "text": "천연가죽에 대한 안내"
+   },
+   {
+    "kind": "title",
+    "text": "주의사항"
+   },
+   {
+    "kind": "description",
+    "text": "밝은 색 천연가죽은 데님(청바지)등"
+   },
+   {
+    "kind": "title",
+    "text": "교환 / 환불 대상이 아닙니다"
+   },
+   {
+    "kind": "title",
+    "text": "1. 가죽 표면에 상처 / 주름이 있어요"
+   }
+  ]
+ },
+ "product_wb_scroll_banner": {
+  "wrapper": "shopify-section section-product-wb-scroll-banner",
+  "colours": {
+   ".container--header .title :: color": "#000000",
+   ".container--body .content--text .tag :: color": "#000000",
+   ".container--body .content--text .tag :: background-color": "#eaedf0",
+   ".container--body .content--text .title :: color": "#ffffff",
+   ".container--body .content--text .description :: color": "#ffffff"
+  },
+  "media": 4,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "퍼포먼스에 최적화된 PROGRESSIVE MOVEMENT"
+   },
+   {
+    "kind": "tag",
+    "text": "자세를 바꿔도 몰입은 방해받지 않도록"
+   },
+   {
+    "kind": "title",
+    "text": "사용자의 움직임에 맞춰 반응하는 인체공학 설계"
+   },
+   {
+    "kind": "description",
+    "text": "장시간 작업 중 자세가 흐트러지더라도 집중이 유지되도록 설계되었습니다. 상체를 비틀거나 한쪽으로 기대어도 T90은 유연하게 반응하며 등과 허리를 안정적으로 지지합니다."
+   }
+  ]
+ },
+ "product_wb_scroll_card_list": {
+  "wrapper": "shopify-section section-product-wb-scroll-card-list",
+  "colours": {
+   ".card--text .title :: color": "#ffffff",
+   ".card--text .description :: color": "#a4aab0",
+   ".section-template--26518846669090__product_wb_scroll_card_list_V9k8dp :: background-color": "#000000",
+   ".section-product-wb-scroll-banner .container--body .wrapper--sticky :: background-color": "#000000"
+  },
+  "media": 6,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "퍼펙트 피팅 럼버서포트"
+   },
+   {
+    "kind": "description",
+    "text": "시디즈만의 특허받은 메커니즘으로 어떤 자세에서도 사용자 체형에 맞춰 허리 곡선을 안정적으로 지지합니다. 장시간 업무 환경에서도 허리를 편안하게 유지할 수 있도록 설계되었습니다. *특허등록 제10-2468097호"
+   },
+   {
+    "kind": "title",
+    "text": "플렉서블 등판"
+   },
+   {
+    "kind": "description",
+    "text": "유연하게 움직이는 등판 구조로 사용자의 움직임에 맞춰 등받이가 자연스럽게 반응합니다. 장시간 앉아 있어도 등과 허리에 가해지는 부담을 줄여 편안한 착석감을 제공합니다."
+   },
+   {
+    "kind": "title",
+    "text": "하이 컴포트 폼"
+   },
+   {
+    "kind": "description",
+    "text": "부드러운 메모리폼과 100% MDI 폼을 적용해 편안한 쿠션감을 제공합니다. 어깨와 상체를 안정적으로 지지해 다양한 방향으로 기대어도 편안한 착석감을 유지합니다."
+   }
+  ]
+ },
+ "product_view_horizontal_1": {
+  "wrapper": "shopify-section section-product-view horizontal",
+  "colours": {},
+  "media": 7,
+  "texts": [
+   {
+    "kind": "tag",
+    "text": "한계 없이 움직여 다각도로 고민할 수 있도록"
+   },
+   {
+    "kind": "title",
+    "text": "다양한 자세를 지원하는 파노라마 4D 팔걸이"
+   },
+   {
+    "kind": "description",
+    "text": "PC, 노트북, 태블릿, 모바일 등 다양한 디바이스를 사용하는 현대의 업무 환경에서는 상체와 팔의 움직임이 더욱 중요합니다. T90의 4D 팔걸이는 넓은 조절 범위를 제공해 사용자의 작업 자세에 맞춰 팔과 어깨를 안정적으로 지지합니다. 마치 파노라마처럼 펼쳐지는 움직임으로 다양한 각도의 작업 환경에 유연하게 대응합니다. *특허등록 제10-2779705호"
+   },
+   {
+    "kind": "title",
+    "text": "4D 팔걸이 조절"
+   },
+   {
+    "kind": "description",
+    "text": "팔걸이 높이, 앞뒤 위치, 좌우 위치, 각도를 조절할 수 있는 4D 조절 시스템입니다. 높이 70mm, 깊이 60mm, 좌우 35°, 후방 230°까지 조절할 수 있습니다."
+   },
+   {
+    "kind": "title",
+    "text": "텐션 지지 설계"
+   },
+   {
+    "kind": "description",
+    "text": "적절한 텐션 설계로 팔을 올렸을 때 안정적인 지지감을 제공합니다. 키보드 작업이나 마우스 사용 시 팔과 어깨의 피로를 줄여줍니다."
+   },
+   {
+    "kind": "title",
+    "text": "실리콘 팔걸이 패드"
+   },
+   {
+    "kind": "description",
+    "text": "부드러운 실리콘 소재를 적용해 팔이 닿는 부분의 압력을 줄였습니다. 장시간 사용해도 편안한 촉감을 유지하도록 설계되었습니다."
+   }
+  ]
+ },
+ "product_wb_banner": {
+  "wrapper": "shopify-section section-product-wb-banner",
+  "colours": {
+   ".container--body .wrapper--text .tag :: color": "#000000",
+   ".container--body .wrapper--text .tag :: background-color": "#eaedf0",
+   ".container--body .wrapper--text .title :: color": "#ffffff",
+   ".container--body .wrapper--text .description :: color": "#a4aab0"
+  },
+  "media": 4,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "빈틈없는 밀착, 샐 틈 없는 몰입."
+   },
+   {
+    "kind": "tag",
+    "text": "당신과 의자 사이, 간격은 ZERO"
+   },
+   {
+    "kind": "title",
+    "text": "허리를 안정적으로 지지하는 럼버서포트와 얼티밋 싱크 틸트"
+   },
+   {
+    "kind": "description",
+    "text": "마치 한 몸처럼 정교하게 반응하는 의자의 움직임은 편안한 착석과 높은 업무 퍼포먼스를 위한 기본 조건입니다. 시디즈의 퍼펙트 피팅 럼버서포트와 얼티밋 싱크 틸트 메커니즘은 신체와 등판 사이의 간격을 최소화하고, 등판과 좌판이 유기적으로 움직이며 안정적인 자세와 몰입도 높은 작업 환경을 만들어줍니다."
+   }
+  ]
+ },
+ "product_wb_card_list": {
+  "wrapper": "shopify-section section-product-wb-card-list",
+  "colours": {
+   ".card--text .title :: color": "#000000",
+   ".card--text .description :: color": "#7c8084"
+  },
+  "media": 6,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "얼티밋 싱크 틸트"
+   },
+   {
+    "kind": "description",
+    "text": "138여 개의 부품을 정밀하게 조합해 인체의 움직임에 가까운 자연스러운 틸트 메커니즘을 구현했습니다. 정교하게 설계된 움직임이 등판과 좌판의 균형을 유지해 편안한 착석과 안정적인 자세를 지원합니다. *특허등록 제10-1533650호 *독일 인간공학 설계 스튜디오 ITO Design과 6년간 공동 설계 및 개발"
+   },
+   {
+    "kind": "title",
+    "text": "싱크로나이즈드 틸팅"
+   },
+   {
+    "kind": "description",
+    "text": "등판을 뒤로 젖힐 때 좌판이 함께 기울어지는 싱크로나이즈드 틸팅 메커니즘입니다. 다리가 자연스럽게 펴지는 움직임까지 고려해 몸의 균형을 유지하며 편안한 휴식 자세를 제공합니다."
+   },
+   {
+    "kind": "title",
+    "text": "멀티 리미티드 틸팅"
+   },
+   {
+    "kind": "description",
+    "text": "등판이 젖혀지는 각도의 범위를 사용자의 취향에 맞게 설정할 수 있는 틸트 조절 기능입니다. 등판이 다시 올라올 때의 반발력까지 조절해 안정적인 착석과 편안한 움직임을 지원합니다."
+   }
+  ]
+ },
+ "product_tile_card_list": {
+  "wrapper": "shopify-section section-product-tile-card-list",
+  "colours": {},
+  "media": 6,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "앉아있다는 사실마저 잊혀지도록 편안하게"
+   },
+   {
+    "kind": "title",
+    "text": "헤드레스트"
+   },
+   {
+    "kind": "description",
+    "text": "쿠션감을 정교하게 설계해 프레임이 인체에 직접 닿지 않도록 했습니다. 다양한 체형과 자세에 맞게 높이와 각도를 조절할 수 있어 목과 머리를 안정적으로 지지합니다. *높이 70mm 조절 / 각도 65° 회전 *특허등록 제10-2779707호"
+   },
+   {
+    "kind": "title",
+    "text": "울트라 컴포트 폼"
+   },
+   {
+    "kind": "description",
+    "text": "탄력 있는 100% MDI 폼에 스쿠핑 기법을 적용해 체중 하중을 고르게 분산합니다. 좌판 끝이 아래로 부드럽게 떨어지는 워터폴 구조로 허벅지 압박을 줄여 장시간 착석에도 편안함을 제공합니다. *스쿠핑 기법은 더블라셀, 아쿠아텍스에 해당 *특허등록 제10-2779714호"
+   },
+   {
+    "kind": "title",
+    "text": "포워드 틸팅"
+   },
+   {
+    "kind": "description",
+    "text": "작업에 집중할수록 상체는 자연스럽게 앞으로 숙여집니다. 포워드 틸팅 기능은 좌판을 살짝 앞으로 기울여 등을 기대지 않고도 안정적이고 편안한 자세를 유지하도록 돕습니다."
+   }
+  ]
+ },
+ "product_assembly_guide": {
+  "wrapper": "shopify-section section-product-assembly-guide",
+  "colours": {},
+  "media": 3,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "T90 실제 사용자 리뷰"
+   },
+   {
+    "kind": "title",
+    "text": "크리에이터가 앉는 의자"
+   },
+   {
+    "kind": "description",
+    "text": "책상 앞에서의 고민의 시간이 늘어날수록 오래 앉아 있어도 피로가 덜한 편안한 데스크 체어에 대한 니즈가 쌓이기 시작했고, T90을 사용하며 정말 좋았던 점은 내 몸 상태와 자세에 맞춰 의자를 세팅할 수 있다는 점이었어요. @mm_fave님"
+   },
+   {
+    "kind": "title",
+    "text": "고급스러운 블랙 데스크테리어 완성"
+   },
+   {
+    "kind": "description",
+    "text": "정자세로 앉아 PC 작업을 할 때도, 한 쪽으로 편하게 기대서 아이디어를 떠올릴 때도 자세에 맞춰 불편함 없이 편안하게 지지해 준다는 점이 다른 의자들과 가장 차별되는 점이라고 느껴졌어요. @ohdesk님"
+   },
+   {
+    "kind": "title",
+    "text": "IT 벡엔드 개발자의 의자"
+   },
+   {
+    "kind": "description",
+    "text": "사무실에서 코드 리뷰를 할 때 의자를 쓱 끌고 와서 동료 옆자리에서 이야기할 때도, 모니터에 몸을 기울이기도, 종이에 코드 구조를 그리며 설명하는 등 다양한 자세에도 몸을 편안하게 지지해주었습니다. @서핏_Convenant님"
+   }
+  ]
+ },
+ "product_find_your_fit": {
+  "wrapper": "shopify-section section-product-find-your-fit",
+  "colours": {},
+  "media": 9,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "T90 조절 방법"
+   },
+   {
+    "kind": "title",
+    "text": "FIND YOUR FIT. 내 몸에 맞게 조절해 보세요"
+   },
+   {
+    "kind": "title",
+    "text": "사용자의 체형에 맞춰"
+   },
+   {
+    "kind": "description",
+    "text": "의자 높이 조절 / 좌판 깊이 조절"
+   },
+   {
+    "kind": "title",
+    "text": "집중이 필요한 순간에 활용하는"
+   },
+   {
+    "kind": "description",
+    "text": "좌판 기울기 조절"
+   },
+   {
+    "kind": "title",
+    "text": "머리와 목의 부담을 줄이도록"
+   },
+   {
+    "kind": "description",
+    "text": "헤드레스트 높이 / 각도조절"
+   },
+   {
+    "kind": "title",
+    "text": "원하는대로 등판이 젖혀지도록"
+   },
+   {
+    "kind": "description",
+    "text": "틸팅 범위 / 강조 조절"
+   },
+   {
+    "kind": "title",
+    "text": "어깨와 팔을 편안하게"
+   },
+   {
+    "kind": "description",
+    "text": "팔걸이 높이 / 앞뒤 / 각도 / 기울기 조절"
+   },
+   {
+    "kind": "title",
+    "text": "허리를 안정적으로 지지하도록"
+   },
+   {
+    "kind": "description",
+    "text": "럼버서포트 높이 조절"
+   }
+  ]
+ },
+ "product_related": {
+  "wrapper": "shopify-section section-product-related",
+  "colours": {},
+  "media": 3,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "함께 쓰면 좋은 제품"
+   },
+   {
+    "kind": "title",
+    "text": "STEPO 스테포"
+   },
+   {
+    "kind": "title",
+    "text": "FUNGUS 펑거스"
+   },
+   {
+    "kind": "title",
+    "text": "멀티 스프레이 150ml - INFINITY"
+   }
+  ]
+ },
+ "product_easy_repair": {
+  "wrapper": "shopify-section section-product-easy-repair",
+  "colours": {},
+  "media": 1,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "T90 | EASY REPAIR 이지리페어"
+   },
+   {
+    "kind": "title",
+    "text": "고쳐서 오래쓰기, 지구를 위한 작은 실천"
+   },
+   {
+    "kind": "description",
+    "text": "시디즈 이지리페어는 의자를 버리지 않고 필요한 부품만 교체해 오래 사용할 수 있도록 돕는 고객 친화적 유지관리 정책입니다."
+   },
+   {
+    "kind": "title",
+    "text": "우레탄 바퀴 A형"
+   }
+  ]
+ },
+ "product_warranty": {
+  "wrapper": "shopify-section section-product-warranty",
+  "colours": {},
+  "media": 1,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "T90 | 15년 품질보증"
+   },
+   {
+    "kind": "description",
+    "text": "T90과 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 15년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해,"
+   }
+  ]
+ },
+ "product_spec": {
+  "wrapper": "shopify-section section-product-spec",
+  "colours": {},
+  "media": 2,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "T90 제품 사이즈"
+   },
+   {
+    "kind": "description",
+    "text": "• 최대 하중 : 125 kg • 제품 무게 : 약 28.7 kg"
+   },
+   {
+    "kind": "description",
+    "text": "*측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다."
+   }
+  ]
+ },
+ "product_information": {
+  "wrapper": "shopify-section section-product-before-purchasing section-product-information",
+  "colours": {},
+  "media": 1,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "사용 시 주의 사항"
+   },
+   {
+    "kind": "title",
+    "text": "틸팅 시 주의 사항"
+   },
+   {
+    "kind": "description",
+    "text": "순간적으로 과도한 힘으로 등판을 젖힐 경우, 전도의 위험이 있으니 주의해주세요."
+   }
+  ]
+ },
+ "product_faq": {
+  "wrapper": "shopify-section section-product-faq section-product-information",
+  "colours": {},
+  "media": 0,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "FAQ"
+   },
+   {
+    "kind": "title",
+    "text": "시디즈 T90은 어떤 용도의 의자인가요?"
+   },
+   {
+    "kind": "description",
+    "text": "시디즈 T90은 장시간 컴퓨터 작업 환경을 고려한 인체공학 사무용 의자입니다. 특히 멀티 디바이스를 사용하는 최신의 업무 환경에서, 다양한 자세 변화와 움직임에 유연하게 반응해 안정적으로 지지하도록 설계되어, 재택근무·사무실·전문 작업 환경까지 폭넓게 사용할 수 있습니다."
+   },
+   {
+    "kind": "title",
+    "text": "시디즈 T90은 일반 사무용 의자와 어떤 점이 다른가요?"
+   },
+   {
+    "kind": "description",
+    "text": "T90은 퍼포먼스 공학 설계를 기반으로 한 프리미엄 사무용 컴퓨터 의자입니다. 플렉서블 등판, 퍼펙트 피팅 럼버서포트, 4D 팔걸이 등 다양한 조절 기능으로 사용자의 체형과 업무 자세에 따라 유연하게 반응하는 것이 특징이며, 총 7건의 산업재산권으로 차별성을 인정받았습니다."
+   },
+   {
+    "kind": "title",
+    "text": "장시간 앉아 있어도 허리나 목이 편한가요?"
+   },
+   {
+    "kind": "description",
+    "text": "시디즈 T90은 장시간 업무에도 편안한 착석감을 제공하도록 설계된 인체공학 의자입니다. 허리를 안정적으로 받쳐주는 럼버서포트와 자연스러운 등판 움직임이 올바른 자세 유지를 도와 피로 누적을 줄여줍니다."
+   },
+   {
+    "kind": "title",
+    "text": "어떤 사람에게 시디즈 T90을 추천하나요?"
+   },
+   {
+    "kind": "description",
+    "text": "T90은 하루 대부분을 책상 앞에서 보내는 사용자에게 추천되는 사무용 의자입니다. 개발자, 디자이너, 기획자, 원격근무자 등 장시간 컴퓨터 사용이 잦은 분들에게 적합합니다."
+   },
+   {
+    "kind": "title",
+    "text": "재택근무나 홈오피스에서도 사용하기 좋은가요?"
+   },
+   {
+    "kind": "description",
+    "text": "시디즈 T90은 재택근무와 홈오피스 환경에 잘 어울리는 컴퓨터 의자입니다. 세련된 디자인뿐만 아니라 다양한 업무 자세를 고려한 설계로 집에서도 사무실 수준의 편안함과 집중력을 제공합니다. 특히 독일 ‘iF 디자인 어워드 2025’ 사무용 의자 카테고리에서 본상을 수상하며 디자인 우수성을 입증했습니다."
+   },
+   {
+    "kind": "title",
+    "text": "체형에 맞게 조절이 가능한가요?"
+   },
+   {
+    "kind": "description",
+    "text": "시디즈 T90은 사용자의 체형에 맞춰 세밀한 조절이 가능한 사무용 의자입니다. 좌판 높이와 깊이, 등판, 팔걸이 등 주요 요소를 조절해 개인에게 최적화된 착석 환경을 만들 수 있습니다."
+   },
+   {
+    "kind": "title",
+    "text": "시디즈 T90은 어떤 작업 환경에 적합한가요?"
+   }
+  ]
+ },
+ "product_review": {
+  "wrapper": "shopify-section section-product-review",
+  "colours": {},
+  "media": 0,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "REVIEW"
+   }
+  ]
+ },
+ "product_store_info": {
+  "wrapper": "shopify-section section-product-store-info",
+  "colours": {},
+  "media": 2,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "시디즈 매장에 방문해 직접 앉아보세요"
+   },
+   {
+    "kind": "description",
+    "text": "의자 위 앉는 경험을 몰입감 있게 체험할 수 있는 시디즈 더 프로그레시브 매장에서 직접 앉아보세요."
+   }
+  ]
+ },
+ "product_recommend": {
+  "wrapper": "shopify-section section-recommend",
+  "colours": {},
+  "media": 4,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "RECOMMEND"
+   },
+   {
+    "kind": "description",
+    "text": "고객님이 최근 본 과 비슷한 제품 추천"
+   },
+   {
+    "kind": "description",
+    "text": "PROGRESSIVE SITTING을 위한 시디즈의 추천 제품"
+   },
+   {
+    "kind": "title",
+    "text": "T90"
+   },
+   {
+    "kind": "title",
+    "text": "회원 할인가"
+   },
+   {
+    "kind": "title",
+    "text": "T80"
+   },
+   {
+    "kind": "title",
+    "text": "회원 할인가"
+   },
+   {
+    "kind": "title",
+    "text": "T60"
+   },
+   {
+    "kind": "title",
+    "text": "회원 할인가"
+   },
+   {
+    "kind": "title",
+    "text": "IBLE 아이블"
+   },
+   {
+    "kind": "title",
+    "text": "회원 할인가"
+   }
+  ]
+ },
+ "product-notice": {
+  "wrapper": "shopify-section section-product-notice",
+  "colours": {},
+  "media": 1,
+  "texts": [
+   {
+    "kind": "title",
+    "text": "컨택센터"
+   },
+   {
+    "kind": "title",
+    "text": "제품/배송/AS/반품 관련 문의"
+   },
+   {
+    "kind": "description",
+    "text": "전화번호 1577-5674 월~금요일 (오전 9:30 ~ 오후 5:30) *점심 시간 (오전 12:30 ~ 오후 1:30) 토요일 (오전 9:30 ~ 오후 12:30) *AS만 가능 일요일 및 공휴일 휴무"
+   },
+   {
+    "kind": "title",
+    "text": "AS 하자반품 안내"
+   },
+   {
+    "kind": "description",
+    "text": "품질보증기간: 구매 후 최대 15년 시디즈의 부품은 품목에 따라 1년에서 최대 15년까지 품질이 보증됩니다. 자세한 사항은 시디즈 품질 보증 정책 을 참고해 주세요. 의자에 별도로 설치하는 보조 기구 또는 자세 교정 의자로 인한 찢김이나 상처 등 고객 부주의로 제품 하자가 발생한 경우 고객님이 비용을 부담할 수 있습니다. 품질 보증 미대상, 사용상 부주의, 소모성 자재, 소재 자체의 특성 및 마감의 변화 등의 경우 AS 신청 시 출장비와 부품비가 청구됩니다. AS 정책 바로 가기 >"
+   },
+   {
+    "kind": "title",
+    "text": "배송안내"
+   },
+   {
+    "kind": "title",
+    "text": "배송지역"
+   },
+   {
+    "kind": "description",
+    "text": "전국 무료배송입니다. (단, 제주도의 경우 추가 배송비가 부과되며, 울릉도 및 일부 도서산간 지역은 직접 배송이 불가합니다.) 제품의 특성상 묶음 배송이 불가하며, 택배 배송의 경우 제품과 수량에 따라 배송일이 다를 수 있습니다."
+   },
+   {
+    "kind": "title",
+    "text": "제주도 추가 배송비"
+   },
+   {
+    "kind": "description",
+    "text": "제주도의 경우 소비자가 기준 4%의 추가 배송비가 부과됩니다."
+   },
+   {
+    "kind": "title",
+    "text": "배송일 및 배송기간"
+   },
+   {
+    "kind": "description",
+    "text": "배송기간은 주문 확인 후 평균 4~10일 정도 소요됩니다. (주말, 공휴일 제외) 배송관련 특수상황이나 천재지변에 따라 배송이 다소 지연될 수 있습니다."
+   },
+   {
+    "kind": "title",
+    "text": "예상 배송일 안내"
+   },
+   {
+    "kind": "description",
+    "text": "예상 배송일은 주문 완료 후 24시간 이내에 발송되는 알림톡을 통해 확인할 수 있습니다. 알림톡을 수신 받지 못한 경우 챗봇 또는 고객센터로 문의해 주세요. (주말, 공휴일 제외) 경기도 일부, 충청, 강원, 경상, 전라도 지역은 배송 요일이 지정되어 있습니다. 주문 후 각 지역별로 배송일이 정해지면 알림톡 혹은 문자로 안내해 드리고 있습니다. 제주 지역의 경우 배송일이 1~2일 추가 소요될 수 있습니다. (주말, 공휴일 제외)"
+   }
+  ]
+ }
+}

@@ -373,10 +373,13 @@
         "description": "<p>Perfect Fitting Lumbar Support and the Ultimate Sync Tilt mechanism minimise the gap between your body and the backrest, while backrest and seat move together to hold a stable posture.</p>",
         "align": "left",
         "align_vertical": "bottom",
-        "text_colour": "#ffffff",
         "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/c7d14500aba741a88dcb8a51148358db/c7d14500aba741a88dcb8a51148358db.HD-1080p-2.5Mbps-40789349.mp4",
         "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/c7d14500aba741a88dcb8a51148358db.thumbnail.0000000000_small.jpg",
-        "alt": "Backrest and seat of the SIDIZ T90 moving together as the sitter reclines"
+        "alt": "Backrest and seat of the SIDIZ T90 moving together as the sitter reclines",
+        "tag_colour": "#000000",
+        "tag_background": "#eaedf0",
+        "title_colour": "#ffffff",
+        "description_colour": "#a4aab0"
       }
     },
     "tilt_cards": {
@@ -390,7 +393,9 @@
             "align": "left",
             "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/20e9455892f343a0bcdb4a7427a961d6/20e9455892f343a0bcdb4a7427a961d6.SD-480p-1.5Mbps-36797788.mp4",
             "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/20e9455892f343a0bcdb4a7427a961d6.thumbnail.0000000000_small.jpg",
-            "alt": "Ultimate Sync Tilt mechanism of the SIDIZ T90 in motion"
+            "alt": "Ultimate Sync Tilt mechanism of the SIDIZ T90 in motion",
+            "title_colour": "#000000",
+            "description_colour": "#7c8084"
           }
         },
         "t2": {
@@ -401,7 +406,9 @@
             "align": "left",
             "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/1a4364137cb746e18d59275a01a09f3c/1a4364137cb746e18d59275a01a09f3c.SD-480p-1.5Mbps-36797785.mp4",
             "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/1a4364137cb746e18d59275a01a09f3c.thumbnail.0000000000_small.jpg",
-            "alt": "Synchronised tilting: the seat tilts with the backrest"
+            "alt": "Synchronised tilting: the seat tilts with the backrest",
+            "title_colour": "#000000",
+            "description_colour": "#7c8084"
           }
         },
         "t3": {
@@ -412,7 +419,9 @@
             "align": "left",
             "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/8a2fb37c626a4c8384ebce18397f9807/8a2fb37c626a4c8384ebce18397f9807.SD-480p-1.5Mbps-36797787.mp4",
             "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/8a2fb37c626a4c8384ebce18397f9807.thumbnail.0000000000_small.jpg",
-            "alt": "Multi-limited tilting control setting the backrest recline range"
+            "alt": "Multi-limited tilting control setting the backrest recline range",
+            "title_colour": "#000000",
+            "description_colour": "#7c8084"
           }
         }
       },
@@ -944,23 +953,11 @@
         "background": "#ffffff"
       }
     },
-    "armrests_banner": {
-      "type": "sidiz-wb-scroll-banner",
-      "settings": {
-        "heading": "",
-        "tag": "Move without limits, so you can think from every angle",
-        "subheading": "Panorama 4D armrests<br>that support every posture",
-        "description": "<p>Modern work moves between PC, laptop, tablet and phone, which makes the movement of your arms and upper body matter more than it used to.</p><p>The T90's 4D armrests offer a wide adjustment range, supporting your arms and shoulders in whatever posture the task calls for. The movement opens out like a panorama.</p><p>Korean Patent No. 10-2779705</p>",
-        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f2b08a29331a4271b16e9fe5b55b9814/f2b08a29331a4271b16e9fe5b55b9814.HD-1080p-7.2Mbps-36707422.mp4",
-        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/f2b08a29331a4271b16e9fe5b55b9814.thumbnail.0000000000_small.jpg",
-        "alt": "Panorama 4D armrests moving through their full adjustment range"
-      }
-    },
-    "armrests_cards": {
-      "type": "sidiz-wb-scroll-card-list",
+    "armrests": {
+      "type": "sidiz-product-view",
       "blocks": {
-        "a1": {
-          "type": "card",
+        "b1": {
+          "type": "feature",
           "settings": {
             "title": "4D armrest adjustment",
             "description": "<p>A four-way adjustment system covering armrest height, depth, width and angle.</p><p>Adjustable through 70 mm height, 60 mm depth, 35° laterally and 230° rotation.</p>",
@@ -969,8 +966,8 @@
             "alt": "Adjusting the 4D armrest on the SIDIZ T90"
           }
         },
-        "a2": {
-          "type": "card",
+        "b2": {
+          "type": "feature",
           "settings": {
             "title": "Tension support design",
             "description": "<p>Calibrated tension gives steady support when you rest your arms.</p><p>It reduces fatigue in the arms and shoulders during keyboard and mouse work.</p>",
@@ -979,8 +976,8 @@
             "alt": "Tension support in the T90 armrest as an arm rests on it"
           }
         },
-        "a3": {
-          "type": "card",
+        "b3": {
+          "type": "feature",
           "settings": {
             "title": "Silicone armrest pads",
             "description": "<p>Soft silicone reduces pressure where your arms make contact.</p><p>It stays comfortable to the touch through long sessions.</p>",
@@ -990,11 +987,18 @@
         }
       },
       "block_order": [
-        "a1",
-        "a2",
-        "a3"
+        "b1",
+        "b2",
+        "b3"
       ],
-      "settings": {}
+      "settings": {
+        "tag": "Move without limits, so you can think from every angle",
+        "heading": "Panorama 4D armrests<br>that support every posture",
+        "description": "<p>Modern work moves between PC, laptop, tablet and phone, which makes the movement of your arms and upper body matter more than it used to.</p><p>The T90's 4D armrests offer a wide adjustment range, supporting your arms and shoulders in whatever posture the task calls for. The movement opens out like a panorama.</p><p>*Korean Patent No. 10-2779705</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f2b08a29331a4271b16e9fe5b55b9814/f2b08a29331a4271b16e9fe5b55b9814.HD-1080p-7.2Mbps-36707422.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/f2b08a29331a4271b16e9fe5b55b9814.thumbnail.0000000000_small.jpg",
+        "alt": "Panorama 4D armrests moving through their full adjustment range"
+      }
     }
   },
   "order": [
@@ -1003,8 +1007,7 @@
     "intro",
     "ergonomics_banner",
     "ergonomics_cards",
-    "armrests_banner",
-    "armrests_cards",
+    "armrests",
     "tilt_banner",
     "tilt_cards",
     "comfort_cards",

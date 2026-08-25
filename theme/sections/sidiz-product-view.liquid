@@ -1,0 +1,164 @@
+{%- comment -%}
+  Port of the KR `product_view_horizontal` section — the armrests block on the
+  T90 page: one large sticky media panel with the heading beside it, then a row
+  of smaller feature blocks underneath.
+
+  Built from the section's rendered HTML. It declares no inline colours, so it
+  runs on the default light palette — this is the section I previously and
+  wrongly substituted with the black scroll banner pair.
+
+  KR structure:
+    section.section-product-view.horizontal
+      > .container
+          > .section-media--wrapper > .section-media > video
+          > .content--wrapper
+              > .wrapper--header > .section-text
+                  > .tag + h2.title + .description.rich-text-area > .size-18
+              > .wrapper--body > .block--wrapper
+                  > .block--item > .block--media + .block--text
+                      > h3.title + .description.rich-text-area > .size-15
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-view.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-product-view.js' | asset_url }}" defer="defer"></script>
+
+<div class="container">
+  <div class="section-media--wrapper">
+    <div class="section-media">
+      {%- if section.settings.video_url != blank -%}
+        <video
+          playsinline="playsinline"
+          autoplay="autoplay"
+          loop="loop"
+          muted="muted"
+          preload="metadata"
+          loading="lazy"
+          {% if section.settings.alt != blank %}aria-label="{{ section.settings.alt | escape }}"{% endif %}
+          {% if section.settings.poster_url != blank %}poster="{{ section.settings.poster_url }}"{% endif %}
+        >
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+          {%- if section.settings.poster_url != blank -%}
+            <img alt="{{ section.settings.alt | escape }}" src="{{ section.settings.poster_url }}">
+          {%- endif -%}
+        </video>
+      {%- elsif section.settings.image_url != blank -%}
+        <img
+          src="{{ section.settings.image_url }}?width=1600"
+          sizes="(min-width: 1024px) 50vw, 100vw"
+          width="1600"
+          height="2133"
+          alt="{{ section.settings.alt | escape }}"
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="content--wrapper">
+    <div class="wrapper--header">
+      <div class="section-text">
+        {%- if section.settings.tag != blank -%}
+          <div class="tag">{{ section.settings.tag }}</div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="description rich-text-area">
+            <div class="size-18">{{ section.settings.description }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="wrapper--body">
+      <div class="block--wrapper">
+        {%- for block in section.blocks -%}
+          <div class="block--item" {{ block.shopify_attributes }}>
+            <div class="block--media">
+              {%- if block.settings.video_url != blank -%}
+                <video
+                  playsinline="playsinline"
+                  autoplay="autoplay"
+                  loop="loop"
+                  muted="muted"
+                  preload="metadata"
+                  loading="lazy"
+                  {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
+                  {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
+                >
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                  {%- if block.settings.poster_url != blank -%}
+                    <img alt="{{ block.settings.alt | escape }}" src="{{ block.settings.poster_url }}">
+                  {%- endif -%}
+                </video>
+              {%- elsif block.settings.image_url != blank -%}
+                <img
+                  src="{{ block.settings.image_url }}?width=704"
+                  srcset="{{ block.settings.image_url }}?width=352 352w, {{ block.settings.image_url }}?width=704 704w"
+                  sizes="(min-width: 1024px) 16vw, 45vw"
+                  width="704"
+                  height="528"
+                  alt="{{ block.settings.alt | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                >
+              {%- endif -%}
+            </div>
+
+            <div class="block--text">
+              {%- if block.settings.title != blank -%}
+                <h3 class="title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <div class="description rich-text-area">
+                  <div class="size-15">{{ block.settings.description }}</div>
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ product view",
+  "tag": "section",
+  "class": "section-product-view horizontal",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Tag" },
+    { "type": "html", "id": "heading", "label": "Heading", "info": "Use <br> for line breaks." },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "header", "content": "Main media" },
+    { "type": "text", "id": "video_url", "label": "Video URL" },
+    { "type": "text", "id": "poster_url", "label": "Video poster URL" },
+    { "type": "text", "id": "image_url", "label": "Image URL" },
+    { "type": "text", "id": "alt", "label": "Alt text" }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        { "type": "text", "id": "video_url", "label": "Video URL" },
+        { "type": "text", "id": "poster_url", "label": "Video poster URL" },
+        { "type": "text", "id": "image_url", "label": "Image URL" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SIDIZ product view",
+      "blocks": [{ "type": "feature" }, { "type": "feature" }, { "type": "feature" }]
+    }
+  ]
+}
+{% endschema %}
