@@ -105,14 +105,33 @@ plus superseded `find-your-chair-ver-3/4` (keep only the current version).
 
 Also `collections/non-exposure-1`, `collections/non-exposure-2` — hidden collections, exclude.
 
-### Blog / S-CULTURE (353 articles)
+### Blog content (353 articles)
 
-353 articles is too many to migrate wholesale at launch. Proposed approach:
-- **Tier 1** — evergreen brand/technology/ergonomics content → translate and publish at launch (~20–40 articles)
-- **Tier 2** — product guides tied to SKUs we're launching → translate in phase 2
-- **Tier 3** — KR campaigns, KR events, KR press, seasonal promos → **do not migrate**
+The 353 "blog" URLs are mostly **not** editorial content — Shopify blogs are used on kr.sidiz.com
+to hold FAQs, IR material and legal documents. Actual breakdown:
 
-Needs a triage pass over `data/inventory/blogs.csv` before any translation work starts.
+| Blog | Count | Decision |
+|---|---|---|
+| `product-faq` | 67 | ✅ **Migrate** — high value, directly reduces AU support load |
+| `service-faq-new` | 50 | ✅ **Migrate & adapt** — AU service process differs |
+| `s-culture` | 76 | 🔶 **Triage** — evergreen ergonomics/brand content migrates, KR-campaign posts don't |
+| `news` | 66 | ❌ Skip — Korean press releases and corporate news |
+| `IR자료` (investor relations) | 33 | ❌ **Skip** — KR-listed-company IR material, no AU relevance |
+| `special-offers` | 21 | ❌ Skip — expired KR promotions |
+| `개인정보 수집 및 이용 동의` (privacy consent) | 16 | 🔁 **Replace** — rewrite for Australian Privacy Act / APPs |
+| `시디즈 쇼핑몰 이용약관` (store T&C) | 6 | 🔁 **Replace** — rewrite for ACL |
+| `storage`, `contents` | 7 | 🔶 Triage |
+| `품질보증정책` (warranty policy) | 2 | 🔁 **Replace** — rewrite for ACL consumer guarantees |
+| `마케팅 수신 동의` (marketing consent) | 2 | 🔁 **Replace** — rewrite for Spam Act 2003 |
+| `임직원 할인` (employee discount) | 2 | ❌ Skip — internal KR programme |
+| `제품가이드 상세` (product guide detail) | 2 | 🔶 Triage — likely fold into product pages |
+| `test`, `s-culture-test`, `service-faq` | 3 | ❌ Skip — test artefacts |
+
+**Net:** ~117 articles to translate (`product-faq` + `service-faq-new`), ~83 to triage,
+~26 legal documents to **rewrite from scratch** for Australian law, ~124 to drop.
+
+This materially changes the effort estimate: the FAQ content is the bulk of the work and it is
+also the highest-value content to get right, because it directly determines AU support volume.
 
 ---
 
