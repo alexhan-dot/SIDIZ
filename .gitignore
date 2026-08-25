@@ -55,3 +55,6 @@ tmp/
 
 # Claude Code local settings (machine-specific)
 .claude/settings.local.json
+
+# Scraped page HTML (large, regenerable via scripts/)
+data/kr-raw/page-*.html
