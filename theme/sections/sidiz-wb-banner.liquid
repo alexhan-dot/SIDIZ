@@ -15,7 +15,7 @@
 
 {%- assign scope = 'section-' | append: section.id -%}
 
-<div class="container {{ scope }}">
+<div class="container {{ scope }}" data-header-scheme="{{ section.settings.header_scheme }}">
   <div class="container--body align-{{ section.settings.align }} align-vertical-{{ section.settings.align_vertical }}">
     <div class="wrapper--background">
       {%- if section.settings.video_url != blank -%}
@@ -90,6 +90,17 @@
   "tag": "section",
   "class": "section-product-wb-banner",
   "settings": [
+    {
+      "type": "select",
+      "id": "header_scheme",
+      "label": "Header text over this section",
+      "options": [
+        { "value": "light", "label": "Black (light background)" },
+        { "value": "dark", "label": "White (dark background)" }
+      ],
+      "default": "dark",
+      "info": "Sets which colour the floating header switches to while this section is under it."
+    },
     { "type": "text", "id": "tag", "label": "Tag" },
     { "type": "html", "id": "heading", "label": "Heading", "info": "Use <br> for line breaks." },
     { "type": "richtext", "id": "description", "label": "Description" },

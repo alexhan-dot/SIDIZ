@@ -89,20 +89,9 @@
         "m5"
       ],
       "settings": {}
-    },
-    "announcement": {
-      "type": "sidiz-announcement",
-      "settings": {
-        "text": "Free standard delivery Australia-wide",
-        "link": "",
-        "dismissible": true,
-        "background": "#000000",
-        "text_colour": "#ffffff"
-      }
     }
   },
   "order": [
-    "announcement",
     "header"
   ]
 }

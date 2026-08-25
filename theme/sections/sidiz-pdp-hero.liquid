@@ -23,7 +23,7 @@
 
 {%- assign scope = 'section-' | append: section.id -%}
 
-<div class="container {{ scope }}" data-prd-type="{{ section.settings.product_type }}">
+<div class="container {{ scope }}" data-prd-type="{{ section.settings.product_type }}" data-header-scheme="{{ section.settings.header_scheme }}">
   <div class="container--header">
     <div class="wrapper--text align-{{ section.settings.text_align }}">
       <div class="content--text">
@@ -81,6 +81,17 @@
   "tag": "section",
   "class": "section-product-pdp-head",
   "settings": [
+    {
+      "type": "select",
+      "id": "header_scheme",
+      "label": "Header text over this section",
+      "options": [
+        { "value": "light", "label": "Black (light background)" },
+        { "value": "dark", "label": "White (dark background)" }
+      ],
+      "default": "dark",
+      "info": "Sets which colour the floating header switches to while this section is under it."
+    },
     { "type": "html", "id": "subtitle", "label": "Sub-title", "info": "Use <br> for line breaks." },
     { "type": "color", "id": "subtitle_colour", "label": "Sub-title colour", "default": "#ffffff" },
     { "type": "text", "id": "heading", "label": "Wordmark", "info": "The model name, e.g. T90." },

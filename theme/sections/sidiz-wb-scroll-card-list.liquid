@@ -23,7 +23,7 @@
 
 {%- assign scope = 'section-' | append: section.id -%}
 
-<div class="container {{ scope }}">
+<div class="container {{ scope }}" data-header-scheme="{{ section.settings.header_scheme }}">
   <div class="wrapper--card-list">
     {%- for block in section.blocks -%}
       <div class="card--item block-{{ block.id }}" {{ block.shopify_attributes }}>
@@ -86,6 +86,17 @@
   "tag": "section",
   "class": "section-product-wb-scroll-card-list",
   "settings": [
+    {
+      "type": "select",
+      "id": "header_scheme",
+      "label": "Header text over this section",
+      "options": [
+        { "value": "light", "label": "Black (light background)" },
+        { "value": "dark", "label": "White (dark background)" }
+      ],
+      "default": "dark",
+      "info": "Sets which colour the floating header switches to while this section is under it."
+    },
     {
       "type": "paragraph",
       "content": "Place this directly after a SIDIZ WB scroll banner. The banner's text stays pinned over this panel while the cards scroll past."

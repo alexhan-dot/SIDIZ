@@ -1,164 +1,107 @@
 {%- comment -%}
-  Port of the KR site header.
+  SIDIZ header — fixed over the page, text-only contrast switching.
 
-  The behaviour that matters, and which I got wrong first time round: this
-  header is not a block that pushes the page down. It sits over the content and
-  recolours itself against whatever is behind it.
+  Rebuilt after two wrong turns:
 
-  From section-header.css:
-    .site-header-container { position: sticky; top: 0; z-index: 1000;
-                             mix-blend-mode: difference; }
-    a.invert-colors        { filter: invert(1); }
-    .no-touchevents .site-header-container:hover { mix-blend-mode: normal; }
-    .no-touchevents .site-header-container:hover .site-header { background: #fff; }
+  1. Stacking two rows that pushed the page down. The header floats over the
+     content instead.
+  2. mix-blend-mode: difference. It blends per channel, so a coloured backdrop
+     gives coloured text — green nav over a red chair — instead of the clean
+     black or white this design calls for. It also inverted the logo and icons
+     as a side effect rather than by intent.
 
-  mix-blend-mode: difference is the whole trick — the nav turns white over dark
-  footage and black over a light page with no JavaScript at all. The logo is an
-  image, so it takes filter: invert(1) to travel with it. On hover the blend is
-  switched off and a white plate drops in so the menu stays readable while open.
-
-  From section-header.js: once the visitor scrolls past the top tier,
-  #gnb--overlay is shown and #logo_pc_bottom appears in the nav row. Both
-  elements have to exist for that script to work.
-
-  The hover rules are scoped to .no-touchevents, a class the KR theme sets on
-  <html>; Dawn does not, so it is set below for pointer devices only.
+  Now: a fixed bar with a light backdrop blur so the menu reads as its own
+  region, and text that switches between black and white. Sections declare what
+  sits behind the header with data-header-scheme="dark|light"; sidiz-header.js
+  watches which declaring section crosses the bar and toggles the class.
+  Anything that declares nothing counts as light.
 {%- endcomment -%}
 
-{{ 'theme.css' | asset_url | stylesheet_tag }}
-{{ 'section-header.css' | asset_url | stylesheet_tag }}
-{{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'section-header.js' | asset_url }}" defer="defer"></script>
-
-<script>
-  // KR scopes its header hover states to .no-touchevents on <html>.
-  if (!window.matchMedia('(hover: none)').matches) {
-    document.documentElement.classList.add('no-touchevents');
-  }
-</script>
+{{ 'sidiz-root-variables.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-header.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign utility = section.blocks | where: 'type', 'utility'
   assign menus = section.blocks | where: 'type', 'menu'
 -%}
 
-<div id="gnb--overlay"></div>
+<div class="sidiz-header header--on-light" data-sidiz-header>
+  <div class="sidiz-header__inner">
+    <a class="sidiz-header__logo" href="{{ routes.root_url }}" title="{{ shop.name | escape }}">
+      <span class="logo-img">
+        <img src="{{ 'sidiz_symbol.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="24" height="24">
+      </span>
+    </a>
 
-<main-header id="site-header" class="site-header site-header--alignment-left">
-  <div class="header-container header-container--top">
-    <div class="header__top header__top--logo-left" id="header-top">
-      <div id="logo_pc_top" class="logo">
-        <a class="logo-img invert-colors" title="{{ shop.name | escape }}" href="{{ routes.root_url }}">
-          <img src="{{ 'sidiz_symbol.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="24" height="24">
-        </a>
-      </div>
-
-      {%- if utility.size > 0 -%}
-        <div class="menu--list">
-          {%- for block in utility -%}
-            <a href="{{ block.settings.link }}" class="icon-button" {{ block.shopify_attributes }}>
-              <span class="header-upper-menu icon-button__text">{{ block.settings.label }}</span>
-            </a>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-    </div>
-  </div>
-
-  <div class="header-container header-container--bottom no-header-blocks">
-    <div class="header__bottom">
-      <div class="header__menu site-nav style--classic">
-        <div class="site-nav-container">
-          <nav>
-            {%- comment -%}
-              Hidden until the visitor scrolls past the top tier, at which point
-              section-header.js reveals it alongside the overlay.
-            {%- endcomment -%}
-            <div id="logo_pc_bottom" class="logo" style="display: none;">
-              <a class="logo-img invert-colors" title="{{ shop.name | escape }}" href="{{ routes.root_url }}">
-                <img src="{{ 'sidiz_symbol.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="24" height="24">
+    {%- if menus.size > 0 -%}
+      <nav aria-label="{{ 'sections.header.menu' | t | default: 'Main' }}">
+        <ul class="sidiz-header__nav">
+          {%- for block in menus -%}
+            {%- liquid
+              assign handle = block.settings.label | handleize
+              assign rows = block.settings.columns | newline_to_br | split: '<br />'
+            -%}
+            <li {{ block.shopify_attributes }}>
+              <a
+                class="menu-link"
+                {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% else %}href="#" aria-haspopup="true"{% endif %}
+              >
+                <span class="gnb-title">{{ block.settings.label }}</span>
               </a>
-            </div>
 
-            <ul class="link-list ul_top_line">
-              {%- for block in menus -%}
-                {%- liquid
-                  assign handle = block.settings.label | handleize
-                  assign rows = block.settings.columns | newline_to_br | split: '<br />'
-                  assign has_submenu = false
-                  if block.settings.columns != blank
-                    assign has_submenu = true
-                  endif
-                -%}
-                <li
-                  id="menu-item-{{ handle }}"
-                  {% if has_submenu %}
-                    class="has-submenu"
-                    aria-controls="SiteNavLabel-{{ handle }}"
-                    aria-expanded="false"
-                  {% endif %}
-                  {{ block.shopify_attributes }}
-                >
-                  <a class="menu-link" {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}>
-                    <span><span class="gnb-title">{{ block.settings.label }}</span></span>
-                  </a>
-
-                  {%- if has_submenu -%}
-                    <ul class="submenu normal-menu" id="SiteNavLabel-{{ handle }}">
-                      <div class="submenu-holder">
-                        <div class="submenu-holder-inner">
-                          <div class="submenu--container">
-                            {%- if block.settings.column_title != blank -%}
-                              <div class="submenu--left">
-                                <div class="submenu--title">{{ block.settings.column_title }}</div>
-                              </div>
-                            {%- endif -%}
-
-                            <div class="submenu--list">
-                              <div class="submenu--list-inner">
-                                {%- for row in rows -%}
-                                  {%- assign parts = row | strip | split: '|' -%}
-                                  {%- if parts.size > 1 -%}
-                                    <a class="submenu--item" href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a>
-                                  {%- elsif parts[0] != blank -%}
-                                    <div class="submenu--group-title">{{ parts[0] | strip }}</div>
-                                  {%- endif -%}
-                                {%- endfor -%}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </ul>
+              {%- if block.settings.columns != blank -%}
+                <div class="sidiz-header__submenu" id="submenu-{{ handle }}">
+                  {%- if block.settings.column_title != blank -%}
+                    <div class="submenu--group-title">{{ block.settings.column_title }}</div>
                   {%- endif -%}
-                </li>
-              {%- endfor -%}
-            </ul>
+                  {%- for row in rows -%}
+                    {%- assign parts = row | strip | split: '|' -%}
+                    {%- if parts.size > 1 -%}
+                      <a href="{{ parts[1] | strip }}">{{ parts[0] | strip }}</a>
+                    {%- elsif parts[0] != blank -%}
+                      <div class="submenu--group-title">{{ parts[0] | strip }}</div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
 
-            <div class="header__icons">
-              <a class="icon-button invert-colors" href="{{ routes.search_url }}" aria-label="{{ 'general.search.search' | t }}">
-                <img src="{{ 'icon-search-line-bk.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
-              </a>
-              <a class="icon-button invert-colors" href="{{ routes.cart_url }}" aria-label="{{ 'sections.header.cart' | t }}">
-                <img src="{{ 'icon-bookmark-line-bk-28.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
-              </a>
-            </div>
-          </nav>
-        </div>
+    {%- if utility.size > 0 -%}
+      <div class="sidiz-header__utility">
+        {%- for block in utility -%}
+          <a href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+            <span class="header-upper-menu">{{ block.settings.label }}</span>
+          </a>
+        {%- endfor -%}
       </div>
+    {%- endif -%}
+
+    <div class="sidiz-header__icons">
+      <a href="{{ routes.search_url }}" aria-label="{{ 'general.search.search' | t }}">
+        <img src="{{ 'icon-search-line-bk.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+      </a>
+      <a href="{{ routes.cart_url }}" aria-label="{{ 'sections.header.cart' | t }}">
+        <img src="{{ 'icon-bookmark-line-bk-28.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+      </a>
     </div>
   </div>
-</main-header>
+</div>
 
 {% schema %}
 {
   "name": "SIDIZ header",
-  "tag": "div",
-  "class": "shopify-section-group-header-group site-header-container mount-header",
+  "tag": "header",
+  "class": "shopify-section-group-header-group",
   "settings": [
     {
       "type": "paragraph",
-      "content": "The header floats over the page and recolours itself against whatever is behind it, so the first section below should be full-bleed media. Submenu links are one per line, as 'Label | /url'; a line with no pipe becomes a group heading."
+      "content": "The header floats over the page. Its text turns white over sections set to a dark header scheme and black everywhere else. Submenu links are one per line, as 'Label | /url'; a line with no pipe becomes a group heading."
     }
   ],
   "blocks": [

@@ -1,0 +1,236 @@
+/* ==========================================================================
+   SIDIZ header
+
+   Fixed over the page, with a light blur so the bar reads as its own region,
+   and text that switches between white and black depending on the section
+   underneath. Replaces the mix-blend-mode approach, which tinted the text
+   against coloured backdrops instead of giving clean black or white.
+   ========================================================================== */
+
+.sidiz-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  /* Just enough to separate the bar from the page without becoming a plate. */
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* The tint rides with the scheme so the blur has something to work against. */
+.sidiz-header.header--on-light {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+.sidiz-header.header--on-dark {
+  background-color: rgba(0, 0, 0, 0.28);
+}
+
+.sidiz-header.header--scrolled.header--on-light {
+  background-color: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+}
+
+.sidiz-header.header--scrolled.header--on-dark {
+  background-color: rgba(0, 0, 0, 0.42);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .sidiz-header.header--on-light { background-color: rgba(255, 255, 255, 0.92); }
+  .sidiz-header.header--on-dark  { background-color: rgba(0, 0, 0, 0.62); }
+}
+
+/* --------------------------------------------------------------------------
+   Text colour — the only thing that reacts
+   -------------------------------------------------------------------------- */
+
+.sidiz-header {
+  --header-ink: #000;
+}
+
+.sidiz-header.header--on-dark {
+  --header-ink: #fff;
+}
+
+.sidiz-header a,
+.sidiz-header .gnb-title,
+.sidiz-header .header-upper-menu {
+  color: var(--header-ink);
+  transition: color 0.25s ease;
+}
+
+/* Logo and icons are artwork, so they follow the ink by filter rather than
+   colour. Both source files are black. */
+.sidiz-header .logo-img img,
+.sidiz-header .header__icons img {
+  transition: filter 0.25s ease;
+}
+
+.sidiz-header.header--on-dark .logo-img img,
+.sidiz-header.header--on-dark .header__icons img {
+  filter: invert(1);
+}
+
+/* --------------------------------------------------------------------------
+   Layout
+   -------------------------------------------------------------------------- */
+
+.sidiz-header__inner {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  height: 64px;
+  padding: 0 var(--gutter-container, 40px);
+}
+
+.sidiz-header__logo {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.sidiz-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidiz-header__nav > li {
+  position: relative;
+}
+
+.sidiz-header .menu-link {
+  display: inline-flex;
+  align-items: center;
+  height: 64px;
+  font-family: var(--font-stack-body-primary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 160%;
+  letter-spacing: -0.28px;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sidiz-header__utility {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}
+
+.sidiz-header__utility a {
+  font-size: 12px;
+  line-height: normal;
+  letter-spacing: -0.24px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sidiz-header__icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 auto;
+}
+
+.sidiz-header__icons img {
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   Mega menu
+   -------------------------------------------------------------------------- */
+
+.sidiz-header__submenu {
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 220px;
+  padding: 20px 24px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+}
+
+.sidiz-header__nav > li:hover .sidiz-header__submenu,
+.sidiz-header__nav > li:focus-within .sidiz-header__submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.sidiz-header__submenu a,
+.sidiz-header__submenu .submenu--group-title {
+  display: block;
+  padding: 6px 0;
+  font-size: 14px;
+  line-height: 160%;
+  letter-spacing: -0.28px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* The panel is always white, so its text never follows the header ink. */
+.sidiz-header__submenu a {
+  color: #434548;
+}
+
+.sidiz-header__submenu a:hover {
+  color: #000;
+}
+
+.sidiz-header__submenu .submenu--group-title {
+  margin-top: 8px;
+  color: #9a9ea2;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sidiz-header__submenu .submenu--group-title:first-child {
+  margin-top: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile
+   -------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1023px) {
+  .sidiz-header__inner {
+    height: 56px;
+    gap: 16px;
+  }
+
+  .sidiz-header .menu-link {
+    height: 56px;
+  }
+
+  .sidiz-header__nav,
+  .sidiz-header__utility {
+    display: none;
+  }
+
+  .sidiz-header__icons {
+    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidiz-header,
+  .sidiz-header a,
+  .sidiz-header .logo-img img,
+  .sidiz-header__submenu {
+    transition: none;
+  }
+}
