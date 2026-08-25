@@ -58,3 +58,6 @@ tmp/
 
 # Scraped page HTML (large, regenerable via scripts/)
 data/kr-raw/page-*.html
+
+# Harvested KR theme binaries (regenerable via scripts/harvest_kr_assets.py)
+data/kr-theme/assets/
