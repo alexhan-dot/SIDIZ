@@ -163,3 +163,32 @@
 .section-announcement-bar {
   position: relative;
 }
+
+/* The utility row sits in the same blended bar as the nav, so it needs the same
+   white source colour. KR leaves it to inherit; without a value the text has no
+   colour to inverse and disappears. */
+.site-header-container .header-upper-menu.icon-button__text {
+  color: #fff;
+}
+
+/* Icons are images, so they travel with the logo's inversion rather than the
+   blend. */
+.site-header .header__icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.site-header .header__icons img {
+  display: block;
+}
+
+/* The header must never paint a background of its own — difference blending
+   only works against the page behind it. */
+.site-header,
+.site-header .header-container,
+.site-header .header__top,
+.site-header .header__bottom {
+  background: transparent;
+}

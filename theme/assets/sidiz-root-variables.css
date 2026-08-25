@@ -1,0 +1,85 @@
+/* ==========================================================================
+   SIDIZ theme variables
+
+   kr.sidiz.com injects these into the document head from its theme settings —
+   they are not in any of its stylesheets. Without them the ported CSS resolves
+   var() to nothing, which is why header text was invisible (no colour at all,
+   so mix-blend-mode had nothing to inverse) and why vertical rhythm and type
+   scale were off across the page.
+
+   Values are KR's, verified against the rendered page, with two deliberate
+   changes for Australia:
+     - the body font stack is Latin-first instead of Noto Sans Japanese
+     - the next-arrow indicator points at our own asset, not the KR CDN
+   ========================================================================== */
+
+:root {
+  /* ---- Type -------------------------------------------------------------- */
+  --font-stack-body-primary: 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-stack-body-secondary: 'Pretendard', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-stack-headings-primary: 'CentraNo2', 'Pretendard', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  --font-weight-headings-primary: 400;
+  --font-style-headings-primary: normal;
+  --font-weight-body-primary: 400;
+  --font-weight-body-primary-bold: 600;
+  --font-weight-body-primary-medium: 500;
+  --font-style-body-primary: normal;
+  --font-weight-body-secondary: 400;
+  --font-weight-body-secondary-bold: 600;
+  --font-style-body-secondary: normal;
+  --font-weight-menu: var(--font-weight-body-primary-medium);
+  --font-weight-buttons: var(--font-weight-body-primary-medium);
+
+  --base-headings-primary-size: 44;
+  --base-headings-line: 1.3;
+  --base-headings-spacing: 0em;
+  --base-body-primary-size: 16;
+  --base-body-secondary-size: 18;
+  --base-body-line: 1.4;
+
+  /* ---- Header ------------------------------------------------------------ */
+  --color-text-header: #000000;
+  --color-foreground-header: #fff;
+  --color-borders-header: rgba(0, 0, 0, 0.15);
+
+  /* ---- Page -------------------------------------------------------------- */
+  --color-background-main: #ffffff;
+  --color-secondary-background-main: rgba(0, 0, 0, 0.08);
+  --color-third-background-main: rgba(0, 0, 0, 0.04);
+  --color-fourth-background-main: rgba(0, 0, 0, 0.02);
+  --color-opacity-background-main: rgba(255, 255, 255, 0);
+  --color-text-main: #000000;
+  --color-foreground-main: #fff;
+  --color-secondary-text-main: rgba(0, 0, 0, 0.6);
+  --color-borders-main: rgba(0, 0, 0, 0.1);
+  --color-background-main-alternate: #f2f2f2;
+  --color-background-product-card: rgba(0, 0, 0, 0);
+  --color-background-cart-card: rgba(0, 0, 0, 0);
+
+  /* ---- Footer ------------------------------------------------------------ */
+  --color-background-footer: #ffffff;
+  --color-text-footer: #000000;
+  --color-borders-footer: rgba(0, 0, 0, 0.15);
+
+  /* ---- Forms and buttons ------------------------------------------------- */
+  --color-borders-forms-primary: rgba(0, 0, 0, 0.3);
+  --color-borders-forms-secondary: rgba(0, 0, 0, 0.6);
+  --border-radius-cards: 0px;
+  --border-width-buttons: 1px;
+  --border-radius-buttons: 30px;
+  --border-width-forms: 1px;
+  --border-radius-forms: 6px;
+  --border-radius-widgets: 10px;
+  --border-radius-product-card: 0px;
+
+  /* ---- Rhythm ------------------------------------------------------------ */
+  --grid-gap-original-base: 32px;
+  --container-vertical-space-base: 120px;
+  --image-fit-padding: 10%;
+
+  --indicator-next-arrow: url('right.svg');
+}
