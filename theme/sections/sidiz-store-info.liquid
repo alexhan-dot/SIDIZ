@@ -1,96 +1,84 @@
-{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
-
 {%- comment -%}
-  KR product_store_info — "try it in a showroom". Australia has no SIDIZ
-  showroom network, so this runs as a stockist / try-before-you-buy panel and
-  falls back to the returns policy where no stockist is listed.
+  Port of the KR `product_store_info` section — an invitation to sit in the
+  chair, with a wide showroom photograph beneath.
+
+  KR structure:
+    section.section-product-store-info
+      > .container > .wrapper
+          > .wrapper--header > h2.title + .description + .btn.btn-hover--bk > a
+          > .wrapper--body > .shop--image > img.web + img.mobile
+
+  Australia has no SIDIZ showroom network, so the copy points at stockists or
+  the returns policy rather than translating "visit a SIDIZ store".
 {%- endcomment -%}
 
-<section
-  class="sidiz-store sidiz-section"
-  style="--store-bg: {{ section.settings.background }};"
-  id="{{ section.settings.anchor_id | default: 'where-to-try' | handleize }}"
->
-  <div class="sidiz-container">
-    <div class="sidiz-store__layout">
-      <div class="sidiz-store__body">
-        {%- if section.settings.eyebrow != blank -%}
-          <p class="sidiz-store__eyebrow">{{ section.settings.eyebrow }}</p>
-        {%- endif -%}
-        {%- if section.settings.heading != blank -%}
-          <h2 class="sidiz-store__heading sidiz-display">{{ section.settings.heading }}</h2>
-        {%- endif -%}
-        {%- if section.settings.body != blank -%}
-          <div class="sidiz-store__text rte">{{ section.settings.body }}</div>
-        {%- endif -%}
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-store-info.css' | asset_url | stylesheet_tag }}
 
-        {%- if section.blocks.size > 0 -%}
-          <ul class="sidiz-store__list">
-            {%- for block in section.blocks -%}
-              <li {{ block.shopify_attributes }}>
-                <strong>{{ block.settings.name }}</strong>
-                {%- if block.settings.address != blank -%}
-                  <span>{{ block.settings.address }}</span>
-                {%- endif -%}
-                {%- if block.settings.link != blank -%}
-                  <a href="{{ block.settings.link }}">
-                    {{ block.settings.link_label | default: 'Directions' }}
-                  </a>
-                {%- endif -%}
-              </li>
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
-
-        {%- if section.settings.cta_link != blank -%}
-          <a class="sidiz-btn sidiz-btn--outline" href="{{ section.settings.cta_link }}">
-            {{ section.settings.cta_label | default: 'Find a stockist' }}
-          </a>
-        {%- endif -%}
-      </div>
-
-      {%- if section.settings.image != blank or section.settings.media_url != blank -%}
-        {% render 'sidiz-media',
-          image: section.settings.image,
-          url: section.settings.media_url,
-          alt: section.settings.alt,
-          sizes: '(min-width: 834px) 50vw, 100vw',
-          class: 'sidiz-store__media'
-        %}
+<div class="container">
+  <div class="wrapper">
+    <div class="wrapper--header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="description">{{ section.settings.description }}</div>
+      {%- endif -%}
+      {%- if section.settings.link != blank -%}
+        <div class="btn btn-hover--bk">
+          <a href="{{ section.settings.link }}">{{ section.settings.link_label | default: 'Find a stockist' }}</a>
+        </div>
       {%- endif -%}
     </div>
+
+    {%- if section.settings.image_url != blank or section.settings.image_url_mobile != blank -%}
+      <div class="wrapper--body">
+        <div class="shop--image">
+          {%- if section.settings.image_url != blank -%}
+            <img
+              class="web"
+              src="{{ section.settings.image_url }}?width=2000"
+              srcset="{{ section.settings.image_url }}?width=1000 1000w, {{ section.settings.image_url }}?width=2000 2000w"
+              sizes="100vw"
+              width="2000"
+              height="800"
+              alt="{{ section.settings.alt | escape }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {%- endif -%}
+          {%- if section.settings.image_url_mobile != blank -%}
+            <img
+              class="mobile"
+              src="{{ section.settings.image_url_mobile }}?width=1200"
+              sizes="100vw"
+              width="1200"
+              height="1200"
+              alt="{{ section.settings.alt | escape }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
   </div>
-</section>
+</div>
 
 {% schema %}
 {
-  "name": "SIDIZ stockists",
+  "name": "SIDIZ store info",
   "tag": "section",
+  "class": "section-product-store-info",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Try it before you buy" },
-    { "type": "richtext", "id": "body", "label": "Body" },
-    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Find a stockist" },
-    { "type": "url", "id": "cta_link", "label": "Button link" },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "media_url", "label": "Media URL" },
-    { "type": "text", "id": "alt", "label": "Alt text" },
-    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "where-to-try" },
-    { "type": "color", "id": "background", "label": "Background", "default": "#f5f6f7" }
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Sit in one before you decide" },
+    { "type": "html", "id": "description", "label": "Description", "info": "Use <br> for line breaks." },
+    { "type": "text", "id": "link_label", "label": "Button label", "default": "Find a stockist" },
+    { "type": "url", "id": "link", "label": "Button link" },
+    { "type": "text", "id": "image_url", "label": "Image URL (desktop)" },
+    { "type": "text", "id": "image_url_mobile", "label": "Image URL (mobile)" },
+    { "type": "text", "id": "alt", "label": "Alt text" }
   ],
-  "blocks": [
-    {
-      "type": "store",
-      "name": "Stockist",
-      "settings": [
-        { "type": "text", "id": "name", "label": "Name" },
-        { "type": "text", "id": "address", "label": "Address" },
-        { "type": "text", "id": "link_label", "label": "Link label", "default": "Directions" },
-        { "type": "url", "id": "link", "label": "Link" }
-      ]
-    }
-  ],
-  "presets": [{ "name": "SIDIZ stockists" }]
+  "presets": [{ "name": "SIDIZ store info" }]
 }
 {% endschema %}
