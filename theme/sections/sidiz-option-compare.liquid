@@ -1,0 +1,138 @@
+{%- comment -%}
+  Port of the KR `product-option-compare` section — "the T90 option that suits
+  you": one panel per material, each showing two photographs, the material name,
+  what it covers, and the colours it comes in as swatch dots.
+
+  This section was missing from the AU template entirely.
+
+  KR structure:
+    section.section-product-option-compare
+      > .container
+          > .container--header > .title
+          > .container--body
+              > .wrapper--option
+                  > .content--option-image
+                      > .button--leather.btn-hover--line > .alert-circle > svg + .text
+                      > .image > img   (two per panel)
+                  > .content--option-info
+                      > .title + .description
+                      > .color > .colorchip[style="background-color: …"]
+
+  The leather-care button only appears on the natural leather panels in KR, so
+  it is per-block here.
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-option-compare.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-product-option-compare.js' | asset_url }}" defer="defer"></script>
+
+<div class="container">
+  {%- if section.settings.heading != blank -%}
+    <div class="container--header">
+      <div class="title">{{ section.settings.heading }}</div>
+    </div>
+  {%- endif -%}
+
+  <div class="container--body">
+    {%- for block in section.blocks -%}
+      <div class="wrapper--option" {{ block.shopify_attributes }}>
+        <div class="content--option-image">
+          {%- if block.settings.note_label != blank -%}
+            <div class="button--leather btn-hover--line">
+              <div class="alert-circle">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M1.125 8C1.125 9.82336 1.84933 11.572 3.13864 12.8614C4.42795 14.1507 6.17664 14.875 8 14.875C9.82336 14.875 11.572 14.1507 12.8614 12.8614C14.1507 11.572 14.875 9.82336 14.875 8C14.875 6.17664 14.1507 4.42795 12.8614 3.13864C11.572 1.84933 9.82336 1.125 8 1.125C6.17664 1.125 4.42795 1.84933 3.13864 3.13864C1.84933 4.42795 1.125 6.17664 1.125 8Z" stroke="black" stroke-miterlimit="10"/>
+                  <path d="M6.9751 11.2353C6.9751 10.6861 7.42875 10.2205 8.00178 10.2205C8.57482 10.2205 9.02847 10.6861 9.02847 11.2353C9.02847 11.7844 8.57482 12.25 8.00178 12.25C7.42875 12.25 6.9751 11.7844 6.9751 11.2353ZM8.77777 9.48034H7.2258L7.0706 3.75H8.93296L8.77777 9.48034Z" fill="black"/>
+                </svg>
+              </div>
+              <div class="text">{{ block.settings.note_label }}</div>
+            </div>
+          {%- endif -%}
+
+          {%- assign shots = block.settings.images | split: ',' -%}
+          {%- for shot in shots -%}
+            {%- assign src = shot | strip -%}
+            {%- if src != blank -%}
+              <div class="image">
+                <img
+                  src="{{ src }}?width=1200"
+                  srcset="{{ src }}?width=600 600w, {{ src }}?width=1200 1200w"
+                  sizes="(min-width: 1024px) 24vw, 45vw"
+                  width="1200"
+                  height="1200"
+                  alt="{{ block.settings.alt | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="content--option-info">
+          {%- if block.settings.title != blank -%}
+            <div class="title">{{ block.settings.title }}</div>
+          {%- endif -%}
+          {%- if block.settings.description != blank -%}
+            <div class="description">{{ block.settings.description }}</div>
+          {%- endif -%}
+
+          {%- assign chips = block.settings.colours | split: ',' -%}
+          {%- if chips.size > 0 -%}
+            <div class="color">
+              {%- for chip in chips -%}
+                {%- assign hex = chip | strip -%}
+                {%- if hex != blank -%}
+                  <div class="colorchip" style="background-color: {{ hex }}"></div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ option compare",
+  "tag": "section",
+  "class": "section-product-option-compare",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The T90 option that suits you" }
+  ],
+  "blocks": [
+    {
+      "type": "option",
+      "name": "Material",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Material name" },
+        { "type": "text", "id": "description", "label": "What it covers", "info": "e.g. Back and seat in natural leather." },
+        {
+          "type": "textarea",
+          "id": "images",
+          "label": "Image URLs",
+          "info": "Comma-separated. KR shows two photographs per material."
+        },
+        { "type": "text", "id": "alt", "label": "Alt text" },
+        {
+          "type": "textarea",
+          "id": "colours",
+          "label": "Colour swatches",
+          "info": "Comma-separated hex values, in the order they should appear."
+        },
+        {
+          "type": "text",
+          "id": "note_label",
+          "label": "Care note label",
+          "info": "Only shown on natural leather in KR, e.g. About natural leather."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "SIDIZ option compare", "blocks": [{ "type": "option" }, { "type": "option" }] }
+  ]
+}
+{% endschema %}

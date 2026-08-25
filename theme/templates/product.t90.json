@@ -481,67 +481,59 @@
       }
     },
     "materials": {
-      "type": "sidiz-card-list",
+      "type": "sidiz-option-compare",
       "blocks": {
-        "mat1": {
-          "type": "card",
+        "o1": {
+          "type": "option",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/T90__1-1__04.jpg",
-            "alt": "Double Raschel dual mesh backrest on the SIDIZ T90",
-            "ratio": "4/5",
-            "label": "Mesh",
-            "title": "Double Raschel dual mesh",
-            "text": "<p>A two-layer mesh structure forms an air pocket, improving breathability and durability. A stain-resistant, water-repellent finish keeps it resistant to marks.</p>"
-          }
-        },
-        "mat2": {
-          "type": "card",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/T90_1-1_leather.jpg",
-            "alt": "Full-grain natural leather upholstery on the SIDIZ T90",
-            "ratio": "4/5",
-            "label": "Leather",
-            "title": "Premium full-grain leather",
-            "text": "<p>A premium full-grain leather finish with natural texture intact, adding a refined quality to offices and home offices alike.</p>"
-          }
-        },
-        "mat3": {
-          "type": "card",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/T90_1-1_AQUATEX.jpg",
-            "alt": "Aquatex fabric upholstery on the SIDIZ T90",
-            "ratio": "4/5",
-            "label": "Fabric",
-            "title": "Aquatex fabric",
-            "text": "<p>Easy to care for and durable. Resistant to water, staining and scratching, so it stays easy to maintain even in a home with pets.</p>"
-          }
-        },
-        "mat4": {
-          "type": "card",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/sidiz-t90-limitied-palatte-color.jpg",
-            "alt": "The five colours of the SIDIZ T90 Natural Leather Limited Palette",
-            "ratio": "4/5",
-            "label": "Limited",
             "title": "Natural Leather Limited Palette",
-            "text": "<p>A five-piece collection of top-grade natural leathers carrying the heritage of Mastrotto Group and Montebello, Italian leather houses with 50 years of tradition.</p>",
-            "note": "Made to order — please allow approximately three weeks including production"
+            "description": "Back and seat in natural leather",
+            "note_label": "About natural leather",
+            "images": "https://kr.sidiz.com/cdn/shop/files/sidiz-t90-limitied-palatte-color.jpg,https://kr.sidiz.com/cdn/shop/files/Img2_ea4b0b1c-483b-43a5-a7dc-c0d93f2839da.jpg",
+            "colours": "#946661,#ba8b42,#87999b,#4e686d,#2f3842",
+            "alt": "SIDIZ T90 Natural Leather Limited Palette colour options"
+          }
+        },
+        "o2": {
+          "type": "option",
+          "settings": {
+            "title": "Natural Leather",
+            "description": "Back and seat in natural leather",
+            "note_label": "About natural leather",
+            "images": "https://kr.sidiz.com/cdn/shop/files/Img1_398fe294-9d06-4c71-ba35-d8b4f34f98cd.jpg,https://kr.sidiz.com/cdn/shop/files/Img1_a817f47c-939a-4320-b9ab-1e39426fb05c.jpg",
+            "colours": "#4b4745,#835740",
+            "alt": "SIDIZ T90 natural leather colour options"
+          }
+        },
+        "o3": {
+          "type": "option",
+          "settings": {
+            "title": "Aquatex Fabric",
+            "description": "Back and seat in Aquatex fabric",
+            "images": "https://kr.sidiz.com/cdn/shop/files/Img2_b29ea91c-9b77-4cf5-8583-a4734794251d.jpg,https://kr.sidiz.com/cdn/shop/files/Img2_2595b57b-a72a-415e-a4f8-2f3c573c6fa8.jpg",
+            "colours": "#d4d1c3,#222728",
+            "alt": "SIDIZ T90 Aquatex fabric colour options"
+          }
+        },
+        "o4": {
+          "type": "option",
+          "settings": {
+            "title": "Double Raschel",
+            "description": "Back and seat in Double Raschel mesh",
+            "images": "https://kr.sidiz.com/cdn/shop/files/Img3_49da20fd-64f4-4bc3-b448-2607b36548f0.jpg,https://kr.sidiz.com/cdn/shop/files/Img3_be03a09e-3f0d-4a81-9fa9-7bb226512347.jpg",
+            "colours": "#989b98,#2c2d2f",
+            "alt": "SIDIZ T90 Double Raschel mesh colour options"
           }
         }
       },
       "block_order": [
-        "mat1",
-        "mat2",
-        "mat3",
-        "mat4"
+        "o1",
+        "o2",
+        "o3",
+        "o4"
       ],
       "settings": {
-        "layout": "grid",
-        "columns": 4,
-        "heading": "Premium mesh, fabric and full-grain leather",
-        "anchor_id": "materials",
-        "background": "#ffffff",
-        "text_colour": "#000000"
+        "heading": "The T90 option that suits you"
       }
     },
     "leather_care": {
@@ -924,13 +916,13 @@
     "sticky_nav",
     "pdp_head",
     "intro",
+    "materials",
     "ergonomics_banner",
     "ergonomics_cards",
     "armrests",
     "tilt_banner",
     "tilt_cards",
     "comfort_cards",
-    "materials",
     "leather_care",
     "in_use",
     "find_your_fit",
