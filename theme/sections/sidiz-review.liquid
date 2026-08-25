@@ -1,0 +1,137 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  KR product_review — customer reviews.
+
+  Two layers, deliberately separate:
+
+  1. Featured reviews — hand-picked blocks. Merchandisers choose which real
+     reviews to surface at the top of the page.
+  2. The review app itself — an @app block slot, so whichever review app the AU
+     store runs (Judge.me, Okendo, Yotpo, Shopify Product Reviews) drops its own
+     block in here and owns collection, moderation and reply.
+
+  Featured reviews must be copied from genuine reviews left by Australian
+  customers. Inventing them, or importing Korean reviews, is misleading conduct
+  under the Australian Consumer Law — hence the verified fields below.
+{%- endcomment -%}
+
+{%- liquid
+  assign featured = section.blocks | where: 'type', 'review'
+  assign app_blocks = section.blocks | where: 'type', '@app'
+-%}
+
+<section
+  class="sidiz-reviews sidiz-section"
+  style="--rev-bg: {{ section.settings.background }};"
+  id="{{ section.settings.anchor_id | default: 'reviews' | handleize }}"
+>
+  <div class="sidiz-container">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="sidiz-reviews__heading sidiz-display">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <div class="sidiz-reviews__intro rte">{{ section.settings.body }}</div>
+    {%- endif -%}
+  </div>
+
+  {%- if featured.size > 0 -%}
+    <div class="sidiz-reviews__track">
+      {%- for block in featured -%}
+        <figure class="sidiz-reviews__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank or block.settings.media_url != blank -%}
+            {% render 'sidiz-media',
+              image: block.settings.image,
+              url: block.settings.media_url,
+              alt: block.settings.alt,
+              ratio: '4/5',
+              sizes: '(min-width: 834px) 30vw, 80vw',
+              class: 'sidiz-reviews__media'
+            %}
+          {%- endif -%}
+
+          <figcaption class="sidiz-reviews__body">
+            {%- if block.settings.rating > 0 -%}
+              <p class="sidiz-reviews__rating" aria-label="{{ block.settings.rating }} out of 5 stars">
+                {%- for i in (1..5) -%}
+                  <span aria-hidden="true">{% if i <= block.settings.rating %}&#9733;{% else %}&#9734;{% endif %}</span>
+                {%- endfor -%}
+              </p>
+            {%- endif -%}
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="sidiz-reviews__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+
+            <blockquote class="sidiz-reviews__quote">{{ block.settings.quote }}</blockquote>
+
+            <p class="sidiz-reviews__author">
+              {{ block.settings.author }}
+              {%- if block.settings.verified %}
+                <span class="sidiz-reviews__verified">Verified purchase</span>
+              {%- endif -%}
+            </p>
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- if app_blocks.size > 0 -%}
+    <div class="sidiz-container sidiz-reviews__app">
+      {%- for block in app_blocks -%}
+        {% render block %}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "SIDIZ reviews",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Customer reviews" },
+    { "type": "richtext", "id": "body", "label": "Intro" },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "reviews" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
+    {
+      "type": "paragraph",
+      "content": "Add your review app's block below the featured reviews to show the full, moderated review list. Featured reviews must be copied verbatim from genuine reviews by Australian customers — never written for marketing purposes and never imported from another market."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Featured review",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Headline" },
+        { "type": "textarea", "id": "quote", "label": "Review text", "info": "Quote the customer verbatim." },
+        { "type": "text", "id": "author", "label": "Customer name or handle" },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified purchase",
+          "default": true,
+          "info": "Only tick this where the review is linked to a real order."
+        },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "media_url", "label": "Media URL" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    },
+    { "type": "@app" }
+  ],
+  "presets": [{ "name": "SIDIZ reviews" }]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-sticky-nav.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  KR sidebar-complementary — the in-page anchor nav that follows the visitor
+  down a long PDP, with a persistent add-to-cart bar on mobile.
+{%- endcomment -%}
+
+{%- liquid
+  assign links = section.blocks | where: 'type', 'link'
+  assign v = product.selected_or_first_available_variant
+-%}
+
+<nav
+  class="sidiz-stickynav"
+  aria-label="{{ section.settings.label | default: 'On this page' | escape }}"
+  data-sidiz-sticky-nav
+>
+  <div class="sidiz-container sidiz-stickynav__inner">
+    {%- if links.size > 0 -%}
+      <ul class="sidiz-stickynav__links">
+        {%- for block in links -%}
+          <li {{ block.shopify_attributes }}>
+            <a href="#{{ block.settings.anchor | handleize }}" data-sidiz-anchor="{{ block.settings.anchor | handleize }}">
+              {{ block.settings.label }}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if section.settings.show_buy and product != blank -%}
+      <div class="sidiz-stickynav__buy">
+        <span class="sidiz-stickynav__price">{{ v.price | money }}</span>
+        <a class="sidiz-btn sidiz-btn--solid sidiz-stickynav__cta" href="#sidiz-pdp-head">
+          {{ section.settings.buy_label | default: 'Choose options' }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "SIDIZ sticky nav",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Nav label", "default": "On this page" },
+    { "type": "checkbox", "id": "show_buy", "label": "Show price and buy button", "default": true },
+    { "type": "text", "id": "buy_label", "label": "Buy button label", "default": "Choose options" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Anchor link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor ID",
+          "info": "Must match the Anchor ID set on the target section."
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SIDIZ sticky nav", "blocks": [{ "type": "link" }] }]
+}
+{% endschema %}

@@ -1,0 +1,114 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Covers the KR product_related, product_recommend, product_easy_repair and
+  product_related_product sections: a horizontally scrolling product rail whose
+  source is a collection, Shopify's own recommendations, or a manual pick.
+
+  Used on the T90 page for "Goes well with", "You may also like" and the
+  Easy Repair parts rail.
+{%- endcomment -%}
+
+{%- liquid
+  assign products = null
+  case section.settings.source
+    when 'collection'
+      assign products = section.settings.collection.products
+    when 'recommendations'
+      assign products = recommendations.products
+    when 'manual'
+      assign products = section.blocks
+  endcase
+-%}
+
+<section
+  class="sidiz-rail sidiz-section"
+  style="--rail-bg: {{ section.settings.background }};"
+  {% if section.settings.anchor_id != blank %}id="{{ section.settings.anchor_id | handleize }}"{% endif %}
+  {% if section.settings.source == 'recommendations' %}
+    data-sidiz-recommendations
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.limit }}"
+  {% endif %}
+>
+  <div class="sidiz-container sidiz-rail__head">
+    <div>
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="sidiz-rail__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="sidiz-rail__heading sidiz-display">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="sidiz-rail__intro rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.view_all_link != blank -%}
+      <a class="sidiz-rail__viewall" href="{{ section.settings.view_all_link }}">
+        {{ section.settings.view_all_label | default: 'View all' }} <span aria-hidden="true">&rsaquo;</span>
+      </a>
+    {%- endif -%}
+  </div>
+
+  <div class="sidiz-rail__track">
+    {%- if section.settings.source == 'manual' -%}
+      {%- for block in section.blocks -%}
+        {%- assign item = block.settings.product -%}
+        {%- if item != blank -%}
+          {% render 'sidiz-product-card', item: item %}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      {%- for item in products limit: section.settings.limit -%}
+        {% render 'sidiz-product-card', item: item %}
+      {%- else -%}
+        <p class="sidiz-rail__empty sidiz-container">No products to show yet.</p>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SIDIZ product rail",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Source",
+      "options": [
+        { "value": "collection", "label": "Collection" },
+        { "value": "recommendations", "label": "Shopify recommendations" },
+        { "value": "manual", "label": "Hand-picked" }
+      ],
+      "default": "collection"
+    },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Maximum products",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "body", "label": "Intro" },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all" },
+    { "type": "url", "id": "view_all_link", "label": "View all link" },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Product",
+      "settings": [{ "type": "product", "id": "product", "label": "Product" }]
+    }
+  ],
+  "presets": [{ "name": "SIDIZ product rail" }]
+}
+{% endschema %}

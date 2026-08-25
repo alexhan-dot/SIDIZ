@@ -1,0 +1,131 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-tabs.js' | asset_url }}" defer="defer"></script>
+
+{%- comment -%}
+  KR product_find_your_fit — 조절 방법. A tabbed adjustment guide: pick an
+  adjustment, see the media and the steps for it, with a link out to the full
+  user guide.
+
+  Tabs follow the WAI-ARIA tabs pattern and each panel's content is in the DOM
+  from the start, so the instructions remain crawlable and printable even
+  though only one is visible.
+{%- endcomment -%}
+
+{%- liquid
+  assign steps = section.blocks | where: 'type', 'step'
+-%}
+
+<section
+  class="sidiz-fyf sidiz-section"
+  style="--fyf-bg: {{ section.settings.background }};"
+  id="{{ section.settings.anchor_id | default: 'adjustment-guide' | handleize }}"
+  data-sidiz-tabs
+>
+  <div class="sidiz-container">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="sidiz-fyf__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="sidiz-fyf__heading sidiz-display">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <div class="sidiz-fyf__intro rte">{{ section.settings.body }}</div>
+    {%- endif -%}
+
+    {%- if steps.size > 0 -%}
+      <div class="sidiz-fyf__layout">
+        <div class="sidiz-fyf__tablist" role="tablist" aria-label="{{ section.settings.heading | escape }}">
+          {%- for block in steps -%}
+            <button
+              class="sidiz-fyf__tab"
+              type="button"
+              role="tab"
+              id="fyf-tab-{{ section.id }}-{{ forloop.index }}"
+              aria-controls="fyf-panel-{{ section.id }}-{{ forloop.index }}"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              tabindex="{% if forloop.first %}0{% else %}-1{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              <span class="sidiz-fyf__tab-num">{{ forloop.index }}</span>
+              <span>{{ block.settings.title }}</span>
+            </button>
+          {%- endfor -%}
+        </div>
+
+        <div class="sidiz-fyf__panels">
+          {%- for block in steps -%}
+            <div
+              class="sidiz-fyf__panel"
+              role="tabpanel"
+              id="fyf-panel-{{ section.id }}-{{ forloop.index }}"
+              aria-labelledby="fyf-tab-{{ section.id }}-{{ forloop.index }}"
+              {% unless forloop.first %}hidden{% endunless %}
+            >
+              {% render 'sidiz-media',
+                image: block.settings.image,
+                url: block.settings.media_url,
+                poster: block.settings.poster_url,
+                alt: block.settings.alt,
+                sizes: '(min-width: 834px) 60vw, 100vw',
+                class: 'sidiz-fyf__media'
+              %}
+              <div class="sidiz-fyf__panel-body">
+                <h3 class="sidiz-fyf__panel-title">{{ block.settings.title }}</h3>
+                {%- if block.settings.text != blank -%}
+                  <div class="rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {%- if block.settings.range != blank -%}
+                  <p class="sidiz-fyf__range">{{ block.settings.range }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.guide_link != blank -%}
+      <div class="sidiz-fyf__cta">
+        <a class="sidiz-btn sidiz-btn--outline" href="{{ section.settings.guide_link }}">
+          {{ section.settings.guide_label | default: 'Read the full user guide' }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SIDIZ find your fit",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "FIND YOUR FIT" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Set it up for your body" },
+    { "type": "richtext", "id": "body", "label": "Intro" },
+    { "type": "header", "content": "User guide" },
+    { "type": "text", "id": "guide_label", "label": "Guide link label", "default": "Read the full user guide" },
+    { "type": "url", "id": "guide_link", "label": "User guide page" },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "adjustment-guide" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#f5f6f7" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Adjustment",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Adjustment name" },
+        { "type": "richtext", "id": "text", "label": "How to adjust it" },
+        { "type": "text", "id": "range", "label": "Range", "info": "e.g. Height 70 mm · Angle 65°" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "media_url", "label": "Media URL" },
+        { "type": "text", "id": "poster_url", "label": "Video poster URL" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "SIDIZ find your fit", "blocks": [{ "type": "step" }, { "type": "step" }] }
+  ]
+}
+{% endschema %}

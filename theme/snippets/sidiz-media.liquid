@@ -1,0 +1,99 @@
+{%- comment -%}
+  Renders one media item from either an uploaded Shopify asset or a URL.
+
+  The URL path exists so the draft build can reference the original media while
+  the AU Files library is still being populated. Production should use the
+  uploaded asset: a URL pointing at another store's CDN is outside our control
+  and will break if that store reorganises its files.
+
+  Accepts:
+    image      - Shopify image object (preferred)
+    video      - Shopify video object (preferred)
+    url        - string, an image or video URL (fallback)
+    poster     - string, poster image URL for a video URL
+    alt        - string, required for images
+    sizes      - string, defaults to 100vw
+    widths     - string, defaults to a full responsive ladder
+    loading    - 'lazy' (default) or 'eager'
+    ratio      - optional aspect-ratio, e.g. '16/9'
+    class      - extra class names
+{%- endcomment -%}
+
+{%- liquid
+  assign media_sizes = sizes | default: '100vw'
+  assign media_widths = widths | default: '375,600,760,1100,1500,1900,2400'
+  assign width_list = media_widths | split: ','
+  assign media_loading = loading | default: 'lazy'
+  assign media_alt = alt | default: ''
+  assign media_class = class | default: ''
+
+  assign is_video = false
+  if url != blank
+    assign ext = url | split: '.' | last | downcase
+    if ext contains 'mp4' or ext contains 'webm'
+      assign is_video = true
+    endif
+  endif
+
+  assign joiner = '?'
+  if url contains '?'
+    assign joiner = '&'
+  endif
+
+  comment
+    Intrinsic size comes from the declared ratio so the browser can reserve the
+    right box before the image lands. Without it a URL-sourced image has no
+    dimensions and the page shifts as each one loads.
+  endcomment
+  assign box_ratio = ratio | default: '3/2'
+  assign ratio_w = box_ratio | split: '/' | first | times: 1
+  assign ratio_h = box_ratio | split: '/' | last | times: 1
+  assign out_w = 1500
+  assign out_h = 1500 | times: ratio_h | divided_by: ratio_w
+-%}
+
+<div
+  class="sidiz-media {{ media_class }}"
+  {% if ratio != blank %}style="--media-ratio: {{ ratio }};"{% endif %}
+>
+  {%- if video != blank -%}
+    {{ video | video_tag: image_size: '1920x', autoplay: true, loop: true, muted: true, controls: false }}
+
+  {%- elsif image != blank -%}
+    {{
+      image
+      | image_url: width: 2400
+      | image_tag: loading: media_loading, sizes: media_sizes, widths: media_widths, alt: media_alt
+    }}
+
+  {%- elsif is_video -%}
+    <video
+      src="{{ url }}"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      width="{{ out_w }}"
+      height="{{ out_h }}"
+      {% if poster != blank %}poster="{{ poster }}"{% endif %}
+      {% if media_alt != blank %}aria-label="{{ media_alt | escape }}"{% endif %}
+    ></video>
+
+  {%- elsif url != blank -%}
+    <img
+      src="{{ url }}{{ joiner }}width=1500"
+      width="{{ out_w }}"
+      height="{{ out_h }}"
+      srcset="
+        {%- for w in width_list -%}
+          {{ url }}{{ joiner }}width={{ w }} {{ w }}w{% unless forloop.last %}, {% endunless %}
+        {%- endfor -%}
+      "
+      sizes="{{ media_sizes }}"
+      alt="{{ media_alt | escape }}"
+      loading="{{ media_loading }}"
+      decoding="async"
+    >
+  {%- endif -%}
+</div>

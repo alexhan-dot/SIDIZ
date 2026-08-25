@@ -1,0 +1,980 @@
+/* ==========================================================================
+   SIDIZ PDP sections — shared styles
+   Breakpoints follow the KR theme: 1365 / 1280 / 833 / 767 / 474 / 374
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Media wrapper + buttons (shared primitives)
+   -------------------------------------------------------------------------- */
+
+.sidiz-media {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidiz-media img,
+.sidiz-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidiz-media[style*='--media-ratio'] img,
+.sidiz-media[style*='--media-ratio'] video {
+  aspect-ratio: var(--media-ratio);
+}
+
+.sidiz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sidiz-btn--solid {
+  background: var(--sidiz-blue);
+  color: var(--gray-000);
+}
+.sidiz-btn--solid:hover {
+  background: var(--light-blue);
+}
+
+.sidiz-btn--outline {
+  border-color: currentColor;
+  color: inherit;
+}
+.sidiz-btn--outline:hover {
+  background: var(--gray-900);
+  border-color: var(--gray-900);
+  color: var(--gray-000);
+}
+
+.sidiz-btn--ghost {
+  border-color: currentColor;
+  color: inherit;
+  opacity: 0.85;
+}
+.sidiz-btn--ghost:hover {
+  opacity: 1;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Shared eyebrow / heading rhythm */
+[class$='__eyebrow'] {
+  margin: 0 0 var(--gutter-small);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sidiz-blue);
+}
+
+/* --------------------------------------------------------------------------
+   Card list — scroll / grid / tile
+   -------------------------------------------------------------------------- */
+
+.sidiz-cards {
+  background: var(--cards-bg, var(--gray-000));
+  color: var(--cards-fg, var(--gray-900));
+}
+
+.sidiz-cards__heading {
+  margin: 0 0 var(--gutter-regular);
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  line-height: 1.15;
+}
+
+.sidiz-cards__intro {
+  max-width: 62ch;
+  margin-bottom: var(--gutter-large);
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.sidiz-cards__track {
+  display: grid;
+  gap: var(--gutter-regular);
+}
+
+/* grid + tile */
+.sidiz-cards--grid .sidiz-cards__track,
+.sidiz-cards--tile .sidiz-cards__track {
+  grid-template-columns: repeat(var(--cards-cols, 3), minmax(0, 1fr));
+}
+
+/* horizontal scroll */
+.sidiz-cards--scroll .sidiz-cards__track {
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, calc((100% - (var(--cards-cols) - 1) * var(--gutter-regular)) / var(--cards-cols)));
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter-container);
+  padding-bottom: var(--gutter-small);
+  scrollbar-width: thin;
+  overscroll-behavior-x: contain;
+}
+
+.sidiz-cards--scroll .sidiz-cards__card {
+  scroll-snap-align: start;
+}
+
+.sidiz-cards__media {
+  margin-bottom: var(--gutter-regular);
+  background: var(--gray-100);
+}
+
+.sidiz-cards__label {
+  margin: 0 0 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.sidiz-cards__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.1875rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.sidiz-cards__text {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--gray-600);
+}
+
+.sidiz-cards__note {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+.sidiz-cards__link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sidiz-blue);
+  text-decoration: none;
+}
+.sidiz-cards__link:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 833px) {
+  .sidiz-cards--grid .sidiz-cards__track,
+  .sidiz-cards--tile .sidiz-cards__track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .sidiz-cards--scroll .sidiz-cards__track {
+    grid-auto-columns: minmax(240px, 72vw);
+  }
+}
+
+@media screen and (max-width: 474px) {
+  .sidiz-cards--grid .sidiz-cards__track,
+  .sidiz-cards--tile .sidiz-cards__track {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sidiz-cards--scroll .sidiz-cards__track {
+    grid-auto-columns: minmax(220px, 82vw);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Scroll banner — pinned panel
+   -------------------------------------------------------------------------- */
+
+.sidiz-scrollban__rail {
+  position: relative;
+  height: var(--sb-len, 200vh);
+}
+
+.sidiz-scrollban__pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--sb-fg, var(--gray-000));
+}
+
+.sidiz-scrollban__media {
+  position: absolute;
+  inset: 0;
+}
+
+.sidiz-scrollban__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--sb-scrim, transparent);
+}
+
+.sidiz-scrollban__content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  padding: var(--gutter-xlarge) var(--gutter-container);
+  text-align: center;
+}
+
+.sidiz-scrollban__heading {
+  margin: 0 0 var(--gutter-regular);
+  font-size: clamp(1.875rem, 4vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.sidiz-scrollban__text {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  max-width: 56ch;
+  margin-inline: auto;
+}
+
+.sidiz-scrollban__note {
+  margin: var(--gutter-regular) 0 0;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+/* Without sticky support the panel simply stacks at natural height. */
+@supports not (position: sticky) {
+  .sidiz-scrollban__rail {
+    height: auto;
+  }
+  .sidiz-scrollban__pin {
+    position: relative;
+    height: auto;
+    min-height: 70vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidiz-scrollban__rail {
+    height: auto;
+  }
+  .sidiz-scrollban__pin {
+    position: relative;
+    height: auto;
+    min-height: 60vh;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Specifications
+   -------------------------------------------------------------------------- */
+
+.sidiz-spec {
+  background: var(--spec-bg, var(--gray-000));
+}
+
+.sidiz-spec__heading {
+  margin: 0 0 var(--gutter-large);
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  text-align: center;
+}
+
+.sidiz-spec__layout {
+  display: grid;
+  gap: var(--gutter-large);
+  align-items: start;
+}
+
+@media screen and (min-width: 834px) {
+  .sidiz-spec__layout {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  }
+}
+
+.sidiz-spec__drawings {
+  display: grid;
+  gap: var(--gutter-regular);
+}
+
+.sidiz-spec__tablewrap {
+  overflow-x: auto;
+}
+
+.sidiz-spec__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.sidiz-spec__table th,
+.sidiz-spec__table td {
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--gray-200);
+  text-align: left;
+  vertical-align: top;
+}
+
+.sidiz-spec__table th {
+  width: 42%;
+  font-weight: 400;
+  color: var(--gray-500);
+}
+
+.sidiz-spec__table td {
+  font-weight: 500;
+}
+
+.sidiz-spec__note {
+  margin: var(--gutter-regular) 0 0;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+/* --------------------------------------------------------------------------
+   Notices
+   -------------------------------------------------------------------------- */
+
+.sidiz-notice {
+  background: var(--notice-bg, var(--gray-100));
+}
+
+.sidiz-notice__heading {
+  margin: 0 0 var(--gutter-large);
+  font-size: clamp(1.375rem, 2.2vw, 1.875rem);
+}
+
+.sidiz-notice__list {
+  display: grid;
+  gap: var(--gutter-regular);
+  max-width: 900px;
+}
+
+.sidiz-notice__item {
+  padding: var(--gutter-regular);
+  background: var(--gray-000);
+}
+
+.sidiz-notice__item--warning {
+  display: flex;
+  gap: var(--gutter-small);
+  background: #fff6f6;
+  border-left: 3px solid var(--red-error);
+}
+
+.sidiz-notice__icon {
+  flex: 0 0 20px;
+  color: var(--red-error);
+}
+
+.sidiz-notice__title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sidiz-notice__text {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+}
+
+/* --------------------------------------------------------------------------
+   Warranty
+   -------------------------------------------------------------------------- */
+
+.sidiz-warranty {
+  position: relative;
+  background: var(--war-bg, var(--gray-800));
+  color: var(--war-fg, var(--gray-000));
+  overflow: hidden;
+}
+
+.sidiz-warranty__bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+}
+
+.sidiz-warranty__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.sidiz-warranty__term {
+  margin: 0 0 var(--gutter-small);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.sidiz-warranty__heading {
+  margin: 0 0 var(--gutter-regular);
+  font-size: clamp(1.375rem, 2.4vw, 2rem);
+}
+
+.sidiz-warranty__body {
+  max-width: 58ch;
+  margin-inline: auto;
+  line-height: 1.75;
+  opacity: 0.9;
+}
+
+.sidiz-warranty__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter-small);
+  justify-content: center;
+  margin-top: var(--gutter-large);
+}
+
+.sidiz-warranty__acl {
+  max-width: 780px;
+  margin: var(--gutter-xlarge) auto 0;
+  padding: var(--gutter-regular);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  text-align: left;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.sidiz-warranty__acl-heading {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.sidiz-warranty__acl p + p {
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Product rail
+   -------------------------------------------------------------------------- */
+
+.sidiz-rail {
+  background: var(--rail-bg, var(--gray-000));
+}
+
+.sidiz-rail__head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter-regular);
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: var(--gutter-large);
+}
+
+.sidiz-rail__heading {
+  margin: 0;
+  font-size: clamp(1.375rem, 2.4vw, 2rem);
+}
+
+.sidiz-rail__intro {
+  margin-top: 0.5rem;
+  max-width: 60ch;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.sidiz-rail__viewall {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--sidiz-blue);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sidiz-rail__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(200px, calc((100% - 3 * var(--gutter-regular)) / 4));
+  gap: var(--gutter-regular);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter-container);
+  padding-bottom: var(--gutter-small);
+  overscroll-behavior-x: contain;
+}
+
+.sidiz-card {
+  scroll-snap-align: start;
+}
+
+.sidiz-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.sidiz-card__media {
+  background: var(--gray-100);
+  overflow: hidden;
+  margin-bottom: 0.875rem;
+}
+
+.sidiz-card__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sidiz-card__link:hover .sidiz-card__media img {
+  transform: scale(1.04);
+}
+
+.sidiz-card__title {
+  margin: 0 0 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.sidiz-card__price {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.sidiz-card__badge {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+}
+
+@media screen and (max-width: 833px) {
+  .sidiz-rail__track {
+    grid-auto-columns: minmax(180px, 46vw);
+  }
+}
+
+@media screen and (max-width: 474px) {
+  .sidiz-rail__track {
+    grid-auto-columns: minmax(160px, 62vw);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidiz-card__media img {
+    transition: none;
+  }
+  .sidiz-card__link:hover .sidiz-card__media img {
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Find your fit — tabs
+   -------------------------------------------------------------------------- */
+
+.sidiz-fyf {
+  background: var(--fyf-bg, var(--gray-100));
+}
+
+.sidiz-fyf__heading {
+  margin: 0 0 var(--gutter-regular);
+  font-size: clamp(1.5rem, 2.8vw, 2.25rem);
+}
+
+.sidiz-fyf__intro {
+  max-width: 60ch;
+  margin-bottom: var(--gutter-large);
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.sidiz-fyf__layout {
+  display: grid;
+  gap: var(--gutter-large);
+}
+
+@media screen and (min-width: 834px) {
+  .sidiz-fyf__layout {
+    grid-template-columns: 290px minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+.sidiz-fyf__tablist {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+@media screen and (max-width: 833px) {
+  .sidiz-fyf__tablist {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    overscroll-behavior-x: contain;
+  }
+}
+
+.sidiz-fyf__tab {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  text-align: left;
+  cursor: pointer;
+  white-space: nowrap;
+  border-left: 2px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+@media screen and (max-width: 833px) {
+  .sidiz-fyf__tab {
+    border-left: 0;
+    border-bottom: 2px solid transparent;
+  }
+}
+
+.sidiz-fyf__tab[aria-selected='true'] {
+  background: var(--gray-000);
+  border-color: var(--sidiz-blue);
+  font-weight: 500;
+}
+
+.sidiz-fyf__tab:focus-visible {
+  outline: 2px solid var(--sidiz-blue);
+  outline-offset: -2px;
+}
+
+.sidiz-fyf__tab-num {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  font-size: 0.75rem;
+}
+
+.sidiz-fyf__tab[aria-selected='true'] .sidiz-fyf__tab-num {
+  background: var(--sidiz-blue);
+  color: var(--gray-000);
+}
+
+.sidiz-fyf__media {
+  background: var(--gray-200);
+  margin-bottom: var(--gutter-regular);
+}
+
+.sidiz-fyf__panel-title {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.sidiz-fyf__range {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  color: var(--gray-500);
+}
+
+.sidiz-fyf__cta {
+  margin-top: var(--gutter-large);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Reviews
+   -------------------------------------------------------------------------- */
+
+.sidiz-reviews {
+  background: var(--rev-bg, var(--gray-000));
+}
+
+.sidiz-reviews__heading {
+  margin: 0 0 var(--gutter-regular);
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+}
+
+.sidiz-reviews__intro {
+  max-width: 60ch;
+  margin-bottom: var(--gutter-large);
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.sidiz-reviews__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, calc((100% - 2 * var(--gutter-regular)) / 3));
+  gap: var(--gutter-regular);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter-container);
+  padding-bottom: var(--gutter-small);
+  overscroll-behavior-x: contain;
+}
+
+.sidiz-reviews__card {
+  margin: 0;
+  scroll-snap-align: start;
+  background: var(--gray-100);
+}
+
+.sidiz-reviews__body {
+  padding: var(--gutter-regular);
+}
+
+.sidiz-reviews__rating {
+  margin: 0 0 0.5rem;
+  color: var(--sidiz-blue);
+  letter-spacing: 0.1em;
+}
+
+.sidiz-reviews__title {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sidiz-reviews__quote {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--gray-700);
+}
+
+.sidiz-reviews__author {
+  margin: var(--gutter-small) 0 0;
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+.sidiz-reviews__verified {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  background: var(--background-blue);
+  color: var(--sidiz-blue);
+  font-size: 0.6875rem;
+}
+
+.sidiz-reviews__app {
+  margin-top: var(--gutter-xlarge);
+}
+
+@media screen and (max-width: 833px) {
+  .sidiz-reviews__track {
+    grid-auto-columns: minmax(240px, 78vw);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Gallery
+   -------------------------------------------------------------------------- */
+
+.sidiz-gallery {
+  background: var(--gal-bg, var(--gray-000));
+  color: var(--gal-fg, var(--gray-900));
+}
+
+.sidiz-gallery__head {
+  margin-bottom: var(--gutter-large);
+}
+
+.sidiz-gallery__heading {
+  margin: 0 0 var(--gutter-small);
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+}
+
+.sidiz-gallery__intro {
+  max-width: 62ch;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
+.sidiz-gallery__track {
+  display: grid;
+  gap: var(--gutter-small);
+}
+
+.sidiz-gallery--horizontal .sidiz-gallery__track {
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 68vw);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter-container);
+  overscroll-behavior-x: contain;
+}
+
+.sidiz-gallery__item {
+  margin: 0;
+  scroll-snap-align: center;
+}
+
+.sidiz-gallery__caption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+}
+
+@media screen and (max-width: 767px) {
+  .sidiz-gallery--horizontal .sidiz-gallery__track {
+    grid-auto-columns: minmax(260px, 86vw);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Sticky nav
+   -------------------------------------------------------------------------- */
+
+.sidiz-stickynav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: saturate(180%) blur(10px);
+  border-bottom: 1px solid var(--gray-200);
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.sidiz-stickynav.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidiz-stickynav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gutter-regular);
+  min-height: 56px;
+}
+
+.sidiz-stickynav__links {
+  display: flex;
+  gap: var(--gutter-regular);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.sidiz-stickynav__links::-webkit-scrollbar {
+  display: none;
+}
+
+.sidiz-stickynav__links a {
+  display: block;
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+
+.sidiz-stickynav__links a.is-current {
+  color: var(--gray-900);
+  font-weight: 500;
+  border-color: var(--sidiz-blue);
+}
+
+.sidiz-stickynav__buy {
+  display: flex;
+  align-items: center;
+  gap: var(--gutter-small);
+  flex: 0 0 auto;
+}
+
+.sidiz-stickynav__price {
+  font-family: var(--font-display);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.sidiz-stickynav__cta {
+  min-height: 40px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+@media screen and (max-width: 767px) {
+  .sidiz-stickynav__links {
+    display: none;
+  }
+  .sidiz-stickynav__inner {
+    justify-content: flex-end;
+  }
+  .sidiz-stickynav__cta {
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidiz-stickynav {
+    transition: none;
+  }
+}
+
+/* Anchor targets must clear the sticky bar when jumped to. */
+[id] {
+  scroll-margin-top: 72px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Stockists
+   -------------------------------------------------------------------------- */
+
+.sidiz-store { background: var(--store-bg, var(--gray-100)); }
+
+.sidiz-store__layout { display: grid; gap: var(--gutter-large); align-items: center; }
+
+@media screen and (min-width: 834px) {
+  .sidiz-store__layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+.sidiz-store__heading { margin: 0 0 var(--gutter-regular); font-size: clamp(1.5rem, 2.6vw, 2.25rem); }
+.sidiz-store__text { max-width: 56ch; color: var(--gray-600); line-height: 1.75; }
+
+.sidiz-store__list { margin: var(--gutter-regular) 0; padding: 0; list-style: none; }
+.sidiz-store__list li { display: grid; gap: 0.15rem; padding: 0.875rem 0; border-bottom: 1px solid var(--gray-300); font-size: 0.9375rem; }
+.sidiz-store__list span { color: var(--gray-600); }
+.sidiz-store__list a { color: var(--sidiz-blue); text-decoration: none; font-size: 0.875rem; }

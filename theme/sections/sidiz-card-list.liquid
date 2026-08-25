@@ -1,0 +1,139 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  Covers the KR product_wb_scroll_card_list, product_wb_card_list and
+  product_tile_card_list sections. One component, three layouts.
+{%- endcomment -%}
+
+<section
+  class="sidiz-cards sidiz-cards--{{ section.settings.layout }} sidiz-section"
+  style="--cards-bg: {{ section.settings.background }}; --cards-fg: {{ section.settings.text_colour }}; --cards-cols: {{ section.settings.columns }};"
+  {% if section.settings.anchor_id != blank %}id="{{ section.settings.anchor_id | handleize }}"{% endif %}
+>
+  <div class="{% if section.settings.layout == 'scroll' %}sidiz-cards__head sidiz-container{% else %}sidiz-container{% endif %}">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="sidiz-cards__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="sidiz-cards__heading sidiz-display">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.body != blank -%}
+      <div class="sidiz-cards__intro rte">{{ section.settings.body }}</div>
+    {%- endif -%}
+  </div>
+
+  <div class="sidiz-cards__track{% if section.settings.layout != 'scroll' %} sidiz-container{% endif %}">
+    {%- for block in section.blocks -%}
+      <article class="sidiz-cards__card" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank or block.settings.media_url != blank -%}
+          {% render 'sidiz-media',
+            image: block.settings.image,
+            url: block.settings.media_url,
+            poster: block.settings.poster_url,
+            alt: block.settings.alt,
+            ratio: block.settings.ratio,
+            sizes: '(min-width: 834px) 33vw, 80vw',
+            class: 'sidiz-cards__media'
+          %}
+        {%- endif -%}
+
+        <div class="sidiz-cards__body">
+          {%- if block.settings.label != blank -%}
+            <p class="sidiz-cards__label">{{ block.settings.label }}</p>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <h3 class="sidiz-cards__title sidiz-display">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="sidiz-cards__text rte">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.note != blank -%}
+            <p class="sidiz-cards__note">{{ block.settings.note }}</p>
+          {%- endif -%}
+          {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+            <a class="sidiz-cards__link" href="{{ block.settings.link }}">
+              {{ block.settings.link_label }} <span aria-hidden="true">&rsaquo;</span>
+            </a>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SIDIZ card list",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "scroll", "label": "Horizontal scroll" },
+        { "value": "grid", "label": "Grid" },
+        { "value": "tile", "label": "Tile (large media)" }
+      ],
+      "default": "scroll"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "body", "label": "Intro" },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text_colour", "label": "Text", "default": "#000000" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "text",
+          "id": "media_url",
+          "label": "Media URL",
+          "info": "Draft-build fallback for an image or video not yet uploaded to Files."
+        },
+        { "type": "text", "id": "poster_url", "label": "Video poster URL" },
+        { "type": "text", "id": "alt", "label": "Alt text", "info": "Required for images." },
+        {
+          "type": "select",
+          "id": "ratio",
+          "label": "Media ratio",
+          "options": [
+            { "value": "1/1", "label": "Square" },
+            { "value": "4/5", "label": "Portrait 4:5" },
+            { "value": "3/4", "label": "Portrait 3:4" },
+            { "value": "16/9", "label": "Landscape 16:9" }
+          ],
+          "default": "4/5"
+        },
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "text", "id": "note", "label": "Footnote" },
+        { "type": "text", "id": "link_label", "label": "Link label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SIDIZ card list",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,42 @@
+{%- comment -%}
+  Product card used by the SIDIZ product rails.
+  Accepts: item (product)
+{%- endcomment -%}
+
+{%- liquid
+  assign img = item.featured_media.preview_image
+-%}
+
+<article class="sidiz-card">
+  <a class="sidiz-card__link" href="{{ item.url }}">
+    <div class="sidiz-card__media">
+      {%- if img != blank -%}
+        {{
+          img
+          | image_url: width: 900
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 834px) 22vw, 60vw',
+            widths: '260,400,600,900',
+            alt: img.alt | default: item.title
+        }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'sidiz-card__placeholder' }}
+      {%- endif -%}
+    </div>
+
+    <div class="sidiz-card__body">
+      <h3 class="sidiz-card__title">{{ item.title }}</h3>
+      <p class="sidiz-card__price">
+        {%- if item.price_varies -%}
+          {{ 'products.product.price.from_price_html' | t: price: item.price_min | money }}
+        {%- else -%}
+          {{ item.price | money }}
+        {%- endif -%}
+      </p>
+      {%- unless item.available -%}
+        <p class="sidiz-card__badge">{{ 'products.product.sold_out' | t }}</p>
+      {%- endunless -%}
+    </div>
+  </a>
+</article>

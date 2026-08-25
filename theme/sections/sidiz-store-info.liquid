@@ -1,0 +1,96 @@
+{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%}
+  KR product_store_info — "try it in a showroom". Australia has no SIDIZ
+  showroom network, so this runs as a stockist / try-before-you-buy panel and
+  falls back to the returns policy where no stockist is listed.
+{%- endcomment -%}
+
+<section
+  class="sidiz-store sidiz-section"
+  style="--store-bg: {{ section.settings.background }};"
+  id="{{ section.settings.anchor_id | default: 'where-to-try' | handleize }}"
+>
+  <div class="sidiz-container">
+    <div class="sidiz-store__layout">
+      <div class="sidiz-store__body">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="sidiz-store__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="sidiz-store__heading sidiz-display">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="sidiz-store__text rte">{{ section.settings.body }}</div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <ul class="sidiz-store__list">
+            {%- for block in section.blocks -%}
+              <li {{ block.shopify_attributes }}>
+                <strong>{{ block.settings.name }}</strong>
+                {%- if block.settings.address != blank -%}
+                  <span>{{ block.settings.address }}</span>
+                {%- endif -%}
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}">
+                    {{ block.settings.link_label | default: 'Directions' }}
+                  </a>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if section.settings.cta_link != blank -%}
+          <a class="sidiz-btn sidiz-btn--outline" href="{{ section.settings.cta_link }}">
+            {{ section.settings.cta_label | default: 'Find a stockist' }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.image != blank or section.settings.media_url != blank -%}
+        {% render 'sidiz-media',
+          image: section.settings.image,
+          url: section.settings.media_url,
+          alt: section.settings.alt,
+          sizes: '(min-width: 834px) 50vw, 100vw',
+          class: 'sidiz-store__media'
+        %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "SIDIZ stockists",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Try it before you buy" },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Find a stockist" },
+    { "type": "url", "id": "cta_link", "label": "Button link" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "media_url", "label": "Media URL" },
+    { "type": "text", "id": "alt", "label": "Alt text" },
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "where-to-try" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#f5f6f7" }
+  ],
+  "blocks": [
+    {
+      "type": "store",
+      "name": "Stockist",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "address", "label": "Address" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Directions" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "SIDIZ stockists" }]
+}
+{% endschema %}
