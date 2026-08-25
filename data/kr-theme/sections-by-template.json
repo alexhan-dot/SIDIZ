@@ -1,0 +1,529 @@
+{
+  "index": {
+    "url": "https://kr.sidiz.com/",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "banner",
+      "fit_for_me",
+      "recommend",
+      "special",
+      "s-culture",
+      "main-about",
+      "brand-menu",
+      "store",
+      "news",
+      "main_popup_swiper",
+      "partner_exec",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "banner",
+      "brand-menu",
+      "fit_for_me",
+      "footer",
+      "header",
+      "main-about",
+      "main_popup_swiper",
+      "news",
+      "partner_exec",
+      "popups",
+      "product_row_1_narrow",
+      "recommend",
+      "s-culture",
+      "site-menu-sidebar",
+      "special",
+      "store"
+    ]
+  },
+  "product": {
+    "url": "https://kr.sidiz.com/products/t60",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "configurator",
+      "product_pdp_head",
+      "product_row_1_wide",
+      "product_wb_banner",
+      "product_wb_scroll_banner",
+      "product_wb_scroll_card_list",
+      "product_wb_scroll_banner",
+      "product_wb_scroll_card_list",
+      "product_view_vertical",
+      "product_tile_card_list",
+      "product_wb_banner",
+      "product_row_1_wide",
+      "product_row_1_wide",
+      "product_row_1_wide",
+      "product_find_your_fit",
+      "product_related",
+      "product_easy_repair",
+      "product_warranty",
+      "product_spec",
+      "product_faq",
+      "product_review",
+      "product_store_info",
+      "product_recommend",
+      "product-notice",
+      "product_row_1_narrow",
+      "footer",
+      "popups",
+      "sidebar-complementary"
+    ],
+    "unique": [
+      "announcement",
+      "configurator",
+      "footer",
+      "header",
+      "popups",
+      "product-notice",
+      "product_easy_repair",
+      "product_faq",
+      "product_find_your_fit",
+      "product_pdp_head",
+      "product_recommend",
+      "product_related",
+      "product_review",
+      "product_row_1_narrow",
+      "product_row_1_wide",
+      "product_spec",
+      "product_store_info",
+      "product_tile_card_list",
+      "product_view_vertical",
+      "product_warranty",
+      "product_wb_banner",
+      "product_wb_scroll_banner",
+      "product_wb_scroll_card_list",
+      "sidebar-complementary",
+      "site-menu-sidebar"
+    ]
+  },
+  "product.parts": {
+    "url": "https://kr.sidiz.com/products/t80-headrest",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "configurator",
+      "product_pdp_head",
+      "product_row_1",
+      "product_compatible",
+      "product_related_product",
+      "product_assembly_guide",
+      "product_review",
+      "product-notice",
+      "product_row_1_narrow",
+      "footer",
+      "popups",
+      "sidebar-complementary"
+    ],
+    "unique": [
+      "announcement",
+      "configurator",
+      "footer",
+      "header",
+      "popups",
+      "product-notice",
+      "product_assembly_guide",
+      "product_compatible",
+      "product_pdp_head",
+      "product_related_product",
+      "product_review",
+      "product_row_1",
+      "product_row_1_narrow",
+      "sidebar-complementary",
+      "site-menu-sidebar"
+    ]
+  },
+  "product.relife": {
+    "url": "https://kr.sidiz.com/products/t60-re-life",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "configurator",
+      "banner",
+      "product_row_1_wide",
+      "product_faq",
+      "journey_title",
+      "product_warranty",
+      "journey_title",
+      "product_wb_card_list",
+      "product_spec",
+      "article_link",
+      "product_easy_repair",
+      "product_review",
+      "product_store_info",
+      "product_recommend",
+      "product-notice",
+      "product_row_1_narrow",
+      "footer",
+      "popups",
+      "sidebar-complementary"
+    ],
+    "unique": [
+      "announcement",
+      "article_link",
+      "banner",
+      "configurator",
+      "footer",
+      "header",
+      "journey_title",
+      "popups",
+      "product-notice",
+      "product_easy_repair",
+      "product_faq",
+      "product_recommend",
+      "product_review",
+      "product_row_1_narrow",
+      "product_row_1_wide",
+      "product_spec",
+      "product_store_info",
+      "product_warranty",
+      "product_wb_card_list",
+      "sidebar-complementary",
+      "site-menu-sidebar"
+    ]
+  },
+  "collection.work": {
+    "url": "https://kr.sidiz.com/collections/work",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "banner",
+      "product-grid",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "banner",
+      "footer",
+      "header",
+      "popups",
+      "product-grid",
+      "product_row_1_narrow",
+      "site-menu-sidebar"
+    ]
+  },
+  "collection.model": {
+    "url": "https://kr.sidiz.com/collections/t60",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "banner",
+      "product-grid",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "banner",
+      "footer",
+      "header",
+      "popups",
+      "product-grid",
+      "product_row_1_narrow",
+      "site-menu-sidebar"
+    ]
+  },
+  "page.brand": {
+    "url": "https://kr.sidiz.com/pages/brand-story-1",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "whoweare_section_1",
+      "whoweare_section_2",
+      "whoweare_section_3",
+      "whoweare_section_4",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "footer",
+      "header",
+      "popups",
+      "product_row_1_narrow",
+      "site-menu-sidebar",
+      "whoweare_section_1",
+      "whoweare_section_2",
+      "whoweare_section_3",
+      "whoweare_section_4"
+    ]
+  },
+  "page.history": {
+    "url": "https://kr.sidiz.com/pages/history",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "journey_title",
+      "journey_main",
+      "journey_sub",
+      "journey_main",
+      "journey_sub",
+      "journey_main",
+      "journey_sub",
+      "journey_main",
+      "journey_sub",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "footer",
+      "header",
+      "journey_main",
+      "journey_sub",
+      "journey_title",
+      "popups",
+      "product_row_1_narrow",
+      "site-menu-sidebar"
+    ]
+  },
+  "page.findchair": {
+    "url": "https://kr.sidiz.com/pages/find-your-chair",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "product_sticky",
+      "article_header",
+      "product_row_1_wide",
+      "product_row_1_wide",
+      "muuve_event",
+      "product_row_1_wide",
+      "article_link",
+      "product_row_1_wide",
+      "product_row_1_wide",
+      "product_related_product",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "article_header",
+      "article_link",
+      "footer",
+      "header",
+      "muuve_event",
+      "popups",
+      "product_related_product",
+      "product_row_1_narrow",
+      "product_row_1_wide",
+      "product_sticky",
+      "site-menu-sidebar"
+    ]
+  },
+  "page.compare": {
+    "url": "https://kr.sidiz.com/pages/compare",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "main",
+      "tilt-popup",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "footer",
+      "header",
+      "main",
+      "popups",
+      "product_row_1_narrow",
+      "site-menu-sidebar",
+      "tilt-popup"
+    ]
+  },
+  "page.support": {
+    "url": "https://kr.sidiz.com/pages/support",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "main",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "footer",
+      "header",
+      "main",
+      "popups",
+      "product_row_1_narrow",
+      "site-menu-sidebar"
+    ]
+  },
+  "page.easyrepair": {
+    "url": "https://kr.sidiz.com/pages/easy-repair",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "self_repair_search",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "footer",
+      "header",
+      "popups",
+      "product_row_1_narrow",
+      "self_repair_search",
+      "site-menu-sidebar"
+    ]
+  },
+  "page.work": {
+    "url": "https://kr.sidiz.com/pages/work",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "banner",
+      "product_related_product",
+      "article_link",
+      "product_related_product",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "article_link",
+      "banner",
+      "footer",
+      "header",
+      "popups",
+      "product_related_product",
+      "product_row_1_narrow",
+      "site-menu-sidebar"
+    ]
+  },
+  "page.experience": {
+    "url": "https://kr.sidiz.com/pages/experience",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "whoweare_section_1",
+      "whoweare_section_2",
+      "product_store_info",
+      "product_store_info",
+      "product_store_info",
+      "product_row_1_wide",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "footer",
+      "header",
+      "popups",
+      "product_row_1_narrow",
+      "product_row_1_wide",
+      "product_store_info",
+      "site-menu-sidebar",
+      "whoweare_section_1",
+      "whoweare_section_2"
+    ]
+  },
+  "blog": {
+    "url": "https://kr.sidiz.com/blogs/s-culture",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "main",
+      "banner",
+      "available",
+      "story",
+      "sticky",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "available",
+      "banner",
+      "footer",
+      "header",
+      "main",
+      "popups",
+      "product_row_1_narrow",
+      "site-menu-sidebar",
+      "sticky",
+      "story"
+    ]
+  },
+  "cart": {
+    "url": "https://kr.sidiz.com/cart",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "main",
+      "cart-recommendations",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "cart-recommendations",
+      "footer",
+      "header",
+      "main",
+      "popups",
+      "product_row_1_narrow",
+      "site-menu-sidebar"
+    ]
+  },
+  "search": {
+    "url": "https://kr.sidiz.com/search?q=t60",
+    "sections": [
+      "announcement",
+      "header",
+      "site-menu-sidebar",
+      "main",
+      "recommend",
+      "list_guide_banner",
+      "product_row_1_narrow",
+      "footer",
+      "popups"
+    ],
+    "unique": [
+      "announcement",
+      "footer",
+      "header",
+      "list_guide_banner",
+      "main",
+      "popups",
+      "product_row_1_narrow",
+      "recommend",
+      "site-menu-sidebar"
+    ]
+  }
+}
