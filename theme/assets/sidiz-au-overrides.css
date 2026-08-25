@@ -102,3 +102,35 @@
 .variant-image.hidden {
   display: none;
 }
+
+/* --------------------------------------------------------------------------
+   Mixed-case headings
+
+   KR pairs a Korean line with an all-caps English line and the two read as the
+   same size, because Hangul has no case and fills the em box much as capitals
+   do. Translated, the first line becomes sentence case and the pairing breaks:
+   lowercase sits at x-height while the caps line fills the cap-height, so the
+   caps line looks noticeably larger and heavier even at an identical font-size.
+
+   Two corrections, which is what typesetters do by hand:
+     - the caps line is set slightly smaller so the two match optically
+     - it gains tracking, because capitals set at body tracking look cramped
+
+   Usage: wrap the emphasis line in <em class="caps">…</em>, or set
+   data-caps on a heading whose whole content is capitals.
+   -------------------------------------------------------------------------- */
+
+.caps,
+[data-caps] {
+  font-size: 0.9em;      /* optical match to the sentence-case line */
+  letter-spacing: 0.04em; /* capitals need more air than lowercase */
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+/* The heading stack reads as one block, so the two lines share a line box
+   rather than inheriting the caps line's smaller leading. */
+.caps {
+  display: inline-block;
+  line-height: inherit;
+}

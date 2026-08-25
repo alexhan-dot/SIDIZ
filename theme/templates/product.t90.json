@@ -157,7 +157,7 @@
           "type": "info",
           "settings": {
             "label": "Colours",
-            "value": "Shadow Grey, Tan Brown, Cream Beige, Green Black, Grey, Black, Dry Rose, Daisy Yellow, Greyish Mint, Teal Blue, Deep Navy"
+            "value": "Shadow Grey\nTan Brown\nCream Beige\nGreen Black\nGrey\nBlack\nDry Rose\nDaisy Yellow\nGreyish Mint\nTeal Blue\nDeep Navy"
           }
         },
         "i5": {
@@ -253,6 +253,13 @@
             "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_00_69f278c1-8606-4a52-82bd-b48cee9a1463.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_01_4ec6f143-e80a-47f1-99cb-400b7b74222a.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_02_521f988f-575b-4f18-81b4-abc98d902b7a.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_03_e216758a-20f2-4726-b7f8-dec11c8cdaae.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_04_f364d6a8-58b9-4f51-8658-85ff9ff81741.jpg",
             "alt": "SIDIZ T90 in Tan Brown, rotated view"
           }
+        },
+        "i7": {
+          "type": "info",
+          "settings": {
+            "label": "Warranty",
+            "value": "15 years with product registration"
+          }
         }
       },
       "block_order": [
@@ -277,7 +284,8 @@
         "spinl738ac",
         "spinl744ac",
         "spinl941ac",
-        "spinl945ac"
+        "spinl945ac",
+        "i7"
       ],
       "settings": {
         "show_360": true,
@@ -292,7 +300,9 @@
         "notice_title": "Before you buy",
         "notice": "<p>Natural Leather Limited Palette items are made to order and ship approximately three weeks later, including production time.</p><p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p><p>Tilt resistance can feel different depending on your body. We recommend trying the chair in person before buying where you can.</p>",
         "display_title": "T90",
-        "subtitle": "Whatever your posture, whatever the device, the T90 supports you."
+        "subtitle": "Whatever your posture, whatever the device, the T90 supports you.",
+        "basic_info_title": "BASIC INFO",
+        "basic_info_open": false
       }
     },
     "intro": {
@@ -308,7 +318,7 @@
     "ergonomics_banner": {
       "type": "sidiz-wb-scroll-banner",
       "settings": {
-        "heading": "Optimised for performance<br>PROGRESSIVE MOVEMENT",
+        "heading": "Optimised for performance<br><em class=\"caps\">Progressive Movement</em>",
         "tag": "Change posture without breaking focus",
         "subheading": "Ergonomic design that responds<br>to how you move",
         "description": "<p>Designed so your concentration holds even when your posture drifts through a long stretch of work.</p><p>Twist your upper body or lean to one side and the T90 responds smoothly, keeping your back and lower back supported.</p>",

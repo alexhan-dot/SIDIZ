@@ -200,7 +200,23 @@
                     assign is_colour = true
                   endif
                 -%}
-                <div class="product-variant depth-{{ forloop.index }}">
+                {%- comment -%}
+                  data-option is what gives these chips their look. KR keys the
+                  bordered 130x34 pill off [data-option=option|option-2] and the
+                  round swatch off [data-option=color]. I removed the attribute
+                  earlier after misreading an unrelated grid rule, which is why
+                  the chips lost their borders and the colour swatches came out
+                  empty.
+                {%- endcomment -%}
+                {%- liquid
+                  assign data_option = 'option'
+                  if is_colour
+                    assign data_option = 'color'
+                  elsif option.position > 1
+                    assign data_option = 'option-' | append: option.position
+                  endif
+                -%}
+                <div class="product-variant depth-{{ forloop.index }}" data-option="{{ data_option }}">
                   {%- if is_colour -%}
                     <span class="product-variant__name">{{ option.name }}</span>
                   {%- endif -%}
@@ -361,16 +377,40 @@
 
       {%- if info.size > 0 -%}
         <div class="product-basic-info--wrapper">
-          <details>
+          <details {% if section.settings.basic_info_open %}open{% endif %}>
             <summary class="basic-info--header">
-              <div class="basic-info--title">BASIC INFO</div>
-              <div class="arrow"></div>
+              <div class="basic-info--title">{{ section.settings.basic_info_title }}</div>
+              <div class="arrow">
+                <svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true" focusable="false">
+                  <path d="M2 5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.4"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
             </summary>
+
             <div class="basic-info--body">
               {%- for block in info -%}
-                <div class="product--data" {{ block.shopify_attributes }}>
+                {%- comment -%}
+                  A value holding several entries is set one per line. KR lists
+                  them stacked and top-aligns the label against them, which is
+                  what .color--data does.
+                {%- endcomment -%}
+                {%- assign lines = block.settings.value | strip | newline_to_br | split: '<br />' -%}
+                <div
+                  class="product--data{% if lines.size > 1 %} color--data{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
                   <div class="data--title">{{ block.settings.label }}</div>
-                  <div class="data--text">{{ block.settings.value }}</div>
+                  <div class="data--text">
+                    {%- if lines.size > 1 -%}
+                      {%- for line in lines -%}
+                        {%- assign entry = line | strip -%}
+                        {%- if entry != blank -%}<p>{{ entry }}</p>{%- endif -%}
+                      {%- endfor -%}
+                    {%- else -%}
+                      {{ block.settings.value }}
+                    {%- endif -%}
+                  </div>
                 </div>
               {%- endfor -%}
             </div>
@@ -470,6 +510,9 @@
     { "type": "text", "id": "delivery_title", "label": "Delivery heading", "default": "Delivery" },
     { "type": "text", "id": "warranty_label", "label": "Warranty label", "default": "Warranty" },
     { "type": "text", "id": "warranty_value", "label": "Warranty value", "default": "15 years" },
+    { "type": "header", "content": "Basic info" },
+    { "type": "text", "id": "basic_info_title", "label": "Basic info heading", "default": "BASIC INFO" },
+    { "type": "checkbox", "id": "basic_info_open", "label": "Open by default", "default": false },
     { "type": "header", "content": "Before you buy" },
     { "type": "text", "id": "notice_title", "label": "Notice heading", "default": "Before you buy" },
     { "type": "richtext", "id": "notice", "label": "Notice" }
@@ -504,7 +547,7 @@
       "name": "Basic info row",
       "settings": [
         { "type": "text", "id": "label", "label": "Label" },
-        { "type": "text", "id": "value", "label": "Value" }
+        { "type": "textarea", "id": "value", "label": "Value", "info": "One entry per line to render a list, as KR does for colours." }
       ]
     },
     {
