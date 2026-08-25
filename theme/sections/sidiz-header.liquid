@@ -1,0 +1,166 @@
+{%- comment -%}
+  Port of the KR site header.
+
+  Two tiers, as on kr.sidiz.com:
+    .header-container--top    logo + utility links (registration, business,
+                              stockists, sign up, log in)
+    .header-container--bottom logo + the main nav, each item optionally opening
+                              a mega-menu with a titled left column and one or
+                              more link columns
+
+  Korean-market utility links are dropped rather than translated: there is no
+  Korean business-purchase flow or showroom network to point at.
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-header.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign utility = section.blocks | where: 'type', 'utility'
+  assign menus = section.blocks | where: 'type', 'menu'
+-%}
+
+<main-header id="site-header" class="site-header site-header--alignment-left">
+  <div class="header-container header-container--top">
+    <div class="header__top header__top--logo-left" id="header-top">
+      <div id="logo_pc_top" class="logo">
+        <a class="logo-img invert-colors" title="{{ shop.name | escape }}" href="{{ routes.root_url }}">
+          <img src="{{ 'sidiz_symbol.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="24" height="24">
+        </a>
+      </div>
+
+      {%- if utility.size > 0 -%}
+        <div class="menu--list">
+          {%- for block in utility -%}
+            <a href="{{ block.settings.link }}" class="icon-button" {{ block.shopify_attributes }}>
+              <span class="header-upper-menu icon-button__text">{{ block.settings.label }}</span>
+            </a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="header-container header-container--bottom no-header-blocks">
+    <div class="header__bottom">
+      <div class="header__menu site-nav style--classic">
+        <div class="site-nav-container">
+          <nav>
+            <div id="logo_pc_bottom" class="logo">
+              <a class="logo-img invert-colors" title="{{ shop.name | escape }}" href="{{ routes.root_url }}">
+                <img src="{{ 'sidiz_symbol.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="24" height="24">
+              </a>
+            </div>
+
+            <ul class="link-list ul_top_line">
+              {%- for block in menus -%}
+                {%- liquid
+                  assign handle = block.settings.label | handleize
+                  assign groups = block.settings.columns | newline_to_br | split: '<br />'
+                  assign has_submenu = false
+                  if block.settings.columns != blank
+                    assign has_submenu = true
+                  endif
+                -%}
+                <li
+                  id="menu-item-{{ handle }}"
+                  {% if has_submenu %}
+                    class="has-submenu"
+                    aria-controls="SiteNavLabel-{{ handle }}"
+                    aria-expanded="false"
+                  {% endif %}
+                  {{ block.shopify_attributes }}
+                >
+                  <a class="menu-link" {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}>
+                    <span><span class="gnb-title">{{ block.settings.label }}</span></span>
+                  </a>
+
+                  {%- if has_submenu -%}
+                    <ul class="submenu normal-menu" id="SiteNavLabel-{{ handle }}">
+                      <div class="submenu-holder">
+                        <div class="submenu-holder-inner">
+                          <div class="submenu--container">
+                            {%- if block.settings.column_title != blank -%}
+                              <div class="submenu--left">
+                                <div class="submenu--title">{{ block.settings.column_title }}</div>
+                              </div>
+                            {%- endif -%}
+
+                            <div class="submenu--list">
+                              <div class="submenu--list-inner">
+                                {%- for group in groups -%}
+                                  {%- assign parts = group | strip | split: '|' -%}
+                                  {%- if parts.size > 1 -%}
+                                    <a class="submenu--item" href="{{ parts[1] | strip }}">
+                                      {{ parts[0] | strip }}
+                                    </a>
+                                  {%- elsif parts[0] != blank -%}
+                                    <div class="submenu--group-title">{{ parts[0] | strip }}</div>
+                                  {%- endif -%}
+                                {%- endfor -%}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </ul>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+
+            <div class="header__icons">
+              <a class="icon-button" href="{{ routes.search_url }}" aria-label="{{ 'general.search.search' | t }}">
+                <img src="{{ 'icon-search-line-bk.svg' | asset_url }}" width="24" height="24" alt="" loading="lazy">
+              </a>
+              <a class="icon-button" href="{{ routes.cart_url }}" aria-label="{{ 'sections.header.cart' | t }}">
+                <span class="icon-button__text">{{ cart.item_count }}</span>
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</main-header>
+
+{% schema %}
+{
+  "name": "SIDIZ header",
+  "tag": "header",
+  "class": "shopify-section-group-header-group site-header-container mount-header",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Main menu items take their submenu from the Columns field: one entry per line, as 'Label | /url'. A line with no pipe becomes a group heading."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "utility",
+      "name": "Utility link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "Menu item",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Leave blank if this item only opens a submenu." },
+        { "type": "text", "id": "column_title", "label": "Submenu heading" },
+        { "type": "textarea", "id": "columns", "label": "Submenu links", "info": "One per line: Label | /url" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SIDIZ header",
+      "blocks": [{ "type": "menu" }, { "type": "menu" }]
+    }
+  ]
+}
+{% endschema %}

@@ -17,7 +17,7 @@
         "announcement-bar-0": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "Free standard delivery Australia-wide",
             "text_alignment": "center",
             "color_scheme": "scheme-1",
             "link": ""
@@ -29,22 +29,92 @@
       ]
     },
     "header": {
-      "type": "header",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
-        "logo_position": "middle-left",
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "mobile_logo_position": "center",
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
+      "type": "sidiz-header",
+      "blocks": {
+        "u1": {
+          "type": "utility",
+          "settings": {
+            "label": "Warranty & registration",
+            "link": "/pages/product-registration"
+          }
+        },
+        "u2": {
+          "type": "utility",
+          "settings": {
+            "label": "Business enquiries",
+            "link": "/pages/become-a-distributor"
+          }
+        },
+        "u3": {
+          "type": "utility",
+          "settings": {
+            "label": "Find a stockist",
+            "link": "/pages/contact"
+          }
+        },
+        "u4": {
+          "type": "utility",
+          "settings": {
+            "label": "Log in",
+            "link": "/account/login"
+          }
+        },
+        "m1": {
+          "type": "menu",
+          "settings": {
+            "label": "SHOP",
+            "link": "/collections/all",
+            "column_title": "Find your chair",
+            "columns": "Office chairs\nT90 | /products/t90-ergonomic-office-chair\nT50 | /collections/t50\nT80 | /collections/t80\nT40 SE | /collections/t40se\nT25 | /collections/t25\nGaming\nGC PRO | /collections/gaming\nStudy & kids\nRINGO | /collections/ringo\nCompare models | /pages/compare-models"
+          }
+        },
+        "m2": {
+          "type": "menu",
+          "settings": {
+            "label": "ABOUT SIDIZ",
+            "link": "/pages/about-us",
+            "column_title": "About SIDIZ",
+            "columns": "Brand story | /pages/about-us\nTechnology | /pages/about-us\nWhy choose SIDIZ | /collections/why-choose-sidiz"
+          }
+        },
+        "m3": {
+          "type": "menu",
+          "settings": {
+            "label": "GUIDES",
+            "link": "/blogs/guide",
+            "column_title": "Guides & stories",
+            "columns": "All articles | /blogs/guide\nUser guide | /pages/user-guide\nErgonomics | /blogs/guide"
+          }
+        },
+        "m4": {
+          "type": "menu",
+          "settings": {
+            "label": "SPECIAL OFFERS",
+            "link": "/collections/all"
+          }
+        },
+        "m5": {
+          "type": "menu",
+          "settings": {
+            "label": "SUPPORT",
+            "link": "/pages/faq",
+            "column_title": "Support",
+            "columns": "FAQ | /pages/faq\nDelivery & lead time | /pages/delivery-lead-time\nWarranty | /pages/warranty\nReturns | /pages/return-policy\nContact | /pages/contact"
+          }
+        }
+      },
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m5"
+      ],
+      "settings": {}
     }
   },
   "order": [

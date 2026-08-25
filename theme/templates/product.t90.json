@@ -536,58 +536,6 @@
         "heading": "The T90 option that suits you"
       }
     },
-    "leather_care": {
-      "type": "sidiz-content-row",
-      "settings": {
-        "width": "narrow",
-        "media_side": "left",
-        "text_align": "left",
-        "padding_block": 80,
-        "image": "",
-        "heading": "About natural leather",
-        "body": "<p>SIDIZ uses natural cowhide. Natural leather carries the traces of the animal's whole life. Scars, wrinkles and variations in colour picked up as the animal grew are characteristics of natural leather, not defects.</p><p><strong>Marks and wrinkles</strong> — cattle hide carries marks large and small. They do not weaken the durability of the leather, and they are proof the material is natural rather than synthetic.</p><p><strong>Variation in texture</strong> — wrinkle density and skin texture differ across the hide, so the surface grain is not uniform.</p><p><strong>Variation in colour</strong> — natural leather can vary slightly in colour depending on when it was dyed and which part of the hide it came from. Colour can also look different under sunlight or indoor lighting.</p><p><strong>Please note:</strong> light-coloured natural leather can pick up colour transfer when rubbed against dark clothing such as denim.</p>",
-        "background": "#fdfaf6",
-        "text_colour": "#2a1f1a"
-      }
-    },
-    "in_use": {
-      "type": "sidiz-gallery",
-      "blocks": {
-        "u1": {
-          "type": "item",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/IMG01_93411466-4411-4b94-8d99-3a517489d34f.jpg",
-            "alt": "SIDIZ T90 at a desk in a bright home office"
-          }
-        },
-        "u2": {
-          "type": "item",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/IMG02_59796c90-9f0c-4cea-98b3-261f73e646d0.jpg",
-            "alt": "SIDIZ T90 in a home office, angled view"
-          }
-        },
-        "u3": {
-          "type": "item",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/IMG03_9dbc8afc-28e5-4b84-ad4c-69c9b0614076.jpg",
-            "alt": "SIDIZ T90 beside a desk with a laptop and monitor"
-          }
-        }
-      },
-      "block_order": [
-        "u1",
-        "u2",
-        "u3"
-      ],
-      "settings": {
-        "direction": "horizontal",
-        "ratio": "1/1",
-        "heading": "At the desk",
-        "background": "#ffffff",
-        "text_colour": "#000000"
-      }
-    },
     "find_your_fit": {
       "type": "sidiz-find-your-fit",
       "blocks": {
@@ -910,12 +858,86 @@
         "poster_url": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/preview_images/5d32fb34adbe4ccda4558ac67efaa05a.thumbnail.0000000000.jpg",
         "alt": "Panorama 4D armrests moving through their full adjustment range"
       }
+    },
+    "hero": {
+      "type": "sidiz-pdp-hero",
+      "settings": {
+        "subtitle": "The performance engineered chair<br>the multi-device era was waiting for",
+        "subtitle_colour": "#ffffff",
+        "heading": "T90",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "video_url": "https://cdn.shopify.com/videos/c/vp/c5244e30d8644926a03c2da0b3f37462/c5244e30d8644926a03c2da0b3f37462.HD-1080p-4.8Mbps-92555594.mp4",
+        "poster_url": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/preview_images/c5244e30d8644926a03c2da0b3f37462.thumbnail.0000000000.jpg",
+        "video_url_mobile": "https://cdn.shopify.com/videos/c/vp/8d5218b868274f9abe246db57e46eb91/8d5218b868274f9abe246db57e46eb91.HD-1080p-4.8Mbps-92555588.mp4",
+        "poster_url_mobile": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/preview_images/8d5218b868274f9abe246db57e46eb91.thumbnail.0000000000.jpg",
+        "alt": "SIDIZ T90 shown in close detail",
+        "description": "<p>The SIDIZ T90 is an ergonomic office chair designed for long hours of computer work.<br>To support the changes in posture and movement that happen naturally through a working day,<br>it applies Panorama 4D armrests, Perfect Fitting Lumbar Support and a flexible backrest.</p><p>That structure delivers stable seating across office work, working from home and multi-device setups,<br>making it a chair suited to work that demands sustained concentration.</p>",
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default"
+      }
+    },
+    "material_tiles": {
+      "type": "sidiz-tile-card-list",
+      "blocks": {
+        "m1": {
+          "type": "tile",
+          "settings": {
+            "ratio": "1 / 1",
+            "title": "Double Raschel dual mesh",
+            "description": "<p>A two-layer mesh structure forms an air pocket, improving both breathability and durability.<br>A stain-resistant, water-repellent finish keeps it resistant to marks.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90__1-1__04.jpg",
+            "alt": "Double Raschel dual mesh on the SIDIZ T90"
+          }
+        },
+        "m2": {
+          "type": "tile",
+          "settings": {
+            "ratio": "1 / 1",
+            "title": "Natural Leather Limited Palette",
+            "description": "<p>A five-piece collection of top-grade natural leathers carrying the heritage of Mastrotto Group and Montebello, Italian leather houses with 50 years of tradition.</p><p>*Made to order — please allow approximately three weeks including production</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90_1-1_leather.jpg",
+            "alt": "Natural Leather Limited Palette swatches"
+          }
+        },
+        "m3": {
+          "type": "tile",
+          "settings": {
+            "ratio": "1 / 1",
+            "title": "Aquatex fabric",
+            "description": "<p>Premium Aquatex fabric that is both easy to care for and durable.<br>Resistant to water, staining and scratching, it stays easy to maintain even in a home with pets.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90_1-1_AQUATEX.jpg",
+            "alt": "Aquatex fabric detail"
+          }
+        },
+        "m4": {
+          "type": "tile",
+          "settings": {
+            "ratio": "1 / 1",
+            "title": "Premium full-grain leather",
+            "description": "<p>A premium full-grain leather finish with natural texture intact, adding a refined quality to offices and home offices alike.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90__1-1__05.jpg",
+            "alt": "Full-grain leather detail"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2",
+        "m3",
+        "m4"
+      ],
+      "settings": {
+        "heading": "Premium mesh, fabric<br>and full-grain leather"
+      }
     }
   },
   "order": [
     "sticky_nav",
     "pdp_head",
     "intro",
+    "hero",
     "materials",
     "ergonomics_banner",
     "ergonomics_cards",
@@ -923,8 +945,7 @@
     "tilt_banner",
     "tilt_cards",
     "comfort_cards",
-    "leather_care",
-    "in_use",
+    "material_tiles",
     "find_your_fit",
     "goes_with",
     "easy_repair",

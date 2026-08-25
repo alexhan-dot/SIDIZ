@@ -1,0 +1,128 @@
+{%- comment -%}
+  Port of the KR `product_pdp_head` section — the full-bleed hero that carries
+  the model wordmark over looping footage, with the positioning paragraph
+  underneath.
+
+  This section was missing from the AU template entirely, which is also why two
+  uploaded videos had no home: the KR hero uses a separate desktop and mobile
+  cut (f5fd6a72… and b4c1c34f…).
+
+  KR structure:
+    section.section-product-pdp-head
+      > .container[data-prd-type]
+          > .container--header
+              > .wrapper--text.align-<x> > .content--text > .subtitle + h2.title
+              > .wrapper--background > video.pc + video.mobile
+          > .container--body
+              > .wrapper--description.align-<x> > .description
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-pdp-head.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-video.js' | asset_url }}" defer="defer"></script>
+
+{%- assign scope = 'section-' | append: section.id -%}
+
+<div class="container {{ scope }}" data-prd-type="{{ section.settings.product_type }}">
+  <div class="container--header">
+    <div class="wrapper--text align-{{ section.settings.text_align }}">
+      <div class="content--text">
+        {%- if section.settings.subtitle != blank -%}
+          <div class="subtitle">{{ section.settings.subtitle }}</div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="wrapper--background">
+      {%- if section.settings.video_url != blank -%}
+        {% render 'sidiz-video',
+          url: section.settings.video_url,
+          poster: section.settings.poster_url,
+          alt: section.settings.alt,
+          classes: 'pc',
+          eager: true,
+          size: 'full'
+        %}
+      {%- endif -%}
+
+      {%- if section.settings.video_url_mobile != blank -%}
+        {% render 'sidiz-video',
+          url: section.settings.video_url_mobile,
+          poster: section.settings.poster_url_mobile,
+          alt: section.settings.alt,
+          classes: 'mobile',
+          size: 'full'
+        %}
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- if section.settings.description != blank -%}
+    <div class="container--body">
+      <div class="wrapper--description align-{{ section.settings.description_align }}">
+        <div class="description">{{ section.settings.description }}</div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+<style data-shopify>
+  .{{ scope }} .content--text .subtitle { color: {{ section.settings.subtitle_colour }}; }
+  .{{ scope }} .content--text .title { color: {{ section.settings.heading_colour }}; }
+  .{{ scope }} .wrapper--description .description { color: {{ section.settings.description_colour }}; }
+</style>
+
+{% schema %}
+{
+  "name": "SIDIZ PDP hero",
+  "tag": "section",
+  "class": "section-product-pdp-head",
+  "settings": [
+    { "type": "html", "id": "subtitle", "label": "Sub-title", "info": "Use <br> for line breaks." },
+    { "type": "color", "id": "subtitle_colour", "label": "Sub-title colour", "default": "#ffffff" },
+    { "type": "text", "id": "heading", "label": "Wordmark", "info": "The model name, e.g. T90." },
+    { "type": "color", "id": "heading_colour", "label": "Wordmark colour", "default": "#ffffff" },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Wordmark position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    { "type": "header", "content": "Media" },
+    { "type": "text", "id": "video_url", "label": "Video URL (desktop)" },
+    { "type": "text", "id": "poster_url", "label": "Poster URL (desktop)" },
+    { "type": "text", "id": "video_url_mobile", "label": "Video URL (mobile)" },
+    { "type": "text", "id": "poster_url_mobile", "label": "Poster URL (mobile)" },
+    { "type": "text", "id": "alt", "label": "Alt text" },
+    { "type": "header", "content": "Positioning copy" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "color", "id": "description_colour", "label": "Description colour", "default": "#000000" },
+    {
+      "type": "select",
+      "id": "description_align",
+      "label": "Description alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "text",
+      "id": "product_type",
+      "label": "Product type",
+      "default": "default",
+      "info": "Sets data-prd-type, which the KR stylesheet uses to vary the hero."
+    }
+  ],
+  "presets": [{ "name": "SIDIZ PDP hero" }]
+}
+{% endschema %}
