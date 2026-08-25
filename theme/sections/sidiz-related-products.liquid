@@ -1,0 +1,103 @@
+{%- comment -%}
+  Port of the KR `product_related` section — "goes well with", a simple grid of
+  product tiles with image, title and price. Also serves the Easy Repair parts
+  rail and the "you may also like" rail, which use the same markup in KR.
+
+  KR structure:
+    section.section-product-related
+      > .container
+          > .container--header > h2.title (+ .subtitle, + .description)
+          > .container--body > .wrapper--product
+              > .product-item
+                  > .product-item--image > a > img
+                  > .product-item--text > .title + .price + .description
+
+  Products come from a collection or from hand-picked blocks, so the same
+  section covers all three rails on the T90 page.
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-related.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-easy-repair.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign items = section.settings.collection.products
+  if section.settings.source == 'manual'
+    assign items = null
+  endif
+-%}
+
+<div class="container">
+  <div class="container--header">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <div class="subtitle">{{ section.settings.subtitle }}</div>
+    {%- endif -%}
+    {%- if section.settings.description != blank -%}
+      <div class="description rich-text-area">
+        <div class="size-13">{{ section.settings.description }}</div>
+      </div>
+    {%- endif -%}
+    {%- if section.settings.link != blank -%}
+      <div class="btn btn-hover--bk">
+        <a href="{{ section.settings.link }}" title="">
+          {{ section.settings.link_label | default: 'View all' }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="container--body">
+    <div class="wrapper--product">
+      {%- if section.settings.source == 'manual' -%}
+        {%- for block in section.blocks -%}
+          {%- assign item = block.settings.product -%}
+          {%- if item != blank -%}
+            {% render 'sidiz-related-item', item: item, attrs: block.shopify_attributes %}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for item in items limit: section.settings.limit -%}
+          {% render 'sidiz-related-item', item: item %}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ related products",
+  "tag": "section",
+  "class": "section-product-related",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "text", "id": "subtitle", "label": "Sub-title" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "text", "id": "link_label", "label": "Button label", "default": "View all" },
+    { "type": "url", "id": "link", "label": "Button link" },
+    {
+      "type": "select",
+      "id": "source",
+      "label": "Source",
+      "options": [
+        { "value": "collection", "label": "Collection" },
+        { "value": "manual", "label": "Hand-picked" }
+      ],
+      "default": "collection"
+    },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Maximum products", "min": 2, "max": 12, "step": 1, "default": 4 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Product",
+      "settings": [{ "type": "product", "id": "product", "label": "Product" }]
+    }
+  ],
+  "presets": [{ "name": "SIDIZ related products" }]
+}
+{% endschema %}

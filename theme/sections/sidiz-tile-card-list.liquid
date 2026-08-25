@@ -1,0 +1,126 @@
+{%- comment -%}
+  Port of the KR `product_tile_card_list` section — the comfort block: three
+  square media tiles, each with an overlay caption, and the heading and body
+  underneath.
+
+  KR structure:
+    section.section-product-tile-card-list
+      > .container
+          > .container--header > h2.title
+          > .container--body > .wrapper--card-list
+              > .card--item
+                  > .card--media[style="aspect-ratio: …"]
+                      > .media--text[style="color: …"] + video|img
+                  > .card--text > h3.title + .description.rich-text-area > .size-15
+
+  The aspect ratio and the overlay colour are inline on the element in KR, so
+  they are settings here rather than fixed CSS.
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-tile-card-list.css' | asset_url | stylesheet_tag }}
+
+<div class="container">
+  {%- if section.settings.heading != blank -%}
+    <div class="container--header">
+      <h2 class="title">{{ section.settings.heading }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="container--body">
+    <div class="wrapper--card-list">
+      {%- for block in section.blocks -%}
+        <div class="card--item" {{ block.shopify_attributes }}>
+          <div class="card--media" style="aspect-ratio: {{ block.settings.ratio }}">
+            {%- if block.settings.overlay != blank -%}
+              <div class="media--text" style="color: {{ block.settings.overlay_colour }}">
+                {{ block.settings.overlay }}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.video_url != blank -%}
+              <video
+                playsinline="playsinline"
+                autoplay="autoplay"
+                loop="loop"
+                muted="muted"
+                preload="metadata"
+                loading="lazy"
+                {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
+                {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
+              >
+                <source src="{{ block.settings.video_url }}" type="video/mp4">
+                {%- if block.settings.poster_url != blank -%}
+                  <img alt="{{ block.settings.alt | escape }}" src="{{ block.settings.poster_url }}">
+                {%- endif -%}
+              </video>
+            {%- elsif block.settings.image_url != blank -%}
+              <img
+                src="{{ block.settings.image_url }}?width=1200"
+                srcset="{{ block.settings.image_url }}?width=600 600w, {{ block.settings.image_url }}?width=1200 1200w"
+                sizes="(min-width: 1024px) 33vw, 90vw"
+                width="1200"
+                height="1200"
+                alt="{{ block.settings.alt | escape }}"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- endif -%}
+          </div>
+
+          <div class="card--text">
+            {%- if block.settings.title != blank -%}
+              <h3 class="title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <div class="description rich-text-area">
+                <div class="size-15">{{ block.settings.description }}</div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ tile cards",
+  "tag": "section",
+  "class": "section-product-tile-card-list",
+  "settings": [
+    { "type": "html", "id": "heading", "label": "Heading", "info": "Use <br> for line breaks." }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "text", "id": "overlay", "label": "Overlay caption" },
+        { "type": "color", "id": "overlay_colour", "label": "Overlay colour", "default": "#ffffff" },
+        {
+          "type": "select",
+          "id": "ratio",
+          "label": "Media ratio",
+          "options": [
+            { "value": "1 / 1", "label": "Square" },
+            { "value": "4 / 5", "label": "Portrait 4:5" },
+            { "value": "16 / 9", "label": "Landscape 16:9" }
+          ],
+          "default": "1 / 1"
+        },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        { "type": "text", "id": "image_url", "label": "Image URL" },
+        { "type": "text", "id": "video_url", "label": "Video URL" },
+        { "type": "text", "id": "poster_url", "label": "Video poster URL" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "SIDIZ tile cards", "blocks": [{ "type": "tile" }, { "type": "tile" }, { "type": "tile" }] }
+  ]
+}
+{% endschema %}

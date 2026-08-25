@@ -429,57 +429,55 @@
       "settings": {}
     },
     "comfort_cards": {
-      "type": "sidiz-card-list",
+      "type": "sidiz-tile-card-list",
       "blocks": {
-        "m1": {
-          "type": "card",
+        "t1": {
+          "type": "tile",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/99b0646b1da94afaabb47802d23a36db/99b0646b1da94afaabb47802d23a36db.HD-1080p-7.2Mbps-37256038.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/99b0646b1da94afaabb47802d23a36db.thumbnail.0000000000_small.jpg",
-            "alt": "Headrest of the SIDIZ T90 adjusting for height and angle",
-            "ratio": "4/5",
+            "overlay": "Rest is part of focus",
+            "overlay_colour": "#ffffff",
+            "ratio": "1 / 1",
             "title": "Headrest",
-            "text": "<p>The cushioning is engineered so the frame never presses directly against you. Height and angle adjust to suit different bodies and postures.</p>",
-            "note": "Height 70 mm · Angle 65° · Korean Patent No. 10-2779707"
+            "description": "<p>The cushioning is engineered so the frame never presses directly against you.<br>Height and angle adjust to suit different bodies and postures, supporting your neck and head steadily.</p><p>*Height 70 mm adjustment / 65° angle rotation<br>*Korean Patent No. 10-2779707</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/99b0646b1da94afaabb47802d23a36db/99b0646b1da94afaabb47802d23a36db.HD-1080p-7.2Mbps-37256038.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/99b0646b1da94afaabb47802d23a36db.thumbnail.0000000000_small.jpg",
+            "alt": "Headrest of the SIDIZ T90 adjusting for height and angle"
           }
         },
-        "m2": {
-          "type": "card",
+        "t2": {
+          "type": "tile",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/2047af3cd38b4acd8aa30534ca3c9893/2047af3cd38b4acd8aa30534ca3c9893.HD-1080p-7.2Mbps-37256041.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/2047af3cd38b4acd8aa30534ca3c9893.thumbnail.0000000000_small.jpg",
-            "alt": "Waterfall front edge of the SIDIZ T90 seat cushion",
-            "ratio": "4/5",
+            "overlay": "The seat that maximises deep focus",
+            "overlay_colour": "#ffffff",
+            "ratio": "1 / 1",
             "title": "Ultra Comfort Foam",
-            "text": "<p>Resilient 100% MDI foam distributes body weight evenly, and the waterfall seat edge falls away gently to reduce pressure on the thighs.</p>",
-            "note": "Scooping applies to Double Raschel and Aquatex · Korean Patent No. 10-2779714"
+            "description": "<p>Resilient 100% MDI foam with a scooping technique applied distributes body weight evenly.<br>The waterfall seat edge falls away gently to reduce pressure on the thighs, staying comfortable through long periods of sitting.</p><p>*Scooping applies to Double Raschel and Aquatex<br>*Korean Patent No. 10-2779714</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/2047af3cd38b4acd8aa30534ca3c9893/2047af3cd38b4acd8aa30534ca3c9893.HD-1080p-7.2Mbps-37256041.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/2047af3cd38b4acd8aa30534ca3c9893.thumbnail.0000000000_small.jpg",
+            "alt": "Waterfall front edge of the SIDIZ T90 seat cushion"
           }
         },
-        "m3": {
-          "type": "card",
+        "t3": {
+          "type": "tile",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/e007a4036f70485bb34cb721a0f0b0d9/e007a4036f70485bb34cb721a0f0b0d9.HD-1080p-7.2Mbps-37256042.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/e007a4036f70485bb34cb721a0f0b0d9.thumbnail.0000000000_small.jpg",
-            "alt": "Forward tilting angles the T90 seat slightly forward for focused work",
-            "ratio": "4/5",
+            "overlay": "When you want to concentrate, sit the way concentration wants",
+            "overlay_colour": "#ffffff",
+            "ratio": "1 / 1",
             "title": "Forward tilting",
-            "text": "<p>The more you focus, the more your upper body leans forward. Forward tilting angles the seat slightly forward so you can hold a stable posture without leaning back.</p>"
+            "description": "<p>The more you focus on a task, the more your upper body leans forward naturally.<br>Forward tilting angles the seat slightly forward so you can hold a stable, comfortable posture without leaning back.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/e007a4036f70485bb34cb721a0f0b0d9/e007a4036f70485bb34cb721a0f0b0d9.HD-1080p-7.2Mbps-37256042.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/e007a4036f70485bb34cb721a0f0b0d9.thumbnail.0000000000_small.jpg",
+            "alt": "Forward tilting angles the T90 seat slightly forward for focused work"
           }
         }
       },
       "block_order": [
-        "m1",
-        "m2",
-        "m3"
+        "t1",
+        "t2",
+        "t3"
       ],
       "settings": {
-        "layout": "tile",
-        "columns": 3,
-        "eyebrow": "Until you forget you are sitting at all",
-        "heading": "Comfortable, because rest is part of focus",
-        "anchor_id": "comfort",
-        "background": "#f5f6f7",
-        "text_colour": "#000000"
+        "heading": "Comfortable enough<br>to forget you are sitting"
       }
     },
     "materials": {
@@ -675,27 +673,24 @@
       }
     },
     "goes_with": {
-      "type": "sidiz-product-carousel",
+      "type": "sidiz-related-products",
       "settings": {
-        "source": "recommendations",
-        "limit": 8,
-        "eyebrow": "Complete the setup",
         "heading": "Goes well with the T90",
-        "background": "#ffffff"
+        "source": "collection",
+        "limit": 4,
+        "collection": ""
       }
     },
     "easy_repair": {
-      "type": "sidiz-product-carousel",
+      "type": "sidiz-related-products",
       "settings": {
+        "heading": "T90 | EASY REPAIR",
+        "subtitle": "Repair it, keep it longer — a small act for the planet",
+        "description": "<p>SIDIZ Easy Repair is a customer-friendly maintenance approach: replace only the part that needs replacing, rather than the whole chair, so it lasts far longer.</p>",
+        "link_label": "View all Easy Repair parts",
+        "link": "/collections/easy-repair",
         "source": "collection",
-        "limit": 12,
-        "eyebrow": "Built to be repaired, not replaced",
-        "heading": "T90 Easy Repair parts",
-        "body": "<p>SIDIZ Easy Repair is a customer-friendly maintenance approach: replace only the part that needs replacing, rather than the whole chair, so it lasts far longer.</p>",
-        "view_all_label": "View all Easy Repair parts",
-        "view_all_link": "/collections/easy-repair",
-        "anchor_id": "easy-repair",
-        "background": "#f5f6f7"
+        "limit": 8
       }
     },
     "warranty": {
@@ -868,14 +863,13 @@
       }
     },
     "recommend": {
-      "type": "sidiz-product-carousel",
+      "type": "sidiz-related-products",
       "settings": {
-        "source": "collection",
-        "limit": 8,
         "heading": "You may also like",
-        "view_all_label": "View all chairs",
-        "view_all_link": "/collections/all",
-        "background": "#ffffff"
+        "link_label": "View all chairs",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4
       }
     },
     "armrests": {
