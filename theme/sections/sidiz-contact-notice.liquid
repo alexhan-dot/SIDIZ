@@ -1,0 +1,82 @@
+{%- comment -%}
+  Port of the KR `product-notice` section.
+
+  Worth naming clearly: despite "notice" this is not the "before you buy" panel
+  (that lives in the buy box). It is the contact centre and after-sales block at
+  the foot of the product page — phone, hours, warranty period and returns.
+
+  KR structure:
+    section.section-product-notice
+      > .container > .wrapper
+          > .notice--wrap#notice-<id>
+              > .title
+              > .notice--contents > .notice > .title + .description
+
+  Everything here is market-specific: KR carries a Korean phone number, Korean
+  business hours and Korean consumer policy, so the AU copy is written fresh
+  rather than translated.
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-notice.css' | asset_url | stylesheet_tag }}
+
+{%- assign scope = 'notice-' | append: section.id -%}
+
+<div class="container">
+  <div class="wrapper">
+    <div id="{{ scope }}" class="notice--wrap">
+      {%- if section.settings.heading != blank -%}
+        <div class="title">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      <div class="notice--contents">
+        {%- for block in section.blocks -%}
+          <div class="notice" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <div class="title">{{ block.settings.title }}</div>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <div class="description">{{ block.settings.body }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style data-shopify>
+  #{{ scope }} { background-color: {{ section.settings.background }}; }
+  #{{ scope }} .notice--title,
+  #{{ scope }} > .title,
+  #{{ scope }} .notice .title { color: {{ section.settings.title_colour }}; }
+  #{{ scope }} .notice--content,
+  #{{ scope }} .notice .description { color: {{ section.settings.text_colour }}; }
+</style>
+
+{% schema %}
+{
+  "name": "SIDIZ contact",
+  "tag": "section",
+  "class": "section-product-notice",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Contact centre" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#eaedf0" },
+    { "type": "color", "id": "title_colour", "label": "Title colour", "default": "#000000" },
+    { "type": "color", "id": "text_colour", "label": "Text colour", "default": "#434548" }
+  ],
+  "blocks": [
+    {
+      "type": "notice",
+      "name": "Notice",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "SIDIZ contact", "blocks": [{ "type": "notice" }, { "type": "notice" }] }
+  ]
+}
+{% endschema %}

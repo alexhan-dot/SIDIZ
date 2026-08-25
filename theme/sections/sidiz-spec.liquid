@@ -1,77 +1,92 @@
-{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
-
 {%- comment -%}
-  KR product_spec — 제품 사이즈. Dimension drawings plus a specification table.
-  Rendered as a real <table>, not an image, so the numbers are searchable,
-  translatable and readable by assistive tech.
+  Port of the KR `product_spec` section — dimension drawings side by side above
+  the key figures and the measurement caveats. My earlier version put a spec
+  table beside a single drawing, which is not the KR layout.
+
+  KR structure:
+    section.section-product-spec
+      > .container > .wrapper
+          > .wrapper--header > h2.title
+          > .wrapper--body > .spec-swiper.swiper > .swiper-wrapper
+              > .swiper-slide
+                  > .slide-media--wrap > .slide--media > img   (one per drawing)
+                  > .slide-info--wrap > .description-1 + .description-2
 {%- endcomment -%}
 
-<section
-  class="sidiz-spec sidiz-section"
-  style="--spec-bg: {{ section.settings.background }};"
-  id="{{ section.settings.anchor_id | default: 'specifications' | handleize }}"
->
-  <div class="sidiz-container">
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-spec.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'section-product-spec.js' | asset_url }}" defer="defer"></script>
+
+<div class="container">
+  <div class="wrapper">
     {%- if section.settings.heading != blank -%}
-      <h2 class="sidiz-spec__heading sidiz-display">{{ section.settings.heading }}</h2>
+      <div class="wrapper--header">
+        <h2 class="title">{{ section.settings.heading }}</h2>
+      </div>
     {%- endif -%}
 
-    <div class="sidiz-spec__layout">
-      {%- assign drawings = section.blocks | where: 'type', 'drawing' -%}
-      {%- if drawings.size > 0 -%}
-        <div class="sidiz-spec__drawings">
-          {%- for block in drawings -%}
-            {% render 'sidiz-media',
-              image: block.settings.image,
-              url: block.settings.media_url,
-              alt: block.settings.alt,
-              sizes: '(min-width: 834px) 50vw, 100vw',
-              class: 'sidiz-spec__drawing'
-            %}
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
-
-      {%- assign rows = section.blocks | where: 'type', 'row' -%}
-      {%- if rows.size > 0 -%}
-        <div class="sidiz-spec__tablewrap">
-          <table class="sidiz-spec__table">
-            <caption class="visually-hidden">
-              {{ section.settings.heading | default: 'Specifications' }}
-            </caption>
-            <tbody>
-              {%- for block in rows -%}
-                <tr {{ block.shopify_attributes }}>
-                  <th scope="row">{{ block.settings.label }}</th>
-                  <td>{{ block.settings.value }}</td>
-                </tr>
+    <div class="wrapper--body">
+      <div class="spec-swiper swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="slide-media--wrap">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'drawing' -%}
+                  <div class="slide--media" {{ block.shopify_attributes }}>
+                    {%- if block.settings.image != blank -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1200
+                        | image_tag: loading: 'lazy', widths: '600,900,1200', alt: block.settings.alt
+                      }}
+                    {%- elsif block.settings.image_url != blank -%}
+                      <img
+                        src="{{ block.settings.image_url }}?width=1200"
+                        srcset="{{ block.settings.image_url }}?width=600 600w, {{ block.settings.image_url }}?width=1200 1200w"
+                        sizes="(min-width: 1024px) 40vw, 90vw"
+                        width="1200"
+                        height="1200"
+                        alt="{{ block.settings.alt | escape }}"
+                        loading="lazy"
+                        decoding="async"
+                      >
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
               {%- endfor -%}
-            </tbody>
-          </table>
-        </div>
-      {%- endif -%}
-    </div>
+            </div>
 
-    {%- if section.settings.note != blank -%}
-      <p class="sidiz-spec__note">{{ section.settings.note }}</p>
-    {%- endif -%}
+            <div class="slide-info--wrap">
+              {%- if section.settings.figures != blank -%}
+                <div class="description-1">{{ section.settings.figures }}</div>
+              {%- endif -%}
+              {%- if section.settings.caveats != blank -%}
+                <div class="description-2">{{ section.settings.caveats }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "SIDIZ specifications",
   "tag": "section",
+  "class": "section-product-spec",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Specifications" },
-    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "specifications" },
-    { "type": "text", "id": "note", "label": "Footnote" },
-    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "T90 dimensions" },
     {
-      "type": "paragraph",
-      "content": "Use metric units throughout — mm, cm and kg. Never inches or pounds."
-    }
+      "type": "html",
+      "id": "figures",
+      "label": "Key figures",
+      "info": "Metric only — kg and mm. Never pounds or inches."
+    },
+    { "type": "html", "id": "caveats", "label": "Measurement notes" }
   ],
   "blocks": [
     {
@@ -79,24 +94,13 @@
       "name": "Dimension drawing",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "media_url", "label": "Media URL" },
+        { "type": "text", "id": "image_url", "label": "Image URL" },
         { "type": "text", "id": "alt", "label": "Alt text" }
-      ]
-    },
-    {
-      "type": "row",
-      "name": "Specification",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Label" },
-        { "type": "text", "id": "value", "label": "Value" }
       ]
     }
   ],
   "presets": [
-    {
-      "name": "SIDIZ specifications",
-      "blocks": [{ "type": "drawing" }, { "type": "row" }, { "type": "row" }]
-    }
+    { "name": "SIDIZ specifications", "blocks": [{ "type": "drawing" }, { "type": "drawing" }] }
   ]
 }
 {% endschema %}

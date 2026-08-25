@@ -296,17 +296,13 @@
       }
     },
     "intro": {
-      "type": "sidiz-content-row",
+      "type": "sidiz-product-row",
       "settings": {
-        "width": "narrow",
-        "media_side": "above",
-        "text_align": "center",
-        "padding_block": 96,
-        "eyebrow": "For the multi-device era",
-        "heading": "A performance engineered chair",
-        "body": "<p>The SIDIZ T90 is an ergonomic office chair designed for long hours of computer work. Panorama 4D armrests, Perfect Fitting Lumbar Support and a flexible backrest work together to support the changes in posture and movement that happen naturally through a working day.</p>",
+        "heading": "SIDIZ T90 Ergonomic Office Chair",
+        "align": "center",
         "background": "#ffffff",
-        "text_colour": "#000000"
+        "text_colour": "#000000",
+        "body": "<ul><li><strong>Ergonomic office chair</strong> – a premium work chair designed around long hours of computer use</li><li><strong>Panorama 4D armrests</strong> – height, depth, width and angle adjustment for a wide range of working postures</li><li><strong>Perfect Fitting Lumbar Support</strong> – steady lower-back support shaped to your body</li><li><strong>Flexible backrest</strong> – a backrest that responds naturally as you move</li><li><strong>Optimised for office, work-from-home and multi-device environments</strong></li></ul>"
       }
     },
     "ergonomics_banner": {
@@ -605,72 +601,77 @@
     "find_your_fit": {
       "type": "sidiz-find-your-fit",
       "blocks": {
-        "s1": {
-          "type": "step",
+        "f1": {
+          "type": "adjustment",
           "settings": {
-            "title": "Seat tilt",
-            "text": "<p>Angle the seat slightly forward when you want to work leaning in, or level it out to sit back.</p>",
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/T90_FYF_01_cb1091a9-08dc-4187-9996-a30a129a887e.jpg",
-            "alt": "Adjusting the seat tilt on the SIDIZ T90"
+            "title": "To suit your body",
+            "description": "<p>Seat height / seat depth</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90_FYF_01_cb1091a9-08dc-4187-9996-a30a129a887e.jpg",
+            "alt": "Adjusting seat height and depth on the SIDIZ T90"
           }
         },
-        "s2": {
-          "type": "step",
+        "f2": {
+          "type": "adjustment",
           "settings": {
-            "title": "Headrest height and angle",
-            "text": "<p>Set the headrest so it meets the back of your head without pushing it forward.</p>",
-            "range": "Height 70 mm · Angle 65°",
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/T90_FYF_02_5247389b-d4ad-41e9-8e5b-97981b030bc5.jpg",
+            "title": "For moments that need focus",
+            "description": "<p>Seat tilt</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90_FYF_02_5247389b-d4ad-41e9-8e5b-97981b030bc5.jpg",
+            "alt": "Adjusting seat tilt on the SIDIZ T90"
+          }
+        },
+        "f3": {
+          "type": "adjustment",
+          "settings": {
+            "title": "To ease the load on head and neck",
+            "description": "<p>Headrest height / angle</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/03ffb1ec5b944830802e8b8782e114be/03ffb1ec5b944830802e8b8782e114be.SD-480p-1.5Mbps-41125900.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/03ffb1ec5b944830802e8b8782e114be.thumbnail.0000000000_small.jpg",
             "alt": "Adjusting the headrest height and angle on the SIDIZ T90"
           }
         },
-        "s3": {
-          "type": "step",
+        "f4": {
+          "type": "adjustment",
           "settings": {
-            "title": "Tilt range and resistance",
-            "text": "<p>Choose how far the backrest reclines, then set how firmly it pushes back.</p>",
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/03ffb1ec5b944830802e8b8782e114be/03ffb1ec5b944830802e8b8782e114be.SD-480p-1.5Mbps-41125900.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/03ffb1ec5b944830802e8b8782e114be.thumbnail.0000000000_small.jpg",
+            "title": "So the backrest reclines the way you want",
+            "description": "<p>Tilt range / resistance</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/6a3f5402a37241ed90ddf799239bfe27/6a3f5402a37241ed90ddf799239bfe27.SD-480p-1.5Mbps-37256343.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/6a3f5402a37241ed90ddf799239bfe27.thumbnail.0000000000_small.jpg",
             "alt": "Setting the tilt range and resistance on the SIDIZ T90"
           }
         },
-        "s4": {
-          "type": "step",
+        "f5": {
+          "type": "adjustment",
           "settings": {
-            "title": "Armrest height, depth, width and angle",
-            "text": "<p>Bring the armrests to where your forearms sit naturally at your keyboard, then angle them in or out.</p>",
-            "range": "Height 70 mm · Depth 60 mm · Lateral 35° · Rotation 230°",
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/6a3f5402a37241ed90ddf799239bfe27/6a3f5402a37241ed90ddf799239bfe27.SD-480p-1.5Mbps-37256343.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/6a3f5402a37241ed90ddf799239bfe27.thumbnail.0000000000_small.jpg",
+            "title": "To rest shoulders and arms",
+            "description": "<p>Armrest height / depth / angle / tilt</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90_FYF_05.jpg",
             "alt": "Adjusting the 4D armrests on the SIDIZ T90"
           }
         },
-        "s5": {
-          "type": "step",
+        "f6": {
+          "type": "adjustment",
           "settings": {
-            "title": "Lumbar support height",
-            "text": "<p>Slide the lumbar support until it sits in the curve of your lower back.</p>",
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/2b43aa4b1ec24573b4f679781c10d4c5/2b43aa4b1ec24573b4f679781c10d4c5.SD-480p-1.5Mbps-37256396.mp4",
+            "title": "To support your lower back",
+            "description": "<p>Lumbar support height</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/2b43aa4b1ec24573b4f679781c10d4c5/2b43aa4b1ec24573b4f679781c10d4c5.SD-480p-1.5Mbps-37256396.mp4",
             "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/2b43aa4b1ec24573b4f679781c10d4c5.thumbnail.0000000000_small.jpg",
             "alt": "Adjusting the lumbar support height on the SIDIZ T90"
           }
         }
       },
       "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4",
-        "s5"
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6"
       ],
       "settings": {
-        "eyebrow": "FIND YOUR FIT",
-        "heading": "Set it up for your body",
-        "body": "<p>Five adjustments turn the T90 from a good chair into your chair. Work through them once and you will not need to think about it again.</p>",
-        "guide_label": "Read the full user guide",
-        "guide_link": "/pages/user-guide",
-        "anchor_id": "adjustment-guide",
-        "background": "#f5f6f7"
+        "heading": "T90 adjustment guide",
+        "subtitle": "FIND YOUR FIT. Set it up for your body",
+        "guide_label": "USER GUIDE",
+        "guide_link": "/pages/user-guide"
       }
     },
     "goes_with": {
@@ -700,19 +701,14 @@
     "warranty": {
       "type": "sidiz-warranty",
       "settings": {
-        "term": "15 years",
-        "heading": "So the value of your T90 keeps going",
-        "body": "<p>SIDIZ provides a 15-year warranty to customers who complete product registration.</p>",
-        "media_url": "https://kr.sidiz.com/cdn/shop/files/WARRANTY_15.jpg",
-        "alt": "SIDIZ 15-year warranty badge",
+        "heading": "T90 | 15-year warranty",
+        "body": "<p>So the value of your T90 keeps going, SIDIZ provides a 15-year warranty to customers who complete product registration.</p><p>Register your product once it arrives, before it slips your mind.</p>",
+        "note": "<p>*Warranty periods vary by component.</p>",
         "register_label": "Register your product",
         "register_link": "/pages/product-registration",
-        "policy_label": "Warranty terms",
-        "policy_link": "/pages/warranty",
         "show_acl": true,
-        "anchor_id": "warranty",
-        "background": "#242526",
-        "text_colour": "#ffffff"
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/WARRANTY_15.jpg",
+        "alt": "SIDIZ 15-year warranty badge"
       }
     },
     "specifications": {
@@ -721,82 +717,26 @@
         "d1": {
           "type": "drawing",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/T90HLDA2KK_01.jpg",
-            "alt": "Dimension drawing of the SIDIZ T90, front elevation"
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90HLDA2KK_01.jpg",
+            "alt": "Dimension drawing of the SIDIZ T90, front elevation, in millimetres"
           }
         },
         "d2": {
           "type": "drawing",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/files/T90HLDA2KK_02.jpg",
-            "alt": "Dimension drawing of the SIDIZ T90, side elevation"
-          }
-        },
-        "r1": {
-          "type": "row",
-          "settings": {
-            "label": "Maximum load",
-            "value": "125 kg"
-          }
-        },
-        "r2": {
-          "type": "row",
-          "settings": {
-            "label": "Product weight",
-            "value": "Approx. 28.7 kg"
-          }
-        },
-        "r3": {
-          "type": "row",
-          "settings": {
-            "label": "Armrest adjustment",
-            "value": "Height 70 mm · Depth 60 mm · Lateral 35° · Rotation 230°"
-          }
-        },
-        "r4": {
-          "type": "row",
-          "settings": {
-            "label": "Headrest adjustment",
-            "value": "Height 70 mm · Angle 65°"
-          }
-        },
-        "r5": {
-          "type": "row",
-          "settings": {
-            "label": "Materials",
-            "value": "Double Raschel, natural leather, moulded foam, urethane, plastic, steel, aluminium, Aquatex fabric"
-          }
-        },
-        "r6": {
-          "type": "row",
-          "settings": {
-            "label": "Warranty",
-            "value": "15 years with product registration"
-          }
-        },
-        "r7": {
-          "type": "row",
-          "settings": {
-            "label": "Design award",
-            "value": "iF Design Award 2025, office chair category"
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T90HLDA2KK_02.jpg",
+            "alt": "Dimension drawing of the SIDIZ T90, side elevation, in millimetres"
           }
         }
       },
       "block_order": [
         "d1",
-        "d2",
-        "r1",
-        "r2",
-        "r3",
-        "r4",
-        "r5",
-        "r6",
-        "r7"
+        "d2"
       ],
       "settings": {
-        "heading": "Specifications",
-        "anchor_id": "specifications",
-        "background": "#ffffff"
+        "heading": "T90 dimensions",
+        "figures": "• Maximum load: 125 kg &nbsp;&nbsp; • Product weight: approx. 28.7 kg",
+        "caveats": "*Measurements may vary by ±20 mm and ±1 kg depending on where and how they are taken; this is not a fault.<br>*Dimensions are measured with nobody seated.<br>*Seat height is measured from the centre of the seat."
       }
     },
     "faq": {
@@ -899,47 +839,32 @@
       }
     },
     "notices": {
-      "type": "sidiz-notice",
+      "type": "sidiz-contact-notice",
       "blocks": {
-        "n1": {
-          "type": "note",
+        "c1": {
+          "type": "notice",
           "settings": {
-            "title": "Made-to-order leather",
-            "text": "<p>Natural Leather Limited Palette items are made to order and ship approximately three weeks later, including production time. Please check your timing before ordering.</p>"
+            "title": "Product, delivery, service and returns",
+            "body": "<p>support@sidiz.au</p><p>Monday to Friday, 9:00 am – 5:00 pm AEST<br>Closed weekends and public holidays</p>"
           }
         },
-        "n2": {
-          "type": "note",
+        "c2": {
+          "type": "notice",
           "settings": {
-            "title": "About the photography",
-            "text": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>"
-          }
-        },
-        "n3": {
-          "type": "warning",
-          "settings": {
-            "title": "Tilting",
-            "text": "<p>Do not force the backrest back suddenly or with excessive force; there is a risk of tipping.</p>"
-          }
-        },
-        "n4": {
-          "type": "note",
-          "settings": {
-            "title": "Fit varies by body",
-            "text": "<p>Tilt resistance can feel different depending on your body. We recommend trying the chair in person before buying where you can.</p>"
+            "title": "Warranty and faulty returns",
+            "body": "<p>Warranty period: up to 15 years from purchase, with product registration.</p><p>SIDIZ components are warranted from one year up to 15 years depending on the part. See the <a href=\"/pages/warranty\">warranty terms</a> for detail.</p><p>Nothing here limits your rights under the Australian Consumer Law, including your right to a repair, replacement or refund where goods are not of acceptable quality.</p>"
           }
         }
       },
       "block_order": [
-        "n1",
-        "n2",
-        "n3",
-        "n4"
+        "c1",
+        "c2"
       ],
       "settings": {
-        "heading": "Before you buy",
-        "anchor_id": "before-you-buy",
-        "background": "#f5f6f7"
+        "heading": "Contact centre",
+        "background": "#eaedf0",
+        "title_colour": "#000000",
+        "text_colour": "#434548"
       }
     },
     "recommend": {
@@ -1022,7 +947,7 @@
     "faq",
     "reviews",
     "stockists",
-    "notices",
-    "recommend"
+    "recommend",
+    "notices"
   ]
 }

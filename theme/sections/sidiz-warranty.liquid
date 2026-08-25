@@ -1,93 +1,104 @@
-{{ 'sidiz-tokens.css' | asset_url | stylesheet_tag }}
-{{ 'sidiz-sections.css' | asset_url | stylesheet_tag }}
-
 {%- comment -%}
-  KR product_warranty — warranty plus product registration.
+  Port of the KR `product_warranty` section — text and registration button on
+  one side, the warranty badge image on the other, on the light page background.
+  My earlier version was a dark full-bleed panel, which is not what KR renders.
 
-  Australian Consumer Law requires that any voluntary warranty against defects
-  is accompanied by the mandatory consumer guarantees statement, and that the
-  warranty is not presented as limiting those guarantees. The ACL text is a
-  separate, always-rendered block rather than an editable setting so it cannot
-  be deleted from a product page by mistake.
+  KR structure:
+    section.section-product-warranty
+      > .container > .wrapper
+          > .wrapper--header > h2.title + .description.rich-text-area > .size-13
+                             + .btn.btn-hover--bk > a
+          > .wrapper--body > .warrenty--image > img
+
+  Australian Consumer Law note: any warranty against defects advertised in
+  Australia must carry the mandatory consumer guarantees statement. It renders
+  as fixed markup rather than an editable setting so it cannot be removed by
+  accident, and sits inside the same .description block so it inherits KR type.
 {%- endcomment -%}
 
-<section
-  class="sidiz-warranty sidiz-section"
-  style="--war-bg: {{ section.settings.background }}; --war-fg: {{ section.settings.text_colour }};"
-  id="{{ section.settings.anchor_id | default: 'warranty' | handleize }}"
->
-  {%- if section.settings.image != blank or section.settings.media_url != blank -%}
-    {% render 'sidiz-media',
-      image: section.settings.image,
-      url: section.settings.media_url,
-      alt: section.settings.alt,
-      sizes: '100vw',
-      class: 'sidiz-warranty__bg'
-    %}
-  {%- endif -%}
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-warranty.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
 
-  <div class="sidiz-container sidiz-warranty__inner">
-    {%- if section.settings.term != blank -%}
-      <p class="sidiz-warranty__term">{{ section.settings.term }}</p>
-    {%- endif -%}
-
-    {%- if section.settings.heading != blank -%}
-      <h2 class="sidiz-warranty__heading sidiz-display">{{ section.settings.heading }}</h2>
-    {%- endif -%}
-
-    {%- if section.settings.body != blank -%}
-      <div class="sidiz-warranty__body rte">{{ section.settings.body }}</div>
-    {%- endif -%}
-
-    <div class="sidiz-warranty__actions">
-      {%- if section.settings.register_link != blank -%}
-        <a class="sidiz-btn sidiz-btn--solid" href="{{ section.settings.register_link }}">
-          {{ section.settings.register_label | default: 'Register your product' }}
-        </a>
+<div class="container">
+  <div class="wrapper">
+    <div class="wrapper--header">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="title">{{ section.settings.heading }}</h2>
       {%- endif -%}
-      {%- if section.settings.policy_link != blank -%}
-        <a class="sidiz-btn sidiz-btn--ghost" href="{{ section.settings.policy_link }}">
-          {{ section.settings.policy_label | default: 'Warranty terms' }}
-        </a>
+
+      <div class="description rich-text-area">
+        {%- if section.settings.body != blank -%}
+          <div class="size-13">{{ section.settings.body }}</div>
+        {%- endif -%}
+        {%- if section.settings.note != blank -%}
+          <div class="size-13">{{ section.settings.note }}</div>
+        {%- endif -%}
+
+        {%- if section.settings.show_acl -%}
+          <div class="size-13 sidiz-acl" role="note">
+            <p>
+              Our goods come with guarantees that cannot be excluded under the Australian Consumer
+              Law. You are entitled to a replacement or refund for a major failure and compensation
+              for any other reasonably foreseeable loss or damage. You are also entitled to have the
+              goods repaired or replaced if the goods fail to be of acceptable quality and the
+              failure does not amount to a major failure.
+            </p>
+            <p>
+              This warranty is in addition to, and does not limit, exclude or modify, the rights and
+              remedies available to you under the Australian Consumer Law.
+            </p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.register_link != blank -%}
+        <div class="btn btn-hover--bk">
+          <a href="{{ section.settings.register_link }}" title="">
+            {{ section.settings.register_label | default: 'Register your product' }}
+          </a>
+        </div>
       {%- endif -%}
     </div>
 
-    {%- if section.settings.show_acl -%}
-      <div class="sidiz-warranty__acl" role="note">
-        <h3 class="sidiz-warranty__acl-heading">Your rights under the Australian Consumer Law</h3>
-        <p>
-          Our goods come with guarantees that cannot be excluded under the Australian Consumer Law.
-          You are entitled to a replacement or refund for a major failure and compensation for any
-          other reasonably foreseeable loss or damage. You are also entitled to have the goods
-          repaired or replaced if the goods fail to be of acceptable quality and the failure does
-          not amount to a major failure.
-        </p>
-        <p>
-          This warranty is in addition to, and does not limit, exclude or modify, the rights and
-          remedies available to you under the Australian Consumer Law.
-        </p>
+    {%- if section.settings.image_url != blank or section.settings.image != blank -%}
+      <div class="wrapper--body">
+        <div class="warrenty--image">
+          {%- if section.settings.image != blank -%}
+            {{
+              section.settings.image
+              | image_url: width: 1400
+              | image_tag: loading: 'lazy', widths: '700,1000,1400', alt: section.settings.alt
+            }}
+          {%- else -%}
+            <img
+              src="{{ section.settings.image_url }}?width=1400"
+              srcset="{{ section.settings.image_url }}?width=700 700w, {{ section.settings.image_url }}?width=1400 1400w"
+              sizes="(min-width: 1024px) 45vw, 90vw"
+              width="1400"
+              height="1050"
+              alt="{{ section.settings.alt | escape }}"
+              loading="lazy"
+              decoding="async"
+            >
+          {%- endif -%}
+        </div>
       </div>
     {%- endif -%}
   </div>
-</section>
+</div>
 
 {% schema %}
 {
   "name": "SIDIZ warranty",
   "tag": "section",
+  "class": "section-product-warranty",
   "settings": [
-    { "type": "text", "id": "term", "label": "Term badge", "default": "15 years" },
     { "type": "text", "id": "heading", "label": "Heading" },
     { "type": "richtext", "id": "body", "label": "Body" },
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "text", "id": "media_url", "label": "Background media URL" },
-    { "type": "text", "id": "alt", "label": "Alt text" },
-    { "type": "header", "content": "Product registration" },
-    { "type": "text", "id": "register_label", "label": "Register button label", "default": "Register your product" },
-    { "type": "url", "id": "register_link", "label": "Register page" },
-    { "type": "text", "id": "policy_label", "label": "Policy link label", "default": "Warranty terms" },
-    { "type": "url", "id": "policy_link", "label": "Warranty policy page" },
-    { "type": "header", "content": "Compliance" },
+    { "type": "richtext", "id": "note", "label": "Footnote" },
+    { "type": "text", "id": "register_label", "label": "Button label", "default": "Register your product" },
+    { "type": "url", "id": "register_link", "label": "Registration page" },
     {
       "type": "checkbox",
       "id": "show_acl",
@@ -95,9 +106,9 @@
       "default": true,
       "info": "Required by law wherever a warranty against defects is advertised. Leave this on."
     },
-    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "warranty" },
-    { "type": "color", "id": "background", "label": "Background", "default": "#242526" },
-    { "type": "color", "id": "text_colour", "label": "Text", "default": "#ffffff" }
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_url", "label": "Image URL" },
+    { "type": "text", "id": "alt", "label": "Alt text" }
   ],
   "presets": [{ "name": "SIDIZ warranty" }]
 }

@@ -1,0 +1,75 @@
+{%- comment -%}
+  Port of the KR `product_row_1_wide` section — the intro block: one centred
+  heading over a centred bulleted feature list.
+
+  KR structure:
+    section.section-product-row.row-1.wide
+      > .container#section-<id>
+          > .wrapper
+              > .wrapper--header > h1.title.align-<align>
+              > .wrapper--body > .content > .content--text
+                  > .description.rich-text-area.align-<align>
+
+  Note the H1: on the KR page this is the SEO heading, while the buy box title
+  is styled as a heading but is not the document H1.
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-row.css' | asset_url | stylesheet_tag }}
+
+{%- assign scope = 'section-' | append: section.id -%}
+
+<div id="{{ scope }}" class="container">
+  <div class="wrapper">
+    {%- if section.settings.heading != blank -%}
+      <div class="wrapper--header">
+        <h1 class="title align-{{ section.settings.align }}">{{ section.settings.heading }}</h1>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.body != blank -%}
+      <div class="wrapper--body">
+        <div class="content">
+          <div class="content--text">
+            <div class="description rich-text-area align-{{ section.settings.align }}">
+              {{ section.settings.body }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style data-shopify>
+  #{{ scope }} {
+    background-color: {{ section.settings.background }};
+    color: {{ section.settings.text_colour }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "SIDIZ product row",
+  "tag": "section",
+  "class": "section-product-row row-1 wide",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "body", "label": "Body", "info": "A bulleted list on the KR page." },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    { "type": "color", "id": "background", "label": "Background", "default": "#ffffff" },
+    { "type": "color", "id": "text_colour", "label": "Text", "default": "#000000" }
+  ],
+  "presets": [{ "name": "SIDIZ product row" }]
+}
+{% endschema %}
