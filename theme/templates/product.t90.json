@@ -3,53 +3,206 @@
     "sticky_nav": {
       "type": "sidiz-sticky-nav",
       "blocks": {
-        "n1": { "type": "link", "settings": { "label": "Ergonomics", "anchor": "ergonomics" } },
-        "n2": { "type": "link", "settings": { "label": "Armrests", "anchor": "armrests" } },
-        "n3": { "type": "link", "settings": { "label": "Tilt", "anchor": "tilt" } },
-        "n4": { "type": "link", "settings": { "label": "Comfort", "anchor": "comfort" } },
-        "n5": { "type": "link", "settings": { "label": "Materials", "anchor": "materials" } },
-        "n6": { "type": "link", "settings": { "label": "Adjustment", "anchor": "adjustment-guide" } },
-        "n7": { "type": "link", "settings": { "label": "Specifications", "anchor": "specifications" } },
-        "n8": { "type": "link", "settings": { "label": "FAQ", "anchor": "faq" } },
-        "n9": { "type": "link", "settings": { "label": "Reviews", "anchor": "reviews" } }
-      },
-      "block_order": ["n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8", "n9"],
-      "settings": { "label": "On this page", "show_buy": true, "buy_label": "Choose options" }
-    },
-
-    "pdp_head": {
-      "type": "sidiz-pdp-head",
-      "blocks": {
-        "warranty": {
-          "type": "assurance",
+        "n1": {
+          "type": "link",
           "settings": {
-            "label": "15-year warranty",
-            "detail": "with product registration. In addition to your rights under the Australian Consumer Law."
+            "label": "Ergonomics",
+            "anchor": "ergonomics"
           }
         },
-        "delivery": {
-          "type": "assurance",
+        "n2": {
+          "type": "link",
           "settings": {
-            "label": "Australia-wide delivery",
-            "detail": "Natural Leather Limited Palette is made to order."
+            "label": "Armrests",
+            "anchor": "armrests"
           }
         },
-        "repair": {
-          "type": "assurance",
+        "n3": {
+          "type": "link",
           "settings": {
-            "label": "Easy Repair",
-            "detail": "replace a single part instead of the whole chair."
+            "label": "Tilt",
+            "anchor": "tilt"
+          }
+        },
+        "n4": {
+          "type": "link",
+          "settings": {
+            "label": "Comfort",
+            "anchor": "comfort"
+          }
+        },
+        "n5": {
+          "type": "link",
+          "settings": {
+            "label": "Materials",
+            "anchor": "materials"
+          }
+        },
+        "n6": {
+          "type": "link",
+          "settings": {
+            "label": "Adjustment",
+            "anchor": "adjustment-guide"
+          }
+        },
+        "n7": {
+          "type": "link",
+          "settings": {
+            "label": "Specifications",
+            "anchor": "specifications"
+          }
+        },
+        "n8": {
+          "type": "link",
+          "settings": {
+            "label": "FAQ",
+            "anchor": "faq"
+          }
+        },
+        "n9": {
+          "type": "link",
+          "settings": {
+            "label": "Reviews",
+            "anchor": "reviews"
           }
         }
       },
-      "block_order": ["warranty", "delivery", "repair"],
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6",
+        "n7",
+        "n8",
+        "n9"
+      ],
       "settings": {
-        "eyebrow": "Performance engineered",
-        "tagline": "Whatever your posture, whatever the device, the T90 supports you — flexibly, and without interrupting your focus.",
-        "tax_note": "Price includes GST. Shipping calculated at checkout."
+        "label": "On this page",
+        "show_buy": true,
+        "buy_label": "Choose options"
       }
     },
-
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "v1": {
+          "type": "media",
+          "settings": {
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/785d235698f24e7498fb31b98af73489/785d235698f24e7498fb31b98af73489.HD-1080p-7.2Mbps-36789419.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/785d235698f24e7498fb31b98af73489.thumbnail.0000000000_small.jpg",
+            "alt": "SIDIZ T90 shown in a studio setting, rotating slowly"
+          }
+        },
+        "v2": {
+          "type": "media",
+          "settings": {
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/fa159114e82f43a0bae73474ce27b3d5/fa159114e82f43a0bae73474ce27b3d5.HD-1080p-7.2Mbps-36789420.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/fa159114e82f43a0bae73474ce27b3d5.thumbnail.0000000000_small.jpg",
+            "alt": "SIDIZ T90 in use at a desk, seen from behind"
+          }
+        },
+        "v3": {
+          "type": "media",
+          "settings": {
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/97efc5a9ffa8402994162a5947f43574/97efc5a9ffa8402994162a5947f43574.HD-1080p-7.2Mbps-36789421.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/97efc5a9ffa8402994162a5947f43574.thumbnail.0000000000_small.jpg",
+            "alt": "Close detail of the SIDIZ T90 backrest and armrest"
+          }
+        },
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Estimated delivery",
+            "value": "3–7 business days for in-stock items"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Delivery type",
+            "value": "Free standard delivery Australia-wide"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Assembly",
+            "value": "Arrives fully assembled — no assembly required"
+          }
+        },
+        "i1": {
+          "type": "info",
+          "settings": {
+            "label": "Product name",
+            "value": "SIDIZ T90 Ergonomic Office Chair"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "label": "Included",
+            "value": "Chair"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "label": "Main materials",
+            "value": "Double Raschel, natural leather, moulded foam, urethane, plastic, steel, aluminium, Aquatex fabric"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "label": "Colours",
+            "value": "Shadow Grey, Tan Brown, Cream Beige, Green Black, Grey, Black, Dry Rose, Daisy Yellow, Greyish Mint, Teal Blue, Deep Navy"
+          }
+        },
+        "i5": {
+          "type": "info",
+          "settings": {
+            "label": "Maximum load",
+            "value": "125 kg"
+          }
+        },
+        "i6": {
+          "type": "info",
+          "settings": {
+            "label": "Product weight",
+            "value": "Approx. 28.7 kg"
+          }
+        }
+      },
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "f1",
+        "f2",
+        "f3",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5",
+        "i6"
+      ],
+      "settings": {
+        "show_360": true,
+        "compare_link": "/pages/compare-models",
+        "guide_link": "/pages/user-guide",
+        "tax_note": "Price includes GST. Shipping calculated at checkout.",
+        "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
+        "addons_title": "Add to your setup",
+        "delivery_title": "Delivery",
+        "warranty_label": "Warranty",
+        "warranty_value": "15 years",
+        "notice_title": "Before you buy",
+        "notice": "<p>Natural Leather Limited Palette items are made to order and ship approximately three weeks later, including production time.</p><p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p><p>Tilt resistance can feel different depending on your body. We recommend trying the chair in person before buying where you can.</p>"
+      }
+    },
     "intro": {
       "type": "sidiz-content-row",
       "settings": {
@@ -64,7 +217,6 @@
         "text_colour": "#000000"
       }
     },
-
     "ergonomics_banner": {
       "type": "sidiz-scroll-banner",
       "settings": {
@@ -80,7 +232,6 @@
         "scrim": "rgba(0,0,0,0.35)"
       }
     },
-
     "ergonomics_cards": {
       "type": "sidiz-card-list",
       "blocks": {
@@ -119,7 +270,11 @@
           }
         }
       },
-      "block_order": ["c1", "c2", "c3"],
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
       "settings": {
         "layout": "scroll",
         "columns": 3,
@@ -128,7 +283,6 @@
         "text_colour": "#000000"
       }
     },
-
     "armrests_gallery": {
       "type": "sidiz-gallery",
       "blocks": {
@@ -160,7 +314,11 @@
           }
         }
       },
-      "block_order": ["g1", "g2", "g3"],
+      "block_order": [
+        "g1",
+        "g2",
+        "g3"
+      ],
       "settings": {
         "direction": "horizontal",
         "ratio": "16/9",
@@ -172,7 +330,6 @@
         "text_colour": "#000000"
       }
     },
-
     "tilt_banner": {
       "type": "sidiz-scroll-banner",
       "settings": {
@@ -189,7 +346,6 @@
         "scrim": "rgba(0,0,0,0.4)"
       }
     },
-
     "tilt_cards": {
       "type": "sidiz-card-list",
       "blocks": {
@@ -227,7 +383,11 @@
           }
         }
       },
-      "block_order": ["t1", "t2", "t3"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
       "settings": {
         "layout": "grid",
         "columns": 3,
@@ -236,7 +396,6 @@
         "text_colour": "#000000"
       }
     },
-
     "comfort_cards": {
       "type": "sidiz-card-list",
       "blocks": {
@@ -276,7 +435,11 @@
           }
         }
       },
-      "block_order": ["m1", "m2", "m3"],
+      "block_order": [
+        "m1",
+        "m2",
+        "m3"
+      ],
       "settings": {
         "layout": "tile",
         "columns": 3,
@@ -287,7 +450,6 @@
         "text_colour": "#000000"
       }
     },
-
     "materials": {
       "type": "sidiz-card-list",
       "blocks": {
@@ -337,7 +499,12 @@
           }
         }
       },
-      "block_order": ["mat1", "mat2", "mat3", "mat4"],
+      "block_order": [
+        "mat1",
+        "mat2",
+        "mat3",
+        "mat4"
+      ],
       "settings": {
         "layout": "grid",
         "columns": 4,
@@ -347,7 +514,6 @@
         "text_colour": "#000000"
       }
     },
-
     "leather_care": {
       "type": "sidiz-content-row",
       "settings": {
@@ -362,7 +528,6 @@
         "text_colour": "#2a1f1a"
       }
     },
-
     "in_use": {
       "type": "sidiz-gallery",
       "blocks": {
@@ -388,7 +553,11 @@
           }
         }
       },
-      "block_order": ["u1", "u2", "u3"],
+      "block_order": [
+        "u1",
+        "u2",
+        "u3"
+      ],
       "settings": {
         "direction": "horizontal",
         "ratio": "1/1",
@@ -397,7 +566,6 @@
         "text_colour": "#000000"
       }
     },
-
     "find_your_fit": {
       "type": "sidiz-find-your-fit",
       "blocks": {
@@ -452,7 +620,13 @@
           }
         }
       },
-      "block_order": ["s1", "s2", "s3", "s4", "s5"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
       "settings": {
         "eyebrow": "FIND YOUR FIT",
         "heading": "Set it up for your body",
@@ -463,7 +637,6 @@
         "background": "#f5f6f7"
       }
     },
-
     "goes_with": {
       "type": "sidiz-product-carousel",
       "settings": {
@@ -474,7 +647,6 @@
         "background": "#ffffff"
       }
     },
-
     "easy_repair": {
       "type": "sidiz-product-carousel",
       "settings": {
@@ -489,7 +661,6 @@
         "background": "#f5f6f7"
       }
     },
-
     "warranty": {
       "type": "sidiz-warranty",
       "settings": {
@@ -508,7 +679,6 @@
         "text_colour": "#ffffff"
       }
     },
-
     "specifications": {
       "type": "sidiz-spec",
       "blocks": {
@@ -526,22 +696,73 @@
             "alt": "Dimension drawing of the SIDIZ T90, side elevation"
           }
         },
-        "r1": { "type": "row", "settings": { "label": "Maximum load", "value": "125 kg" } },
-        "r2": { "type": "row", "settings": { "label": "Product weight", "value": "Approx. 28.7 kg" } },
-        "r3": { "type": "row", "settings": { "label": "Armrest adjustment", "value": "Height 70 mm · Depth 60 mm · Lateral 35° · Rotation 230°" } },
-        "r4": { "type": "row", "settings": { "label": "Headrest adjustment", "value": "Height 70 mm · Angle 65°" } },
-        "r5": { "type": "row", "settings": { "label": "Materials", "value": "Double Raschel, natural leather, moulded foam, urethane, plastic, steel, aluminium, Aquatex fabric" } },
-        "r6": { "type": "row", "settings": { "label": "Warranty", "value": "15 years with product registration" } },
-        "r7": { "type": "row", "settings": { "label": "Design award", "value": "iF Design Award 2025, office chair category" } }
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "Maximum load",
+            "value": "125 kg"
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Product weight",
+            "value": "Approx. 28.7 kg"
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Armrest adjustment",
+            "value": "Height 70 mm · Depth 60 mm · Lateral 35° · Rotation 230°"
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Headrest adjustment",
+            "value": "Height 70 mm · Angle 65°"
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "Materials",
+            "value": "Double Raschel, natural leather, moulded foam, urethane, plastic, steel, aluminium, Aquatex fabric"
+          }
+        },
+        "r6": {
+          "type": "row",
+          "settings": {
+            "label": "Warranty",
+            "value": "15 years with product registration"
+          }
+        },
+        "r7": {
+          "type": "row",
+          "settings": {
+            "label": "Design award",
+            "value": "iF Design Award 2025, office chair category"
+          }
+        }
       },
-      "block_order": ["d1", "d2", "r1", "r2", "r3", "r4", "r5", "r6", "r7"],
+      "block_order": [
+        "d1",
+        "d2",
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7"
+      ],
       "settings": {
         "heading": "Specifications",
         "anchor_id": "specifications",
         "background": "#ffffff"
       }
     },
-
     "faq": {
       "type": "sidiz-faq",
       "blocks": {
@@ -602,14 +823,22 @@
           }
         }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ],
       "settings": {
         "heading": "Frequently asked questions",
         "open_first": true,
         "background": "#f5f6f7"
       }
     },
-
     "reviews": {
       "type": "sidiz-review",
       "settings": {
@@ -619,7 +848,6 @@
         "background": "#ffffff"
       }
     },
-
     "stockists": {
       "type": "sidiz-store-info",
       "settings": {
@@ -634,7 +862,6 @@
         "background": "#f5f6f7"
       }
     },
-
     "notices": {
       "type": "sidiz-notice",
       "blocks": {
@@ -667,14 +894,18 @@
           }
         }
       },
-      "block_order": ["n1", "n2", "n3", "n4"],
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ],
       "settings": {
         "heading": "Before you buy",
         "anchor_id": "before-you-buy",
         "background": "#f5f6f7"
       }
     },
-
     "recommend": {
       "type": "sidiz-product-carousel",
       "settings": {
