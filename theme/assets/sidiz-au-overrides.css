@@ -134,3 +134,15 @@
   display: inline-block;
   line-height: inherit;
 }
+
+/* The buy-box title is an h2 so the page keeps a single h1, but it must still
+   look like the KR h1 it replaces. Values copied from
+   .product-title--wrapper h1 in section-product-configurator.css. */
+.product-title--wrapper h2.product-title {
+  margin-bottom: 0;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.6px;
+}

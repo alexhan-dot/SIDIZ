@@ -159,7 +159,13 @@
     <div class="product-text--wrapper">
       <div class="product-title--wrapper web">
         <div class="wrapper--header">
-          <h1>{{ display_title }}</h1>
+          {%- comment -%}
+            A heading, but not the page's h1. The document h1 is the descriptive
+            product title in the row below ("SIDIZ T90 Ergonomic Office Chair");
+            this one shows the model alone, which makes a weak h1 for search.
+            KR marks both as h1 — that is a fault worth not copying.
+          {%- endcomment -%}
+          <h2 class="product-title">{{ display_title }}</h2>
         </div>
         {%- if section.settings.subtitle != blank -%}
           <div class="product-configuration--desc">{{ section.settings.subtitle }}</div>
