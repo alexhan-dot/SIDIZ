@@ -1,0 +1,163 @@
+/* SIDIZ content row — replaces KR product_row_1_wide / _narrow / product_row_1 */
+
+.sidiz-row {
+  background: var(--row-bg, var(--gray-000));
+  color: var(--row-fg, var(--gray-900));
+  padding-block: var(--row-pad-block, var(--gutter-xlarge));
+}
+
+.sidiz-row__inner {
+  display: grid;
+  gap: var(--gutter-large);
+  align-items: center;
+}
+
+.sidiz-row--narrow .sidiz-row__inner {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: var(--gutter-container);
+}
+
+.sidiz-row--wide .sidiz-row__inner {
+  max-width: none;
+}
+
+/* ---- media / text split -------------------------------------------------- */
+
+@media screen and (min-width: 834px) {
+  .sidiz-row--media-left .sidiz-row__inner,
+  .sidiz-row--media-right .sidiz-row__inner {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+
+  .sidiz-row--media-right .sidiz-row__media {
+    order: 2;
+  }
+
+  .sidiz-row--wide.sidiz-row--media-left .sidiz-row__body,
+  .sidiz-row--wide.sidiz-row--media-right .sidiz-row__body {
+    padding-inline: var(--gutter-container);
+  }
+}
+
+.sidiz-row--no-media .sidiz-row__inner,
+.sidiz-row--media-above .sidiz-row__inner {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ---- media --------------------------------------------------------------- */
+
+.sidiz-row__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidiz-row__media img,
+.sidiz-row__media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidiz-row--media-background .sidiz-row__inner {
+  grid-template-columns: minmax(0, 1fr);
+  position: relative;
+}
+
+.sidiz-row--media-background .sidiz-row__media {
+  position: absolute;
+  inset: 0;
+}
+
+.sidiz-row--media-background .sidiz-row__body {
+  position: relative;
+  z-index: 1;
+  padding: var(--gutter-xlarge) var(--gutter-container);
+}
+
+/* ---- body ---------------------------------------------------------------- */
+
+.sidiz-row--text-center .sidiz-row__body {
+  text-align: center;
+}
+
+.sidiz-row__eyebrow {
+  margin: 0 0 var(--gutter-small);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sidiz-blue);
+}
+
+.sidiz-row__heading {
+  margin: 0 0 var(--gutter-regular);
+  font-size: clamp(1.75rem, 3.2vw, 3rem);
+  line-height: 1.15;
+}
+
+.sidiz-row__text {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gray-700);
+  /* English copy runs 20-40% longer than the Korean source — cap the measure
+     so ported KR layouts do not lose their rhythm. */
+  max-width: 62ch;
+}
+
+.sidiz-row--text-center .sidiz-row__text {
+  margin-inline: auto;
+}
+
+/* ---- facts --------------------------------------------------------------- */
+
+.sidiz-row__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--gutter-regular);
+  margin: var(--gutter-large) 0 0;
+  padding: 0;
+}
+
+.sidiz-row__fact dt {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+  margin-bottom: 0.25rem;
+}
+
+.sidiz-row__fact dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 500;
+}
+
+/* ---- cta ----------------------------------------------------------------- */
+
+.sidiz-row__cta {
+  display: inline-block;
+  margin-top: var(--gutter-large);
+  padding: var(--button-padding);
+  min-width: 200px;
+  text-align: center;
+  background: var(--sidiz-blue);
+  color: var(--gray-000);
+  text-decoration: none;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.sidiz-row__cta:hover {
+  background: var(--light-blue);
+}
+
+@media screen and (max-width: 833px) {
+  .sidiz-row__inner {
+    gap: var(--gutter-regular);
+  }
+
+  .sidiz-row--wide .sidiz-row__body {
+    padding-inline: var(--gutter-container);
+  }
+}
