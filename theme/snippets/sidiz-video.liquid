@@ -1,0 +1,64 @@
+{%- comment -%}
+  One background video, emitted the same way everywhere on the page.
+
+  Two things this fixes versus the Korean markup:
+
+  1. Poster resolution. KR points at the `_small` preview frame, which is about
+     3 KB and visibly soft — and it is what the visitor looks at until the video
+     is playing. This upgrades it to the 1024px rendition (~90 KB), or the full
+     frame for the hero.
+
+  2. Loading. The KR page starts fetching every video at once. With a dozen
+     background videos competing, the one on screen arrives last and stalls,
+     which reads as bad quality. Here the source is held in data-src and
+     attached by sidiz-video.js only as the video nears the viewport, so the
+     visible video gets the bandwidth.
+
+  Accepts:
+    url     - mp4 URL (required)
+    poster  - poster image URL
+    alt     - describes the footage, used as aria-label
+    classes - extra classes, e.g. 'web' / 'mobile'
+    eager   - true for the hero video only
+    size    - poster rendition: 'full' | '1024' (default)
+{%- endcomment -%}
+
+{%- liquid
+  assign poster_url = poster
+
+  # KR serves preview frames as <name>.thumbnail.<n>_small.jpg. The suffix is
+  # what makes it tiny, so swap it for a usable rendition.
+  if poster_url contains '_small.'
+    assign wanted = '_1024x.'
+    if size == 'full'
+      assign wanted = '.'
+    endif
+    assign poster_url = poster_url | replace: '_small.', wanted
+  endif
+
+  assign is_eager = false
+  if eager == true or eager == 'true'
+    assign is_eager = true
+  endif
+-%}
+
+{%- if url != blank -%}
+  <video
+    data-sidiz-video
+    {% if is_eager %}data-eager="true"{% endif %}
+    class="{{ classes }}"
+    playsinline="playsinline"
+    autoplay="autoplay"
+    loop="loop"
+    muted="muted"
+    preload="none"
+    disableremoteplayback
+    {% if poster_url != blank %}poster="{{ poster_url }}"{% endif %}
+    {% if alt != blank %}aria-label="{{ alt | escape }}"{% endif %}
+  >
+    <source data-src="{{ url }}" type="video/mp4">
+    {%- if poster_url != blank -%}
+      <img src="{{ poster_url }}" alt="{{ alt | escape }}" loading="lazy" decoding="async">
+    {%- endif -%}
+  </video>
+{%- endif -%}

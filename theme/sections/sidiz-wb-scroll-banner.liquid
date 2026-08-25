@@ -19,6 +19,7 @@
 {%- endcomment -%}
 
 {{ 'theme.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-video.js' | asset_url }}" defer="defer"></script>
 {{ 'section-product-wb-scroll.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'section-product-wb-scroll.js' | asset_url }}" defer="defer"></script>
 
@@ -39,41 +40,11 @@
   <div class="container--body">
     <div class="wrapper--background">
       {%- if section.settings.video_url != blank -%}
-        <video
-          playsinline="playsinline"
-          class="web"
-          autoplay="autoplay"
-          loop="loop"
-          muted="muted"
-          preload="metadata"
-          loading="lazy"
-          {% if section.settings.alt != blank %}aria-label="{{ section.settings.alt | escape }}"{% endif %}
-          {% if section.settings.poster_url != blank %}poster="{{ section.settings.poster_url }}"{% endif %}
-        >
-          <source src="{{ section.settings.video_url }}" type="video/mp4">
-          {%- if section.settings.poster_url != blank -%}
-            <img alt="{{ section.settings.alt | escape }}" src="{{ section.settings.poster_url }}">
-          {%- endif -%}
-        </video>
+        {% render 'sidiz-video', url: section.settings.video_url, poster: section.settings.poster_url, alt: section.settings.alt, classes: 'web', eager: true, size: 'full' %}
       {%- endif -%}
 
       {%- if section.settings.video_url_mobile != blank -%}
-        <video
-          playsinline="playsinline"
-          class="mobile"
-          autoplay="autoplay"
-          loop="loop"
-          muted="muted"
-          preload="metadata"
-          loading="lazy"
-          {% if section.settings.alt != blank %}aria-label="{{ section.settings.alt | escape }}"{% endif %}
-          {% if section.settings.poster_url_mobile != blank %}poster="{{ section.settings.poster_url_mobile }}"{% endif %}
-        >
-          <source src="{{ section.settings.video_url_mobile }}" type="video/mp4">
-          {%- if section.settings.poster_url_mobile != blank -%}
-            <img alt="{{ section.settings.alt | escape }}" src="{{ section.settings.poster_url_mobile }}">
-          {%- endif -%}
-        </video>
+        {% render 'sidiz-video', url: section.settings.video_url_mobile, poster: section.settings.poster_url_mobile, alt: section.settings.alt, classes: 'mobile', size: 'full' %}
       {%- endif -%}
     </div>
 

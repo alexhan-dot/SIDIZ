@@ -17,6 +17,7 @@
 {%- endcomment -%}
 
 {{ 'theme.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-video.js' | asset_url }}" defer="defer"></script>
 {{ 'section-product-wb-scroll.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'section-product-wb-scroll.js' | asset_url }}" defer="defer"></script>
 
@@ -29,21 +30,7 @@
         <div class="card--content">
           <div class="card--media">
             {%- if block.settings.video_url != blank -%}
-              <video
-                playsinline="playsinline"
-                autoplay="autoplay"
-                loop="loop"
-                muted="muted"
-                preload="metadata"
-                loading="lazy"
-                {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
-                {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
-              >
-                <source src="{{ block.settings.video_url }}" type="video/mp4">
-                {%- if block.settings.poster_url != blank -%}
-                  <img alt="{{ block.settings.alt | escape }}" src="{{ block.settings.poster_url }}">
-                {%- endif -%}
-              </video>
+              {% render 'sidiz-video', url: block.settings.video_url, poster: block.settings.poster_url, alt: block.settings.alt, size: '1024' %}
             {%- elsif block.settings.image_url != blank -%}
               <img
                 src="{{ block.settings.image_url }}?width=1200"

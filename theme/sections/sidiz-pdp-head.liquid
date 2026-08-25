@@ -21,6 +21,7 @@
   configurator sheet last is what lets the chips wrap inside the 420px sidebar.
 {%- endcomment -%}
 {{ 'theme.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'sidiz-video.js' | asset_url }}" defer="defer"></script>
 {{ 'component-product-variants.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-item.css' | asset_url | stylesheet_tag }}
 {{ 'section-product-configurator.css' | asset_url | stylesheet_tag }}
@@ -85,17 +86,7 @@
         {%- for block in gallery -%}
           <div class="product-media--item" {{ block.shopify_attributes }}>
             {%- if block.settings.video_url != blank -%}
-              <video
-                autoplay
-                loop
-                muted
-                playsinline
-                preload="metadata"
-                {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
-                {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
-              >
-                <source src="{{ block.settings.video_url }}" type="video/mp4">
-              </video>
+              {% render 'sidiz-video', url: block.settings.video_url, poster: block.settings.poster_url, alt: block.settings.alt, size: '1024' %}
             {%- elsif block.settings.image != blank -%}
               {{
                 block.settings.image
@@ -147,17 +138,7 @@
           {%- for block in gallery -%}
             <div class="product-media--item swiper-slide">
               {%- if block.settings.video_url != blank -%}
-                <video
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  preload="metadata"
-                  {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
-                  {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
-                >
-                  <source src="{{ block.settings.video_url }}" type="video/mp4">
-                </video>
+                {% render 'sidiz-video', url: block.settings.video_url, poster: block.settings.poster_url, alt: block.settings.alt, size: '1024' %}
               {%- elsif block.settings.image_url != blank -%}
                 <img
                   src="{{ block.settings.image_url }}?width=900"
