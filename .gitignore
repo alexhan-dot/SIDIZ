@@ -1,0 +1,57 @@
+# ---------------------------------------------------------------
+# SECRETS — this repository is PUBLIC. Never commit credentials.
+# ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+credentials*
+*token*
+!**/tokenizer*
+*.secret
+shopify.app*.toml
+.shopify/
+
+# Shopify CLI
+.shopifyignore
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Build output
+dist/
+build/
+.cache/
+.tmp/
+
+# Downloaded media (large binaries — keep out of git, track via manifest)
+assets-raw/
+media/
+*.mp4
+*.mov
+*.webm
+*.psd
+*.ai
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+
+# Scratch
+scratch/
+tmp/
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
