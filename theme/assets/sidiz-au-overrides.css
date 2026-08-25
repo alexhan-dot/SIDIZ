@@ -74,14 +74,23 @@
   margin: 0;
 }
 
-/* Variant values that cannot combine with the current selection. */
-.product-variant__input:disabled + .product-variant__label {
-  opacity: 0.35;
-  cursor: not-allowed;
+/* Unreachable variant values.
+
+   The KR rule targets the input, which is already display:none here, so the
+   whole item is hidden instead — same visible result as kr.sidiz.com, where
+   selecting a leather leaves only the leather colours on screen. */
+.product-variants--hide-unavailable .product-variant__item--radio:has(input.disabled) {
+  display: none;
 }
 
-.product-variant__input:disabled + .product-variant__label .option-name {
-  text-decoration: line-through;
+/* Fallback for browsers without :has() — grey the value out rather than
+   hiding it, so it is still obvious that it cannot be chosen. */
+@supports not selector(:has(*)) {
+  .product-variant__input.disabled + .product-variant__label {
+    opacity: 0.22;
+    text-decoration: line-through;
+    cursor: default;
+  }
 }
 
 .product-variant__input:focus-visible + .product-variant__label {

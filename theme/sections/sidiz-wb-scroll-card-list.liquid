@@ -1,0 +1,137 @@
+{%- comment -%}
+  Port of the KR `product_wb_scroll_card_list` section, built from its actual
+  rendered HTML rather than from reading the stylesheet.
+
+  This section must sit directly after a SIDIZ WB scroll banner. The Korean
+  script (section-product-wb-scroll.js) reads this section's
+  previousElementSibling and, when it is the banner, stretches the banner's
+  .wrapper--sticky to span both. That is what pins the banner text while these
+  cards scroll past and the background video keeps playing.
+
+  Colours come from per-section and per-block <style data-shopify> blocks, the
+  same way KR does it:
+    .section-<id>                      background-color  (the black panel)
+    .block-<id> .card--text .title     colour
+    .block-<id> .card--text .description colour
+    mobile only: the banner's .wrapper--sticky also takes the background
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-wb-scroll.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-product-wb-scroll.js' | asset_url }}" defer="defer"></script>
+
+{%- assign scope = 'section-' | append: section.id -%}
+
+<div class="container {{ scope }}">
+  <div class="wrapper--card-list">
+    {%- for block in section.blocks -%}
+      <div class="card--item block-{{ block.id }}" {{ block.shopify_attributes }}>
+        <div class="card--content">
+          <div class="card--media">
+            {%- if block.settings.video_url != blank -%}
+              <video
+                playsinline="playsinline"
+                autoplay="autoplay"
+                loop="loop"
+                muted="muted"
+                preload="metadata"
+                loading="lazy"
+                {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
+                {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
+              >
+                <source src="{{ block.settings.video_url }}" type="video/mp4">
+                {%- if block.settings.poster_url != blank -%}
+                  <img alt="{{ block.settings.alt | escape }}" src="{{ block.settings.poster_url }}">
+                {%- endif -%}
+              </video>
+            {%- elsif block.settings.image_url != blank -%}
+              <img
+                src="{{ block.settings.image_url }}?width=1200"
+                srcset="{{ block.settings.image_url }}?width=600 600w, {{ block.settings.image_url }}?width=1200 1200w"
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                width="1200"
+                height="900"
+                alt="{{ block.settings.alt | escape }}"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- elsif block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', widths: '600,900,1200', alt: block.settings.alt
+              }}
+            {%- endif -%}
+          </div>
+
+          <div class="card--text">
+            {%- if block.settings.title != blank -%}
+              <div class="title">{{ block.settings.title }}</div>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <div class="description rich-text-area">{{ block.settings.description }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <style data-shopify>
+        .block-{{ block.id }} .card--text .title { color: {{ block.settings.title_colour }}; }
+        .block-{{ block.id }} .card--text .description { color: {{ block.settings.description_colour }}; }
+      </style>
+    {%- endfor -%}
+  </div>
+
+  <style data-shopify>
+    .{{ scope }} .title { margin: 0; padding: 0; }
+    .{{ scope }} { background-color: {{ section.settings.background }}; }
+    @media screen and (max-width: 1023px) {
+      .section-product-wb-scroll-banner .container--body .wrapper--sticky {
+        background-color: {{ section.settings.background }};
+      }
+    }
+  </style>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ WB scroll cards",
+  "tag": "section",
+  "class": "section-product-wb-scroll-card-list",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Place this directly after a SIDIZ WB scroll banner. The banner's text stays pinned over this panel while the cards scroll past."
+    },
+    { "type": "color", "id": "background", "label": "Panel background", "default": "#000000" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "color", "id": "title_colour", "label": "Title colour", "default": "#ffffff" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        {
+          "type": "color",
+          "id": "description_colour",
+          "label": "Description colour",
+          "default": "#a4aab0"
+        },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_url", "label": "Image URL" },
+        { "type": "text", "id": "video_url", "label": "Video URL" },
+        { "type": "text", "id": "poster_url", "label": "Video poster URL" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SIDIZ WB scroll cards",
+      "blocks": [{ "type": "card" }, { "type": "card" }, { "type": "card" }]
+    }
+  ]
+}
+{% endschema %}

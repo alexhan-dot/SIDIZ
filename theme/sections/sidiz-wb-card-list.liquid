@@ -1,0 +1,110 @@
+{%- comment -%}
+  Port of the KR `product_wb_card_list` section.
+
+  KR structure:
+    .container > .wrapper--card-list
+                   > .card--item > .card--content
+                       > .card--media > video
+                       > .card--text.align-left > h3.title + .description.rich-text-area
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-wb.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
+
+<div class="container">
+  {%- if section.settings.heading != blank -%}
+    <div class="container--header">
+      <h2 class="title">{{ section.settings.heading }}</h2>
+    </div>
+  {%- endif -%}
+
+  <div class="wrapper--card-list">
+    {%- for block in section.blocks -%}
+      <div class="card--item" {{ block.shopify_attributes }}>
+        <div class="card--content">
+          <div class="card--media">
+            {%- if block.settings.video_url != blank -%}
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="metadata"
+                {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
+                {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
+              >
+                <source src="{{ block.settings.video_url }}" type="video/mp4">
+              </video>
+            {%- elsif block.settings.image_url != blank -%}
+              <img
+                src="{{ block.settings.image_url }}?width=1200"
+                srcset="{{ block.settings.image_url }}?width=600 600w, {{ block.settings.image_url }}?width=1200 1200w"
+                sizes="(min-width: 1024px) 33vw, 90vw"
+                width="1200"
+                height="900"
+                alt="{{ block.settings.alt | escape }}"
+                loading="lazy"
+                decoding="async"
+              >
+            {%- elsif block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 1200
+                | image_tag: loading: 'lazy', widths: '600,900,1200', alt: block.settings.alt
+              }}
+            {%- endif -%}
+          </div>
+
+          <div class="card--text align-{{ block.settings.align }}">
+            {%- if block.settings.title != blank -%}
+              <h3 class="title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.description != blank -%}
+              <div class="description rich-text-area">{{ block.settings.description }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ WB card list",
+  "tag": "div",
+  "class": "section-product-wb-card-list",
+  "settings": [
+    { "type": "html", "id": "heading", "label": "Heading" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "description", "label": "Description" },
+        {
+          "type": "select",
+          "id": "align",
+          "label": "Text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Centre" }
+          ],
+          "default": "left"
+        },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_url", "label": "Image URL" },
+        { "type": "text", "id": "video_url", "label": "Video URL" },
+        { "type": "text", "id": "poster_url", "label": "Video poster URL" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "SIDIZ WB card list", "blocks": [{ "type": "card" }, { "type": "card" }] }
+  ]
+}
+{% endschema %}

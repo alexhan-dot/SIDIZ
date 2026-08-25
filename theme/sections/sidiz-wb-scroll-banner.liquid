@@ -1,0 +1,143 @@
+{%- comment -%}
+  Port of the KR `product_wb_scroll_banner` section.
+
+  Built from the section's actual rendered HTML (data/products/t90/sections/),
+  not from reading its stylesheet. That matters: the KR theme scopes a
+  per-section <style data-shopify> block to a unique `section-<id>` class on
+  .container, and the text colours live there rather than in any of the shared
+  stylesheets. Reproducing only the external CSS gives the right layout with the
+  wrong colours.
+
+  KR structure:
+    section.section-product-wb-scroll-banner
+      > .container.section-<id>
+          > .container--header > h2.title
+          > .container--body
+              > .wrapper--background > video.web + video.mobile
+              > .wrapper--sticky > .content--text
+                  > .tag + h3.title + .description.rich-text-area > .size-18
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-wb-scroll.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-product-wb-scroll.js' | asset_url }}" defer="defer"></script>
+
+{%- assign scope = 'section-' | append: section.id -%}
+
+<div class="container {{ scope }}">
+  {%- if section.settings.heading != blank -%}
+    <div class="container--header">
+      <h2 class="title">{{ section.settings.heading }}</h2>
+    </div>
+  {%- endif -%}
+
+  <style data-shopify>
+    .{{ scope }} .title { margin: 0; padding: 0; }
+    .{{ scope }} .container--header .title { color: {{ section.settings.heading_colour }}; }
+  </style>
+
+  <div class="container--body">
+    <div class="wrapper--background">
+      {%- if section.settings.video_url != blank -%}
+        <video
+          playsinline="playsinline"
+          class="web"
+          autoplay="autoplay"
+          loop="loop"
+          muted="muted"
+          preload="metadata"
+          loading="lazy"
+          {% if section.settings.alt != blank %}aria-label="{{ section.settings.alt | escape }}"{% endif %}
+          {% if section.settings.poster_url != blank %}poster="{{ section.settings.poster_url }}"{% endif %}
+        >
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+          {%- if section.settings.poster_url != blank -%}
+            <img alt="{{ section.settings.alt | escape }}" src="{{ section.settings.poster_url }}">
+          {%- endif -%}
+        </video>
+      {%- endif -%}
+
+      {%- if section.settings.video_url_mobile != blank -%}
+        <video
+          playsinline="playsinline"
+          class="mobile"
+          autoplay="autoplay"
+          loop="loop"
+          muted="muted"
+          preload="metadata"
+          loading="lazy"
+          {% if section.settings.alt != blank %}aria-label="{{ section.settings.alt | escape }}"{% endif %}
+          {% if section.settings.poster_url_mobile != blank %}poster="{{ section.settings.poster_url_mobile }}"{% endif %}
+        >
+          <source src="{{ section.settings.video_url_mobile }}" type="video/mp4">
+          {%- if section.settings.poster_url_mobile != blank -%}
+            <img alt="{{ section.settings.alt | escape }}" src="{{ section.settings.poster_url_mobile }}">
+          {%- endif -%}
+        </video>
+      {%- endif -%}
+    </div>
+
+    <div class="wrapper--sticky">
+      <div class="content--text">
+        {%- if section.settings.tag != blank -%}
+          <div class="tag">{{ section.settings.tag }}</div>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <h3 class="title">{{ section.settings.subheading }}</h3>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="description rich-text-area">
+            <div class="size-18">{{ section.settings.description }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <style data-shopify>
+    .{{ scope }} .container--body .content--text .tag {
+      color: {{ section.settings.tag_colour }};
+      background-color: {{ section.settings.tag_background }};
+    }
+    .{{ scope }} .container--body .content--text .title { color: {{ section.settings.text_colour }}; }
+    .{{ scope }} .container--body .content--text .description { color: {{ section.settings.text_colour }}; }
+    @media screen and (max-width: 1023px) {
+      .{{ scope }} .container--body .content--text .tag {
+        color: {{ section.settings.tag_colour }};
+        background-color: {{ section.settings.tag_background }};
+      }
+      .{{ scope }} .container--body .content--text .title { color: {{ section.settings.text_colour }}; }
+      .{{ scope }} .container--body .content--text .description { color: {{ section.settings.text_colour }}; }
+    }
+  </style>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ WB scroll banner",
+  "tag": "section",
+  "class": "section-product-wb-scroll-banner",
+  "settings": [
+    { "type": "html", "id": "heading", "label": "Heading", "info": "Use <br> for the line break." },
+    { "type": "color", "id": "heading_colour", "label": "Heading colour", "default": "#000000" },
+    { "type": "text", "id": "tag", "label": "Tag" },
+    { "type": "color", "id": "tag_colour", "label": "Tag text colour", "default": "#000000" },
+    { "type": "color", "id": "tag_background", "label": "Tag background", "default": "#eaedf0" },
+    { "type": "html", "id": "subheading", "label": "Sub-heading" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    {
+      "type": "color",
+      "id": "text_colour",
+      "label": "Sub-heading and description colour",
+      "default": "#ffffff"
+    },
+    { "type": "header", "content": "Media" },
+    { "type": "text", "id": "video_url", "label": "Video URL (desktop)" },
+    { "type": "text", "id": "poster_url", "label": "Poster URL (desktop)" },
+    { "type": "text", "id": "video_url_mobile", "label": "Video URL (mobile)" },
+    { "type": "text", "id": "poster_url_mobile", "label": "Poster URL (mobile)" },
+    { "type": "text", "id": "alt", "label": "Alt text" }
+  ],
+  "presets": [{ "name": "SIDIZ WB scroll banner" }]
+}
+{% endschema %}

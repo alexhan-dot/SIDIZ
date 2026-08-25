@@ -1,0 +1,128 @@
+{%- comment -%}
+  Port of the KR `product_wb_banner` section — a full-bleed video or image with
+  the tag / title / description block positioned over it.
+
+  KR structure:
+    .container > .container--body.align-<h>.align-vertical-<v>
+                   > .wrapper--background > video.web + video.mobile
+                   > .wrapper--text > .tag + .title + .description.rich-text-area
+{%- endcomment -%}
+
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-wb.css' | asset_url | stylesheet_tag }}
+{{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
+
+<div class="container">
+  <div class="container--body align-{{ section.settings.align }} align-vertical-{{ section.settings.align_vertical }}">
+    <div class="wrapper--background">
+      {%- if section.settings.video_url != blank -%}
+        <video
+          class="web"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          {% if section.settings.poster_url != blank %}poster="{{ section.settings.poster_url }}"{% endif %}
+          {% if section.settings.alt != blank %}aria-label="{{ section.settings.alt | escape }}"{% endif %}
+        >
+          <source src="{{ section.settings.video_url }}" type="video/mp4">
+        </video>
+      {%- elsif section.settings.image_url != blank -%}
+        <img
+          class="web"
+          src="{{ section.settings.image_url }}?width=2000"
+          sizes="100vw"
+          width="2000"
+          height="1125"
+          alt="{{ section.settings.alt | escape }}"
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
+
+      {%- if section.settings.video_url_mobile != blank -%}
+        <video
+          class="mobile"
+          autoplay
+          loop
+          muted
+          playsinline
+          preload="metadata"
+          {% if section.settings.poster_url_mobile != blank %}poster="{{ section.settings.poster_url_mobile }}"{% endif %}
+          {% if section.settings.alt != blank %}aria-label="{{ section.settings.alt | escape }}"{% endif %}
+        >
+          <source src="{{ section.settings.video_url_mobile }}" type="video/mp4">
+        </video>
+      {%- elsif section.settings.image_url_mobile != blank -%}
+        <img
+          class="mobile"
+          src="{{ section.settings.image_url_mobile }}?width=1200"
+          sizes="100vw"
+          width="1200"
+          height="2133"
+          alt="{{ section.settings.alt | escape }}"
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
+    </div>
+
+    <div class="wrapper--text" style="--wb-fg: {{ section.settings.text_colour }};">
+      {%- if section.settings.tag != blank -%}
+        <div class="tag">{{ section.settings.tag }}</div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <div class="title">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="description rich-text-area">{{ section.settings.description }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SIDIZ WB banner",
+  "tag": "div",
+  "class": "section-product-wb-banner",
+  "settings": [
+    { "type": "text", "id": "tag", "label": "Tag" },
+    { "type": "html", "id": "heading", "label": "Heading", "info": "Use <br> for line breaks." },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Horizontal position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Centre" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "align_vertical",
+      "label": "Vertical position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "bottom"
+    },
+    { "type": "color", "id": "text_colour", "label": "Text colour", "default": "#ffffff" },
+    { "type": "header", "content": "Media" },
+    { "type": "text", "id": "video_url", "label": "Video URL (desktop)" },
+    { "type": "text", "id": "poster_url", "label": "Poster URL (desktop)" },
+    { "type": "text", "id": "image_url", "label": "Image URL (desktop)" },
+    { "type": "text", "id": "video_url_mobile", "label": "Video URL (mobile)" },
+    { "type": "text", "id": "poster_url_mobile", "label": "Poster URL (mobile)" },
+    { "type": "text", "id": "image_url_mobile", "label": "Image URL (mobile)" },
+    { "type": "text", "id": "alt", "label": "Alt text" }
+  ],
+  "presets": [{ "name": "SIDIZ WB banner" }]
+}
+{% endschema %}

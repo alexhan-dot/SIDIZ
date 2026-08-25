@@ -173,6 +173,86 @@
             "label": "Product weight",
             "value": "Approx. 28.7 kg"
           }
+        },
+        "spin4b1lmn": {
+          "type": "spin",
+          "settings": {
+            "colour": "Grey",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B1LMN_00_5fa353f4-3398-4a37-843a-a67954b9025e.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B1LMN_01_5c7dd759-b2ae-4645-8e0a-d57b003e6c06.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B1LMN_02_d9182688-4af2-4ebc-bd62-b742fec424c1.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B1LMN_03_e90bb483-8424-404c-80ab-9f3005907bbc.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B1LMN_04_2b0ea236-daa6-4d12-ba0a-cb2994dbdf30.jpg",
+            "alt": "SIDIZ T90 in Grey, rotated view"
+          }
+        },
+        "spin4b6bkm": {
+          "type": "spin",
+          "settings": {
+            "colour": "Black",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B6BKM_00_a262fc90-0a87-42eb-98c7-67773473fab9.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B6BKM_01_39c48bb3-00fd-4936-95bd-0993115939ed.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B6BKM_02_b829aa20-62b7-46cf-849b-35eab66d88a9.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B6BKM_03_77baff95-f408-41ca-9120-99b6de264a27.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_4B6BKM_04_115f5811-1d50-4c9e-93b8-e955a29a9398.jpg",
+            "alt": "SIDIZ T90 in Black, rotated view"
+          }
+        },
+        "spinaquatex": {
+          "type": "spin",
+          "settings": {
+            "colour": "Cream Beige",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_Aquatex___00_2b7d948f-12bf-42ea-b283-2d49b5cb5944.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_Aquatex___01_874e83e3-dc86-4bf2-a06a-c9298b887567.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_Aquatex___02_83e5be06-8389-4d7e-bf41-b101019e6d2f.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_Aquatex___03_4f9d8900-186b-4336-88a0-4ebe701b1c43.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_Aquatex___04_ec6bfd2a-efb8-4826-8957-90f75f906037.jpg",
+            "alt": "SIDIZ T90 in Cream Beige, rotated view"
+          }
+        },
+        "spinl734ac": {
+          "type": "spin",
+          "settings": {
+            "colour": "Deep Navy",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_L734AC__00_1b493144-0e67-4f8a-84cc-506276b38efb.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734AC__01_7db4873d-6f09-4fa5-bc85-19a6b3965b1f.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734AC__02_e0204b4b-09cb-4e34-b16c-d5c094414b89.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734AC__03_a68b2e9c-6e34-450d-9f3c-8907651760c6.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734AC__04_acc1534a-1ec8-4b6f-9a32-ac0802e2f505.jpg",
+            "alt": "SIDIZ T90 in Deep Navy, rotated view"
+          }
+        },
+        "spinl734cr": {
+          "type": "spin",
+          "settings": {
+            "colour": "Teal Blue",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_L734CR__00_f3f9e771-ed94-482a-90e6-6e0007dd5ef5.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734CR__01_83c42ca8-88b0-4678-9407-42587faf3cf7.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734CR__02_621530e7-82a7-4eed-af3e-1ebdd4c670ff.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734CR__03_c318cbe9-e37d-4e7a-adbf-31d8dc1ef06c.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L734CR__04_271efab3-f283-4e0b-a16d-a9df72aa5dad.jpg",
+            "alt": "SIDIZ T90 in Teal Blue, rotated view"
+          }
+        },
+        "spinl735lc": {
+          "type": "spin",
+          "settings": {
+            "colour": "Daisy Yellow",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_L735LC__00_59a2f4a2-6bb9-40f9-a9de-ba6299fc0cc6.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L735LC__01_fa66a56d-eae5-48ca-a4cd-035843bc4ab3.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L735LC__02_5f46332d-6db1-418c-9f7b-77f642d7eedf.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L735LC__03_9a58f101-db12-4aa4-8758-31baf5e6b922.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L735LC__04_360047be-67a6-4a07-8888-7220734a53d5.jpg",
+            "alt": "SIDIZ T90 in Daisy Yellow, rotated view"
+          }
+        },
+        "spinl738ac": {
+          "type": "spin",
+          "settings": {
+            "colour": "Dry Rose",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_L738AC__00_f839fc12-fdfa-4a8e-af6d-3c0200b2b0eb.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L738AC__01_2c4778bb-a471-40f0-8c85-d07e1e4c0abb.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L738AC__02_929374e9-b74b-430f-a347-835dee451c99.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L738AC__03_be705d51-47b5-41ee-86b9-fe1cfc98a948.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L738AC__04_cb3308f7-e661-4ebb-8bfe-513cf51ff20e.jpg",
+            "alt": "SIDIZ T90 in Dry Rose, rotated view"
+          }
+        },
+        "spinl744ac": {
+          "type": "spin",
+          "settings": {
+            "colour": "Greyish Mint",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_L744AC__00_7f95ccdf-7f0d-4f50-868f-90c8ce9858f3.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L744AC__01_a0ae073b-8ac0-45ee-a6bf-10a6303f3155.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L744AC__02_8b57ee80-41db-48f1-959b-2d2026c627aa.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L744AC__03_d04b3316-f562-4e9f-b931-ac878bc2f61f.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_L744AC__04_e94dfab9-062f-4d12-94e8-89c4e984cc86.jpg",
+            "alt": "SIDIZ T90 in Greyish Mint, rotated view"
+          }
+        },
+        "spinl941ac": {
+          "type": "spin",
+          "settings": {
+            "colour": "Shadow Grey",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L941AC_00_52baf25e-75d0-44a6-ab32-2d0e83d5ef96.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L941AC_01_05952aa3-c003-4307-9a94-0d39e2fb0cbe.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L941AC_02_f0434eba-cf61-4010-a1a4-7d9df9af47b2.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L941AC_03_3fb5cde8-a029-4672-a0ee-39cc0f9dc2d1.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L941AC_04_4ae79155-07eb-4584-8642-1e7284b2c95a.jpg",
+            "alt": "SIDIZ T90 in Shadow Grey, rotated view"
+          }
+        },
+        "spinl945ac": {
+          "type": "spin",
+          "settings": {
+            "colour": "Tan Brown",
+            "frames": "https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_00_69f278c1-8606-4a52-82bd-b48cee9a1463.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_01_4ec6f143-e80a-47f1-99cb-400b7b74222a.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_02_521f988f-575b-4f18-81b4-abc98d902b7a.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_03_e216758a-20f2-4726-b7f8-dec11c8cdaae.jpg,https://kr.sidiz.com/cdn/shop/files/thum_T90_T90HLDA1KK_L945AC_04_f364d6a8-58b9-4f51-8658-85ff9ff81741.jpg",
+            "alt": "SIDIZ T90 in Tan Brown, rotated view"
+          }
         }
       },
       "block_order": [
@@ -187,7 +267,17 @@
         "i3",
         "i4",
         "i5",
-        "i6"
+        "i6",
+        "spin4b1lmn",
+        "spin4b6bkm",
+        "spinaquatex",
+        "spinl734ac",
+        "spinl734cr",
+        "spinl735lc",
+        "spinl738ac",
+        "spinl744ac",
+        "spinl941ac",
+        "spinl945ac"
       ],
       "settings": {
         "show_360": true,
@@ -200,7 +290,9 @@
         "warranty_label": "Warranty",
         "warranty_value": "15 years",
         "notice_title": "Before you buy",
-        "notice": "<p>Natural Leather Limited Palette items are made to order and ship approximately three weeks later, including production time.</p><p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p><p>Tilt resistance can feel different depending on your body. We recommend trying the chair in person before buying where you can.</p>"
+        "notice": "<p>Natural Leather Limited Palette items are made to order and ship approximately three weeks later, including production time.</p><p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p><p>Tilt resistance can feel different depending on your body. We recommend trying the chair in person before buying where you can.</p>",
+        "display_title": "T90",
+        "subtitle": "Whatever your posture, whatever the device, the T90 supports you."
       }
     },
     "intro": {
@@ -218,55 +310,51 @@
       }
     },
     "ergonomics_banner": {
-      "type": "sidiz-scroll-banner",
+      "type": "sidiz-wb-scroll-banner",
       "settings": {
-        "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f4fa01b56d86461cb0e5ac85b06cf5a4/f4fa01b56d86461cb0e5ac85b06cf5a4.HD-1080p-7.2Mbps-36706544.mp4",
+        "heading": "Optimised for performance<br>PROGRESSIVE MOVEMENT",
+        "tag": "Change posture without breaking focus",
+        "subheading": "Ergonomic design that responds<br>to how you move",
+        "description": "<p>Designed so your concentration holds even when your posture drifts through a long stretch of work.</p><p>Twist your upper body or lean to one side and the T90 responds smoothly, keeping your back and lower back supported.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f4fa01b56d86461cb0e5ac85b06cf5a4/f4fa01b56d86461cb0e5ac85b06cf5a4.HD-1080p-7.2Mbps-36706544.mp4",
         "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/f4fa01b56d86461cb0e5ac85b06cf5a4.thumbnail.0000000000_small.jpg",
-        "alt": "SIDIZ T90 responding as the sitter shifts posture",
-        "eyebrow": "Optimised for performance",
-        "heading": "Change posture without breaking focus",
-        "body": "<p>Designed so your concentration holds even when your posture drifts through a long stretch of work. Twist your upper body or lean to one side and the T90 responds smoothly, keeping your back and lower back supported.</p>",
-        "scroll_length": 200,
-        "anchor_id": "ergonomics",
-        "text_colour": "#ffffff",
-        "scrim": "rgba(0,0,0,0.35)"
+        "video_url_mobile": "https://kr.sidiz.com/cdn/shop/videos/c/vp/fac91c41ce534f4483c545eb022e0bfa/fac91c41ce534f4483c545eb022e0bfa.HD-1080p-7.2Mbps-36941802.mp4",
+        "poster_url_mobile": "https://kr.sidiz.com/cdn/shop/files/preview_images/fac91c41ce534f4483c545eb022e0bfa.thumbnail.0000000000_small.jpg",
+        "alt": "SIDIZ T90 responding as the sitter shifts posture"
       }
     },
     "ergonomics_cards": {
-      "type": "sidiz-card-list",
+      "type": "sidiz-wb-scroll-card-list",
       "blocks": {
         "c1": {
           "type": "card",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/9f691510fc054903b2ea38f1a54a49de/9f691510fc054903b2ea38f1a54a49de.HD-720p-4.5Mbps-36706916.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/9f691510fc054903b2ea38f1a54a49de.thumbnail.0000000000_small.jpg",
-            "alt": "Perfect Fitting Lumbar Support adapting to the sitter's lower back",
-            "ratio": "4/5",
             "title": "Perfect Fitting Lumbar Support",
-            "text": "<p>SIDIZ's own patented mechanism supports the curve of your lower back in any posture, adapting to your body. Built to keep your lower back comfortable through long working sessions.</p>",
-            "note": "Korean Patent No. 10-2468097"
+            "description": "<p>SIDIZ's own patented mechanism supports the curve of your lower back in any posture, adapting to your body.</p><p>Built to keep your lower back comfortable through long working sessions.</p>",
+            "note": "<p>Korean Patent No. 10-2468097</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/9f691510fc054903b2ea38f1a54a49de/9f691510fc054903b2ea38f1a54a49de.HD-720p-4.5Mbps-36706916.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/9f691510fc054903b2ea38f1a54a49de.thumbnail.0000000000_small.jpg",
+            "alt": "Perfect Fitting Lumbar Support adapting to the sitter's lower back"
           }
         },
         "c2": {
           "type": "card",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/87deb204b2244ed492b2727d98af48ac/87deb204b2244ed492b2727d98af48ac.HD-720p-4.5Mbps-36706917.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/87deb204b2244ed492b2727d98af48ac.thumbnail.0000000000_small.jpg",
-            "alt": "Flexible backrest of the SIDIZ T90 responding to movement",
-            "ratio": "4/5",
             "title": "Flexible backrest",
-            "text": "<p>A flexible backrest structure that responds naturally as you move, reducing the load on your back and lower back over long periods of sitting.</p>"
+            "description": "<p>A flexible backrest structure that responds naturally as you move.</p><p>It reduces the load on your back and lower back over long periods of sitting, for comfortable support throughout the day.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/87deb204b2244ed492b2727d98af48ac/87deb204b2244ed492b2727d98af48ac.HD-720p-4.5Mbps-36706917.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/87deb204b2244ed492b2727d98af48ac.thumbnail.0000000000_small.jpg",
+            "alt": "Flexible backrest of the SIDIZ T90 responding to movement"
           }
         },
         "c3": {
           "type": "card",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7583e174aa384a91a8954321a6bdda70/7583e174aa384a91a8954321a6bdda70.HD-720p-4.5Mbps-36706919.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7583e174aa384a91a8954321a6bdda70.thumbnail.0000000000_small.jpg",
-            "alt": "High Comfort Foam cushioning in the SIDIZ T90 backrest",
-            "ratio": "4/5",
             "title": "High Comfort Foam",
-            "text": "<p>Soft memory foam combined with 100% MDI foam supports your shoulders and upper body, so leaning in any direction still feels stable.</p>"
+            "description": "<p>Soft memory foam combined with 100% MDI foam for a comfortable cushioned feel.</p><p>It supports your shoulders and upper body so leaning in any direction still feels stable.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7583e174aa384a91a8954321a6bdda70/7583e174aa384a91a8954321a6bdda70.HD-720p-4.5Mbps-36706919.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7583e174aa384a91a8954321a6bdda70.thumbnail.0000000000_small.jpg",
+            "alt": "High Comfort Foam cushioning in the SIDIZ T90 backrest"
           }
         }
       },
@@ -275,111 +363,56 @@
         "c2",
         "c3"
       ],
-      "settings": {
-        "layout": "scroll",
-        "columns": 3,
-        "heading": "Ergonomic design that responds to how you move",
-        "background": "#ffffff",
-        "text_colour": "#000000"
-      }
-    },
-    "armrests_gallery": {
-      "type": "sidiz-gallery",
-      "blocks": {
-        "g1": {
-          "type": "item",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f2b08a29331a4271b16e9fe5b55b9814/f2b08a29331a4271b16e9fe5b55b9814.HD-1080p-7.2Mbps-36707422.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/f2b08a29331a4271b16e9fe5b55b9814.thumbnail.0000000000_small.jpg",
-            "alt": "Panorama 4D armrests moving through their full adjustment range",
-            "caption": "Height 70 mm · Depth 60 mm · Lateral 35° · Rotation 230°"
-          }
-        },
-        "g2": {
-          "type": "item",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7c4836fa4ed942488ffdf3762cb80769/7c4836fa4ed942488ffdf3762cb80769.SD-480p-1.0Mbps-36797054.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7c4836fa4ed942488ffdf3762cb80769.thumbnail.0000000000_small.jpg",
-            "alt": "Tension support in the T90 armrest as an arm rests on it",
-            "caption": "Tension support design"
-          }
-        },
-        "g3": {
-          "type": "item",
-          "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/8d49c3d03ccf4fbb9abf0c9c775499fa/8d49c3d03ccf4fbb9abf0c9c775499fa.SD-480p-1.2Mbps-36797055.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/8d49c3d03ccf4fbb9abf0c9c775499fa.thumbnail.0000000000_small.jpg",
-            "alt": "Silicone armrest pad on the SIDIZ T90",
-            "caption": "Silicone armrest pads"
-          }
-        }
-      },
-      "block_order": [
-        "g1",
-        "g2",
-        "g3"
-      ],
-      "settings": {
-        "direction": "horizontal",
-        "ratio": "16/9",
-        "eyebrow": "Move without limits",
-        "heading": "Panorama 4D armrests",
-        "body": "<p>Modern work moves between PC, laptop, tablet and phone, which makes the movement of your arms and upper body matter more than it used to. The T90's 4D armrests offer a wide adjustment range, supporting your arms and shoulders in whatever posture the task calls for.</p><p><em>Korean Patent No. 10-2779705</em></p>",
-        "anchor_id": "armrests",
-        "background": "#f5f6f7",
-        "text_colour": "#000000"
-      }
+      "settings": {}
     },
     "tilt_banner": {
-      "type": "sidiz-scroll-banner",
+      "type": "sidiz-wb-banner",
       "settings": {
-        "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/c7d14500aba741a88dcb8a51148358db/c7d14500aba741a88dcb8a51148358db.HD-1080p-2.5Mbps-40789349.mp4",
-        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/c7d14500aba741a88dcb8a51148358db.thumbnail.0000000000_small.jpg",
-        "alt": "Backrest and seat of the SIDIZ T90 moving together as the sitter reclines",
-        "eyebrow": "A close fit, with nothing leaking your focus",
+        "tag": "A close fit, with nothing leaking your focus",
         "heading": "Zero gap between you and the chair",
-        "body": "<p>Perfect Fitting Lumbar Support and the Ultimate Sync Tilt mechanism minimise the gap between your body and the backrest, while backrest and seat move together to hold a stable posture.</p><p>More than 138 precisely assembled components produce a tilt mechanism that moves close to the way the body does.</p>",
-        "note": "Korean Patent No. 10-1533650 · Co-designed and developed over six years with ITO Design, the German ergonomics design studio",
-        "scroll_length": 200,
-        "anchor_id": "tilt",
+        "description": "<p>Perfect Fitting Lumbar Support and the Ultimate Sync Tilt mechanism minimise the gap between your body and the backrest, while backrest and seat move together to hold a stable posture.</p>",
+        "align": "left",
+        "align_vertical": "bottom",
         "text_colour": "#ffffff",
-        "scrim": "rgba(0,0,0,0.4)"
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/c7d14500aba741a88dcb8a51148358db/c7d14500aba741a88dcb8a51148358db.HD-1080p-2.5Mbps-40789349.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/c7d14500aba741a88dcb8a51148358db.thumbnail.0000000000_small.jpg",
+        "alt": "Backrest and seat of the SIDIZ T90 moving together as the sitter reclines"
       }
     },
     "tilt_cards": {
-      "type": "sidiz-card-list",
+      "type": "sidiz-wb-card-list",
       "blocks": {
         "t1": {
           "type": "card",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/1a4364137cb746e18d59275a01a09f3c/1a4364137cb746e18d59275a01a09f3c.SD-480p-1.5Mbps-36797785.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/1a4364137cb746e18d59275a01a09f3c.thumbnail.0000000000_small.jpg",
-            "alt": "Synchronised tilting: the seat tilts with the backrest as the sitter reclines",
-            "ratio": "16/9",
-            "title": "Synchronised tilting",
-            "text": "<p>The seat tilts along with the backrest as you recline. It accounts for the way your legs naturally extend, keeping your body balanced in a comfortable resting posture.</p>"
+            "title": "Ultimate Sync Tilt",
+            "description": "<p>More than 138 precisely assembled components produce a tilt mechanism that moves close to the way the body does.</p><p>Korean Patent No. 10-1533650 · Co-developed over six years with ITO Design.</p>",
+            "align": "left",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/20e9455892f343a0bcdb4a7427a961d6/20e9455892f343a0bcdb4a7427a961d6.SD-480p-1.5Mbps-36797788.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/20e9455892f343a0bcdb4a7427a961d6.thumbnail.0000000000_small.jpg",
+            "alt": "Ultimate Sync Tilt mechanism of the SIDIZ T90 in motion"
           }
         },
         "t2": {
           "type": "card",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/8a2fb37c626a4c8384ebce18397f9807/8a2fb37c626a4c8384ebce18397f9807.SD-480p-1.5Mbps-36797787.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/8a2fb37c626a4c8384ebce18397f9807.thumbnail.0000000000_small.jpg",
-            "alt": "Multi-limited tilting control setting the backrest recline range",
-            "ratio": "16/9",
-            "title": "Multi-limited tilting",
-            "text": "<p>Set the range through which the backrest reclines, to taste. The resistance as the backrest returns is adjustable too.</p>"
+            "title": "Synchronised tilting",
+            "description": "<p>The seat tilts along with the backrest as you recline, accounting for the way your legs naturally extend.</p>",
+            "align": "left",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/1a4364137cb746e18d59275a01a09f3c/1a4364137cb746e18d59275a01a09f3c.SD-480p-1.5Mbps-36797785.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/1a4364137cb746e18d59275a01a09f3c.thumbnail.0000000000_small.jpg",
+            "alt": "Synchronised tilting: the seat tilts with the backrest"
           }
         },
         "t3": {
           "type": "card",
           "settings": {
-            "media_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/20e9455892f343a0bcdb4a7427a961d6/20e9455892f343a0bcdb4a7427a961d6.SD-480p-1.5Mbps-36797788.mp4",
-            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/20e9455892f343a0bcdb4a7427a961d6.thumbnail.0000000000_small.jpg",
-            "alt": "Ultimate Sync Tilt mechanism of the SIDIZ T90 in motion",
-            "ratio": "16/9",
-            "title": "Ultimate Sync Tilt",
-            "text": "<p>Engineered movement keeps backrest and seat in balance, supporting comfortable seating and stable posture.</p>"
+            "title": "Multi-limited tilting",
+            "description": "<p>Set the range through which the backrest reclines, to taste. The resistance as it returns is adjustable too.</p>",
+            "align": "left",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/8a2fb37c626a4c8384ebce18397f9807/8a2fb37c626a4c8384ebce18397f9807.SD-480p-1.5Mbps-36797787.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/8a2fb37c626a4c8384ebce18397f9807.thumbnail.0000000000_small.jpg",
+            "alt": "Multi-limited tilting control setting the backrest recline range"
           }
         }
       },
@@ -388,13 +421,7 @@
         "t2",
         "t3"
       ],
-      "settings": {
-        "layout": "grid",
-        "columns": 3,
-        "heading": "Tilt, three ways",
-        "background": "#ffffff",
-        "text_colour": "#000000"
-      }
+      "settings": {}
     },
     "comfort_cards": {
       "type": "sidiz-card-list",
@@ -916,6 +943,58 @@
         "view_all_link": "/collections/all",
         "background": "#ffffff"
       }
+    },
+    "armrests_banner": {
+      "type": "sidiz-wb-scroll-banner",
+      "settings": {
+        "heading": "",
+        "tag": "Move without limits, so you can think from every angle",
+        "subheading": "Panorama 4D armrests<br>that support every posture",
+        "description": "<p>Modern work moves between PC, laptop, tablet and phone, which makes the movement of your arms and upper body matter more than it used to.</p><p>The T90's 4D armrests offer a wide adjustment range, supporting your arms and shoulders in whatever posture the task calls for. The movement opens out like a panorama.</p><p>Korean Patent No. 10-2779705</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f2b08a29331a4271b16e9fe5b55b9814/f2b08a29331a4271b16e9fe5b55b9814.HD-1080p-7.2Mbps-36707422.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/f2b08a29331a4271b16e9fe5b55b9814.thumbnail.0000000000_small.jpg",
+        "alt": "Panorama 4D armrests moving through their full adjustment range"
+      }
+    },
+    "armrests_cards": {
+      "type": "sidiz-wb-scroll-card-list",
+      "blocks": {
+        "a1": {
+          "type": "card",
+          "settings": {
+            "title": "4D armrest adjustment",
+            "description": "<p>A four-way adjustment system covering armrest height, depth, width and angle.</p><p>Adjustable through 70 mm height, 60 mm depth, 35° laterally and 230° rotation.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7c4836fa4ed942488ffdf3762cb80769/7c4836fa4ed942488ffdf3762cb80769.SD-480p-1.0Mbps-36797054.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7c4836fa4ed942488ffdf3762cb80769.thumbnail.0000000000_small.jpg",
+            "alt": "Adjusting the 4D armrest on the SIDIZ T90"
+          }
+        },
+        "a2": {
+          "type": "card",
+          "settings": {
+            "title": "Tension support design",
+            "description": "<p>Calibrated tension gives steady support when you rest your arms.</p><p>It reduces fatigue in the arms and shoulders during keyboard and mouse work.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/8d49c3d03ccf4fbb9abf0c9c775499fa/8d49c3d03ccf4fbb9abf0c9c775499fa.SD-480p-1.2Mbps-36797055.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/8d49c3d03ccf4fbb9abf0c9c775499fa.thumbnail.0000000000_small.jpg",
+            "alt": "Tension support in the T90 armrest as an arm rests on it"
+          }
+        },
+        "a3": {
+          "type": "card",
+          "settings": {
+            "title": "Silicone armrest pads",
+            "description": "<p>Soft silicone reduces pressure where your arms make contact.</p><p>It stays comfortable to the touch through long sessions.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/f2518d4c4dc36873528bb2b0de569259.png",
+            "alt": "Silicone armrest pad on the SIDIZ T90"
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -924,7 +1003,8 @@
     "intro",
     "ergonomics_banner",
     "ergonomics_cards",
-    "armrests_gallery",
+    "armrests_banner",
+    "armrests_cards",
     "tilt_banner",
     "tilt_cards",
     "comfort_cards",

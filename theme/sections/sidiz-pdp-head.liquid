@@ -14,12 +14,21 @@
     .color-chip                 28px ring, with a 20px inner div carrying the colour
 {%- endcomment -%}
 
+{%- comment -%}
+  Order matters. component-product-variants.css sets
+  .product-variant__container--radio{flex-wrap:nowrap}, and
+  section-product-configurator.css overrides it back to wrap. Loading the
+  configurator sheet last is what lets the chips wrap inside the 420px sidebar.
+{%- endcomment -%}
 {{ 'theme.css' | asset_url | stylesheet_tag }}
-{{ 'section-product-configurator.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-variants.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-item.css' | asset_url | stylesheet_tag }}
+{{ 'section-product-configurator.css' | asset_url | stylesheet_tag }}
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
 {{ 'sidiz-au-overrides.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'swiper-bundle.min.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'sidiz-configurator.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'sidiz-360.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
   assign p = product
@@ -34,6 +43,11 @@
 <div class="container" data-sidiz-configurator>
   <product-page>
     <div class="product-gallery--wrapper">
+      {%- comment -%}
+        The KR grid lives on .product-media--wrapper, not on .product-gallery,
+        so every tile has to sit inside that wrapper or the gallery collapses to
+        a single column. Below 1023px .web is hidden and .mobile takes over.
+      {%- endcomment -%}
       <div class="product-gallery web">
         <div class="product-media--wrapper">
           <div class="product-media--item variant-media">
@@ -67,7 +81,6 @@
               </div>
             {%- endif -%}
           </div>
-        </div>
 
         {%- for block in gallery -%}
           <div class="product-media--item" {{ block.shopify_attributes }}>
@@ -107,6 +120,58 @@
             {%- endif -%}
           </div>
         {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="product-gallery mobile swiper">
+        <div class="swiper-wrapper">
+          <div class="product-media--item variant-media swiper-slide">
+            {%- for variant in p.variants -%}
+              {%- if variant.image != blank -%}
+                <img
+                  class="variant-image{% unless variant.id == v.id %} hidden{% endunless %}"
+                  data-variant-id="{{ variant.id }}"
+                  src="{{ variant.image | image_url: width: 900 }}"
+                  srcset="{{ variant.image | image_url: width: 600 }} 600w, {{ variant.image | image_url: width: 900 }} 900w"
+                  sizes="90vw"
+                  width="900"
+                  height="1200"
+                  alt="{{ variant.image.alt | default: variant.title | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                >
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+
+          {%- for block in gallery -%}
+            <div class="product-media--item swiper-slide">
+              {%- if block.settings.video_url != blank -%}
+                <video
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  preload="metadata"
+                  {% if block.settings.poster_url != blank %}poster="{{ block.settings.poster_url }}"{% endif %}
+                  {% if block.settings.alt != blank %}aria-label="{{ block.settings.alt | escape }}"{% endif %}
+                >
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                </video>
+              {%- elsif block.settings.image_url != blank -%}
+                <img
+                  src="{{ block.settings.image_url }}?width=900"
+                  sizes="90vw"
+                  width="900"
+                  height="1200"
+                  alt="{{ block.settings.alt | escape }}"
+                  loading="lazy"
+                  decoding="async"
+                >
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
       </div>
     </div>
 
@@ -139,8 +204,13 @@
 
       {%- unless p.has_only_default_variant -%}
         <div class="product-variant--wrapper">
+          {%- comment -%}
+            KR hides values that cannot be reached rather than striking them
+            through — pick a leather and only the leather colours remain. That
+            is what product-variants--hide-unavailable does in the KR sheet.
+          {%- endcomment -%}
           <product-variants>
-            <div class="product-variants">
+            <div class="product-variants product-variants--hide-unavailable">
               {%- for option in p.options_with_values -%}
                 {%- liquid
                   assign lower = option.name | downcase
@@ -329,6 +399,59 @@
     </div>
   </product-page>
 
+  {%- comment -%}
+    360 viewer. KR ships one .modal-360 per colour; the same is done here, keyed
+    by the handleized colour so the viewer opens on whatever the shopper has
+    selected. Frames stay hidden until opened so none of them are fetched on
+    first paint.
+  {%- endcomment -%}
+  {%- assign spins = section.blocks | where: 'type', 'spin' -%}
+  {%- for block in spins -%}
+    <div
+      class="modal-360 hidden"
+      data-sidiz-360-modal
+      data-colour="{{ block.settings.colour | handleize }}"
+      role="dialog"
+      aria-modal="true"
+      aria-label="360 degree view"
+      {{ block.shopify_attributes }}
+    >
+      <div class="close--button btn-hover--bk" role="button" tabindex="0" data-sidiz-360-close aria-label="Close">
+        <img src="{{ 'icon-close-line-bk.svg' | asset_url }}" width="28" height="28" alt="" loading="lazy">
+      </div>
+
+      <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper">
+          {%- assign frames = block.settings.frames | split: ',' -%}
+          {%- for frame in frames -%}
+            {%- assign src = frame | strip -%}
+            {%- if src != blank -%}
+              <div class="swiper-slide image-360">
+                <img
+                  data-src="{{ src }}?width=1400"
+                  alt="{{ block.settings.alt | default: 'SIDIZ T90, rotated view' | escape }}"
+                  width="1400"
+                  height="1400"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk" role="button" tabindex="0" aria-label="Previous">
+          <img src="{{ 'icon-arrow-left-line-bk-28.svg' | asset_url }}" width="28" height="28" alt="" loading="lazy">
+        </div>
+        <div class="navigation-next btn-hover--bk" role="button" tabindex="0" aria-label="Next">
+          <img src="{{ 'icon-arrow-right-line-bk-28.svg' | asset_url }}" width="28" height="28" alt="" loading="lazy">
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+
   <script type="application/json" data-sidiz-variants>
     {{ p.variants | json }}
   </script>
@@ -401,6 +524,25 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Label" },
         { "type": "text", "id": "value", "label": "Value" }
+      ]
+    },
+    {
+      "type": "spin",
+      "name": "360 view set",
+      "settings": [
+        {
+          "type": "text",
+          "id": "colour",
+          "label": "Colour",
+          "info": "Must match the Colour option value exactly, e.g. Shadow Grey."
+        },
+        {
+          "type": "textarea",
+          "id": "frames",
+          "label": "Frame URLs",
+          "info": "Comma-separated, in rotation order."
+        },
+        { "type": "text", "id": "alt", "label": "Alt text" }
       ]
     }
   ]

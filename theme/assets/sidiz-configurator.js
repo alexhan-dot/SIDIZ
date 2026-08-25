@@ -69,13 +69,25 @@
       return null;
     }
 
-    // Disable option values that cannot combine with the rest of the selection.
+    // Disable option values that cannot combine with the selection made so far.
+    //
+    // Only the options BEFORE this one constrain it. Constraining by the later
+    // options too would disable most of the first option — picking a material
+    // would be blocked because the currently selected colour is not offered in
+    // it, when in reality choosing that material simply moves you to a
+    // different colour.
     function refreshAvailability(chosen) {
       inputs.forEach(function (input) {
         var pos = parseInt(input.dataset.optionPosition, 10);
-        var probe = chosen.slice();
+        var probe = chosen.slice(0, pos - 1);
         probe[pos - 1] = input.value;
-        input.disabled = !find(probe);
+        var ok = !!find(probe);
+        // `disabled` is a class in the KR sheet, not just the attribute: inside
+        // .product-variants--hide-unavailable it hides the value entirely,
+        // which is how kr.sidiz.com behaves — choosing a leather leaves only
+        // the leather colours on screen.
+        input.classList.toggle('disabled', !ok);
+        input.disabled = !ok;
       });
     }
 
@@ -136,17 +148,36 @@
       }
     }
 
-    function onChange() {
-      var chosen = selection();
-      refreshAvailability(chosen);
+    function syncInputs(variant) {
+      inputs.forEach(function (input) {
+        var pos = parseInt(input.dataset.optionPosition, 10);
+        input.checked = variant.options[pos - 1] === input.value;
+      });
+    }
 
+    function onChange(event) {
+      var chosen = selection();
       var variant = find(chosen);
+
       if (!variant) {
-        // Fall back to the first variant that honours the option just changed.
-        variant = variants.find(function (v) {
-          return v.available && matches(v, [chosen[0]]);
-        });
+        // The combination does not exist — usually because the shopper changed
+        // an early option and the later ones no longer apply. Honour the option
+        // they just touched and everything before it, then let the rest follow.
+        var changedPos = event && event.target
+          ? parseInt(event.target.dataset.optionPosition, 10)
+          : 1;
+        var prefix = chosen.slice(0, changedPos);
+        variant =
+          variants.filter(function (candidate) {
+            return candidate.available && matches(candidate, prefix);
+          })[0] ||
+          variants.filter(function (candidate) {
+            return matches(candidate, prefix);
+          })[0];
+        if (variant) syncInputs(variant);
       }
+
+      refreshAvailability(selection());
       if (variant) render(variant);
     }
 
