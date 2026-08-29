@@ -337,7 +337,6 @@
           "settings": {
             "title": "Perfect Fitting Lumbar Support",
             "description": "<p>SIDIZ's own patented mechanism supports the curve of your lower back in any posture, adapting to your body.</p><p>Built to keep your lower back comfortable through long working sessions.</p>",
-            "note": "<p>Korean Patent No. 10-2468097</p>",
             "video_url": "https://cdn.shopify.com/videos/c/vp/b5d1ff0289964a958e7e33c4a3aec93d/b5d1ff0289964a958e7e33c4a3aec93d.HD-720p-3.0Mbps-92555587.mp4",
             "poster_url": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/preview_images/b5d1ff0289964a958e7e33c4a3aec93d.thumbnail.0000000000.jpg",
             "alt": "Perfect Fitting Lumbar Support adapting to the sitter's lower back"
@@ -772,15 +771,12 @@
     "stockists": {
       "type": "sidiz-store-info",
       "settings": {
-        "eyebrow": "Not sure yet?",
         "heading": "Try it before you buy",
-        "body": "<p>Tilt resistance and seat feel differ from body to body. If you can, sit in a T90 before you order. Where that is not practical, our returns policy is there to fall back on.</p>",
-        "cta_label": "Find a stockist",
-        "cta_link": "/pages/contact",
-        "media_url": "https://kr.sidiz.com/cdn/shop/files/shop_pc.jpg",
         "alt": "A SIDIZ showroom interior with chairs on display",
-        "anchor_id": "where-to-try",
-        "background": "#f5f6f7"
+        "description": "<p>Tilt resistance and seat feel differ from body to body. If you can, sit in a T90 before you order. Where that is not practical, our returns policy is there to fall back on.</p>",
+        "link_label": "Find a stockist",
+        "link": "/pages/contact",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/shop_pc.jpg"
       }
     },
     "notices": {

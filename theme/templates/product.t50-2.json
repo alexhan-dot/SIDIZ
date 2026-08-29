@@ -1,0 +1,835 @@
+{
+  "sections": {
+    "sticky_nav": {
+      "type": "sidiz-sticky-nav",
+      "blocks": {
+        "n1": {
+          "type": "link",
+          "settings": {
+            "label": "Story",
+            "anchor": "story"
+          }
+        },
+        "n2": {
+          "type": "link",
+          "settings": {
+            "label": "Lumbar support",
+            "anchor": "lumbar"
+          }
+        },
+        "n3": {
+          "type": "link",
+          "settings": {
+            "label": "Headrest",
+            "anchor": "headrest"
+          }
+        },
+        "n4": {
+          "type": "link",
+          "settings": {
+            "label": "Armrest",
+            "anchor": "armrest"
+          }
+        },
+        "n5": {
+          "type": "link",
+          "settings": {
+            "label": "Tilt",
+            "anchor": "tilt"
+          }
+        },
+        "n6": {
+          "type": "link",
+          "settings": {
+            "label": "Compare",
+            "anchor": "compare"
+          }
+        },
+        "n7": {
+          "type": "link",
+          "settings": {
+            "label": "Adjustment",
+            "anchor": "adjustment-guide"
+          }
+        },
+        "n8": {
+          "type": "link",
+          "settings": {
+            "label": "FAQ",
+            "anchor": "faq"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6",
+        "n7",
+        "n8"
+      ],
+      "settings": {
+        "label": "On this page",
+        "show_buy": true,
+        "buy_label": "Choose options"
+      }
+    },
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Estimated delivery",
+            "value": "3-7 business days for in-stock items"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Delivery type",
+            "value": "Free standard delivery Australia-wide"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Assembly",
+            "value": "Arrives fully assembled - no assembly required"
+          }
+        },
+        "i1": {
+          "type": "info",
+          "settings": {
+            "label": "Product name",
+            "value": "SIDIZ T50 2nd Generation Ergonomic Office Chair"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "label": "Included",
+            "value": "Chair"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "label": "Main materials",
+            "value": "Fabric, mesh, moulded foam, plastic, steel"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "label": "Colours",
+            "value": "Ash White\nCarbon Black\nMineral Grey"
+          }
+        },
+        "i5": {
+          "type": "info",
+          "settings": {
+            "label": "Warranty",
+            "value": "5 years with product registration"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5"
+      ],
+      "settings": {
+        "tax_note": "Price includes GST. Shipping calculated at checkout.",
+        "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
+        "addons_title": "Add to your setup",
+        "delivery_title": "Delivery",
+        "warranty_label": "Warranty",
+        "warranty_value": "5 years",
+        "basic_info_title": "BASIC INFO",
+        "notice_title": "Before you buy",
+        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>",
+        "subtitle": "Rebuilt from the real usage data of three million sitters - a custom-fitting mechanism for flawless comfort through long hours."
+      }
+    },
+    "hero": {
+      "type": "sidiz-pdp-hero",
+      "settings": {
+        "subtitle": "<em class=\"caps\">The Original Standard</em><br>Once again, rewriting what a good chair should be",
+        "subtitle_colour": "#ffffff",
+        "heading": "T50 2nd Generation",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/3c3449baafcb457fb2ecc4d5ac66360e/3c3449baafcb457fb2ecc4d5ac66360e.HD-1080p-7.2Mbps-88196343.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/3c3449baafcb457fb2ecc4d5ac66360e.thumbnail.0000000000_small.jpg",
+        "video_url_mobile": "https://kr.sidiz.com/cdn/shop/videos/c/vp/3c3449baafcb457fb2ecc4d5ac66360e/3c3449baafcb457fb2ecc4d5ac66360e.HD-1080p-7.2Mbps-88196343.mp4",
+        "poster_url_mobile": "https://kr.sidiz.com/cdn/shop/files/preview_images/3c3449baafcb457fb2ecc4d5ac66360e.thumbnail.0000000000_small.jpg",
+        "alt": "SIDIZ T50 2nd Generation ergonomic office chair in motion",
+        "description": "<p>The T50 designs better comfort from the real usage data of three million sitters. We analysed thousands of customer reviews and refined every detail, completing seating that satisfies every body.</p><p>With even the subtle frustrations of real use resolved, it holds steady comfort through the longest hours.</p>",
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default"
+      }
+    },
+    "intro": {
+      "type": "sidiz-product-row",
+      "settings": {
+        "heading": "SIDIZ T50 2nd Generation Ergonomic Office Computer Mesh Chair",
+        "body": "<p><strong>Custom Mechanism Fitting Chair</strong> - built on the real usage data of three million sitters, resolving even subtle discomforts: SIDIZ's tailored office chair that sets up flawlessly for different builds and postures.</p><ul><li><strong>Wide Mesh Headrest &amp; 2D Lumbar Support</strong> - a 310 mm wide mesh headrest that holds the neck without wobble, and a lumbar support that meets the lumbar curve with 50 mm height and 10 mm depth adjustment and no pressure-point feel.</li><li><strong>Bowl-shaped Hybrid Seat &amp; 4D Waterfall Armrest</strong> - a scooped, concave bowl seat that cradles the pelvis (fabric and mesh seats interchange), and 4D armrests raised 25 mm at base height to ease shoulder fatigue.</li><li><strong>Synchronised &amp; 5-Step Multi-limited Tilting</strong> - sync tilt that keeps the pelvis from sliding as you recline, a 105-130 degree five-step range, and fine tension control that protects the lower back.</li></ul><p>A new benchmark for the office chair, optimised for offices, home offices and studies - everywhere long sitting cycles between focus and rest.</p>",
+        "align": "left",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+    "journey_banner": {
+      "type": "sidiz-wb-scroll-banner",
+      "settings": {
+        "heading": "",
+        "header_scheme": "light",
+        "tag": "",
+        "subheading": "The standard for a good chair<br>keeps advancing",
+        "description": "<p>Three million sitters' feedback showed us clearly what was needed - and what fell short - in every moment on a chair. We considered all of it, thoroughly.</p>",
+        "text_colour": "#000000",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7e273350bc3641cbaed200e9dae43dca/7e273350bc3641cbaed200e9dae43dca.HD-720p-4.5Mbps-88880974.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7e273350bc3641cbaed200e9dae43dca.thumbnail.0000000000_small.jpg",
+        "video_url_mobile": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7e273350bc3641cbaed200e9dae43dca/7e273350bc3641cbaed200e9dae43dca.HD-720p-4.5Mbps-88880974.mp4",
+        "poster_url_mobile": "https://kr.sidiz.com/cdn/shop/files/preview_images/7e273350bc3641cbaed200e9dae43dca.thumbnail.0000000000_small.jpg",
+        "alt": "The SIDIZ T50 through its generations"
+      }
+    },
+    "journey_cards": {
+      "type": "sidiz-wb-card-list",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "title": "The chair that changed chairs",
+            "title_colour": "#000000",
+            "description": "<p>Loved across offices, home offices and studies, it changed the paradigm of the Korean office chair.</p>",
+            "description_colour": "#7c8084",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/5110530e20dd42798db2581861369556/5110530e20dd42798db2581861369556.HD-1080p-7.2Mbps-88964623.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/5110530e20dd42798db2581861369556.thumbnail.0000000000_small.jpg",
+            "alt": "The first-generation T50 at work"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "title": "Discomforts found inside familiarity",
+            "title_colour": "#000000",
+            "description": "<p>Never resting on its reputation, we analysed years of accumulated review data and traced the subtle frustrations.</p>",
+            "description_colour": "#7c8084",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/9f27dee664044d0bae16e1fde7eec626/9f27dee664044d0bae16e1fde7eec626.HD-1080p-7.2Mbps-88880886.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/9f27dee664044d0bae16e1fde7eec626.thumbnail.0000000000_small.jpg",
+            "alt": "Review data being analysed"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "title": "A design that resolves them all",
+            "title_colour": "#000000",
+            "description": "<p>We focused on the biggest complaints - the lumbar support's pressure-point feel, the headrest's shape and height limits, armrests that sat too low - for seating a class above.</p>",
+            "description_colour": "#7c8084",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/d00c8cf2c9d54302a97c3d11fda26c8a/d00c8cf2c9d54302a97c3d11fda26c8a.HD-1080p-7.2Mbps-88880912.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/d00c8cf2c9d54302a97c3d11fda26c8a.thumbnail.0000000000_small.jpg",
+            "alt": "The redesigned T50 2nd Generation"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "comfort_banner": {
+      "type": "sidiz-wb-banner",
+      "settings": {
+        "heading": "The standard of comfort, redesigned",
+        "align": "left",
+        "title_colour": "#000000"
+      }
+    },
+    "lumbar": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Lumbar Support",
+        "description": "<p>A precise mechanism minimises the slip-down and play you feel when you lean back - not a moment's plushness but comfort that holds, hour after hour, without collapsing.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/29b55f14ead64a3f8228c67b95afe8dc/29b55f14ead64a3f8228c67b95afe8dc.HD-1080p-7.2Mbps-88039623.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/29b55f14ead64a3f8228c67b95afe8dc.thumbnail.0000000000_small.jpg",
+        "alt": "The T50 2nd Generation lumbar support in motion"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Ergofit lumbar support",
+            "description": "<p>About 1.5 times the contact area of before dissolves pressure that concentrated on one spot, and a material that flexes with your build supports the lumbar closely.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T50_7c4bc130-e61f-49f7-a7be-a1d11932b674.png",
+            "alt": "The widened Ergofit lumbar pad"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "2D adjustment",
+            "description": "<p>Height (50 mm) and depth (10 mm) find the support position that fits your body exactly.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/71cf1da88479417ea1d6f9f7ca8d6cec/71cf1da88479417ea1d6f9f7ca8d6cec.HD-1080p-7.2Mbps-88038615.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/71cf1da88479417ea1d6f9f7ca8d6cec.thumbnail.0000000000_small.jpg",
+            "alt": "Lumbar support height and depth adjustment"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    },
+    "headrest": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Headrest",
+        "description": "<p>A wider surface keeps comfort flowing, however you rest your head.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/18f412bb136d4b73bd01c305f94ae414/18f412bb136d4b73bd01c305f94ae414.HD-1080p-7.2Mbps-88202354.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/18f412bb136d4b73bd01c305f94ae414.thumbnail.0000000000_small.jpg",
+        "alt": "The 310 mm wide mesh headrest"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Airflex mesh",
+            "description": "<p>The same mesh as the backrest breathes freely, preventing sweat build-up and cradling the head softly, like a hammock.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img2_f746652c-719b-4616-9a41-6d5f36fc68e0.jpg",
+            "alt": "Close view of the Airflex mesh weave"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "310 mm wide support",
+            "description": "<p>A wider surface absorbs frequent posture changes: turn or lean your head and it still holds the nape steady, without slipping off the headrest.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/91478640760643fdb2c201e0478c8884/91478640760643fdb2c201e0478c8884.HD-720p-2.1Mbps-88142988.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/91478640760643fdb2c201e0478c8884.thumbnail.0000000000_small.jpg",
+            "alt": "The wide headrest supporting a turned head"
+          }
+        },
+        "b3": {
+          "type": "feature",
+          "settings": {
+            "title": "Height and angle adjustment",
+            "description": "<p>Fine-tune height (55 mm) and angle (55 degrees) to your build; from focused work to a proper rest, the nape stays fully supported.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/fd2c5226e7bc4477b00d7c655e365fb1/fd2c5226e7bc4477b00d7c655e365fb1.HD-1080p-7.2Mbps-88040316.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/fd2c5226e7bc4477b00d7c655e365fb1.thumbnail.0000000000_small.jpg",
+            "alt": "Headrest height and angle adjusting"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "armrest": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Armrest",
+        "description": "<p>Whatever your build or posture, support runs from elbow to wrist, minimising the load on your shoulders.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f22bf344b9ed4e1bb29879c1fa78b9da/f22bf344b9ed4e1bb29879c1fa78b9da.HD-1080p-7.2Mbps-88040109.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/f22bf344b9ed4e1bb29879c1fa78b9da.thumbnail.0000000000_small.jpg",
+        "alt": "The 4D waterfall armrest in motion"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Raised base height",
+            "description": "<p>The base height is up 25 mm, fixing armrests that sat low for some builds; elbows rest steady and upper-body tension eases.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/8533b757e10c4eccbf2391db07c6cb41/8533b757e10c4eccbf2391db07c6cb41.HD-1080p-7.2Mbps-88040684.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/8533b757e10c4eccbf2391db07c6cb41.thumbnail.0000000000_small.jpg",
+            "alt": "The raised armrest base height"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "4D adjustment",
+            "description": "<p>Height (60 mm), fore-and-aft (30 mm), angle (20 degrees) and width (10 mm) flex to your build, holding the arm at its most comfortable angle through any movement.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/be538a49271f4420a44487bad3d2b7da/be538a49271f4420a44487bad3d2b7da.HD-1080p-7.2Mbps-88142944.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/be538a49271f4420a44487bad3d2b7da.thumbnail.0000000000_small.jpg",
+            "alt": "4D armrest adjusting in four directions"
+          }
+        },
+        "b3": {
+          "type": "feature",
+          "settings": {
+            "title": "Waterfall armrest pad",
+            "description": "<p>A pad that falls away softly on the inner edge prevents forearm pressure through frequent posture changes.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/f02b76e3f88c413bafefbb762de2d909/f02b76e3f88c413bafefbb762de2d909.HD-1080p-7.2Mbps-88040728.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/f02b76e3f88c413bafefbb762de2d909.thumbnail.0000000000_small.jpg",
+            "alt": "The waterfall armrest pad profile"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "everybody_banner": {
+      "type": "sidiz-wb-banner",
+      "settings": {
+        "heading": "Comfort for every body",
+        "align": "left",
+        "title_colour": "#000000"
+      }
+    },
+    "ergonomics": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Ergonomics that read the body",
+        "description": "<p>The essence of a good chair is holding any build straight, without a hint of strangeness. For long hours of work and focus, the design follows the body's curves precisely - the T50 wraps spine and pelvis softly from the moment you sit and keeps pressure minimal through every change of posture.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7b3e9de3fecf43c4a63383ca8e2a156e/7b3e9de3fecf43c4a63383ca8e2a156e.HD-1080p-7.2Mbps-88040822.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7b3e9de3fecf43c4a63383ca8e2a156e.thumbnail.0000000000_small.jpg",
+        "alt": "The T50 2nd Generation supporting the spine's curve"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "The original S-Curve backrest",
+            "description": "<p>The heart of the T50's heritage: a backrest drawn in the S of the human spine, holding posture true without straining the lumbar.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T50_S__1.png",
+            "alt": "The S-Curve backrest profile"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Bowl-shaped seat",
+            "description": "<p>A concave bowl settles the pelvis securely; scooping maximises compression for a soft yet firm sit without pressure points, hour after hour.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/8cb2ce110be6921d277f7f19cdc7c04c.jpg",
+            "alt": "The bowl-shaped seat cross-section"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    },
+    "tilt": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Sync Tilt",
+        "description": "<p>The tilt - the chair's core mechanism - precisely adjusts the angle of backrest and seat so you keep moving naturally rather than sitting fixed. The T50's sync tilt tunes range and tension, the deciding measures of an office chair, finely to your build and the work at hand.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/401bceb1cd3281a9696cc523160ad0cd.jpg",
+        "alt": "The T50 2nd Generation reclining through its sync tilt"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Synchronised tilting",
+            "description": "<p>As you recline, the seat moves with the backrest at a different angle, stopping the body sliding forward and keeping lower back and pelvis closely supported.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7b3e9de3fecf43c4a63383ca8e2a156e/7b3e9de3fecf43c4a63383ca8e2a156e.HD-1080p-7.2Mbps-88040822.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7b3e9de3fecf43c4a63383ca8e2a156e.thumbnail.0000000000_small.jpg",
+            "alt": "Backrest and seat reclining at linked angles"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "5-step tilt range",
+            "description": "<p>Set the range for the moment, from upright focus to a proper rest: the backrest reclines from 105 to 130 degrees.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/9720e682fc384f499d0d13188e20bedf/9720e682fc384f499d0d13188e20bedf.HD-1080p-7.2Mbps-88042321.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/9720e682fc384f499d0d13188e20bedf.thumbnail.0000000000_small.jpg",
+            "alt": "Tilt range being set in steps"
+          }
+        },
+        "b3": {
+          "type": "feature",
+          "settings": {
+            "title": "Fine tension control",
+            "description": "<p>No forcing your body into fixed steps; tune the weight of the recline with the lever until the tension is exactly yours.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/2fc6ac7be44d4a78bf9feaaf4b7d224f/2fc6ac7be44d4a78bf9feaaf4b7d224f.HD-1080p-7.2Mbps-88202556.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/2fc6ac7be44d4a78bf9feaaf4b7d224f.thumbnail.0000000000_small.jpg",
+            "alt": "Tilting tension adjusted by lever"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "detail_tiles": {
+      "type": "sidiz-tile-card-list",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Washable seat cover",
+            "description": "<p>The fabric cover peels off for machine washing, keeping the seat fresh and hygienic through years of use.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/f5f81e8ac28906104e8a323564484a17.jpg",
+            "alt": "Removing the washable seat cover"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Hybrid seat system",
+            "description": "<p>Swap between fabric and mesh seats any time, whatever you bought first; a simple, intuitive release makes the change easy for anyone.</p>",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/2e862efef722422ba97d03f8be3e1eb2/2e862efef722422ba97d03f8be3e1eb2.HD-1080p-4.8Mbps-88143127.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/2e862efef722422ba97d03f8be3e1eb2.thumbnail.0000000000_small.jpg",
+            "alt": "Swapping the hybrid seat"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Urethane castors",
+            "description": "<p>Softer than standard castors, rolling quietly and guarding the floor from scratches in any room.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/0bb9f4ff25f1cdf3c1a8fb3eaaa0c322.jpg",
+            "alt": "Urethane castors"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "heading": "Details that complete the comfort"
+      }
+    },
+    "compare_banner": {
+      "type": "sidiz-wb-banner",
+      "settings": {
+        "heading": "T50 2nd Generation &amp; 1st Generation at a glance",
+        "align": "left",
+        "title_colour": "#000000"
+      }
+    },
+    "compare_tables": {
+      "type": "sidiz-content-row",
+      "blocks": {
+        "m1": {
+          "type": "media",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T502_T501_web-1_45b23df2-fe25-4ab1-8e4b-2a07ccf0a559.png",
+            "alt": "Comparison table of the T50 2nd and 1st Generation, part one"
+          }
+        },
+        "m2": {
+          "type": "media",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T502_T501_web-2_ed88e478-017e-4686-8ea0-d89394da87d3.png",
+            "alt": "Comparison table of the T50 2nd and 1st Generation, part two"
+          }
+        }
+      },
+      "block_order": [
+        "m1",
+        "m2"
+      ],
+      "settings": {
+        "width": "wide",
+        "media_side": "above",
+        "anchor_id": "compare",
+        "background": "#ffffff",
+        "text_colour": "#000000",
+        "padding_block": 0
+      }
+    },
+    "find_your_fit": {
+      "type": "sidiz-find-your-fit",
+      "blocks": {
+        "s1": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Chair height / seat depth",
+            "description": "<p>Set both to your body frame.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/2026-07-05_14.06.34.png",
+            "alt": "Adjusting chair height and seat depth"
+          }
+        },
+        "s2": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Headrest height / angle",
+            "description": "<p>Ease the load on your head and neck.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/2026-07-05_14.07.15.png",
+            "alt": "Adjusting the headrest"
+          }
+        },
+        "s3": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Tilt range / tension",
+            "description": "<p>Choose how far and how firmly the backrest reclines.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/2026-07-05_14.12.22.png",
+            "alt": "Adjusting tilt range and tension"
+          }
+        },
+        "s4": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Armrest height / fore-and-aft / angle / width",
+            "description": "<p>Keep shoulders and arms relaxed.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/2026-07-05_14.08.24.png",
+            "alt": "Adjusting the 4D armrests"
+          }
+        },
+        "s5": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Lumbar support height / depth",
+            "description": "<p>Support the lower back steadily.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/2026-07-05_14.08.56.png",
+            "alt": "Adjusting the lumbar support"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
+      "settings": {
+        "heading": "T50 2nd Generation adjustment guide",
+        "subtitle": "FIND YOUR FIT. Set it up for your body",
+        "guide_label": "USER GUIDE",
+        "guide_link": "/pages/user-guide"
+      }
+    },
+    "easy_repair": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "T50 2nd Generation | EASY REPAIR",
+        "subtitle": "Repair it, keep it longer",
+        "description": "<p>Easy Repair is SIDIZ's maintenance policy: replace just the part you need instead of the whole chair. *Headrest, seats and armrest pads coming soon.</p>",
+        "link_label": "View all Easy Repair parts",
+        "link": "/collections/easy-repair",
+        "source": "collection",
+        "limit": 8
+      }
+    },
+    "warranty": {
+      "type": "sidiz-warranty",
+      "settings": {
+        "heading": "T50 2nd Generation | 5-year warranty",
+        "body": "<p>So the journey with your T50 continues, SIDIZ provides a 5-year warranty to customers who complete product registration. Once your chair arrives, register it before you forget, for more comfortable years ahead.</p>",
+        "note": "<p>*Warranty periods vary by component.</p>",
+        "register_label": "Register your product",
+        "register_link": "/pages/product-registration",
+        "show_acl": true,
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/WARRANTY_5.jpg",
+        "alt": "SIDIZ 5-year warranty badge"
+      }
+    },
+    "specifications": {
+      "type": "sidiz-spec",
+      "blocks": {
+        "d1": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T51HLDA0KK_01.jpg",
+            "alt": "Dimension drawing of the SIDIZ T50 2nd Generation, front elevation"
+          }
+        },
+        "d2": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T51HLDA0KK_02.jpg",
+            "alt": "Dimension drawing of the SIDIZ T50 2nd Generation, side elevation"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2"
+      ],
+      "settings": {
+        "heading": "T50 2nd Generation dimensions",
+        "figures": "Maximum load 125 kg / product weight approximately 17.6 kg.",
+        "caveats": "*Measurements may vary by plus or minus 20 mm and 1 kg depending on where and how they are taken; this is not a fault.<br>*Dimensions are measured with nobody seated.<br>*Seat height is measured at the centre of the seat."
+      }
+    },
+    "safety_info": {
+      "type": "sidiz-safety-info",
+      "blocks": {
+        "n1": {
+          "type": "note",
+          "settings": {
+            "title": "Removing stains",
+            "body": "<p>If the chair frame gets marked, a melamine sponge lifts stains easily. *Rubbing hard can damage the surface.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/BLOCK-EGA-NOTICE.jpg",
+            "alt": "Cleaning the chair frame with a melamine sponge"
+          }
+        },
+        "n2": {
+          "type": "note",
+          "settings": {
+            "title": "Take care when tilting",
+            "body": "<p>Throwing your weight back suddenly can tip the chair; recline with care.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/pc_1.png",
+            "alt": "Reclining the backrest with care"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2"
+      ],
+      "settings": {
+        "heading": "Care and cautions"
+      }
+    },
+    "faq": {
+      "type": "sidiz-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "What changed in the fully redesigned T50 2nd Generation?",
+            "answer": "<p>The 2nd Generation carries the symbolic S-line identity of the three-million-selling first generation while resolving the subtle frustrations real users reported: a wide lumbar support with the play and pressure-point feel engineered out, a breathable 310 mm Airflex mesh headrest in place of firm leather, and 4D armrests raised 25 mm. The seat is now a hybrid structure - the fabric seat (T50) and mesh seat (T50 AIR) interchange, and each is sold separately so you can swap one in yourself through Easy Repair.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "I get lower-back pain at the computer - does it support the lumbar properly?",
+            "answer": "<p>Yes. The pad's contact area is much wider than before (290 by 160 mm), removing the single-point pressure of the old design, and a flexible material follows your lumbar curve closely. Height (50 mm) and depth (10 mm) adjust precisely, the depth lever can tuck the support away entirely if you prefer no contact, and the slip-down and play of the first generation are engineered out.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "How does the tilting work, and what is the recline range?",
+            "answer": "<p>The T50 2nd Generation uses a synchronised tilt: as you recline, backrest and seat move at different optimal angles so the body does not slide. The recline limit sets in five steps from 105 to 130 degrees, and backrest tension fine-tunes across 23 lever turns.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "Fabric seat (T50) or mesh seat (T50 AIR) - which should I choose?",
+            "answer": "<p>The T50's fabric seat pairs a bowl-shaped form with scooping compression for a firm, stable sit without pressure points, and its cover removes for machine washing. The T50 AIR's seat applies stiff, resilient Airflex mesh across the whole surface for maximum airflow, and a separate fabric cover can be fitted when mesh feels too cool. The two seats interchange on either chair.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "Does it ease wrist and shoulder tension over long sittings?",
+            "answer": "<p>Yes. The 4D armrests adjust in height (60 mm), fore-and-aft (30 mm), angle (20 degrees) and width (10 mm), supporting from elbow to wrist in any posture, and the waterfall-shaped pad prevents forearm pressure when you lean. The maximum height is also up 25 mm on previous SIDIZ chairs, resolving armrests that sat too low for taller sitters or higher desks.</p>"
+          }
+        },
+        "q6": {
+          "type": "faq",
+          "settings": {
+            "question": "When parts wear out, do I have to replace the whole chair?",
+            "answer": "<p>No. The T50 2nd Generation was designed for Easy Repair from the start: the headrest, armrest pads, seats and seat covers - the parts that wear or stain first - will be sold individually so you can swap them at home, and the chair carries a 5-year warranty with product registration.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6"
+      ],
+      "settings": {
+        "heading": "Frequently asked questions",
+        "open_first": true,
+        "background": "#f5f6f7"
+      }
+    },
+    "reviews": {
+      "type": "sidiz-review",
+      "settings": {
+        "heading": "Customer reviews",
+        "body": "<p>Reviews from Australian customers. Add your review app block here to show the full list.</p>",
+        "anchor_id": "reviews",
+        "background": "#ffffff"
+      }
+    },
+    "notices": {
+      "type": "sidiz-contact-notice",
+      "blocks": {
+        "c1": {
+          "type": "notice",
+          "settings": {
+            "title": "Product, delivery, service and returns",
+            "body": "<p>support@sidiz.au</p><p>Monday to Friday, 9:00 am to 5:00 pm AEST<br>Closed weekends and public holidays</p>"
+          }
+        },
+        "c2": {
+          "type": "notice",
+          "settings": {
+            "title": "Warranty and faulty returns",
+            "body": "<p>Warranty period: up to 5 years from purchase, with product registration. See the <a href=\"/pages/warranty\">warranty terms</a>. Nothing here limits your rights under the Australian Consumer Law.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {
+        "heading": "Contact centre",
+        "background": "#eaedf0",
+        "title_colour": "#000000",
+        "text_colour": "#434548"
+      }
+    }
+  },
+  "order": [
+    "sticky_nav",
+    "pdp_head",
+    "hero",
+    "intro",
+    "journey_banner",
+    "journey_cards",
+    "comfort_banner",
+    "lumbar",
+    "headrest",
+    "armrest",
+    "everybody_banner",
+    "ergonomics",
+    "tilt",
+    "detail_tiles",
+    "compare_banner",
+    "compare_tables",
+    "find_your_fit",
+    "easy_repair",
+    "warranty",
+    "specifications",
+    "safety_info",
+    "faq",
+    "reviews",
+    "notices"
+  ]
+}

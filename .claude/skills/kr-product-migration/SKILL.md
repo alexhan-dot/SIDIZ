@@ -263,7 +263,21 @@ These each cost real time on T90.
     already points at it. Confirm with the owner before the first push of a
     session.
 
-17. **Browser-pane screenshots of KR pinned-scroll pages capture white** below
-    the fold (compositor + sticky/transform). Verify via DOM instead:
-    section heights, `img.naturalWidth`, heading/text probes — then ask the
-    owner for the visual pass.
+17. **A hidden Browser pane runs at a 0x0 viewport.** Every layout metric goes
+    wrong at once — body width 0, giant section heights, text-only banners at
+    height 0, images stuck in error state — and screenshots come back white.
+    None of it is the page. Fix: `resize_window` to an explicit size (e.g.
+    1440x900) to force real layout, reset the `src` of any images that erred
+    while the viewport was 0, then re-measure. Screenshots work near the top
+    of the page after that, but deep-scrolled captures still paint white while
+    the pane is hidden — verify below the fold via DOM probes (section
+    heights, `img.naturalWidth`, text content) and ask the owner for the
+    pixel pass. Check `window.innerWidth` FIRST, before diagnosing "bugs"
+    that are really a 0-viewport artifact.
+
+18. **Validate every template with `scripts/validate_template.py <handle>`
+    before pushing.** It cross-checks each section's settings and blocks
+    against the section schema and enforces the 25-section cap — the loud
+    version of gotcha 15. It caught pdp-head `tagline`→`subtitle`, warranty
+    `policy_*`, and the T90 stockists section passing entirely wrong setting
+    names (rendering empty on live) after four templates had already shipped.

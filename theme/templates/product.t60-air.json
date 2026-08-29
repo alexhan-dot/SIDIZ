@@ -3,16 +3,73 @@
     "sticky_nav": {
       "type": "sidiz-sticky-nav",
       "blocks": {
-        "n1": { "type": "link", "settings": { "label": "Full mesh", "anchor": "full-mesh" } },
-        "n2": { "type": "link", "settings": { "label": "Personal fitting", "anchor": "fitting" } },
-        "n3": { "type": "link", "settings": { "label": "Comfort", "anchor": "comfort" } },
-        "n4": { "type": "link", "settings": { "label": "Tilt", "anchor": "tilt" } },
-        "n5": { "type": "link", "settings": { "label": "Compare", "anchor": "compare" } },
-        "n6": { "type": "link", "settings": { "label": "Adjustment", "anchor": "adjustment-guide" } },
-        "n7": { "type": "link", "settings": { "label": "Specifications", "anchor": "specifications" } },
-        "n8": { "type": "link", "settings": { "label": "FAQ", "anchor": "faq" } }
+        "n1": {
+          "type": "link",
+          "settings": {
+            "label": "Full mesh",
+            "anchor": "full-mesh"
+          }
+        },
+        "n2": {
+          "type": "link",
+          "settings": {
+            "label": "Personal fitting",
+            "anchor": "fitting"
+          }
+        },
+        "n3": {
+          "type": "link",
+          "settings": {
+            "label": "Comfort",
+            "anchor": "comfort"
+          }
+        },
+        "n4": {
+          "type": "link",
+          "settings": {
+            "label": "Tilt",
+            "anchor": "tilt"
+          }
+        },
+        "n5": {
+          "type": "link",
+          "settings": {
+            "label": "Compare",
+            "anchor": "compare"
+          }
+        },
+        "n6": {
+          "type": "link",
+          "settings": {
+            "label": "Adjustment",
+            "anchor": "adjustment-guide"
+          }
+        },
+        "n7": {
+          "type": "link",
+          "settings": {
+            "label": "Specifications",
+            "anchor": "specifications"
+          }
+        },
+        "n8": {
+          "type": "link",
+          "settings": {
+            "label": "FAQ",
+            "anchor": "faq"
+          }
+        }
       },
-      "block_order": ["n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8"],
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5",
+        "n6",
+        "n7",
+        "n8"
+      ],
       "settings": {
         "label": "On this page",
         "show_buy": true,
@@ -52,7 +109,10 @@
         },
         "i2": {
           "type": "info",
-          "settings": { "label": "Included", "value": "Chair" }
+          "settings": {
+            "label": "Included",
+            "value": "Chair"
+          }
         },
         "i3": {
           "type": "info",
@@ -76,10 +136,17 @@
           }
         }
       },
-      "block_order": ["f1", "f2", "f3", "i1", "i2", "i3", "i4", "i5"],
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5"
+      ],
       "settings": {
-        "eyebrow": "Airy comfort",
-        "tagline": "Firm, breathable Airflex mesh across the seat and backrest, with fine personal fitting for cool comfort through long hours.",
         "tax_note": "Price includes GST. Shipping calculated at checkout.",
         "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
         "addons_title": "Add to your setup",
@@ -88,7 +155,8 @@
         "warranty_value": "5 years",
         "basic_info_title": "BASIC INFO",
         "notice_title": "Before you buy",
-        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>"
+        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>",
+        "subtitle": "Firm, breathable Airflex mesh across the seat and backrest, with fine personal fitting for cool comfort through long hours."
       }
     },
     "hero": {
@@ -156,7 +224,10 @@
           }
         }
       },
-      "block_order": ["b1", "b2"]
+      "block_order": [
+        "b1",
+        "b2"
+      ]
     },
     "fitting_banner": {
       "type": "sidiz-wb-scroll-banner",
@@ -214,7 +285,11 @@
           }
         }
       },
-      "block_order": ["c1", "c2", "c3"],
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
       "settings": {
         "header_scheme": "light",
         "background": "#ffffff"
@@ -263,7 +338,10 @@
           }
         }
       },
-      "block_order": ["c1", "c2"],
+      "block_order": [
+        "c1",
+        "c2"
+      ],
       "settings": {
         "header_scheme": "dark",
         "background": "#000000"
@@ -306,7 +384,11 @@
           }
         }
       },
-      "block_order": ["b1", "b2", "b3"]
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
     },
     "material_tiles": {
       "type": "sidiz-tile-card-list",
@@ -322,7 +404,9 @@
           }
         }
       },
-      "block_order": ["t1"],
+      "block_order": [
+        "t1"
+      ],
       "settings": {
         "heading": "Details that complete the comfort"
       }
@@ -355,7 +439,10 @@
           }
         }
       },
-      "block_order": ["m1", "m2"],
+      "block_order": [
+        "m1",
+        "m2"
+      ],
       "settings": {
         "width": "wide",
         "media_side": "above",
@@ -430,7 +517,13 @@
           }
         }
       },
-      "block_order": ["s1", "s2", "s3", "s4", "s5"],
+      "block_order": [
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5"
+      ],
       "settings": {
         "heading": "T60 AIR adjustment guide",
         "subtitle": "FIND YOUR FIT. Set it up for your body",
@@ -466,8 +559,6 @@
         "note": "<p>*Warranty periods vary by component.</p>",
         "register_label": "Register your product",
         "register_link": "/pages/product-registration",
-        "policy_label": "Warranty terms",
-        "policy_link": "/pages/warranty",
         "show_acl": true,
         "image_url": "https://kr.sidiz.com/cdn/shop/files/WARRANTY_5.jpg",
         "alt": "SIDIZ 5-year warranty badge"
@@ -491,7 +582,10 @@
           }
         }
       },
-      "block_order": ["d1", "d2"],
+      "block_order": [
+        "d1",
+        "d2"
+      ],
       "settings": {
         "heading": "T60 AIR dimensions",
         "figures": "Maximum load 125 kg / product weight approximately 19 kg.",
@@ -537,7 +631,13 @@
           }
         }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
       "settings": {
         "heading": "Frequently asked questions",
         "open_first": true,
@@ -592,7 +692,10 @@
           }
         }
       },
-      "block_order": ["c1", "c2"],
+      "block_order": [
+        "c1",
+        "c2"
+      ],
       "settings": {
         "heading": "Contact centre",
         "background": "#eaedf0",
