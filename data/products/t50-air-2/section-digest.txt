@@ -1,0 +1,180 @@
+
+===== 05-product_pdp_head.html =====
+  TEXT THE AIRY STANDARD 메쉬 의자의 기준을 새로 쓰다 T50 AIR 2세대 T50 AIR는 300만 소비자가 남겨온 실제 사용 데이터와 리뷰를 철저하게 분석하여, 정밀한 신체 맞춤 피팅에 압도적인 청량감을 더한 풀메쉬 의자입니다. 실제 사용 환경에서 느꼈던 미세한 아쉬움과 유격까지 모두 해소한 설계에, 체열과 땀을 실시간으로 순환시키는 고강성 에어플렉스 메쉬(Airflex Mesh)를 좌판까지 전면 적용했습니다. 장시간 몰입하는 순간에도 꺼짐 없이 탄탄한 지지력과 산뜻한 시원함을 동시에 유지해 주어, 사계절 내내 쾌적한 편안함을 선사합니다.
+  MEDIA 3c3449baafcb457fb2ecc4d5ac66360e.thumbnail.0000000000_small.jpg
+  MEDIA 3c3449baafcb457fb2ecc4d5ac66360e.HD-1080p-7.2Mbps-88196343.mp4
+  MEDIA 3c3449baafcb457fb2ecc4d5ac66360e.thumbnail.0000000000_small.jpg
+
+===== 06-product_row_1_wide.html =====
+  CSS #section-template--27506199757090__product_row_1_wide_6rHVPd :: background-color=#ffffff, color=#000000
+  TEXT 시디즈 T50 AIR 2세대 인체공학 사무용 컴퓨터 메쉬 의자 커스텀 메커니즘 에어 풀메쉬 체어 (Custom Mechanism Airy Full Mesh Chair) – 300만 소비자의 실제 사용 데이터를 바탕으로 기존의 미세한 불편함과 유격까지 완전히 해소하고 , 등판부터 좌판까지 고강성 에어플렉스 메쉬를 적용해 온종일 압도적인 청량감과 탄탄한 맞춤 피팅을 선사하는 시디즈의 프리미엄 풀메쉬 오피스 체어 와이드 메쉬 헤드레스트 & 2D 정밀 럼버서포트 (Wide Mesh Headrest & 2D Lumbar Support) – 310mm 와이드 메쉬로 잦은 자세 변화에도 뒷목을 포근하게 받쳐주는 헤드레스트와 이물감 및 흘러내림을 전면 개선해 요추 곡선에 맞춰 높이(50mm)·깊이(10mm)를 정밀하게 밀착 지지하는 럼버서포트 에어플렉스 풀메쉬 좌판 & 4D 워터폴 팔걸이 (Airflex Full Mesh Seat & 4D Waterfall Armrest) – 체열과 땀을 실시간으로 순환시키는 고탄성 복원력의 메쉬 좌판으로 패브릭 좌판 간 상호 호환 및 이지리페어 자가 교체가 가능하며, 기본 높이를 25mm 상향하고 4D 정밀 조절을 지원해 어깨 피로를 낮추는 워터폴 팔걸이 싱크로나이즈드 틸팅 & 5단계 범위 조절 (Synchronized & 5-Step Limited Tilting) – 등판을 젖힐 때 등이 떨어지지 않도록 유기적으로 연동되는 싱크 틸트 기술과 각도 고정 방식의 허리 부상 위험을 방지하고 요추를 보호하는 105도~130도의 5단계 틸팅 범위 및 강도 미세 조절 메커니즘 사무실·재택근무 홈 오피스·서재 등 장시간 앉아 몰입과 휴식을 반복하며, 기성 의자의 높낮이 한계를 넘어 여름
+
+===== 07-product_wb_scroll_banner.html =====
+  CSS .section-template--27506199757090__product_wb_scroll_banner_ :: color=#000000
+  CSS .section-template--27506199757090__product_wb_scroll_banner_ :: color=#000000, background-color=#eaedf0
+  CSS .section-template--27506199757090__product_wb_scroll_banner_ :: color=#000000
+  CSS .section-template--27506199757090__product_wb_scroll_banner_ :: color=#000000
+  CSS .section-template--27506199757090__product_wb_scroll_banner_ :: color=#000000, background-color=#eaedf0
+  CSS .section-template--27506199757090__product_wb_scroll_banner_ :: color=#000000
+  CSS .section-template--27506199757090__product_wb_scroll_banner_ :: color=#000000
+  TEXT 좋은 의자의 기준은 계속해서 발전하는 것 300만 소비자의 피드백이 있었기에 우리는 더 분명하게 알 수 있었습니다. 의자 위 사용자의 모든 순간에서 무엇이 필요하고, 무엇이 아쉬웠는지 철저하게 고민했습니다.
+  MEDIA 7e273350bc3641cbaed200e9dae43dca.thumbnail.0000000000_small.jpg
+  MEDIA 7e273350bc3641cbaed200e9dae43dca.HD-720p-4.5Mbps-88880974.mp4
+  MEDIA 7e273350bc3641cbaed200e9dae43dca.thumbnail.0000000000_small.jpg
+  MEDIA 7e273350bc3641cbaed200e9dae43dca.thumbnail.0000000000_small.jpg
+  MEDIA 7e273350bc3641cbaed200e9dae43dca.HD-720p-4.5Mbps-88880974.mp4
+  MEDIA 7e273350bc3641cbaed200e9dae43dca.thumbnail.0000000000_small.jpg
+
+===== 08-product_wb_card_list.html =====
+  CSS .block-video_9ipKpa .card--text .title :: color=#000000
+  CSS .block-video_9ipKpa .card--text .description :: color=#7c8084
+  CSS .block-video_kUhEEj .card--text .title :: color=#000000
+  CSS .block-video_kUhEEj .card--text .description :: color=#7c8084
+  CSS .block-video_LKzfCC .card--text .title :: color=#000000
+  CSS .block-video_LKzfCC .card--text .description :: color=#7c8084
+  TEXT 의자를 바꾼 의자 사무실, 홈오피스, 서재 등 전 국민의 일상 속에서 가장 많은 사랑을 받으며 대한민국 사무용 의자의 패러다임을 바꿨습니다. 익숙함 속에서 포착한 불편함 기존의 명성에 안주하지 않고 오랜 시간 축적해 온 리뷰 데이터를 철저하게 분석하여 미세한 아쉬움을들 찾아냈습니다. 미세한 아쉬움들을 해소한 설계 가장 불편함이 컸던 럼버서포트의 이물감, 헤드레스트 형태와 높이의 한계, 낮게 느껴졌던 팔걸이를 집중적으로 개선하여 한 차원 높은 착좌감을 선사합니다.
+  MEDIA 5110530e20dd42798db2581861369556.thumbnail.0000000000_small.jpg
+  MEDIA 5110530e20dd42798db2581861369556.HD-1080p-7.2Mbps-88964623.mp4
+  MEDIA 5110530e20dd42798db2581861369556.thumbnail.0000000000_small.jpg
+  MEDIA 9f27dee664044d0bae16e1fde7eec626.thumbnail.0000000000_small.jpg
+  MEDIA 9f27dee664044d0bae16e1fde7eec626.HD-1080p-7.2Mbps-88880886.mp4
+  MEDIA 9f27dee664044d0bae16e1fde7eec626.thumbnail.0000000000_small.jpg
+  MEDIA d00c8cf2c9d54302a97c3d11fda26c8a.thumbnail.0000000000_small.jpg
+  MEDIA d00c8cf2c9d54302a97c3d11fda26c8a.HD-1080p-7.2Mbps-88880912.mp4
+  MEDIA d00c8cf2c9d54302a97c3d11fda26c8a.thumbnail.0000000000_small.jpg
+
+===== 09-product_view_horizontal.html =====
+  TEXT 등판부터 좌판까지, 풀 메쉬 (Full Mesh System) 등판부터 좌판까지 전면에 메쉬 소재를 적용하여 몸에 고이는 땀과 열을 빠르게 식혀주고 산뜻함을 유지합니다. 공기 순환을 극대화한 구조로 사계절 내내 온종일 앉아 있어도 청량하고 쾌적한 착석감을 제공합니다. 에어플렉스 메쉬 (Airflex Mesh) 강성과 탄성 복원력이 모두 뛰어난 특수 메쉬 원단을 사용하여 오랜 기간 사용해도 형태가 쉽게 무너지지 않습니다. 엉덩이와 등 전체를 탄탄하고 유연하게 받쳐주어 균형 잡힌 인체공학적 지지력을 선사합니다. 걱정없이 오래오래 (Durable Design) 미국 사무가구협회(BIFMA)의 엄격한 테스트 기준을 통과하여 최대 125kg 의 하중까지 견고하게 지지하는 압도적인 내구성을 자랑합니다. 부품 손상 시 좌판을 손쉽게 구매하고 직접 교체할 수 있어 장기간 안심하고 사용할 수 있습니다.
+  MAIN: ['24a0efbf1d8843bcb907653feef49d32.HD-1080p-7.2Mbps-766117', '24a0efbf1d8843bcb907653feef49d32.thumbnail.0000000000_sm']
+  MEDIA 24a0efbf1d8843bcb907653feef49d32.thumbnail.0000000000_small.jpg
+  MEDIA 24a0efbf1d8843bcb907653feef49d32.HD-1080p-7.2Mbps-76611715.mp4
+  MEDIA 24a0efbf1d8843bcb907653feef49d32.thumbnail.0000000000_small.jpg
+  MEDIA Img2_f746652c-719b-4616-9a41-6d5f36fc68e0.jpg
+  MEDIA Img3_311d07fd-09dc-411a-b8e0-e628f395da27.jpg
+
+===== 10-product_wb_banner.html =====
+  CSS .section-template--27506199757090__product_wb_banner_fGQ6bL  :: color=
+  CSS .section-template--27506199757090__product_wb_banner_fGQ6bL  :: color=
+  TEXT 다시 설계한 편안함의 기준
+
+===== 11-product_view_vertical.html =====
+  TEXT 럼버서포트 정밀한 메커니즘으로 기대었을 때 아래로 흘러내리는 현상과 미세한 유격을 최소화했습니다. 순간의 안락함이 아닌, 오랜 시간 앉아 있어도 무너지지 않고 유지되는 지속적인 편안함을 전합니다. 에르고핏 럼버서포트 등에 닿는 지지 면적을 기존 대비 약 1.5배 넓혀 특정 부위에만 가해지던 압박감을 해소했습니다. 체형에 따라 유연하게 반응하는 소재를 적용하여 요추를 밀착 지지합니다. 2D 입체 조절 높이(50mm)와 깊이(10mm) 조절 기능으로 내 몸에 딱 맞는 지지 포지션을 찾아줍니다.
+  MAIN: ['29b55f14ead64a3f8228c67b95afe8dc.HD-1080p-7.2Mbps-880396', '29b55f14ead64a3f8228c67b95afe8dc.thumbnail.0000000000_sm']
+  MEDIA 29b55f14ead64a3f8228c67b95afe8dc.thumbnail.0000000000_small.jpg
+  MEDIA 29b55f14ead64a3f8228c67b95afe8dc.HD-1080p-7.2Mbps-88039623.mp4
+  MEDIA 29b55f14ead64a3f8228c67b95afe8dc.thumbnail.0000000000_small.jpg
+  MEDIA T50_7c4bc130-e61f-49f7-a7be-a1d11932b674.png
+  MEDIA 71cf1da88479417ea1d6f9f7ca8d6cec.thumbnail.0000000000_small.jpg
+  MEDIA 71cf1da88479417ea1d6f9f7ca8d6cec.HD-1080p-7.2Mbps-88038615.mp4
+  MEDIA 71cf1da88479417ea1d6f9f7ca8d6cec.thumbnail.0000000000_small.jpg
+
+===== 12-product_view_vertical.html =====
+  TEXT 헤드레스트 더 넓어진 면적으로 고개를 어떻게 기대어도 편안함이 끊김 없이 유연하게 이어집니다. 메쉬 헤드레스트 (Mesh Headrest) 헤드레스트에도 메쉬 소재를 적용하여 장시간 사용 시에도 열 배출이 용이하며, 산뜻하고 쾌적한 상태를 유지해 줍니다. 널찍하게 설계된 면적이 어떤 자세나 움직임에서도 목과 머리를 안정적으로 지지합니다. 310mm 와이드 서포트 더 넓은 면적으로 잦은 자세 변화까지 안정적으로 수용합니다. 고개를 좌우로 돌리거나 비스듬히 기댄 상태에서도 헤드레스트 이탈 없이 뒷목을 안정감 있게 받쳐줍니다. 높이와 각도 조절 개인의 체형에 맞게 높이(55mm)와 각도(55°)를 세밀하게 조절할 수 있습니다. 업무 집중 자세부터 편안하게 휴식하는 자세까지, 뒷목을 빈틈없이 받쳐줍니다.
+  MAIN: ['18f412bb136d4b73bd01c305f94ae414.HD-1080p-7.2Mbps-882023', '18f412bb136d4b73bd01c305f94ae414.thumbnail.0000000000_sm']
+  MEDIA 18f412bb136d4b73bd01c305f94ae414.thumbnail.0000000000_small.jpg
+  MEDIA 18f412bb136d4b73bd01c305f94ae414.HD-1080p-7.2Mbps-88202354.mp4
+  MEDIA 18f412bb136d4b73bd01c305f94ae414.thumbnail.0000000000_small.jpg
+  MEDIA Img2_f746652c-719b-4616-9a41-6d5f36fc68e0.jpg
+  MEDIA 91478640760643fdb2c201e0478c8884.thumbnail.0000000000_small.jpg
+  MEDIA 91478640760643fdb2c201e0478c8884.HD-720p-2.1Mbps-88142988.mp4
+  MEDIA 91478640760643fdb2c201e0478c8884.thumbnail.0000000000_small.jpg
+  MEDIA fd2c5226e7bc4477b00d7c655e365fb1.thumbnail.0000000000_small.jpg
+  MEDIA fd2c5226e7bc4477b00d7c655e365fb1.HD-1080p-7.2Mbps-88040316.mp4
+  MEDIA fd2c5226e7bc4477b00d7c655e365fb1.thumbnail.0000000000_small.jpg
+
+===== 13-product_view_vertical.html =====
+  TEXT 팔걸이 어떤 체형과 자세를 취하더라도 팔꿈치부터 손목까지 빈틈없이 지지하여 어깨에 가해지는 하중을 최소화합니다. 더 높아진 팔걸이 체형에 따라 낮게 겉돌던 팔걸이의 기본 높이를 25mm 높였습니다 어떤 체형이 앉아도 팔꿈치를 안정적으로 받쳐주어 상체의 긴장감을 완화합니다. 4D 조절 기능 높이(60mm)와 앞뒤(30mm), 각도(20º) 뿐만 아니라 너비(10mm)까지 체형에 맞춰 유연하게 조절됩니다. 어떤 움직임 속에서도 팔을 가장 편안한 각도로 지지해 줍니다. 워터폴(Waterfall) 팔걸이 안쪽으로 부드럽게 떨어지는 형태의 팔걸이 패드가 잦은 자세 변화에도 아래팔이 눌리는 통증을 방지합니다.
+  MAIN: ['f22bf344b9ed4e1bb29879c1fa78b9da.HD-1080p-7.2Mbps-880401', 'f22bf344b9ed4e1bb29879c1fa78b9da.thumbnail.0000000000_sm']
+  MEDIA f22bf344b9ed4e1bb29879c1fa78b9da.thumbnail.0000000000_small.jpg
+  MEDIA f22bf344b9ed4e1bb29879c1fa78b9da.HD-1080p-7.2Mbps-88040109.mp4
+  MEDIA f22bf344b9ed4e1bb29879c1fa78b9da.thumbnail.0000000000_small.jpg
+  MEDIA 8533b757e10c4eccbf2391db07c6cb41.thumbnail.0000000000_small.jpg
+  MEDIA 8533b757e10c4eccbf2391db07c6cb41.HD-1080p-7.2Mbps-88040684.mp4
+  MEDIA 8533b757e10c4eccbf2391db07c6cb41.thumbnail.0000000000_small.jpg
+  MEDIA be538a49271f4420a44487bad3d2b7da.thumbnail.0000000000_small.jpg
+  MEDIA be538a49271f4420a44487bad3d2b7da.HD-1080p-7.2Mbps-88142944.mp4
+  MEDIA be538a49271f4420a44487bad3d2b7da.thumbnail.0000000000_small.jpg
+  MEDIA f02b76e3f88c413bafefbb762de2d909.thumbnail.0000000000_small.jpg
+  MEDIA f02b76e3f88c413bafefbb762de2d909.HD-1080p-7.2Mbps-88040728.mp4
+  MEDIA f02b76e3f88c413bafefbb762de2d909.thumbnail.0000000000_small.jpg
+
+===== 14-product_wb_banner.html =====
+  CSS .section-template--27506199757090__product_wb_banner_qz7zUX  :: color=
+  CSS .section-template--27506199757090__product_wb_banner_qz7zUX  :: color=
+  TEXT 누구에게나 편안함
+
+===== 15-product_view_vertical.html =====
+  TEXT 몸을 읽는 인체공학 좋은 의자의 본질은 어떤 체형이 앉아도 이질감 없이 몸을 바르게 잡아주는 것입니다. 장시간 의자 위에서 업무와 몰입을 반복하는 사용자를 위해, 신체 곡선을 정밀하게 반영한 인체공학적 설계를 적용했습니다. T50은 앉는 순간 척추와 골반을 부드럽게 감싸며, 자세 변화 속에서도 몸에 가해지는 압박을 최소화하여 가장 이상적인 착좌감을 유지해 줍니다. 오리지널 S-Curve 등판 T50의 헤리티지를 상징하는 핵심 설계입니다. 인체의 척추 라인을 가장 자연스럽게 닮은 S자 형태로 등판을 디자인하여, 요추에 무리한 부담을 주지 않고 바른 자세를 유지할 수 있습니다.
+  MAIN: ['7b3e9de3fecf43c4a63383ca8e2a156e.HD-1080p-7.2Mbps-880408', '7b3e9de3fecf43c4a63383ca8e2a156e.thumbnail.0000000000_sm']
+  MEDIA 7b3e9de3fecf43c4a63383ca8e2a156e.thumbnail.0000000000_small.jpg
+  MEDIA 7b3e9de3fecf43c4a63383ca8e2a156e.HD-1080p-7.2Mbps-88040822.mp4
+  MEDIA 7b3e9de3fecf43c4a63383ca8e2a156e.thumbnail.0000000000_small.jpg
+  MEDIA T50_S__1.png
+
+===== 16-product_view_vertical.html =====
+  TEXT 싱크 틸트 의자의 핵심 메커니즘인 틸트는 등판과 좌판의 각도를 정밀하게 조절해 사용자가 컴퓨터 의자 위에서 고정된 자세에 머무르지 않고 자연스럽게 움직일 수 있도록 돕습니다. T50의 싱크 틸트는 사무용 의자 선택의 기준이 되는 틸팅 범위와 강도를 사용자의 체형과 업무 상황에 맞게 섬세하게 조절할 수 있어, 나에게 최적화된 편안함을 제공합니다. 싱크로나이즈드 틸팅 등판을 젖힐 때 좌판이 서로 다른 각도로 연동되어 함께 움직입니다. 몸이 앞으로 미끄러지는 현상을 막아주어 허리와 골반을 언제나 편안하게 밀착 지지해 줍니다. 5단계 틸팅 범위 조절 집중하는 정자세부터 편안한 휴식까지 상황에 맞게 가동 범위를 설정할 수 있습니다. 105°에서 130°까지 등판이 젖혀지는 범위를 조절할 수 있습니다. 틸팅 강도 미세 조절 정해진 단계에 내 몸을 억지로 맞출 필요가 없습니다. 개개인의 체형과 취향에 따라 등판이 넘어가는 무게감을 레버로 세밀하게 조절하여 최적의 텐션감을 찾아줍니다.
+  MAIN: ['401bceb1cd3281a9696cc523160ad0cd.jpg']
+  MEDIA 401bceb1cd3281a9696cc523160ad0cd.jpg
+  MEDIA 7b3e9de3fecf43c4a63383ca8e2a156e.thumbnail.0000000000_small.jpg
+  MEDIA 7b3e9de3fecf43c4a63383ca8e2a156e.HD-1080p-7.2Mbps-88040822.mp4
+  MEDIA 7b3e9de3fecf43c4a63383ca8e2a156e.thumbnail.0000000000_small.jpg
+  MEDIA 2fc6ac7be44d4a78bf9feaaf4b7d224f.thumbnail.0000000000_small.jpg
+  MEDIA 2fc6ac7be44d4a78bf9feaaf4b7d224f.HD-1080p-7.2Mbps-88202556.mp4
+  MEDIA 2fc6ac7be44d4a78bf9feaaf4b7d224f.thumbnail.0000000000_small.jpg
+  MEDIA 2fc6ac7be44d4a78bf9feaaf4b7d224f.thumbnail.0000000000_small.jpg
+  MEDIA 2fc6ac7be44d4a78bf9feaaf4b7d224f.HD-1080p-7.2Mbps-88202556.mp4
+  MEDIA 2fc6ac7be44d4a78bf9feaaf4b7d224f.thumbnail.0000000000_small.jpg
+
+===== 17-product_tile_card_list.html =====
+  TEXT 편안함을 완성하는 디테일 하이브리드 좌판 시스템 최초 구매 사양에 구애받지 않고 취향이나 계절의 변화에 맞춰 패브릭 좌판과 메쉬 좌판을 언제든 상호 교체할 수 있습니다. 직관적이고 단순하게 설계된 분리 구조로, 누구나 손쉽게 교체 가능합니다. 우레탄 바퀴 일반 바퀴에 비해 한결 부드러운 우레탄 소재를 적용하여 이동 시 발생하는 거슬리는 소음을 조용하게 줄여줍니다. 바닥재의 긁힘과 손상을 최소화하여 어떤 공간에서도 부담 없이 매끄럽게 움직일 수 있습니다.
+  MEDIA 2e862efef722422ba97d03f8be3e1eb2.thumbnail.0000000000_small.jpg
+  MEDIA 2e862efef722422ba97d03f8be3e1eb2.HD-1080p-4.8Mbps-88143127.mp4
+  MEDIA 2e862efef722422ba97d03f8be3e1eb2.thumbnail.0000000000_small.jpg
+  MEDIA 0bb9f4ff25f1cdf3c1a8fb3eaaa0c322.jpg
+
+===== 18-product_wb_banner.html =====
+  CSS .section-template--27506199757090__product_wb_banner_3rhBJz  :: color=
+  CSS .section-template--27506199757090__product_wb_banner_3rhBJz  :: color=
+  TEXT T50 AIR 2세대 & 1세대 한 눈에 비교하기
+
+===== 19-product_row_1_wide.html =====
+  CSS #section-template--27506199757090__product_row_1_wide_dQfMax :: background-color=#ffffff, color=#000000
+  TEXT 
+  MEDIA T501_T502_Air_web-1_8cb862be-33f6-4d22-95fe-b2d096dbfc34.png
+  MEDIA T501_T502_Air_web-1_8cb862be-33f6-4d22-95fe-b2d096dbfc34.png
+
+===== 20-product_row_1_wide.html =====
+  CSS #section-template--27506199757090__product_row_1_wide_cJ7Pkx :: background-color=#ffffff, color=#000000
+  TEXT 
+  MEDIA T502_T501_Air_web-2_7f730434-1777-4ffb-96a5-e9c69b46fbe2.png
+  MEDIA T502_T501_Air_web-2_7f730434-1777-4ffb-96a5-e9c69b46fbe2.png
+
+===== 21-product_find_your_fit.html =====
+  TEXT T50 AIR 2세대 조절 방법 내 몸에 맞게 조절해 보세요 USER GUIDE 사용자의 체형에 맞춰 의자 높이 / 좌판 깊이 조절 머리와 목의 부담을 줄이도록 헤드레스트 높이 / 각도 조절 원하는대로 등판이 젖혀지도록 틸팅 범위 / 강도 조절 어깨와 팔을 편안하게 팔걸이 높이 / 앞뒤 / 각도 / 너비 조절 허리를 안정적으로 지지하도록 럼버서포트 높이 / 깊이 조절
+  MEDIA 2026-07-05_14.06.34.png
+  MEDIA 2026-07-05_14.07.15.png
+  MEDIA 2026-07-05_14.12.22.png
+  MEDIA 2026-07-05_14.08.24.png
+  MEDIA 2026-07-05_14.08.56.png
+
+===== 22-product_easy_repair.html =====
+  TEXT T50 AIR 2세대 | EASY REPAIR 이지리페어 시디즈 이지리페어는 의자를 버리지 않고 필요한 부품만 교체해 오래 사용할 수 있도록 돕는 고객 친화적 유지관리 정책입니다. *헤드레스트, 좌판, 팔걸이 패드 출시 예정 이지리페어 우레탄 바퀴 A형 28,000원 싯브레이크 바퀴 A형 35,000원
+  MEDIA thum_CASTER-GLIDE_T00U0KG_BK65_01.jpg
+  MEDIA thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75
+
+===== 23-product_warranty.html =====
+  TEXT T50 AIR 2세대 | 5년 품질보증 T50 AIR 2세대와 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 5년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해, 더욱 편안한 사용을 경험해 보세요. *제품별로 보증 기간이 상이합니다. 정품등록
+  MEDIA WARRANTY_5.jpg
+
+===== 24-product_spec.html =====
+  TEXT T50 AIR 2세대 제품 사이즈 최대 하중 125kg / 최대 무게 약 17.6kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다.
+  MEDIA T53HLDA0KK_01.jpg
+  MEDIA T53HLDA0KK_02.jpg
+
+===== 25-product_information.html =====
+  TEXT 사용 시 주의 사항 오염 제거 방법 안내 의자 사용 시 의자 프레임이 오염되었을 경우, 매직블럭을 활용하면 얼룩을 간편히 제거할 수 있습니다. *매직블럭을 과도한 힘으로 문지르면, 표면이 손상될 수 있습니다. 틸팅 시 주의 사항 순간적으로 과도한 힘으로 등판을 젖힐 경우, 전도의 위험이 있으니 주의해주세요.
+  MEDIA BLOCK-EGA-NOTICE.jpg
+  MEDIA pc_1.png
+
+===== 26-product_faq.html =====
+  TEXT FAQ 완전히 풀체인지된 시디즈 T50 2세대는 기존 모델과 어떤 점이 다른가요? 시디즈 T50 2세대 는 누적 300만 대 이상 판매된 기존 1세대의 상징적인 S라인 아이덴티티를 완벽히 계승하면서 , 실제 소비자 피드백을 바탕으로 미세한 아쉬움까지 해결한 모델 체인지 제품 입니다. 기존의 덜렁거림과 유격을 잡고 접촉 면적을 넓혀 이물감을 지워낸 와이드 럼버서포트 , 딱딱한 가죽 대신 쾌적한 에어플렉스 메쉬 소재와 310mm 와이드 면적을 채택해 목을 포근하게 받쳐주는 헤드레스트 , 그리고 체형에 맞춰 더 넓은 범위를 조절할 수 있도록 기본 높이를 25mm 상향한 4D 정밀 조절 팔걸이를 통해 목과 어깨의 피로도를 낮췄습니다. 특히, 기존과 달리 패브릭 좌판(T50)과 메쉬 좌판(T50 AIR) 간의 상호 호환이 가능 하도록 하이브리드 분리 구조로 설계되어 , 계절과 취향에 따라 언제든 좌판만 추가 구매해 소비자가 집에서 손쉽게 이지리페어 자가 교체를 하며 오랫동안 새것처럼 사용할 수 있습니다. 장시간 컴퓨터 작업 시 요추 통증이 있는데, 허리를 충분히 받쳐주나요? 네, T50 2세대에 탑재된 차세대 럼버서포트(요추지지대)는 체형과 신체 곡선에 맞춤 대응하도록 설계되었습니다. 기존 대비 패드의 접촉 면적을 대폭 넓혀(290*160mm) 특정 부위만 압박하던 현상을 근본적으로 해결했으며 , 체형에 따라 부드럽게 반응하는 유연한 소재를 적용해 이물감 없이 요추를 밀착 지지합니다. 사용자의 요추 곡선 위치에 맞게 높이(50mm)와 깊이(10mm)를 정밀하게 2D 조절 할 수 있으며 , 지지 자극을 원치 않는 경우 깊이 조절 레버를 이용해 안 느껴지게 숨겨서 사용할 수도 있습니다. 또한 기존 1세대의 취

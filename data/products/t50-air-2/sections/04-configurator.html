@@ -1,0 +1,1507 @@
+<section id="shopify-section-template--27506199757090__configurator" class="shopify-section mount-product-page mount-show-more section-product-configurator"><!-- NAVER 상품상세(view_product) SCRIPT -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type='text/javascript'>
+if(window.wcs){
+  window.scriptInfo = {
+    id: "10288701669666", // (필수) 상품 ID
+    name: "T50 AIR 2세대", // 상품명
+    category: "기본 카테고리", // 카테고리명 (없으면 기본값)
+    quantity: 1, // 기본 수량
+    payAmount: 434000, // 제품 가격 (콤마 제거)
+    option: "화이트 / 애쉬화이트" // 기본 옵션명
+  }
+  
+  if(!wcs_add) var wcs_add = {};
+  wcs_add["wa"] = "s_29fd958c4603"; 
+
+  var _conv = {};
+  _conv.type = 'view_product'; // (필수)
+  _conv.items = [scriptInfo];
+
+  wcs.trans(_conv);
+}
+</script>
+<!-- NAVER 상품상세(view_product) SCRIPT END -->
+
+<script>
+  // 로그인 여부와 제품 정보를 확인한 후 로컬 저장소에 저장하는 함수
+function saveProductToLocalStorage(customerId, productInfo) {
+  if (!customerId) {
+    return; // 로그인되지 않은 경우 실행하지 않음
+  }
+
+  // 로컬 저장소에서 기존 관심 제품 목록을 가져옴 (사용자별로 저장)
+  let storedData = JSON.parse(localStorage.getItem('wishlistProducts')) || {};
+
+  // 해당 고객 ID에 맞는 데이터를 찾음
+  let wishlist = storedData[customerId] || [];
+
+  // 이미 목록에 있는 제품인지 확인 (prod_id로 체크)
+  const productIndex = wishlist.findIndex(item => item.prod_id === productInfo.prod_id);
+
+  // 목록에 있으면 기존 항목을 제거하고 최상단으로 이동
+  if (productIndex !== -1) {
+    wishlist.splice(productIndex, 1);
+  }
+
+  // 새로운 제품을 최상단에 추가
+  wishlist.unshift(productInfo);
+
+  // 갱신된 데이터를 로컬 저장소에 다시 저장
+  storedData[customerId] = wishlist;
+  localStorage.setItem('wishlistProducts', JSON.stringify(storedData));
+}
+
+// 최근 본 제품 ID를 로컬 스토리지에 저장하는 함수
+function saveRecentlyViewedProduct(recentlyViewed) {
+  localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+}
+
+// 페이지 로드 시 실행되는 함수
+document.addEventListener('DOMContentLoaded', function() {
+  const productName = "T50 AIR 2세대";    // 현재 제품의 이름 가져오기
+  const productId = "10288701669666";         // 현재 제품의 ID 가져오기
+  const productHandle = "t50-air-2"; // 현재 제품의 핸들 가져오기
+
+  // 현재 URL 가져오기
+  const currentUrl = new URL(window.location.href);
+  const hasStoreParam = currentUrl.searchParams.has("store"); // "store" 키 존재 여부 확인
+  
+  let storedStoreCookie = getCookie("storeCode");
+  let redirectCookie = getCookie("redirectQrProdDetail");
+
+  let storedStoreParam = (!storedStoreCookie || storedStoreCookie === "null" || storedStoreCookie === "undefined")?null:storedStoreCookie;
+  let redirectParam = (!redirectCookie || redirectCookie === "null" || redirectCookie === "undefined")?null:redirectCookie;
+  
+
+  if (hasStoreParam) {
+      const storeParam = currentUrl.searchParams.get("store");
+      // ✅ store 파라미터가 있으면 sessionStorage에 저장 (로그인 후 유지용)
+      if (!customerId) {
+          // ✅ 현재 페이지 URL을 저장 (로그인 후 돌아올 경로 유지)
+          
+          document.cookie = `storeCode=${storeParam}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          document.cookie = `redirectQrProdDetail=${window.location.pathname}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          
+          setTimeout(() => {
+            location.href = "/account/login";
+          }, 300);
+          
+          // Shopify 기본 로그인 페이지로 이동
+          
+      }
+      else{
+        // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능  
+        setStoreCode(storeParam);
+      }
+  } else if (storedStoreParam) {
+    if (customerId) {
+      // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능
+      setStoreCode(storedStoreParam);
+    }
+  }
+
+  function setStoreCode(storeParam){
+    let shop_name = "";
+    
+    let offlineShopScript = document.querySelector('.offline-shop-data');
+    if (offlineShopScript != null) {
+        const offlineShops = JSON.parse(offlineShopScript.textContent).offline_shops;
+
+        // shop_code에 해당하는 행(row)을 찾기
+        const targetShop = offlineShops.find(shop => shop.shop_code === storeParam);
+
+        if (targetShop) {
+            shop_name = targetShop.shop_name;
+        }
+    }
+
+    let url = "https://sidiz-shopify.sidiz.com/api/v1/search/qr-prod-detail"
+    
+    fetch(url, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json', // JSON 형식 지정
+        },
+        body: JSON.stringify({
+            "customerMd5Hash": customerMd5Hash,
+            "store_code": storeParam,
+            "store_name": shop_name
+        })
+    })
+    .then(response => {
+        
+        document.cookie = "storeCode=; path=/; Secure; SameSite=Lax; max-age=0";
+        document.cookie = "redirectQrProdDetail=; path=/; Secure; SameSite=Lax; max-age=0";
+        
+        if(redirectParam){
+          location.href = redirectParam;
+        }
+        const currentUrl = new URL(window.location.href);
+        if (currentUrl.searchParams.has("store")) {
+            currentUrl.searchParams.delete("store"); // store 파라미터 삭제
+
+            // URL을 변경하지만 페이지를 새로고침하지 않음
+            window.history.replaceState({}, document.title, currentUrl.toString());
+        }
+    });
+  }
+
+  const recentlyViewed = {
+    name: productName,
+    id: productId,
+    handle: productHandle
+  };
+
+  saveRecentlyViewedProduct(recentlyViewed);
+  
+  const productInfo = {
+    prod_name: productName,
+    prod_id: productId
+  };
+
+  // 로그인된 고객만 로컬 저장소에 제품을 저장
+  if (customerId) {
+    saveProductToLocalStorage(customerId, productInfo);
+  }
+});
+</script>
+
+
+
+<script>
+  const variantsData = [
+    
+      {
+        sku: "T53HLDA0KK · 5H1WW",
+        id: "51980637896994",
+        color_options: [
+          {"name": "프레임", "value": "화이트", "frame_rgb": "#FDFDFC"},{"name": "색상", "value": "애쉬화이트", "color_rgb": "#E0DEDC"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "T53HLDA0KK · 5H6BBK",
+        id: "51980637929762",
+        color_options: [
+          {"name": "프레임", "value": "블랙", "frame_rgb": "#181818"},{"name": "색상", "value": "카본블랙", "color_rgb": "#303030"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "T53HLDA0KK · 5H1CG",
+        id: "52321671545122",
+        color_options: [
+          {"name": "프레임", "value": "웜그레이", "frame_rgb": "#dad7d7"},{"name": "색상", "value": "미네랄그레이", "color_rgb": "#b5b5b5"}
+        ]
+      }
+      
+    
+  ];
+  const variantsAllOptionData = [
+    
+      {
+        sku: "T53HLDA0KK-5H1WW",
+        id: "51980637896994",
+        options: [
+          {"name": "프레임", "value": "화이트"},{"name": "색상", "value": "애쉬화이트"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "T53HLDA0KK-5H6BBK",
+        id: "51980637929762",
+        options: [
+          {"name": "프레임", "value": "블랙"},{"name": "색상", "value": "카본블랙"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "T53HLDA0KK-5H1CG",
+        id: "52321671545122",
+        options: [
+          {"name": "프레임", "value": "웜그레이"},{"name": "색상", "value": "미네랄그레이"}
+        ]
+      }
+      
+    
+  ];
+</script>
+<script defer>
+    let icon_pw_show = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-show.svg?v=61838389088702437721747705927';
+    let icon_pw_unshow = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-unshow.svg?v=177080918668616523901747705925';
+</script>
+<script src="//kr.sidiz.com/cdn/shop/t/152/assets/bookmark.js?v=118576581409273616741753146757" defer></script>
+
+<script>
+  // PLUS ZERO: view_item
+  const viewItemData = {
+    item_id: "T53HLDA0KK-5H1WW",
+    item_name: "T50 AIR 2세대",
+    item_brand: 'SIDIZ',
+    item_category: "WORK",
+    img_url: "T50AIR_WW____45.jpg?v=1783306157"
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // 이전 ecommerce 데이터 초기화
+    dataLayer.push({ ecommerce: null });
+    
+    window.dataLayer.push({
+      event: 'view_item',
+      page_type: '제품 상세',
+      ecommerce: {
+        items: [viewItemData]
+      }
+    });
+  }, { once: true });
+</script>
+
+<div class="modal-360 hidden" data-variant-id="51980637896994">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_1_2dcdd207-26dd-4609-89cb-e72947eb58c7.png?crop=center&amp;v=1783304715" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_1_2dcdd207-26dd-4609-89cb-e72947eb58c7.png?crop=center&amp;v=1783304715&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_1_2dcdd207-26dd-4609-89cb-e72947eb58c7.png?crop=center&amp;v=1783304715&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_1_2dcdd207-26dd-4609-89cb-e72947eb58c7.png?crop=center&amp;v=1783304715&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_2_75bd81cb-28a2-4edb-9072-e729777a5fb4.png?crop=center&amp;v=1783304583" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_2_75bd81cb-28a2-4edb-9072-e729777a5fb4.png?crop=center&amp;v=1783304583&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_2_75bd81cb-28a2-4edb-9072-e729777a5fb4.png?crop=center&amp;v=1783304583&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_2_75bd81cb-28a2-4edb-9072-e729777a5fb4.png?crop=center&amp;v=1783304583&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_3_18593932-8ee2-4527-a2ee-77ac0b97cedf.png?crop=center&amp;v=1783304583" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_3_18593932-8ee2-4527-a2ee-77ac0b97cedf.png?crop=center&amp;v=1783304583&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_3_18593932-8ee2-4527-a2ee-77ac0b97cedf.png?crop=center&amp;v=1783304583&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_3_18593932-8ee2-4527-a2ee-77ac0b97cedf.png?crop=center&amp;v=1783304583&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_5_9beb52fa-56dd-45c7-abbf-8dd64d8461ab.png?crop=center&amp;v=1783304583" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_5_9beb52fa-56dd-45c7-abbf-8dd64d8461ab.png?crop=center&amp;v=1783304583&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_5_9beb52fa-56dd-45c7-abbf-8dd64d8461ab.png?crop=center&amp;v=1783304583&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_5_9beb52fa-56dd-45c7-abbf-8dd64d8461ab.png?crop=center&amp;v=1783304583&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_4_5e808e15-1ef7-48ce-a4ff-96ba5c158e09.png?crop=center&amp;v=1783304583" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WW_4_5e808e15-1ef7-48ce-a4ff-96ba5c158e09.png?crop=center&amp;v=1783304583&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_4_5e808e15-1ef7-48ce-a4ff-96ba5c158e09.png?crop=center&amp;v=1783304583&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WW_4_5e808e15-1ef7-48ce-a4ff-96ba5c158e09.png?crop=center&amp;v=1783304583&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="51980637929762">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_1_d2bf3c9d-50dc-4d8f-aece-c2691648339d.png?crop=center&amp;v=1783304756" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_1_d2bf3c9d-50dc-4d8f-aece-c2691648339d.png?crop=center&amp;v=1783304756&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_1_d2bf3c9d-50dc-4d8f-aece-c2691648339d.png?crop=center&amp;v=1783304756&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_1_d2bf3c9d-50dc-4d8f-aece-c2691648339d.png?crop=center&amp;v=1783304756&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_2_f2f1d013-56f2-4fe4-a2ba-935349091364.png?crop=center&amp;v=1783304756" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_2_f2f1d013-56f2-4fe4-a2ba-935349091364.png?crop=center&amp;v=1783304756&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_2_f2f1d013-56f2-4fe4-a2ba-935349091364.png?crop=center&amp;v=1783304756&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_2_f2f1d013-56f2-4fe4-a2ba-935349091364.png?crop=center&amp;v=1783304756&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_3_c46e6bbd-ee16-446d-9783-c9730a474217.png?crop=center&amp;v=1783304756" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_3_c46e6bbd-ee16-446d-9783-c9730a474217.png?crop=center&amp;v=1783304756&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_3_c46e6bbd-ee16-446d-9783-c9730a474217.png?crop=center&amp;v=1783304756&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_3_c46e6bbd-ee16-446d-9783-c9730a474217.png?crop=center&amp;v=1783304756&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_4_489bfcd2-7673-498a-8865-94fe388fb68d.png?crop=center&amp;v=1783304756" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_4_489bfcd2-7673-498a-8865-94fe388fb68d.png?crop=center&amp;v=1783304756&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_4_489bfcd2-7673-498a-8865-94fe388fb68d.png?crop=center&amp;v=1783304756&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_4_489bfcd2-7673-498a-8865-94fe388fb68d.png?crop=center&amp;v=1783304756&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_5_b1f1ea86-410d-445a-ac9a-23000f460a71.png?crop=center&amp;v=1783304756" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_IG_5_b1f1ea86-410d-445a-ac9a-23000f460a71.png?crop=center&amp;v=1783304756&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_5_b1f1ea86-410d-445a-ac9a-23000f460a71.png?crop=center&amp;v=1783304756&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_IG_5_b1f1ea86-410d-445a-ac9a-23000f460a71.png?crop=center&amp;v=1783304756&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="52321671545122">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG_03d875d6-83a4-47cd-834a-dde1aa863ebf.jpg?crop=center&amp;v=1786688105" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG_03d875d6-83a4-47cd-834a-dde1aa863ebf.jpg?crop=center&amp;v=1786688105&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG_03d875d6-83a4-47cd-834a-dde1aa863ebf.jpg?crop=center&amp;v=1786688105&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG_03d875d6-83a4-47cd-834a-dde1aa863ebf.jpg?crop=center&amp;v=1786688105&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45_80807950-2b2c-4cf4-aa31-133440c58249.jpg?crop=center&amp;v=1786688105" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45_80807950-2b2c-4cf4-aa31-133440c58249.jpg?crop=center&amp;v=1786688105&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45_80807950-2b2c-4cf4-aa31-133440c58249.jpg?crop=center&amp;v=1786688105&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45_80807950-2b2c-4cf4-aa31-133440c58249.jpg?crop=center&amp;v=1786688105&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG.jpg?crop=center&amp;v=1786688105" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG.jpg?crop=center&amp;v=1786688105&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG.jpg?crop=center&amp;v=1786688105&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG.jpg?crop=center&amp;v=1786688105&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG_3e9fe334-d994-41c5-8e22-85eb4d069b94.jpg?crop=center&amp;v=1786688105" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG_3e9fe334-d994-41c5-8e22-85eb4d069b94.jpg?crop=center&amp;v=1786688105&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG_3e9fe334-d994-41c5-8e22-85eb4d069b94.jpg?crop=center&amp;v=1786688105&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG_3e9fe334-d994-41c5-8e22-85eb4d069b94.jpg?crop=center&amp;v=1786688105&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45.jpg?crop=center&amp;v=1786688105" alt="" srcset="//kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45.jpg?crop=center&amp;v=1786688105&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45.jpg?crop=center&amp;v=1786688105&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50_AIR_WG____45.jpg?crop=center&amp;v=1786688105&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div>
+<template id="product-description"> #더오리지널스탠다드 T50은 인체공학 기반의 세밀한 커스터마이징으로, 다양한 상황과 체형에도 편안한 몰입을 선사하는 월드와이드 밀리언 셀러입니다.  </template>
+<div class="container">
+  
+  <product-page
+    id="product-template--27506199757090__configurator"
+    data-collection=""
+    data-id="10288701669666"
+    data-availability="true"
+    data-original-price="43400000"
+    data-login="false"
+    data-sku="T53HLDA0KK-5H1WW"
+    data-name="T50 AIR 2세대"
+    data-category="WORK"
+    data-variant-text="화이트 / 애쉬화이트"
+    data-variant-price="43400000"
+    data-compare-at-price="0"
+  >
+    
+    
+    
+
+    
+    
+    <div class="product-title--wrapper mobile">
+      <div class="wrapper--header">
+        <h1>T50 AIR 2세대</h1>
+
+        <div class="button--sns">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="share">
+              <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+      <title class="product--sku">T53HLDA0KK · 5H1WW</title>
+
+      
+        <div class="product-link--row">
+          <div class="button--compare btn-hover--bk" >
+            <a href="/pages/compare?product=T50">제품 비교</a>
+          </div>
+          <div class="button--compare btn-hover--bk">
+            <a href="/pages/product-guide-result?productCode=T53HLDA0KK&searchbar=false">제품가이드</a>
+          </div>
+          <a class="product-review-anchor product-review-anchor--inline hidden" href="#prod_detail_review" data-product-review-anchor>
+            <span class="product-review-anchor__label">리뷰</span>
+            <span class="product-review-anchor__count" data-product-review-count>0</span>
+            <span class="product-review-anchor__suffix">개</span>
+          </a>
+        </div>
+      
+    </div>
+
+    <div class="product-gallery--wrapper">
+      
+      <div class="product-gallery web">
+        <div class="product-media--wrapper">
+          <div class="product-media--item variant-media"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157" alt="인체공학적 디자인의 시디즈 t50 AIR 2세대 의자 이미지" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=1200 1200w" loading="eager" class="" data-variant-id="51980637896994"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153" alt="T50 AIR 2세대" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="51980637929762"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034" alt="T50 AIR 2세대" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="52321671545122"><div class="btn-img-360" data-variant-id="51980637896994">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item"><img src="//kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381" alt="" srcset="//kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=1200 1200w" loading="eager"></div>
+        </div>
+      </div>
+      <div class="product-gallery mobile swiper">
+        <div class="wrapper__contents swiper-wrapper">
+          
+
+          
+            <div class="product-media--item variant-media swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157" alt="인체공학적 디자인의 시디즈 t50 AIR 2세대 의자 이미지" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=1200 1200w" loading="eager" class="" data-variant-id="51980637896994"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153" alt="T50 AIR 2세대" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="51980637929762"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034" alt="T50 AIR 2세대" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="52321671545122"><div class="btn-img-360" data-variant-id="51980637896994">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381" alt="" srcset="//kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=1200 1200w" loading="eager"></div>
+          
+            <div class="product-media--item variant-media swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157" alt="인체공학적 디자인의 시디즈 t50 AIR 2세대 의자 이미지" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?crop=center&amp;v=1783306157&amp;width=1200 1200w" loading="eager" class="" data-variant-id="51980637896994"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153" alt="T50 AIR 2세대" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_IG____45.jpg?crop=center&amp;v=1783306153&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="51980637929762"><img src="//kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034" alt="T50 AIR 2세대" srcset="//kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/T50AIR_WG____45.jpg?crop=center&amp;v=1786688034&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="52321671545122"><div class="btn-img-360" data-variant-id="51980637896994">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381" alt="" srcset="//kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/Head_M_46be16ab-77b1-4076-9ef8-80a99244113b.jpg?crop=center&amp;v=1783076381&amp;width=1200 1200w" loading="eager"></div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="product-text--wrapper">
+    
+      <div class="product-title--wrapper web">
+        <div class="wrapper--header">
+          <h1>T50 AIR 2세대</h1>
+
+          <div class="button--sns btn-hover--bk">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="share">
+                <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+        <title class="product--sku">T53HLDA0KK · 5H1WW</title>
+
+        
+          <div class="product-link--row">
+            <div class="button--compare btn-hover--bk" >
+              <a href="/pages/compare?product=T50">제품 비교</a>
+            </div>
+            <div class="button--compare btn-hover--bk">
+              <a href="/pages/product-guide-result?productCode=T53HLDA0KK&searchbar=false">제품가이드</a>
+            </div>
+            <a class="product-review-anchor product-review-anchor--inline hidden" href="#prod_detail_review" data-product-review-anchor>
+              <span class="product-review-anchor__label">리뷰</span>
+              <span class="product-review-anchor__count" data-product-review-count>0</span>
+              <span class="product-review-anchor__suffix">개</span>
+            </a>
+          </div>
+        
+
+      </div>
+      
+      
+        
+            <div
+              class="product-variant--wrapper"
+              
+              
+            >
+              <product-variants
+                data-main-product-variants
+                data-variants="2"
+                data-hide-variants="
+                  true
+                "
+                data-url="/products/t50-air-2"
+                data-id="template--27506199757090__configurator"
+                data-style=""
+                
+                
+                
+                  data-has-variants
+                
+                
+              >
+                <script type="application/json">
+                  [
+                    
+                      {
+                        "title": "화이트 \/ 애쉬화이트",
+                        
+                        "available": true,
+                        "id": 51980637896994,
+                        "sku": "T53HLDA0KK-5H1WW",
+                        "price": 43400000,
+                        "compare_at_price": 45400000,
+                        "special_price": 434000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["화이트","애쉬화이트"],
+                        "option1": "화이트",
+                        "option2": "애쉬화이트",
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 10
+                      },
+                    
+                      {
+                        "title": "블랙 \/ 카본블랙",
+                        
+                        "available": true,
+                        "id": 51980637929762,
+                        "sku": "T53HLDA0KK-5H6BBK",
+                        "price": 43400000,
+                        "compare_at_price": 45400000,
+                        "special_price": 434000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["블랙","카본블랙"],
+                        "option1": "블랙",
+                        "option2": "카본블랙",
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 10
+                      },
+                    
+                      {
+                        "title": "웜그레이 \/ 미네랄그레이",
+                        
+                        "available": true,
+                        "id": 52321671545122,
+                        "sku": "T53HLDA0KK-5H1CG",
+                        "price": 43400000,
+                        "compare_at_price": 45400000,
+                        "special_price": 434000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["웜그레이","미네랄그레이"],
+                        "option1": "웜그레이",
+                        "option2": "미네랄그레이",
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 10
+                      }
+                    
+                  ]
+                </script>
+                <div
+                  class="product-variants no-js-hidden"
+                  
+                  
+                >
+                  
+                    
+
+                    <div
+                      class="product-variant depth-1"
+                      data-option="frame"
+                      data-js-product-variant
+                    >
+                      
+                        <span class="product-variant__name">프레임</span>
+                      
+
+                      <div
+                        class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap"
+                        data-js-product-variant-container="radio"
+                      >
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-frame-template--27506199757090__configurator"
+                              id="t50-air-2-option-frame-1-template--27506199757090__configurator"
+                              value="화이트"
+                              
+                                checked
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="t50-air-2-option-frame-1-template--27506199757090__configurator"
+                              class="product-variant__label"
+                              data-option-name="frame"
+                              data-option-value="화이트"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">화이트</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-frame-template--27506199757090__configurator"
+                              id="t50-air-2-option-frame-2-template--27506199757090__configurator"
+                              value="블랙"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="t50-air-2-option-frame-2-template--27506199757090__configurator"
+                              class="product-variant__label"
+                              data-option-name="frame"
+                              data-option-value="블랙"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">블랙</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-frame-template--27506199757090__configurator"
+                              id="t50-air-2-option-frame-3-template--27506199757090__configurator"
+                              value="웜그레이"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="t50-air-2-option-frame-3-template--27506199757090__configurator"
+                              class="product-variant__label"
+                              data-option-name="frame"
+                              data-option-value="웜그레이"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">웜그레이</div>
+                            </label>
+                          </div>
+                        
+                      </div>
+                    </div>
+                  
+                    
+
+                    <div
+                      class="product-variant depth-2"
+                      data-option="color"
+                      data-js-product-variant
+                    >
+                      
+                        <span class="product-variant__name">색상</span>
+                      
+
+                      <div
+                        class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap"
+                        data-js-product-variant-container="radio"
+                      >
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--27506199757090__configurator"
+                              id="t50-air-2-option-color-1-template--27506199757090__configurator"
+                              value="애쉬화이트"
+                              
+                                checked
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="t50-air-2-option-color-1-template--27506199757090__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="애쉬화이트"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">애쉬화이트</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--27506199757090__configurator"
+                              id="t50-air-2-option-color-2-template--27506199757090__configurator"
+                              value="카본블랙"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="t50-air-2-option-color-2-template--27506199757090__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="카본블랙"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">카본블랙</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--27506199757090__configurator"
+                              id="t50-air-2-option-color-3-template--27506199757090__configurator"
+                              value="미네랄그레이"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="t50-air-2-option-color-3-template--27506199757090__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="미네랄그레이"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">미네랄그레이</div>
+                            </label>
+                          </div>
+                        
+                      </div>
+                    </div>
+                  
+                </div>
+
+                <noscript>
+                  <label
+                    for="Variants-template--27506199757090__configurator"
+                    class="text-size--small"
+                    style="display:block;margin-bottom:.75rem"
+                  >변</label>
+                  <select
+                    name="id"
+                    id="Variants-template--27506199757090__configurator"
+                    class="productSelect"
+                    
+                    form="product-form-template--27506199757090__configurator"
+                  >
+                    
+                      <option
+                        
+                          selected="selected"
+                        
+                        
+                        value="51980637896994"
+                      >
+                        화이트 / 애쉬화이트
+                        
+                        - 434,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="51980637929762"
+                      >
+                        블랙 / 카본블랙
+                        
+                        - 434,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="52321671545122"
+                      >
+                        웜그레이 / 미네랄그레이
+                        
+                        - 434,000
+                      </option>
+                    
+                  </select>
+                </noscript>
+              </product-variants>
+              <a class="product-review-anchor product-review-anchor--option hidden" href="#prod_detail_review" data-product-review-anchor>
+                <span class="product-review-anchor__label">리뷰</span>
+                <span class="product-review-anchor__count" data-product-review-count>0</span>
+                <span class="product-review-anchor__suffix">개 보기</span>
+              </a>
+            </div>
+
+          
+      
+        
+            <div class="product-price--wrapper" data-js-product-price-compact >
+              <div id="product-price-template--27506199757090__configurator" class="product-price">
+  <div class="product-discount--wrapper">
+    <div class="member--discount">
+      <div class="discount--title">회원 할인가</div>
+      <div class="discount--details">
+        <div class="discount--details-top">
+          <div class="product-discount--percent"></div>
+          <div class="product-price--best"></div>
+        </div>
+        <div class="product-price--original"></div>
+      </div>
+    </div>
+
+    <details class="max--discount">
+      <summary class="discount--header">
+        <div class="discount-header--content">
+          <div class="discount-header--text">
+            <div class="discount--title q--popup">
+              <span>최대 혜택가</span>
+              <div class="button--popup" data-type="price">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+              </div>
+            </div>
+            <div class="product-price--coupon"></div>
+          </div>
+
+          <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.1875 4.8125L7 9.625L11.8125 4.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="popup--wrapper hidden" data-type="price">
+          <div class="popup--content">
+            <ul>
+              <li>보유 쿠폰의 최대 할인 혜택이 적용된 금액입니다.</li>
+              <li>쿠폰은 주문 단계에서 적용/변경할 수 있습니다.</li>
+            </ul>
+          </div>
+          <div class="popup--close">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+          </div>
+        </div>
+      </summary>
+
+      
+      <div class="discount--body">
+        <div class="title">쿠폰 할인</div>
+        
+        <div class="coupon--wrapper"></div>
+      </div>
+    </details>
+  </div>
+</div>
+
+            </div>
+          
+      
+        
+            <div class="button--cardNoInterestInfo btn-hover--bk">
+              <a href="https://www.mainpay.co.kr/intFreeInfo/popup/all.do?mbr_no=116833">카드 무이자 정보</a>
+            </div>
+          
+      
+        
+            
+              <div class="product-complementary--wrapper" data-js-complementary-wrapper >
+                <div class="wrapper--header">
+                  <div class="title">별도 구매 (선택)</div>
+                </div>
+                <div class="wrapper--body">
+                  <div class="complementary--content">
+                    <div class="swiper product-complementary--swiper">
+                      <div class="swiper-wrapper">
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/t50-air-2-cover">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_T50AIR_T529D_00_05977506-727d-46a2-a4d7-dfe1f5f26541.jpg?crop=center&amp;v=1786924531" alt="시디즈 T50 AIR 2세대 좌판 커버와 에어스킨 메쉬 사무용 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_T50AIR_T529D_00_05977506-727d-46a2-a4d7-dfe1f5f26541.jpg?crop=center&amp;v=1786924531&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_T50AIR_T529D_00_05977506-727d-46a2-a4d7-dfe1f5f26541.jpg?crop=center&amp;v=1786924531&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_T50AIR_T529D_00_05977506-727d-46a2-a4d7-dfe1f5f26541.jpg?crop=center&amp;v=1786924531&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="T50 AIR 2세대 좌판 커버"
+                                data-product-handle="t50-air-2-cover"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "T50 AIR 2세대 좌판 커버",                                  "handle": "t50-air-2-cover",                                  "url": "\/products\/t50-air-2-cover",                                  "category": "EASY REPAIR",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "카본블랙",                                              "id": 11458795274530,"rgb": "#242424"},{                                              "name": "애쉬화이트",                                              "id": 11382949216546,"rgb": "#DBDEE1"},{                                              "name": "미네랄그레이",                                              "id": 12516195041570,"rgb": "#C3C1C1"}]                                      }],                                  "variants": [{                                        "title": "카본블랙",                                        "id": 51949421068578,                                        "sku": "T53C0KK-5F6A","inventory_quantity": 999519,                                        "available": true,                                        "price": 35000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_T50AIR_T529D_00_05977506-727d-46a2-a4d7-dfe1f5f26541.jpg?v=1786924531",                                                                                "options": ["카본블랙"],                                        "option1": "카본블랙",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#242424"                                      },{                                        "title": "애쉬화이트",                                        "id": 51949421101346,                                        "sku": "T53C0KK-5F1","inventory_quantity": 999701,                                        "available": true,                                        "price": 35000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_T50AIR_T529D_00_05977506-727d-46a2-a4d7-dfe1f5f26541.jpg?v=1786924531",                                                                                "options": ["애쉬화이트"],                                        "option1": "애쉬화이트",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#DBDEE1"                                      },{                                        "title": "미네랄그레이",                                        "id": 52321680949538,                                        "sku": "T53C0KK-5F1B","inventory_quantity": 999991,                                        "available": true,                                        "price": 35000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_T50AIR_T529D_00_05977506-727d-46a2-a4d7-dfe1f5f26541.jpg?v=1786924531",                                                                                "options": ["미네랄그레이"],                                        "option1": "미네랄그레이",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#C3C1C1"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">T50 AIR 2세대 좌판 커버</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  <div class="discount-price">35,000원</div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/stepo-footrest">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614" alt="스테포 발받침 인체공학 디자인 바른 자세 유지" srcset="//kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="STEPO 스테포"
+                                data-product-handle="stepo-footrest"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "STEPO 스테포",                                  "handle": "stepo-footrest",                                  "url": "\/products\/stepo-footrest",                                  "category": "SEAT BOOSTER",                                  "options": [{                                        "name": "옵션",                                        "position": 1,                                        "values": [{                                              "name": "스테포 커버형",                                              "id": 4167579762978},{                                              "name": "스테포",                                              "id": 4167577436450}]                                      },{                                        "name": "색상",                                        "position": 2,                                        "values": [{                                              "name": "차콜그레이",                                              "id": 4167579861282,"rgb": "#292926"},{                                              "name": "베이지",                                              "id": 4167580156194,"rgb": "#b9ab9e"},{                                              "name": "민트그린",                                              "id": 4167580385570,"rgb": "#3d5343"},{                                              "name": "그레이",                                              "id": 4167577469218,"rgb": "#a3a2a7"}]                                      }],                                  "variants": [{                                        "title": "스테포 커버형 \/ 차콜그레이",                                        "id": 49189318099234,                                        "sku": "SB01F1-3D1","inventory_quantity": 99587,                                        "available": true,                                        "price": 72000,                                        "special_price": "72,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "79,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?v=1785133614",                                                                                "options": ["스테포 커버형","차콜그레이"],                                        "option1": "스테포 커버형",                                        "option2": "차콜그레이",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#292926"                                      },{                                        "title": "스테포 커버형 \/ 베이지",                                        "id": 49189318361378,                                        "sku": "SB01F1-3D2","inventory_quantity": 99889,                                        "available": true,                                        "price": 72000,                                        "special_price": "72,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "79,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F1_3D2_00_e5799dc0-57ac-4e8c-b58f-0ac979bafebc.jpg?v=1745822296",                                                                                "options": ["스테포 커버형","베이지"],                                        "option1": "스테포 커버형",                                        "option2": "베이지",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#b9ab9e"                                      },{                                        "title": "스테포 커버형 \/ 민트그린",                                        "id": 49189318459682,                                        "sku": "SB01F1-3D7","inventory_quantity": 99924,                                        "available": true,                                        "price": 72000,                                        "special_price": "72,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "79,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F1_3D7_00_f9ea52bb-d8a1-4dd6-bc3c-957b0e1f766c.jpg?v=1745822297",                                                                                "options": ["스테포 커버형","민트그린"],                                        "option1": "스테포 커버형",                                        "option2": "민트그린",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#3d5343"                                      },{                                        "title": "스테포 \/ 그레이",                                        "id": 49189315313954,                                        "sku": "SB01F-MM","inventory_quantity": 99635,                                        "available": true,                                        "price": 54000,                                        "special_price": "54,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "60,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F_MM_00_e1281e63-5a6a-47a3-9f20-b143370b89d1.jpg?v=1787151589",                                                                                "options": ["스테포","그레이"],                                        "option1": "스테포",                                        "option2": "그레이",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#a3a2a7"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">STEPO 스테포</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">54,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">60,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/sitbreak-caster-a">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75efc365.jpg?crop=center&amp;v=1787149049" alt="싯브레이크 바퀴 A형 안정적 하중 지지 바퀴" srcset="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75efc365.jpg?crop=center&amp;v=1787149049&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75efc365.jpg?crop=center&amp;v=1787149049&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75efc365.jpg?crop=center&amp;v=1787149049&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="싯브레이크 바퀴 A형"
+                                data-product-handle="sitbreak-caster-a"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "싯브레이크 바퀴 A형",                                  "handle": "sitbreak-caster-a",                                  "url": "\/products\/sitbreak-caster-a",                                  "category": "EASY REPAIR",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "블랙",                                              "id": 4176393371938,"rgb": "#000000"},{                                              "name": "그레이",                                              "id": 4288285016354,"rgb": "#969696"}]                                      }],                                  "variants": [{                                        "title": "블랙",                                        "id": 49199197454626,                                        "sku": "T00V1KG-BK65","inventory_quantity": 998908,                                        "available": true,                                        "price": 35000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75efc365.jpg?v=1787149049",                                                                                "options": ["블랙"],                                        "option1": "블랙",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#000000"                                      },{                                        "title": "그레이",                                        "id": 49199197487394,                                        "sku": "T00V1KG-SG65","inventory_quantity": 998535,                                        "available": true,                                        "price": 35000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_CASTER-GLIDE_T00V1KG_WW65_01_443f7763-e05a-4fb9-9274-d2ed52758ee4.jpg?v=1745822364",                                                                                "options": ["그레이"],                                        "option1": "그레이",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#969696"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">싯브레이크 바퀴 A형</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  <div class="discount-price">35,000원</div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/glide-a">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T509G_BK_01.jpg?crop=center&amp;v=1754365875" alt="글라이드 A형 - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T509G_BK_01.jpg?crop=center&amp;v=1754365875&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T509G_BK_01.jpg?crop=center&amp;v=1754365875&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_T509G_BK_01.jpg?crop=center&amp;v=1754365875&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="글라이드 A형"
+                                data-product-handle="glide-a"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "글라이드 A형",                                  "handle": "glide-a",                                  "url": "\/products\/glide-a",                                  "category": "EASY REPAIR",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "블랙",                                              "id": 4176394518818,"rgb": null}]                                      }],                                  "variants": [{                                        "title": "블랙",                                        "id": 50199183163682,                                        "sku": "T00G1KG-BK","inventory_quantity": 999381,                                        "available": true,                                        "price": 17000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_CASTER-GLIDE_T509G_BK_01.jpg?v=1754365875",                                                                                "options": ["블랙"],                                        "option1": "블랙",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": null                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">글라이드 A형</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  <div class="discount-price">17,000원</div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                      </div>
+                    </div>
+                    
+                      <div class="complementary-navigation">
+                        <div class="navigation-prev">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="left">
+                              <path id="Vector" d="M9.1875 2.1875L4.375 7L9.1875 11.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+                            </g>
+                          </svg>
+                        </div>
+                        
+                        <div class="navigation-next">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="right">
+                              <path id="Vector" d="M4.8125 2.1875L9.625 7L4.8125 11.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+                            </g>
+                          </svg>
+                        </div>
+                      </div>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+      
+        
+            <div class="product-buttons--wrapper">
+              <div class="product-favorite">
+                <div class="button-favorite" data-item-name="T50 AIR 2세대" data-item-category="WORK" data-item-img="//kr.sidiz.com/cdn/shop/files/T50AIR_WW____45.jpg?v=1783306157">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-line-wh-28.svg?v=149835505164352560671747705926" alt="북마크 아이콘" width="28" height="28"
+                        data-bookmark="false" data-id="10288701669666" data-handle="t50-air-2" 
+                        onclick="addBookmark(event.target)" class="bookmark-false">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-solid-wh-28.svg?v=32384455147906168021747705924" alt="북마크 아이콘" width="28" height="28" 
+                        data-bookmark="true" data-id="10288701669666" data-handle="t50-air-2" 
+                        onclick="removeBookmark(event.target)" class="bookmark-true hidden"> 
+                </div>
+              </div>
+
+              <div class="product-actions" >
+                <product-form
+                  id="add-to-cart-template--27506199757090__configurator"
+                  class="product-form"
+                  data-ajax-cart
+                  data-js-product-form
+                >
+                  <form method="post" action="/cart/add" id="product-form-template--27506199757090__configurator" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product" /><input type="hidden" name="utf8" value="✓" />
+                    <input type="hidden" name="id" value="51980637896994">
+                    <div class="product__cart-functions">
+                      <div class="button__cart-div">
+                        <button
+                          type="submit"
+                          name="add"
+                          class="
+                            add-to-cart button button--solid button--product button--loader button--move
+                            
+                            
+                          "
+                          data-js-product-add-to-cart
+                          data-main-product-add-to-cart
+                        >
+                          <span class="button__text" data-js-product-add-to-cart-text>
+                            장바구니 담기
+                          </span>
+                          <span class="button__preloader">
+                            <svg class="button__preloader-element" viewBox="25 25 50 50">
+                              <circle cx="50" cy="50" r="20" fill="none" stroke-width="4"/>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  <input type="hidden" name="product-id" value="10288701669666" /><input type="hidden" name="section-id" value="template--27506199757090__configurator" /></form>
+                </product-form>
+              </div>
+            </div>
+            
+          
+      
+        
+            
+            
+
+          
+      
+        
+            
+            
+            <div class="product-delivery-and-warranty--wrapper" >
+              <div class="product-delivery--wrapper">
+                <div class="delivery--header">
+                  <div class="delivery--title">배송 정보</div>
+                </div>
+
+                <div class="delivery--body">
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>예상 배송일</span>
+                      <div class="button--popup" data-type="deli_date">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="expected-at"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_date">
+                      <div class="popup--content">
+                        <ul>
+                          <li>
+                            <span>수도권 평균 배송일 기준으로 산정된 예상 배송일이며 지역 및 재고 상황에 따라 달라질 수 있습니다.</span>
+                          </li>
+                          <li>
+                            <span>실제 배송일은 주문 완료 후 확인할 수 있습니다.</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>배송 유형</span>
+                      <div class="button--popup" data-type="deli_type">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="delivery-type"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_type">
+                      <div class="popup--content">
+                        <span>제주도는 소비자가의 4% 추가 배송비가 부과됩니다.</span>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title" data-detail="assembly-type"></div>
+                    <div class="data--text" data-detail="description"></div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="product-warranty--wrapper">
+                <div class="product--data warranty--period">
+                  <div class="data--title">품질보증</div>
+                  <div class="data--text">5년</div>
+                </div>
+              </div>
+            </div>
+
+          
+      
+        
+            <div class="notice--title product-notice--title">구매 전 확인사항</div>
+            <div id="notice_TAHBDn" class="product-notice--wrapper" >
+              
+              
+
+              <div class="notice--content rich-text-area"><ul><li>상세페이지 내 이미지는 연출컷으로 실제 제품 사양과 다를 수 있습니다. 상세 사양은 썸네일 이미지를 참고해 주세요.</li></ul><div class="size-13"></div><ul><li>고객님의 체형에 따라 틸팅 강도가 다르게 느껴질 수 있습니다.구매 전 가까운 매장에서 직접 체험해보시길 권유드립니다.<br/></li></ul></div>
+
+              <style data-shopify>
+                #notice_TAHBDn {
+                  background-color: #eaedf0;
+                }
+                #notice_TAHBDn .notice--title {
+                  color: #000000;
+                }
+                #notice_TAHBDn .notice--content {
+                  color: #434548;
+                }
+              </style>
+            </div>
+          
+      
+        
+            <div class="product-basic-info--wrapper" >
+              <details>
+                <summary class="basic-info--header">
+                  <div class="basic-info--title">BASIC INFO</div>
+
+                  <div class="arrow">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_7818_13448)">
+                        <path d="M13 4L7 10L1 4" stroke="#434548" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_7818_13448">
+                          <rect width="14" height="14" fill="white" transform="translate(14) rotate(90)"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </summary>
+
+                <div class="basic-info--body">
+                  <div class="product--data">
+                    <div class="data--title">제품명</div>
+                    <div class="data--text">시디즈 T50 2세대 의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">KC 인증필유무</div>
+                    <div class="data--text">해당사항 없음</div>
+                  </div>
+                  <div class="product--data color--data">
+                    <div class="data--title">색상</div>
+                    <div class="data--text">
+                      <ul>
+                        
+                          <li>애쉬화이트</li>
+                        
+                          <li>카본블랙</li>
+                        
+                          <li>미네랄그레이</li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">구성품</div>
+                    <div class="data--text">게이밍 의자, 컴퓨터 의자, 사무용 의자, 사무실 의자, 책상 의자, 컴퓨터 책상의자, 게이밍체어, 메쉬 의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">주요 소재</div>
+                    <div class="data--text">메쉬, 패브릭, 발포스폰지, PP, 플라스틱, STEEL</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조사</div>
+                    <div class="data--text">시디즈</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조국</div>
+                    <div class="data--text">대한민국</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">크기</div>
+                    <div class="data--text">상세페이지 참조</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">배송비</div>
+                    <div class="data--text">무료배송(제주도 추가 배송비 부과)</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">품질 보증 기준</div>
+                    <div class="data--text">5년</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">AS 책임자 및 연락처</div>
+                    <div class="data--text">컨택센터 1577-5674</div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          
+      
+    </div>
+  </product-page>
+</div>
+
+<script>
+  const PRODUCT_GUIDE_FILTER_ENDPOINT = "https://sidiz-shopify.sidiz.com/metaobject/filter/get";
+  const pageProductCode = "T53HLDA0KK";
+
+  async function fetchHasGuideByProductCode(productCode) {
+    if (!productCode) {
+      return false;
+    }
+
+    try {
+      const response = await fetch(PRODUCT_GUIDE_FILTER_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          type: ["product_guide_code_mapping"],
+          filter_key: "product_code",
+          filter_value: productCode,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error(`[product-guide] Filter API error: ${response.status}`);
+        return false;
+      }
+
+      const result = await response.json();
+      if (result?.success && Array.isArray(result.data)) {
+        return result.data.length > 0;
+      }
+    } catch (error) {
+      console.error("[product-guide] Failed to fetch guide mapping:", error);
+    }
+
+    return false;
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const hasGuide = await fetchHasGuideByProductCode(pageProductCode);
+
+    let findYourFitBtn = document.querySelector('.find-your-fit-btn');
+    if(findYourFitBtn){
+      if(hasGuide) {
+        findYourFitBtn.classList.remove('hidden');
+        findYourFitBtn.querySelector('a').setAttribute('href', `/pages/product-guide-result?productCode=${encodeURIComponent(pageProductCode)}&searchbar=true`);
+      }
+      else {
+        findYourFitBtn.classList.add('hidden');
+      }
+    }
+    document.querySelectorAll('a[data-popup-url]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const url = this.dataset.popupUrl;
+      const popupType = this.dataset.popupType;
+
+      const popup = window.open(
+        url,
+        `popup_${popupType}`,
+        'scrollbars=yes,resizable=yes'
+      );
+
+      if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+        alert("팝업 차단이 설정되어 있습니다. 팝업을 허용해주세요.");
+      }
+    });
+  });
+  })
+</script>
+
+
+</section>

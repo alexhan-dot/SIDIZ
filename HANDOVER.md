@@ -55,6 +55,12 @@ templateSuffix가 걸려 있으면 템플릿 푸시 즉시 공개 페이지가 �
 | T90 | `t90-ergonomic-office-chair` (ACTIVE) | `product.t90.json` (22섹션) | 동영상 23개 완료(AU Files, HLS), **정지이미지 ~69건 KR CDN 잔존** |
 | T60 | `t60-ergonomic-office-chair` (ACTIVE) | `product.t60.json` (21섹션) | 미착수(전부 KR CDN) |
 | T60 AIR | `sidiz-t60-air-…` (ACTIVE, 기존 상품에 템플릿만 추가) | `product.t60-air.json` (25섹션) | 미착수 |
+| T50 2세대 | `sidiz-t50-2nd-…` (ACTIVE, $699 기존가 유지) | `product.t50-2.json` (24섹션) | 미착수 (KR 영상 18개) |
+| T50 AIR 2세대 | `sidiz-t50-air-2nd-…` (ACTIVE) | `product.t50-air-2.json` (25섹션, t50-2 파생 — `scripts/build_t50_air_2_template.py`) | 미착수 |
+
+추가 도구: `scripts/validate_template.py <handle>` — 템플릿 설정/블록을 섹션
+스키마와 대조 + 25섹션 상한 검사. **푸시 전 필수 실행** (스킬 gotcha 18).
+KR T50-2 페이지의 서드파티 YouTube 임베드 섹션은 복제 불가로 생략 — 오너 확인.
 
 - T60 AIR는 KR 27섹션을 25섹션 제한에 맞게 접은 구조(스킬 gotcha 14).
 - T60 AIR 페이지의 PRE-ORDER Wave 1 박스는 기존 프리오더 프로그램 데이터 — 건드리지 말 것.
@@ -86,9 +92,9 @@ templateSuffix가 걸려 있으면 템플릿 푸시 즉시 공개 페이지가 �
 ### A. 다음 마이그레이션 대상 — 스킬로 진행
 상품은 이미 존재(ACTIVE), **템플릿만 없음** → 업데이트 경로(T60 AIR 방식):
 
-1. **T50 2세대** — KR `t50-2` → AU `sidiz-t50-2nd-generation-ergonomic-office-chair` (suffix `t50-2`)
-2. **T50 AIR 2세대** — KR `t50-air-2` → AU `sidiz-t50-air-2nd-…` (suffix `t50-air-2`)
-3. 이후 순서 제안: t20 → gx(gx-work) → gx-joy → muuve → linie → ible →
+1. ~~T50 2세대~~ 완료 (2026-08-29)
+2. ~~T50 AIR 2세대~~ 완료 (2026-08-29)
+3. 순서 제안: t20 → gx(gx-work) → gx-joy → muuve → linie → ible →
    ringo-gen2 → trevo → atti → molti → stepo → pillo → fungus → oui → mane →
    plit → button → ega → 굿즈(bag/spray)
    (각각 AU 핸들은 `sidiz-*`로 존재, templateSuffix 확인 후 `product.<suffix>.json` 작성)
