@@ -1,0 +1,111 @@
+<section id="shopify-section-template--26287032664354__product_faq_VbNWpd" class="shopify-section section-product-faq section-product-information"><div class="container">
+  <div class="wrapper">
+    <div class="wrapper--header">
+        <style data-shopify>
+          .section-product-faq .title { margin: 0; padding: 0; }
+        </style>
+        
+        <h2 class="title">FAQ</h2>
+          
+    </div>
+      <div class="wrapper--body">
+        
+          <div class="information-list">
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">시디즈 뮤브 의자 바퀴/글라이드 교체 가능한가요? 글라이드/바퀴 사양으로 바꾸고 싶습니다.</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-13">시디즈 뮤브 의자의 바퀴/글라이드를 바꾸고 싶다면 AS 접수를 통해 글라이드/바퀴를 구매하여 직접 교체 가능합니다. 교체할 경우 제품의 높이가 달라지는 점을 사전에 확인해 주시기 바랍니다.</div></div>
+                </div>
+              </div>
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">시디즈 뮤브 의자 소프트틸팅 움직임의 범위는 어느 정도인가요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-13">시디즈 뮤브 의자의 소프트틸팅은 몸의 움직임에 따라 윗방향 약8º, 아랫방향 약4º 가량의 범위로 움직입니다. 실제 등판이 움직이는 모습이 궁금하시다면 상세페이지 내 영상을 참고해 주시기 바랍니다.</div></div>
+                </div>
+              </div>
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">시디즈 뮤브 의자의 최대 하중이 궁금합니다.</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-13">시디즈 뮤브 의자의 최대 하중은 125kg 입니다.</div></div>
+                </div>
+              </div>
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">시디즈 뮤브 의자 좌판/등판 쿠션은 세탁이 가능한가요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-13">시디즈 뮤브 의자의 좌판/등판 쿠션은 별도 세탁은 불가하지만, 심하게 오염되거나 오래 사용해 해져서 교체하고 싶다면 AS 접수를 통해 교체 가능합니다. </div></div>
+                </div>
+              </div>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function() {
+      // 현재 섹션 FAQ 블록 + product-information에서 모은 블록(window.__faqBlocks) 통합
+      const ownFaqs = [{
+          name: "시디즈 뮤브 의자 바퀴\/글라이드 교체 가능한가요? 글라이드\/바퀴 사양으로 바꾸고 싶습니다.",
+          answer: "시디즈 뮤브 의자의 바퀴\/글라이드를 바꾸고 싶다면 AS 접수를 통해 글라이드\/바퀴를 구매하여 직접 교체 가능합니다. 교체할 경우 제품의 높이가 달라지는 점을 사전에 확인해 주시기 바랍니다."
+        },
+{
+          name: "시디즈 뮤브 의자 소프트틸팅 움직임의 범위는 어느 정도인가요?",
+          answer: "시디즈 뮤브 의자의 소프트틸팅은 몸의 움직임에 따라 윗방향 약8º, 아랫방향 약4º 가량의 범위로 움직입니다. 실제 등판이 움직이는 모습이 궁금하시다면 상세페이지 내 영상을 참고해 주시기 바랍니다."
+        },
+{
+          name: "시디즈 뮤브 의자의 최대 하중이 궁금합니다.",
+          answer: "시디즈 뮤브 의자의 최대 하중은 125kg 입니다."
+        },
+{
+          name: "시디즈 뮤브 의자 좌판\/등판 쿠션은 세탁이 가능한가요?",
+          answer: "시디즈 뮤브 의자의 좌판\/등판 쿠션은 별도 세탁은 불가하지만, 심하게 오염되거나 오래 사용해 해져서 교체하고 싶다면 AS 접수를 통해 교체 가능합니다."
+        }
+];
+
+      const extraFaqs = Array.isArray(window.__faqBlocks) ? window.__faqBlocks : [];
+      const allFaqs = [...ownFaqs, ...extraFaqs].filter(q => q && q.name && q.answer);
+      if (allFaqs.length === 0) return;
+
+      const payload = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": allFaqs.map(q => ({
+          "@type": "Question",
+          "name": q.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": q.answer
+          }
+        }))
+      };
+
+      const scriptId = "merged-faq-schema-template--26287032664354__product_faq_VbNWpd";
+      const existing = document.getElementById(scriptId);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(payload);
+      document.head.appendChild(script);
+    })();
+  </script>
+
+
+
+</section>

@@ -1,0 +1,130 @@
+
+===== 05-product_pdp_head.html =====
+  TEXT Move Light, Think Free MUUVE 시디즈 뮤브(MUUVE)는 인테리어를 해치지 않으면서 작업 몰입감을 극대화하는 미니멀 디자인의 라이트워크 체어(Light Work Chair)입니다. 홈오피스, 서재, 멀티룸, 다용도 리빙 공간 등 인테리어 조화를 추구하는 환경에 추천합니다.
+  MEDIA Head_24a9ec81-d8c3-470e-9d2c-b9dc238e6413.jpg
+  MEDIA MUUVE_m1.jpg
+
+===== 06-product_tile_card_list.html =====
+  TEXT 뮤브, 어떻게 쓰는 의자인가요?
+
+===== 07-product_row_1_wide.html =====
+  CSS #section-template--26287032664354__product_row_1_wide_NEzi :: background-color=#ffffff, color=#000000
+  TEXT 홈오피스부터 거실서재까지, 뮤브와 함께하는 라이트워크의 순간
+
+===== 08-product_tile_card_list.html =====
+  TEXT 인테리어를 해치지 않는 미니멀 홈오피스 의자 공들여 꾸민 서재와 홈오피스에 자연스럽게 어우러지는 의자. 공간을 무겁게 보이게 하지 않는 미니멀 디자인과 컴팩트한 실루엣으로, 작은 방이나 작업 공간에서도 깔끔한 분위기를 완성합니다. 좁은 공간에도 부담 없는 거실 의자 거실 한 켠, 작은 테이블 앞, 방 한쪽 코너에도 부담 없이 놓기 좋은 컴팩트 의자. 공간 차지는 줄이고 인테리어 조화는 살려, 좁은 공간에서도 편안한 몰입 환경을 만들어줍니다. 미싱부터 독서까지, 가벼운 취미 활동에 맞는 의자 미싱, 독서, 필사, 노트북 작업처럼 오래 부담 없이 집중하고 싶은 순간에 어울리는 의자. 심플한 디자인에 편안한 착석감을 더해, 다양한 취미와 가벼운 작업을 한 자리에서 이어가기 좋습니다. 온 가족이 함께 쓰는 거실 서재 의자 아이와 함께 책을 읽고 공부하는 거실 서재에 잘 어울리는 의자. 어느 한 사람만의 책상 의자가 아니라, 가족이 함께 머무는 공간에서도 자연스럽고 편안하게 사용할 수 있습니다.
+  MEDIA Img_1_1_6b9dded8-667e-48c8-ad61-990f1561602b.jpg
+  MEDIA Img_1_2.jpg
+  MEDIA Img_1_3.jpg
+  MEDIA Img_1_4.jpg
+
+===== 09-product_row_1_wide.html =====
+  CSS #section-template--26287032664354__product_row_1_wide_EPjn :: background-color=#ffffff, color=#000000
+  TEXT 리셉션부터 회의실까지, 폭넓게 적용되는 업무 공간 의자
+
+===== 10-product_tile_card_list.html =====
+  TEXT 첫인상이 중요한 리셉션 공간을 위한 의자 병원, 클리닉, 쇼룸 등 첫인상이 중요한 리셉션 공간에 잘 어울리는 의자입니다. 깔끔한 인상과 편안한 착석감으로 정돈된 분위기를 완성합니다. *AI로 제작된 콘텐츠로, 실제 제품과는 일부 차이가 있을 수 있습니다. 상담 공간에 편안한 분위기를 더하는 의자 상담실과 응대 공간에 자연스럽게 어우러져, 편안한 커뮤니케이션 환경을 만듭니다. 다양한 상담 공간에 부담 없이 적용할 수 있습니다. *AI로 제작된 콘텐츠로, 실제 제품과는 일부 차이가 있을 수 있습니다. 오픈 스페이스에 유연하게 배치하는 워크 체어 공용 업무 공간과 협업존 등 다양한 사용이 이루어지는 사무실 환경에 자연스럽게 적용할 수 있습니다. *AI로 제작된 콘텐츠로, 실제 제품과는 일부 차이가 있을 수 있습니다. 회의 공간에 단정한 인상을 더하는 의자 회의실과 미팅룸에 깔끔하게 어우러져, 집중이 필요한 다양한 비즈니스 환경을 편안하게 지원합니다. *AI로 제작된 콘텐츠로, 실제 제품과는 일부 차이가 있을 수 있습니다.
+  MEDIA AI_MUUVE_01.png
+  MEDIA AI_MUUVE___02.png
+  MEDIA AI_MUUVE_04.png
+  MEDIA AI_MUUVE_10.png
+
+===== 11-product_wb_scroll_banner.html =====
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  TEXT 심플한 디자인과 사용성으로 꿈꾸던 홈 오피스 완성 미니멀한 외형으로 공간은 가볍게, 숨겨둔 기능으로 사용감은 편안하게 완성했습니다. 라이트워크를 위한 '한 끗'이 균형있게 담겨 있습니다.
+  MEDIA Img_1_fbe9ef5e-ab34-4138-a72c-05b29b5529a5.jpg
+  MEDIA MUUVE_m2.jpg
+
+===== 12-product_wb_scroll_card_list.html =====
+  CSS .block-video_GctFQQ .card--text .title :: color=#000000
+  CSS .block-video_GctFQQ .card--text .description :: color=#7c8084
+  CSS .block-image_mRFmNK .card--text .title :: color=#000000
+  CSS .block-image_mRFmNK .card--text .description :: color=#7c8084
+  CSS .section-template--26287032664354__product_wb_scroll_card_ :: background-color=#ffffff
+  CSS .section-product-wb-scroll-banner .container--body .wrappe :: background-color=#ffffff
+  TEXT 허리 곡선에 맞춰 균형 있게 지지하는 등판 사용자의 움직임을 따라가며 움직이고 들뜸 없이 지지해 편안한 밀착감을 제공합니다. 미니멀한 디자인의 완성도를 높이는 높이 조절 레버 사용자의 체형과 공간에 맞게 높이 조절이 가능하며 심플한 디자인을 해치지 않도록 높이 조절 레버 디자인도 세심하게 다듬었습니다. (의자 높이 445mm ~ 535mm 조절 가능)
+  MEDIA 26986ad67dee4f47a56cd7aa5ce01453.thumbnail.0000000000_small.jpg
+  MEDIA 26986ad67dee4f47a56cd7aa5ce01453.HD-720p-4.5Mbps-66938350.mp4
+  MEDIA Img_4_3_9e73e6eb-a7fa-4e7d-8e4f-7eadcd6bb4c1.jpg
+
+===== 13-product_view_vertical.html =====
+  TEXT 더 유연한 다이닝 공간에 필요한 의자 이제 식사뿐만 아니라 일상의 라이트워크가 이루어지는 다이닝 공간. 그 순간을 편안하게 완성해 줄 의자가 필요합니다. 공간에 자연스럽게 스며드는 미니멀 디자인 다이닝 공간에도, 기존에 쓰던 식탁의자와도 잘 어울리는 절제된 디자인과 깔끔한 실루엣이 특징입니다. 컴팩트한 플랫 베이스 다이닝 공간의 분위기를 해치지 않도록 정돈된 인상을 주는 플랫 베이스를 적용했습니다.
+  MAIN: ['Img_2_45019f01-09d5-4441-884c-c2419039a55a.jpg']
+  MEDIA Img_2_45019f01-09d5-4441-884c-c2419039a55a.jpg
+  MEDIA Img_3_db6e7e56-ced8-4324-bf2a-fb55b6c5639f.jpg
+  MEDIA Img_4_4dabcc41-d3de-4787-bccb-19e379e952cd.jpg
+
+===== 14-product_wb_scroll_banner.html =====
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--26287032664354__product_wb_scroll_banne :: color=#000000
+  TEXT 가족이 함께 머무는 거실 서재도 편안하게 가족과 함께 생각을 나누며 이야기하는 서재가 된 거실. 뮤브는 꿈꾸던 거실 서재의 라이트워크 순간을 편안하게 만들어줍니다.
+  MEDIA Img_5_f937f509-315e-4126-8d4e-61b77d298149.jpg
+  MEDIA MUUVE_m3.jpg
+
+===== 15-product_wb_scroll_card_list.html =====
+  CSS .block-image_RKx6nw .card--text .title :: color=#000000
+  CSS .block-image_RKx6nw .card--text .description :: color=#7c8084
+  CSS .block-image_9hKYDm .card--text .title :: color=#000000
+  CSS .block-image_9hKYDm .card--text .description :: color=#7c8084
+  CSS .section-template--26287032664354__product_wb_scroll_card_ :: background-color=#ffffff
+  CSS .section-product-wb-scroll-banner .container--body .wrappe :: background-color=#ffffff
+  TEXT 다양한 식탁의자와 함께 매칭할 수 있는 디자인 균형잡힌 디자인으로 어떤 분위기의 테이블과도 자연스럽게 매칭되고 기존 식탁의자와도 이질감 없이 어울립니다. 거실 서재 인테리어를 해치지 않는 글라이드 사양 자연스럽게 드러나는 거실 공간에 필요한, 시선을 방해하지 않는 심플한 글라이드 옵션도 제안합니다.
+  MEDIA Img_4_3__2.jpg
+  MEDIA Img_4_3__3.jpg
+
+===== 16-product_view_vertical.html =====
+  TEXT 부품만 교체해 새 의자처럼 많은 고민 끝에 사는 의자, 오래 사용할 수 있도록 시간이 흐르면서 자연스럽게 해지는 부품만 교체하면 새것처럼 사용할 수 있게 설계했습니다. 교체는 쉽고, 사용은 오래. 렌치 하나로 손쉽게 분리/교체되는 등판 숨겨진 홈에 렌치를 끼우고 돌리기만 하면 등판이 쉽게 분리되어 새 의자처럼 교체 가능합니다. *AS 접수를 통해 부품 구매 가능합니다. 교체 가능한 좌판 시간의 흔적이 가장 빨리 나타나는 좌판, 오래되거나 오염이 되어도 좌판만 교체해 새 의자처럼 사용할 수 있습니다. *AS 접수를 통해 부품 구매 가능합니다.
+  MAIN: ['Img_6_c7e0dc4e-d059-4518-8238-82a68220a582.jpg']
+  MEDIA Img_6_c7e0dc4e-d059-4518-8238-82a68220a582.jpg
+  MEDIA 366c8a6cf5e24d769bef6c6f714bf126.thumbnail.0000000000_small.jpg
+  MEDIA 366c8a6cf5e24d769bef6c6f714bf126.HD-720p-4.5Mbps-67322851.mp4
+  MEDIA 3b8a88f4ef1f456ea6b0e0a44daa366d.thumbnail.0000000000_small.jpg
+  MEDIA 3b8a88f4ef1f456ea6b0e0a44daa366d.HD-720p-4.5Mbps-66939605.mp4
+
+===== 17-product_view_vertical.html =====
+  TEXT 직접 조립하는 DIY 제품 조립 전 모든 부품의 이상 유무를 반드시 확인하고, 상부 패드의 조립 가이드를 참고하여 조립해 주세요. 빠르고 쉬운 조립 조립 과정이 심플하여 최대 15분 내 조립 가능합니다. (좌판과 등판 연결 후, 베이스와 중심봉을 끼워넣으면 완성)
+  MAIN: ['Img_7_52e9815a-a3e5-4329-991b-37152edfdee1.jpg']
+  MEDIA Img_7_52e9815a-a3e5-4329-991b-37152edfdee1.jpg
+  MEDIA f809a9ce6c24449bef25486d04f40c8f_12a7e474-841f-47aa-b549-8ec3535c7
+
+===== 18-product_warranty.html =====
+  TEXT MUUVE | 5년 품질보증 MUUVE와 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 5년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해, 더욱 편안한 사용을 경험해 보세요. *제품별로 보증 기간이 상이합니다. 정품등록
+  MEDIA WARRANTY_5.jpg
+
+===== 19-product_spec.html =====
+  TEXT MUUVE 제품 사이즈 최대 하중 125kg / 제품 무게 약 9kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다. 최대 하중 125kg / 제품 무게 약 9kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. 바퀴 글라이드
+  MEDIA MUUVE___01.jpg
+  MEDIA MUUVE___02.jpg
+  MEDIA MUUVE___01_3b6e6eb7-e118-4112-8630-4d353a7137b7.jpg
+  MEDIA MUUVE___02_4ce68b62-b0f5-4720-8d21-a4ae9a7c1870.jpg
+
+===== 20-product_information.html =====
+  TEXT 사용 시 주의 사항 오염 제거 방법 안내 의자 사용 시 의자 프레임이 오염되었을 경우, 매직블럭을 활용하면 얼룩을 간편히 제거할 수 있습니다. *매직블럭을 과도한 힘으로 문지르면, 표면이 손상될 수 있습니다.
+  MEDIA BLOCK-EGA-NOTICE.jpg
+
+===== 21-product_faq.html =====
+  TEXT FAQ 시디즈 뮤브 의자 바퀴/글라이드 교체 가능한가요? 글라이드/바퀴 사양으로 바꾸고 싶습니다. 시디즈 뮤브 의자의 바퀴/글라이드를 바꾸고 싶다면 AS 접수를 통해 글라이드/바퀴를 구매하여 직접 교체 가능합니다. 교체할 경우 제품의 높이가 달라지는 점을 사전에 확인해 주시기 바랍니다. 시디즈 뮤브 의자 소프트틸팅 움직임의 범위는 어느 정도인가요? 시디즈 뮤브 의자의 소프트틸팅은 몸의 움직임에 따라 윗방향 약8º, 아랫방향 약4º 가량의 범위로 움직입니다. 실제 등판이 움직이는 모습이 궁금하시다면 상세페이지 내 영상을 참고해 주시기 바랍니다. 시디즈 뮤브 의자의 최대 하중이 궁금합니다. 시디즈 뮤브 의자의 최대 하중은 125kg 입니다. 시디즈 뮤브 의자 좌판/등판 쿠션은 세탁이 가능한가요? 시디즈 뮤브 의자의 좌판/등판 쿠션은 별도 세탁은 불가하지만, 심하게 오염되거나 오래 사용해 해져서 교체하고 싶다면 AS 접수를 통해 교체 가능합니다.
+
+===== 22-product_related.html =====
+  TEXT 함께 쓰면 좋은 제품 STEPO 스테포 54,000원~ FUNGUS 펑거스 99,000원~ 멀티 스프레이 150ml - INFINITY 29,000원
+  MEDIA thum_STEPO_SB01F_MM_00_e1281e63-5a6a-47a3-9f20-b143370b89d1.jpg
+  MEDIA thum_FUNGUS_MN130_454B_00.jpg
+  MEDIA thum_FABRIC_SPRAY_INFINITY__01.jpg
+
+===== 23-product_related_article.html =====
+  TEXT 관련글 책 수선가 재영이 책을 수선하며 배운 삶의 태도 앉아야 일어나는 오늘 | with T50 AIR
+  MEDIA img_sculture_520x500_520x500_520x500_d5d93cc9-0595-4e2e-9c70-8b506
+
+===== 25-product_store_info.html =====
+  TEXT 시디즈 매장에 방문해 직접 앉아보세요 의자 위 앉는 경험을 몰입감 있게 체험할 수 있는 시디즈 더 프로그레시브 매장에서 직접 앉아보세요. 매장찾기
+  MEDIA shop_pc.jpg
+  MEDIA shop_mo.jpg
