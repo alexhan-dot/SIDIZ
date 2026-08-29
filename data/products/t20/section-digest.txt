@@ -1,0 +1,146 @@
+
+===== 05-product_row_1_wide.html =====
+  CSS #section-template--24699216691490__product_row_1_wide_t7eR :: background-color=#ffffff, color=#000000
+  TEXT 시디즈 T20 컴퓨터 사무용 의자 슈퍼노멀 설계 – 전문가 프리셋 기반으로 별도 조작 없이 즉시 인체공학적 착좌 환경을 구현하는 의자 4단계 등판 기울기 고정 – 105°~125° 범위 내 4단계 각도 고정으로 집중 업무부터 휴식까지 자세 전환 지원 클라우드폼 좌판 + 인체공학 헤드레스트 – 스쿠핑 기술로 허벅지 압박을 최소화하고 뒷목 어느 위치에서도 안정적으로 지지 이지리페어 + 5년 품질보증 – 부품 단위 개별 교체와 5년 보증으로 장기 가성비를 실현하는 유지관리 구조 가정·기업 범용 워크 체어 – 홈오피스·학습·사무실 환경을 모두 커버하는 단일 솔루션형 입문 인체공학 의자
+
+===== 06-product_pdp_head.html =====
+  TEXT LESS IS MORE 본질에 집중한 슈퍼노멀(Supernormal) 체어 T20 시디즈 T20은 본질에 집중한 슈퍼노멀 인체공학 사무용 의자입니다. 복잡한 조절 없이도 편안한 착좌감을 느낄 수 있도록 4단계 등판 기울기 고정, 클라우드폼 좌판, 인체공학 헤드레스트를 적용했습니다. 이러한 구조를 통해 홈오피스, 학습, 사무실 환경 모두에서 안정적인 착석감을 제공하며 부담 없이 시작하는 첫 인체공학 의자로 적합한 제품입니다.
+  MEDIA ca6af8d9ca7e402f8b66cc2b0be24feb.thumbnail.0000000000_small.jpg
+  MEDIA ca6af8d9ca7e402f8b66cc2b0be24feb.HD-1080p-7.2Mbps-41014010.mp4
+  MEDIA 0eac5fb3a248488f8e879f7be0c8b883.thumbnail.0000000000_small.jpg
+  MEDIA 0eac5fb3a248488f8e879f7be0c8b883.HD-1080p-7.2Mbps-41014009.mp4
+
+===== 07-product_row_1_wide.html =====
+  CSS #section-template--24699216691490__product_row_1_wide_CGnF :: background-color=#ffffff, color=#000000
+  TEXT 시디즈 T20 의자는? 시디즈 T20은 어느 공간에서나 어울리는 미니멀한 디자인에, 인체공학 설계를 바탕으로 꼭 필요한 기능만 담은 슈퍼노멀 의자입니다. 등판 기울기 고정 기능을 통해 상황에 맞게 의자를 세팅할 수 있으며, 중·고등학생부터 시디즈 입문자까지 부담 없이 선택할 수 있는 사무용 컴퓨터 의자입니다.
+
+===== 08-product_wb_scroll_banner.html =====
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#757575
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#757575
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#757575
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#757575
+  TEXT 본질에 집중한 슈퍼노멀(Supernormal) 체어 꼭 필요한 기능만 담은 실용형 워크 체어 T20은 최소한의 조절 기능만 담았습니다. 간단한 조절만으로 내 몸에 잘 맞는 느낌을 주며, 집중해야 할 순간부터 편안함이 필요한 순간까지 고려했습니다.
+  MEDIA 191efc71976f437a98810e4285cc4c15.thumbnail.0000000000_small.jpg
+  MEDIA 191efc71976f437a98810e4285cc4c15.HD-1080p-7.2Mbps-41014072.mp4
+  MEDIA adb1d34a3924461795364ccc48ee6161.thumbnail.0000000000_small.jpg
+  MEDIA adb1d34a3924461795364ccc48ee6161.HD-1080p-7.2Mbps-41014066.mp4
+
+===== 09-product_wb_card_list.html =====
+  CSS .block-video_738kRw .card--text .title :: color=#000000
+  CSS .block-video_738kRw .card--text .description :: color=#7c8084
+  CSS .block-image_NDMYmg .card--text .title :: color=#000000
+  CSS .block-image_NDMYmg .card--text .description :: color=#7c8084
+  CSS .block-image_cizyVP .card--text .title :: color=#000000
+  CSS .block-image_cizyVP .card--text .description :: color=#7c8084
+  TEXT 내 몸에 꼭 맞는 의자의 필수 조건 체형에 맞게 조절 가능한 의자 높이와 헤드레스트 높이 손쉬운 틸팅 강도 조절 체형과 취향에 따라 4단계로 조절 가능한 틸팅 강도 집중에서 쉼까지, 4단계 등판 기울기 고정 원하는 기울기로 등판을 고정하여 흔들림 없는 몰입과 편안한 휴식 지원
+  MEDIA 8095649bdcd648b1928a3982e74a93d4.thumbnail.0000000000_small.jpg
+  MEDIA 8095649bdcd648b1928a3982e74a93d4.SD-480p-0.9Mbps-41014067.mp4
+  MEDIA T20_01-2_09c24698-26b6-4df5-ba37-70081df5cf3f.jpg
+  MEDIA T20_01-3.jpg
+
+===== 10-product_wb_scroll_banner.html =====
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#ffffff
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#ffffff
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#ffffff
+  CSS .section-template--24699216691490__product_wb_scroll_banne :: color=#ffffff
+  TEXT 최적의 편안함을 구현한 디자인 본질에 집중한 슈퍼노멀(Supernormal) 체어 닿는 곳마다 설계된 편안함 헤드레스트의 위치가 맞지 않아 제거한 채 사용하거나 큰 좌판에 오금이 눌려 다리가 저렸던 경험이 있으신가요? T20은 전문가가 설계한 프리셋으로, 별다른 조작 없이도 느낄 수 있는 편안함을 구현하였습니다.
+  MEDIA fd2a7f5a6ffc4786abfbe1d9a0fa3624.thumbnail.0000000000_small.jpg
+  MEDIA fd2a7f5a6ffc4786abfbe1d9a0fa3624.HD-1080p-3.3Mbps-40956439.mp4
+  MEDIA b7906d553fd543bd85374b7b6c83fc5f.thumbnail.0000000000_small.jpg
+  MEDIA b7906d553fd543bd85374b7b6c83fc5f.HD-1080p-4.8Mbps-40956440.mp4
+
+===== 11-product_wb_card_list.html =====
+  CSS .block-video_h9kni3 .card--text .title :: color=#000000
+  CSS .block-video_h9kni3 .card--text .description :: color=#7c8084
+  CSS .block-video_8xfEaJ .card--text .title :: color=#000000
+  CSS .block-video_8xfEaJ .card--text .description :: color=#7c8084
+  CSS .block-video_UbDdDd .card--text .title :: color=#000000
+  CSS .block-video_UbDdDd .card--text .description :: color=#7c8084
+  TEXT 어느 위치에 두어도 편안한 헤드레스트 뒷통수와 뒷목 어디를 기대도 편안함을 느낄 수 있는 인체공학적 형상 편안함을 한층 높인 클라우드폼 시디즈만의 스쿠핑 기술로 압축력을 극대화하고, 다리 뒷면에 닿는 부분까지 고려한 푹신한 착좌감 안정감 있는 팔걸이패드 안정적으로 팔을 지지해주는 넉넉한 면적과 탄탄한 소재
+  MEDIA b1263fd05f114e24b4adda9ac9b11642.thumbnail.0000000000_small.jpg
+  MEDIA b1263fd05f114e24b4adda9ac9b11642.SD-480p-1.5Mbps-40616915.mp4
+  MEDIA 0c7eafe7c30f400288356224357d4f52.thumbnail.0000000000_small.jpg
+  MEDIA 0c7eafe7c30f400288356224357d4f52.SD-480p-1.5Mbps-40616916.mp4
+  MEDIA 2f95f20b864b4eef928f3beb6e3eb76a.thumbnail.0000000000_small.jpg
+  MEDIA 2f95f20b864b4eef928f3beb6e3eb76a.SD-480p-1.5Mbps-40616917.mp4
+
+===== 12-product_wb_banner.html =====
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=#ffffff
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=#ffffff
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=#ffffff
+  CSS .section-template--24699216691490__product_wb_banner_qxRAt :: color=#ffffff
+  TEXT 가정 뿐만 아니라 기업 환경에도 최적화된 워크 체어 from Home to Office - 최적의 사무용 의자 어떤 공간에 놓아도 편안함의 기준은 같습니다 구매 후 AS가 걱정되거나 사후 관리가 부담됐던 경험이 있으신가요? T20은 부품 단위 이지리페어와 5년 품질보증으로 구매 이후의 걱정까지 함께 덜어드립니다.
+  MEDIA T20_05-1_a894de61-3900-41a6-9b82-5bcdb7338355.jpg
+  MEDIA Head_M_b93afb2d-da1a-4cdc-b850-b7e03df12f84.jpg
+
+===== 13-product_wb_card_list.html =====
+  CSS .block-image_m4xamC .card--text .title :: color=#000000
+  CSS .block-image_m4xamC .card--text .description :: color=#7c8084
+  CSS .block-image_jzNVbb .card--text .title :: color=#000000
+  CSS .block-image_jzNVbb .card--text .description :: color=#7c8084
+  CSS .block-image_BFgkgC .card--text .title :: color=#000000
+  CSS .block-image_BFgkgC .card--text .description :: color=#7c8084
+  TEXT 9 to 6 하루 종일 이어지는 편안함 조용하고 부드럽게 움직이는 바퀴와 인체공학적 설계로, 업무 집중에 최적화 운영 · 관리까지 고려한 스마트한 선택 부품 단위 교체 가능한 이지리페어와 5년 품질 보증으로 용이한 유지관리 도입 부담을 줄이는 대량 구매 지원 15대 이상 구매 시 조립 서비스 제공 (추가 비용 발생)
+  MEDIA T20_05-2.jpg
+  MEDIA T20_05-3.jpg
+  MEDIA T20_05-4.jpg
+
+===== 14-product_link.html =====
+  CSS .section-product-link .wrapper--header .title :: color=#000000
+  CSS .section-product-link .wrapper--body .btn > a :: color=#000000
+  TEXT 사업자 고객 구매 문의
+
+===== 15-product_tile_card_list.html =====
+  TEXT T20 1&2세대 비교 직선적인 디자인에서 미니멀하고 부드러운 디자인으로 깔끔한 직선과 날렵한 실루엣으로 완성된 1세대 간결한 라운디쉬 디자인이 모든 파트에 적용되어 부드럽고 미니멀한 2세대 강도 조절이 쉬워진 2세대 라이트 싱크 틸트 좌판 하단 중앙에 틸팅 강도 조절 레버가 위치한 T20 1세대 허리를 숙이지 않아도 틸팅 강도를 조절하기 쉽고 돌출된 파트 없이 외관이 깔끔한 T20 2세대 사용성이 개선된 2세대 헤드레스트 레버를 고정해 흔들림없이 고정되는 1세대 헤드레스트 어디에 닿아도 편안한 구조와 앉은 자리에서 조절할 수 있는 2세대 헤드레스트 더 오래, 편안하게 앉을 수 있는 2세대 좌판 컴팩트한 사이즈의 탄탄한 1세대 좌판 넉넉한 사이즈와 편안한 착좌감에 이지리페어가 가능한 2세대 좌판
+  MEDIA Img_1_1_bb1c4656-82a9-4c40-8ade-1e4e96a2e489.jpg
+  MEDIA Img_1_1__2.jpg
+  MEDIA Img_1_1__3.jpg
+  MEDIA Img_1_1__4.jpg
+
+===== 16-product_find_your_fit.html =====
+  TEXT T20 조절 방법 내 몸에 맞게 조절해 보세요 USER GUIDE 사용자의 체형에 맞춰 의자 높이 조절 머리와 목의 부담을 줄이도록 헤드레스트 높이 / 각도 조절 원하는대로 등판이 젖혀지도록 틸팅 강도 조절 / 등판 기울기 고정
+  MEDIA FYF_01.jpg
+  MEDIA FYF_02.jpg
+  MEDIA FYF_03.jpg
+
+===== 17-product_related.html =====
+  TEXT 함께 쓰면 좋은 제품 STEPO 스테포 54,000원~ FUNGUS 펑거스 99,000원~
+  MEDIA thum_STEPO_SB01F_MM_00_e1281e63-5a6a-47a3-9f20-b143370b89d1.jpg
+  MEDIA thum_FUNGUS_MN130_454B_00.jpg
+
+===== 18-product_easy_repair.html =====
+  TEXT T20 | EASY REPAIR 고쳐서 오래쓰기, 지구를 위한 작은 실천 이지리페어 우레탄 바퀴 A형 28,000원 싯브레이크 바퀴 A형 35,000원 글라이드 A형 17,000원
+  MEDIA thum_CASTER-GLIDE_T00U0KG_BK65_01.jpg
+  MEDIA thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75
+  MEDIA thum_CASTER-GLIDE_T509G_BK_01.jpg
+
+===== 19-product_warranty.html =====
+  TEXT T20 | 5년 품질보증 T20과 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 5년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해, 더욱 편안한 사용을 경험해 보세요. *제품별로 보증 기간이 상이합니다. 정품등록
+  MEDIA WARRANTY_5.jpg
+
+===== 20-product_spec.html =====
+  TEXT T20 제품 사이즈 최대 하중 125kg / 제품 무게 약 15.5kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다.
+  MEDIA T20-2_01_6b011859-3f21-4896-a267-ea8ea1e36b8c.jpg
+  MEDIA T20-2_02_58937322-e61d-497b-9d5e-c1fdbc4f69d9.jpg
+
+===== 21-product_information.html =====
+  TEXT 사용 시 주의 사항 오염 제거 방법 안내 의자 조립 및 사용 시 의자 프레임이 오염되었을 경우, 매직블럭을 활용하면 얼룩을 간편히 제거할 수 있습니다. *매직블럭을 과도한 힘으로 문지르면, 표면이 손상될 수 있습니다. 틸팅 시 주의 사항 순간적으로 과도한 힘으로 등판을 젖힐 경우, 전도의 위험이 있으니 주의해주세요.
+  MEDIA BLOCK-EGA-NOTICE.jpg
+  MEDIA pc_1.png
+
+===== 22-product_faq.html =====
+  TEXT FAQ 헤드레스트, 좌판을 별도로 구입할 수 있나요? 제품 사용 중 헤드레스트나 좌판의 교체가 필요할 경우, 이지리페어 제품을 구매하여 쉽게 교체 가능합니다. 등판은 최대 몇°까지 뒤로 젖힐 수 있으며, 젖힌 상태에서 고정이 가능한가요? T20은 최대 125º까지 젖혀지며, 등판의 기울기를 고정할 수 있습니다. 다만 등판이 고정되는 각도는 105º, 113º, 121º로 총 3단계입니다. 등판을 2,3단계로 기울였을 때, 틸트 강도 조절이 안돼요. 등판을 2,3단계로 기울인 상태에서는 틸트 강도 레버가 고정되어 조절이 불가능합니다. 틸트 강도를 조절하려면, 등판이 직각인 1단계에서 등을 기대지 않은 상태로 조절해 주세요.
+
+===== 24-product_store_info.html =====
+  TEXT 시디즈 매장에 방문해 직접 앉아보세요 의자 위 앉는 경험을 몰입감 있게 체험할 수 있는 시디즈 더 프로그레시브 매장에서 직접 앉아보세요. 매장찾기
+  MEDIA shop_pc.jpg
+  MEDIA shop_mo.jpg
