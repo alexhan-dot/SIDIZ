@@ -1,0 +1,117 @@
+
+===== 05-product_tile_card_list.html =====
+  TEXT 리뉴얼된 GX, 무엇이 달라졌을까요? 높이 조절이 더해진 헤드레스트 각도 조절만 가능했던 기존 방식에서 높이 조절 기능이 추가되어, 사용자 체형에 맞는 더욱 세밀한 조정이 가능합니다. 허리를 더 탄탄하게 받치는 메쉬 설계 인체공학적 설계를 바탕으로 허리 부분의 메쉬를 더욱 탄탄하게 받쳐주는 설계로 변경해, 부위 별 차별화된 지지로 바른 자세를 편안하게 유지할 수 있습니다.
+  MEDIA gx-_1.jpg
+  MEDIA gx-_33.jpg
+
+===== 06-product_pdp_head.html =====
+  TEXT JOY EXPLORER 일과 휴식을 위한 인체공학 게이밍 의자 GX 듀얼-텐션 서포트 등판 와이드 헤드레스트 게이밍 틸트 9스텝 팔걸이 GX는 하나의 의자로 업무와 휴식을 스마트하게 즐길 수 있는 인체공학 게이밍의자입니다. 몰입과 여유, 일과 휴식의 밸런스를 맞추는 라이프 스타일에 발전을 더합니다.
+  MEDIA 237dc7ea071243c397ab4f460c6c69a6.thumbnail.0000000000_small.jpg
+  MEDIA 237dc7ea071243c397ab4f460c6c69a6.HD-1080p-7.2Mbps-82736419.mp4
+  MEDIA 405eee554ab3493da98045bf4065b7f2.thumbnail.0000000000_small.jpg
+  MEDIA 405eee554ab3493da98045bf4065b7f2.HD-1080p-7.2Mbps-82736610.mp4
+
+===== 07-product_wb_scroll_banner.html =====
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#ffffff
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#ffffff
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#ffffff
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#ffffff
+  TEXT Work and chill 하나의 의자로 일과 휴식을 자유롭게 전환 프로텐션 메쉬&와이드 헤드레스트 장시간 집중 업무에 몰입은 기본, 일상의 편안함을 더하는 데에도 한계는 없어야 하니까. GX로 업무와 휴식의 경계를 허물어보세요.
+  MEDIA home_01_pc.jpg
+  MEDIA home_01_mo.jpg
+
+===== 08-product_wb_scroll_card_list.html =====
+  CSS .block-video_da44HW .card--text .title :: color=#ffffff
+  CSS .block-video_da44HW .card--text .description :: color=#a4aab0
+  CSS .block-video_mhNkPX .card--text .title :: color=#ffffff
+  CSS .block-video_mhNkPX .card--text .description :: color=#a4aab0
+  CSS .block-video_ga3F6a .card--text .title :: color=#ffffff
+  CSS .block-video_ga3F6a .card--text .description :: color=#a4aab0
+  CSS .section-template--25188545364258__product_wb_scroll_card_ :: background-color=#000000
+  CSS .section-product-wb-scroll-banner .container--body .wrappe :: background-color=#000000
+  TEXT 듀얼-텐션 서포트 등판 업무와 게임, 휴식을 취하는 일상의 모든 순간에 신체 구조별 맞춤 텐션을 적용하여, 마지막까지 흐트러짐 없는 완벽한 지지력과 몰입 환경을 선사합니다. 상단의 Relax Zone 은 유연한 직조로 어깨와 등을 부드럽게 감싸며 업무나 휴식 중에도 최상의 쾌적함을 유지합니다. 반면 허리가 닿는 Core Zone 은 더욱 촘촘하고 단단하게 설계되어, 별도의 장치 없이도 허리를 탄탄하게 받쳐주는 '럼버서포트' 역할을 수행합니다. 와이드 헤드레스트 프로텐션 메쉬의 쾌적함을 살린 더 넓은 폭의 헤드레스트는 자세가 흐트러져도 고개를 안정적으로 지지하며 해먹 같은 안락함을 제공합니다. 여기에 사용자의 체형에 맞춘 세밀한 높이 조절과 각도 조절 기능 을 더해, 어떤 자세에서도 목과 머리를 가장 편안한 각도로 서포트합니다. 클라우드 폼 대부분의 시간을 보내는 의자는 평생 앉고 싶을 정도로 편해야합니다. 압축력을 최대화하는 스폰지 성형 기법으로 몸에 맞는 지지력과 편안함을 선사하는 GX의 클라우드 폼을 느껴보세요. 두툼한 두께로 오랜 시간 엉덩이 배김 없이 편안합니다.
+  MEDIA afad8111d62e419381c52160c83dc129.thumbnail.0000000000_small.jpg
+  MEDIA afad8111d62e419381c52160c83dc129.HD-1080p-7.2Mbps-72835973.mp4
+  MEDIA 22d20ad4070a4e0f949e70b370c9212f.thumbnail.0000000000_small.jpg
+  MEDIA 22d20ad4070a4e0f949e70b370c9212f.HD-1080p-7.2Mbps-50402657.mp4
+  MEDIA 9aa80dcca3144d209c4becd8a30fe869.thumbnail.0000000000_small.jpg
+  MEDIA 9aa80dcca3144d209c4becd8a30fe869.HD-1080p-7.2Mbps-50402702.mp4
+
+===== 09-product_wb_scroll_banner.html =====
+  CSS .section-template--25188545364258__product_wb_scroll_banne :: color=#000000
+  TEXT Be the professional
+
+===== 10-product_view_horizontal.html =====
+  TEXT 업무 효율을 완성하는 건, 흔들림 없는 자세 흔들림 없이 지지하는 게이밍 틸트 몰입이 필요한 순간, 90도 고정 기능을 휴식이 필요한 순간엔 120도로 등판 고정 ON 모든 순간을 편안하게, 흔들림없이 지지해 주는 게이밍 틸트로 편안함을 느껴보세요. *4단계 등판 기울기 고정, 4단계 틸팅 강도 조절 가능 등판 기울기 고정 유격 없이 안정적인 90 ° 세팅과 고정 기능으로 원하는 각도를 자유롭게 틸팅 강도 조절 원하는 강도로 빠르게 전환하여 집중 모드와 휴식 모드를 자유롭게 전환
+  MAIN: ['da745b07c0d147b1aed86a9fbe1e2a84.HD-1080p-3.3Mbps-54722576', 'da745b07c0d147b1aed86a9fbe1e2a84.thumbnail.0000000000_smal']
+  MEDIA da745b07c0d147b1aed86a9fbe1e2a84.thumbnail.0000000000_small.jpg
+  MEDIA da745b07c0d147b1aed86a9fbe1e2a84.HD-1080p-3.3Mbps-54722576.mp4
+  MEDIA Be_the_player.jpg
+  MEDIA Img2_174c8a25-e805-445a-bbd8-b51b8ac873d2.jpg
+
+===== 11-product_view_horizontal.html =====
+  TEXT 정교함의 차이가 몰입의 차이 다양한 사용 환경에 적합한 9스텝 팔걸이 팔의 위치는 집중력와 효율성에 직접적인 영향을 줍니다. GX는 사용자의 업무 스타일과 환경에 맞춰 정교하게 조절 가능한 팔걸이를 제공합니다. 9단계까지 높낮이 조절이 가능한 팔걸이는 장시간 타이핑, 회의, 휴식 등 다양한 상황에 따라 손목과 어깨의 부담을 줄여주고, 몰입을 돕습니다. *높이 110mm 조절, 60 ° 회전, 50mm 각도 조절 9단계 높이 조절 PC 모니터, 태블릿 등 다양한 디바이스에 맞춘 높이 세팅 가능 7단계 각도 조절 원하는 자세에 맞춘 정교한 세팅 가능 와이드 팔걸이 패드 활동에 제약 없이 기댈 수 있는 넓은 사이즈와 편안함
+  MAIN: ['GX__AI__04.jpg']
+  MEDIA GX__AI__04.jpg
+  MEDIA GX_02-1.jpg
+  MEDIA GX_02-2.jpg
+  MEDIA GX_02-3.jpg
+
+===== 12-product_tile_card_list.html =====
+  TEXT 오감을 고려한 입체적인 디자인 CHAMELEON MESH 눈이 즐거운 카멜레온 메쉬 각도에 따라 다채로운 색상을 선보이는 카멜레온 메쉬는 공간을 더욱 생동감 있게, 일상을 더 스타일리쉬하게 채워줍니다. LEVER DESIGN 보이지 않는 곳까지 생각한 레버 디자인 사선형 디자인의 레버로 손가락을 과하게 구부릴 필요가 없고, 부드러운 실리콘을 삽입하여 손가락이 닿는 부분의 촉감까지 고려했습니다.
+  MEDIA GX__1-1__01.jpg
+  MEDIA Img3_b8ff1387-aa42-408a-ab7e-3e28bf913155.jpg
+
+===== 13-product_assembly_guide.html =====
+  TEXT GX 실제 사용자 리뷰 공간을 다채롭게 채우는 GX 몰입과 여유, 일과 휴식의 밸런스가 중요한 저에게 딱 필요한 의자였어요! @블로거 리빙유님(@tamimamang) 공간을 다채롭게 채우는 GX 몰입과 여유, 일과 휴식의 밸런스가 중요한 저에게 딱 필요한 의자였어요! @블로거 리빙유님(@tamimamang) 미니멀한 공간에도 찰떡 넓은 사이즈에 쾌적한 메쉬 헤드레스트가 해먹에 누워서 휴식하는 것 같아요. @블로거 호담님 미니멀한 공간에도 찰떡 어떤 공간에도 어우러지는 심플한 디자인이지만, 기능은 하이 퍼포먼스로 몰입과 휴식을 지원해요. @블로거 호담님 나만의 취미방 완성 오랜 꿈이었던 게이밍 룸을 GX와 함께 완성하였습니다. @블로거 월터님 나만의 취미방 완성 오랜 꿈이었던 게이밍 룸을 GX와 함께 완성하였습니다. @블로거 월터님 유용한 등판 각도 고정 기능 4단계 각도 고정 기능으로 원하는 위치에 고정할 수 있어 좋아요. @블로거 아이보리님(@it_vory)
+  MEDIA IMG08.jpg
+  MEDIA IMG07.jpg
+  MEDIA IMG06.jpg
+  MEDIA IMG05.jpg
+  MEDIA IMG04.jpg
+  MEDIA IMG03.jpg
+  MEDIA IMG02.jpg
+
+===== 14-product_find_your_fit.html =====
+  TEXT GX 조절 방법 내 몸에 맞게 조절해 보세요 USER GUIDE 사용자의 체형에 맞춰 의자 높이 조절 / 좌판 깊이 조절 머리와 목의 부담을 줄이도록 헤드레스트 각도 조절 어깨와 팔을 편안하게 팔걸이 높이 / 앞뒤 / 각도 조절 원하는대로 등판이 젖혀지도록 틸팅 강도 / 등판 기울기 조절
+  MEDIA GX_FYF_01.jpg
+  MEDIA Find_your_fit_01.jpg
+  MEDIA GX_FYF_03.jpg
+  MEDIA Find_your_fit_02.jpg
+
+===== 15-product_related.html =====
+  TEXT 함께 쓰면 좋은 제품 STEPO 스테포 54,000원~ FUNGUS 펑거스 99,000원~ 더 프로그레시브 백 15,000원
+  MEDIA thum_STEPO_SB01F_MM_00_e1281e63-5a6a-47a3-9f20-b143370b89d1.jpg
+  MEDIA thum_FUNGUS_MN130_454B_00.jpg
+  MEDIA thum_THE_PROGRESSIVE_BAG_01.jpg
+
+===== 16-product_easy_repair.html =====
+  TEXT GX | EASY REPAIR 고쳐서 오래쓰기, 지구를 위한 작은 실천 이지리페어 우레탄 바퀴 A형 28,000원 싯브레이크 바퀴 A형 35,000원 글라이드 A형 17,000원
+  MEDIA thum_CASTER-GLIDE_T00U0KG_BK65_01.jpg
+  MEDIA thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75ef
+  MEDIA thum_CASTER-GLIDE_T509G_BK_01.jpg
+
+===== 17-product_warranty.html =====
+  TEXT GX | 5년 품질보증 GX와 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 5년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해, 더욱 편안한 사용을 경험해 보세요. *제품별로 보증 기간이 상이합니다. 정품등록
+  MEDIA WARRANTY_5.jpg
+
+===== 18-product_spec.html =====
+  TEXT GX 제품 사이즈 최대 하중 115kg / 제품 무게 약 17kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다.
+  MEDIA GX_bef2ce3c-faec-4514-8da5-179075a4775f.png
+  MEDIA GX-1_01744ba6-1e09-47a6-a5ca-377598f694bb.png
+
+===== 19-product_information.html =====
+  TEXT 사용 시 주의 사항 오염 제거 방법 안내 의자 사용 시 의자 프레임이 오염되었을 경우, 매직블럭을 활용하면 얼룩을 간편히 제거할 수 있습니다. *매직블럭을 과도한 힘으로 문지르면, 표면이 손상될 수 있습니다. 틸팅 시 주의 사항 순간적으로 과도한 힘으로 등판을 젖힐 경우, 전도의 위험이 있으니 주의해주세요.
+  MEDIA BLOCK-EGA-NOTICE.jpg
+  MEDIA pc_1.png
+
+===== 20-product_faq.html =====
+  TEXT FAQ 등판은 최대 몇°까지 뒤로 젖힐 수 있으며, 젖힌 상태에서 고정이 가능한가요? GX 등판은 4단계 각도 조절을 통해 최소 100°~ 최대 120° 까지 젖힐 수 있으며, 등판의 기울기를 고정할 수 있습니다. 좌판을 교체할 수 있나요? 좌판 교체를 원하시는 경우 챗봇 또는 컨택센터로 문의해 주세요. 등판을 2~4단계로 기울였을 때, 틸트 강도 조절이 안돼요. 등판을 2~4단계로 기울인 상태에서는 틸트 강도 레버가 고정되어 조절이 불가능합니다. 틸트 강도를 조절하려면, 등판이 직각인 1단계에서 등을 기대지 않은 상태로 조절해 주세요.
+
+===== 22-product_store_info.html =====
+  TEXT 시디즈 매장에 방문해 직접 앉아보세요 의자 위 앉는 경험을 몰입감 있게 체험할 수 있는 시디즈 더 프로그레시브 매장에서 직접 앉아보세요. 매장찾기
+  MEDIA shop.png
+  MEDIA shop_mo.png

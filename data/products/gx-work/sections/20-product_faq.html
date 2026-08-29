@@ -1,0 +1,98 @@
+<section id="shopify-section-template--25188545364258__product_faq_pFJHYe" class="shopify-section section-product-faq section-product-information"><div class="container">
+  <div class="wrapper">
+    <div class="wrapper--header">
+        <style data-shopify>
+          .section-product-faq .title { margin: 0; padding: 0; }
+        </style>
+        
+        <h2 class="title">FAQ</h2>
+          
+    </div>
+      <div class="wrapper--body">
+        
+          <div class="information-list">
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">등판은 최대 몇°까지 뒤로 젖힐 수 있으며, 젖힌 상태에서 고정이 가능한가요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">GX 등판은 4단계 각도 조절을 통해 최소 100°~ 최대 120° 까지 젖힐 수 있으며, 등판의 기울기를 고정할 수 있습니다.</div></div>
+                </div>
+              </div>
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">좌판을 교체할 수 있나요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">좌판 교체를 원하시는 경우 챗봇 또는 컨택센터로 문의해 주세요.</div></div>
+                </div>
+              </div>
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">등판을 2~4단계로 기울였을 때, 틸트 강도 조절이 안돼요.</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">등판을 2~4단계로 기울인 상태에서는 틸트 강도 레버가 고정되어 조절이 불가능합니다.<br/>틸트 강도를 조절하려면, 등판이 직각인 1단계에서 등을 기대지 않은 상태로 조절해 주세요.</div></div>
+                </div>
+              </div>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function() {
+      // 현재 섹션 FAQ 블록 + product-information에서 모은 블록(window.__faqBlocks) 통합
+      const ownFaqs = [{
+          name: "등판은 최대 몇°까지 뒤로 젖힐 수 있으며, 젖힌 상태에서 고정이 가능한가요?",
+          answer: "GX 등판은 4단계 각도 조절을 통해 최소 100°~ 최대 120° 까지 젖힐 수 있으며, 등판의 기울기를 고정할 수 있습니다."
+        },
+{
+          name: "좌판을 교체할 수 있나요?",
+          answer: "좌판 교체를 원하시는 경우 챗봇 또는 컨택센터로 문의해 주세요."
+        },
+{
+          name: "등판을 2~4단계로 기울였을 때, 틸트 강도 조절이 안돼요.",
+          answer: "등판을 2~4단계로 기울인 상태에서는 틸트 강도 레버가 고정되어 조절이 불가능합니다.틸트 강도를 조절하려면, 등판이 직각인 1단계에서 등을 기대지 않은 상태로 조절해 주세요."
+        }
+];
+
+      const extraFaqs = Array.isArray(window.__faqBlocks) ? window.__faqBlocks : [];
+      const allFaqs = [...ownFaqs, ...extraFaqs].filter(q => q && q.name && q.answer);
+      if (allFaqs.length === 0) return;
+
+      const payload = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": allFaqs.map(q => ({
+          "@type": "Question",
+          "name": q.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": q.answer
+          }
+        }))
+      };
+
+      const scriptId = "merged-faq-schema-template--25188545364258__product_faq_pFJHYe";
+      const existing = document.getElementById(scriptId);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(payload);
+      document.head.appendChild(script);
+    })();
+  </script>
+
+
+
+</section>

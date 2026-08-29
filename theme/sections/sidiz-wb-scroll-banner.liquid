@@ -46,6 +46,35 @@
       {%- if section.settings.video_url_mobile != blank -%}
         {% render 'sidiz-video', url: section.settings.video_url_mobile, poster: section.settings.poster_url_mobile, alt: section.settings.alt, classes: 'mobile', size: 'full' %}
       {%- endif -%}
+
+      {%- comment -%}
+        Still-image background. The GX page pins a photograph here where the
+        T-series pages pin footage.
+      {%- endcomment -%}
+      {%- if section.settings.video_url == blank and section.settings.image_url != blank -%}
+        <img
+          class="web"
+          src="{{ section.settings.image_url }}?width=2400"
+          sizes="100vw"
+          width="2400"
+          height="1350"
+          alt="{{ section.settings.alt | escape }}"
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
+      {%- if section.settings.video_url_mobile == blank and section.settings.image_url_mobile != blank -%}
+        <img
+          class="mobile"
+          src="{{ section.settings.image_url_mobile }}?width=1200"
+          sizes="100vw"
+          width="1200"
+          height="1800"
+          alt="{{ section.settings.alt | escape }}"
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
     </div>
 
     <div class="wrapper--sticky">
@@ -118,6 +147,8 @@
     { "type": "text", "id": "poster_url", "label": "Poster URL (desktop)" },
     { "type": "text", "id": "video_url_mobile", "label": "Video URL (mobile)" },
     { "type": "text", "id": "poster_url_mobile", "label": "Poster URL (mobile)" },
+    { "type": "text", "id": "image_url", "label": "Image URL (desktop)", "info": "Used when no video is set." },
+    { "type": "text", "id": "image_url_mobile", "label": "Image URL (mobile)" },
     { "type": "text", "id": "alt", "label": "Alt text" }
   ],
   "presets": [{ "name": "SIDIZ WB scroll banner" }]
