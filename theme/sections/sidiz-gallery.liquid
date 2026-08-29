@@ -28,9 +28,14 @@
   <div class="sidiz-gallery__track">
     {%- for block in section.blocks -%}
       <figure class="sidiz-gallery__item" {{ block.shopify_attributes }}>
+        {%- liquid
+          # The pipeline writes plain image URLs as image_url; media_url stays
+          # the primary so existing blocks keep working.
+          assign item_url = block.settings.media_url | default: block.settings.image_url
+        -%}
         {% render 'sidiz-media',
           image: block.settings.image,
-          url: block.settings.media_url,
+          url: item_url,
           poster: block.settings.poster_url,
           alt: block.settings.alt,
           ratio: section.settings.ratio,
@@ -85,6 +90,7 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "media_url", "label": "Media URL" },
+        { "type": "text", "id": "image_url", "label": "Image URL", "info": "Alias for Media URL; used by the migration pipeline." },
         { "type": "text", "id": "poster_url", "label": "Video poster URL" },
         { "type": "text", "id": "alt", "label": "Alt text" },
         { "type": "text", "id": "caption", "label": "Caption" }

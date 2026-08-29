@@ -1,0 +1,307 @@
+{{ 'sidiz-home.css' | asset_url | stylesheet_tag }}
+
+<section class="sidiz-home-editorial" data-header-scheme="light">
+  <div class="sidiz-home-editorial__head">
+    <p class="sidiz-home-kicker">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    {%- if section.settings.link != blank -%}<a href="{{ section.settings.link }}">{{ section.settings.link_label }} <span aria-hidden="true">&rsaquo;</span></a>{%- endif -%}
+  </div>
+
+  <div class="sidiz-home-editorial__stories">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'story' -%}
+        <article class="sidiz-home-story" {{ block.shopify_attributes }}>
+          <a href="{{ block.settings.link | default: section.settings.link }}">
+            <div class="sidiz-home-story__media">
+              {%- if block.settings.image_url != blank -%}
+                {% render 'sidiz-image', source: block.settings.image_url, alt: block.settings.title, width: 1200, widths: '480,720,960,1200', sizes: '(min-width: 990px) 33vw, 92vw', loading: 'lazy', fallback_width: 1200, fallback_height: 900 %}
+              {%- elsif block.settings.product.featured_image != blank -%}
+                {{ block.settings.product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 92vw', widths: '480,720,960,1200', alt: block.settings.title }}
+              {%- endif -%}
+            </div>
+            <p class="sidiz-home-story__label">{{ block.settings.label }}</p>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.body }}</p>
+          </a>
+        </article>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="sidiz-home-services">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'service' -%}
+        <a class="sidiz-home-service" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          <span>{{ block.settings.label }}</span>
+          <strong>{{ block.settings.title }}</strong>
+          <span class="sidiz-home-service__arrow" aria-hidden="true">&rsaquo;</span>
+        </a>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% render 'sidiz-section-editor-controls' %}
+
+{% schema %}
+{
+  "name": "SIDIZ editorial",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout and type"
+    },
+    {
+      "type": "paragraph",
+      "content": "Default preserves the section design. Turn on spacing or colour only when this section needs an override."
+    },
+    {
+      "type": "checkbox",
+      "id": "editor_spacing_override",
+      "label": "Custom section spacing",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_top",
+      "label": "Top spacing - desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_bottom",
+      "label": "Bottom spacing - desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_top_mobile",
+      "label": "Top spacing - mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_bottom_mobile",
+      "label": "Bottom spacing - mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "editor_heading_scale",
+      "label": "Heading size",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "s",
+          "label": "S"
+        },
+        {
+          "value": "m",
+          "label": "M"
+        },
+        {
+          "value": "l",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "editor_text_scale",
+      "label": "Text size",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "s",
+          "label": "S"
+        },
+        {
+          "value": "m",
+          "label": "M"
+        },
+        {
+          "value": "l",
+          "label": "L"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "editor_content_width",
+      "label": "Content width",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "full",
+          "label": "Full width"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "editor_text_alignment",
+      "label": "Text alignment",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "editor_apply_color_scheme",
+      "label": "Use selected colour scheme",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "editor_color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "S-Culture"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ideas for better sitting"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "View all stories"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Story",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Body"
+        },
+        {
+          "type": "text",
+          "id": "image_url",
+          "label": "Shopify image reference"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Fallback product image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "service",
+      "name": "Service link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "SIDIZ editorial"
+    }
+  ]
+}
+{% endschema %}

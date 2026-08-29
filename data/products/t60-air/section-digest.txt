@@ -1,0 +1,240 @@
+
+===== 05-product_pdp_head.html ===== wrapper=shopify-section section-product-pdp-head
+  TXT [wrapper--text align-center] Personal Fit. Airy Comfort. 세밀한 피팅에 산뜻함을 더하다
+  TXT [title] T60 AIR
+  TXT [wrapper--description align-left] 내 몸에 꼭 맞는 세밀한 피팅으로 편안함을 지켜주고, 탄탄하면서도 통기성 좋은 에어플렉스 메쉬가 쾌적한 착좌감을 완성합니다. T60 AIR와 함께, 나만의 피팅에 산뜻한 청량감을 더해보세요.
+  MEDIA Head_55475f12-39a1-417e-902a-b8633cd023a9.jpg
+  MEDIA T60_m1_decdfcfe-975a-4c98-822f-dc3248275ffe.jpg
+
+===== 06-product_row_1_wide.html ===== wrapper=shopify-section section-product-row row-1 wide
+  CSS #section-template--25383594492194__product_row_1_wide_WyGzPt :: background-color=#ffffff, color=#000000
+  TXT [title align-left] 시디즈 T60 AIR 인체공학 사무용 컴퓨터 풀메쉬 의자 (SIDIZ T60 AIR Ergonomic Office Computer Full Mesh Chair)
+  TXT [content--text] 퍼스널 피팅 에어 풀메쉬 체어 (Personal Fitting Airy Full Mesh Chair) – 정밀한 신체 맞춤 피팅 기능에 탄탄한 에어플렉스 메쉬 소재를 좌판과 등판 모두에 적용하여 압
+
+===== 07-product_wb_banner.html ===== wrapper=shopify-section section-product-wb-banner
+  CSS .section-template--25383594492194__product_wb_banner_GWXGiq .container :: color=
+  CSS .section-template--25383594492194__product_wb_banner_GWXGiq .container :: color=
+  TXT [title] 풀 메쉬, 오래 가는 쾌적함 AIRY COMFORT ALL DAY LONG
+
+===== 08-product_view_horizontal_1.html ===== wrapper=shopify-section section-product-view horizontal
+  TXT [section-text] 등판부터 좌판까지, 풀 메쉬 (Full Mesh System) 등판부터 좌판까지 전면에 메쉬 소재를 적용하여 몸에 고이는 땀과 열을 빠르게 식혀주고 산뜻함을 유지합니다. 공기 순환을 극대화한 구조로
+  TXT [block--text] 에어플렉스 메쉬 (Airflex Mesh) 강성과 탄성 복원력이 모두 뛰어난 특수 메쉬 원단을 사용하여 오랜 기간 사용해도 형태가 쉽게 무너지지 않습니다. 엉덩이와 등 전체를 탄탄하고 유연하게 받쳐
+  TXT [block--text] 걱정없이 오래오래 (Durable Design) 미국 사무가구협회(BIFMA)의 엄격한 테스트 기준을 통과하여 최대 125kg 의 하중까지 견고하게 지지하는 압도적인 내구성을 자랑합니다. 부품 손상
+  MEDIA 7c581e01be3843129f1487703373da59.thumbnail.0000000000_small.jpg
+  MEDIA 7c581e01be3843129f1487703373da59.HD-1080p-7.2Mbps-64920462.mp4
+  MEDIA 7c581e01be3843129f1487703373da59.thumbnail.0000000000_small.jpg
+  MEDIA Img2_f746652c-719b-4616-9a41-6d5f36fc68e0.jpg
+  MEDIA Img3_be636555-44a5-4b22-ac7d-18eea6b0bf79.jpg
+
+===== 09-product_wb_banner.html ===== wrapper=shopify-section section-product-wb-banner
+  CSS .section-template--25383594492194__product_wb_banner_dDHi9b .container :: color=
+  CSS .section-template--25383594492194__product_wb_banner_dDHi9b .container :: color=
+  TXT [title] 모두 다른 몸, 그래서 필요한 나만의 핏 PERSONAL FITTING
+
+===== 10-product_wb_scroll_banner.html ===== wrapper=shopify-section section-product-wb-scroll-banner
+  CSS .section-template--25383594492194__product_wb_scroll_banner_3RjDWi .co :: color=#000000, background-color=#eaedf0
+  CSS .section-template--25383594492194__product_wb_scroll_banner_3RjDWi .co :: color=#000000
+  CSS .section-template--25383594492194__product_wb_scroll_banner_3RjDWi .co :: color=#000000
+  CSS .section-template--25383594492194__product_wb_scroll_banner_3RjDWi .co :: color=#000000, background-color=#eaedf0
+  CSS .section-template--25383594492194__product_wb_scroll_banner_3RjDWi .co :: color=#000000
+  CSS .section-template--25383594492194__product_wb_scroll_banner_3RjDWi .co :: color=#000000
+  MEDIA 858954013b164fbfad7f5670438d6f8d.thumbnail.0000000000_small.jpg
+  MEDIA 858954013b164fbfad7f5670438d6f8d.HD-1080p-7.2Mbps-64919396.mp4
+  MEDIA 858954013b164fbfad7f5670438d6f8d.thumbnail.0000000000_small.jpg
+  MEDIA 7bf60cae55914f0781b68323c16cc1d5.thumbnail.0000000000_small.jpg
+  MEDIA 7bf60cae55914f0781b68323c16cc1d5.HD-1080p-7.2Mbps-64919399.mp4
+  MEDIA 7bf60cae55914f0781b68323c16cc1d5.thumbnail.0000000000_small.jpg
+
+===== 11-product_wb_scroll_card_list.html ===== wrapper=shopify-section section-product-wb-scroll-card-list
+  CSS .block-video_r4Keba .card--text .title :: color=#000000
+  CSS .block-video_r4Keba .card--text .description :: color=#7c8084
+  CSS .block-video_xEbciV .card--text .title :: color=#000000
+  CSS .block-video_xEbciV .card--text .description :: color=#7c8084
+  CSS .block-video_wbcQAY .card--text .title :: color=#000000
+  CSS .block-video_wbcQAY .card--text .description :: color=#7c8084
+  CSS .section-template--25383594492194__product_wb_scroll_card_list_EtjYmt :: background-color=#ffffff
+  CSS .section-product-wb-scroll-banner .container--body .wrapper--sticky :: background-color=#ffffff
+  TXT [card--text] 인피니핏 헤드레스트 35mm 깊이 조절로 허리를 세우거나 등을 기대도 안정감 있고 최대 125mm 높이 조절로 작은 키부터 큰 키까지 모두 편안하게
+  TXT [card--text] 럼버서포트 높이(7단계)와 깊이(3단계) 조절로 내 몸에 맞출 수 있고, 넓은 럼버 패드에 날렵한 슬릿으로 유연함을 더한 럼버서포트
+  TXT [card--text] 팔걸이 높이와 앞뒤, 각도를 체형에 맞게 조절하여 어깨 부담을 줄이고, 부드러운 움직임으로 감도 높은 사용성
+  MEDIA 6a46fd5f888549198ae82f66f45074d3.thumbnail.0000000000_small.jpg
+  MEDIA 6a46fd5f888549198ae82f66f45074d3.HD-1080p-7.2Mbps-64919636.mp4
+  MEDIA 6a46fd5f888549198ae82f66f45074d3.thumbnail.0000000000_small.jpg
+  MEDIA 69c4f44846e14dbfb3296cb45aa74e70.thumbnail.0000000000_small.jpg
+  MEDIA 69c4f44846e14dbfb3296cb45aa74e70.HD-1080p-7.2Mbps-64919463.mp4
+  MEDIA 69c4f44846e14dbfb3296cb45aa74e70.thumbnail.0000000000_small.jpg
+  MEDIA 6df8581239724055b2ec8f089835e771.thumbnail.0000000000_small.jpg
+  MEDIA 6df8581239724055b2ec8f089835e771.HD-1080p-7.2Mbps-64919466.mp4
+  MEDIA 6df8581239724055b2ec8f089835e771.thumbnail.0000000000_small.jpg
+
+===== 12-product_wb_scroll_banner.html ===== wrapper=shopify-section section-product-wb-scroll-banner
+  CSS .section-template--25383594492194__product_wb_scroll_banner_7f3f8e .co :: color=#000000
+  CSS .section-template--25383594492194__product_wb_scroll_banner_7f3f8e .co :: color=#000000, background-color=#eaedf0
+  CSS .section-template--25383594492194__product_wb_scroll_banner_7f3f8e .co :: color=#000000
+  CSS .section-template--25383594492194__product_wb_scroll_banner_7f3f8e .co :: color=#000000
+  CSS .section-template--25383594492194__product_wb_scroll_banner_7f3f8e .co :: color=#000000, background-color=#eaedf0
+  CSS .section-template--25383594492194__product_wb_scroll_banner_7f3f8e .co :: color=#000000
+  CSS .section-template--25383594492194__product_wb_scroll_banner_7f3f8e .co :: color=#000000
+  TXT [title] 전문성이 만든 인간공학적 편안함 ENGINEERED COMFORT
+  MEDIA 89581099c5d344daaf424ed8ec856d88.thumbnail.0000000000_small.jpg
+  MEDIA 89581099c5d344daaf424ed8ec856d88.HD-1080p-7.2Mbps-64930428.mp4
+  MEDIA 89581099c5d344daaf424ed8ec856d88.thumbnail.0000000000_small.jpg
+  MEDIA baab5ed500894baf8f24c40be0968d58.thumbnail.0000000000_small.jpg
+  MEDIA baab5ed500894baf8f24c40be0968d58.HD-1080p-7.2Mbps-64930442.mp4
+  MEDIA baab5ed500894baf8f24c40be0968d58.thumbnail.0000000000_small.jpg
+
+===== 13-product_wb_scroll_card_list.html ===== wrapper=shopify-section section-product-wb-scroll-card-list
+  CSS .block-video_Px9UyU .card--text .title :: color=#ffffff
+  CSS .block-video_Px9UyU .card--text .description :: color=#a4aab0
+  CSS .block-image_gqegkb .card--text .title :: color=#ffffff
+  CSS .block-image_gqegkb .card--text .description :: color=#a4aab0
+  CSS .section-template--25383594492194__product_wb_scroll_card_list_q3C9zt :: background-color=#000000
+  CSS .section-product-wb-scroll-banner .container--body .wrapper--sticky :: background-color=#000000
+  TXT [card--text] 워터폴 팔걸이 패드 스마트폰 사용, 태블릿 작업, 한 쪽 팔걸이에 기대어 쉬는 순간까지 어떤 자세에서도 팔의 부담을 덜어주는 워터폴 형상
+  TXT [card--text] 메쉬 헤드레스트 메쉬 소재로 열 배출이 용이해 산뜻함과 쾌적함을 유지하며, 널찍한 면적이 어떤 자세에서도 목과 머리를 안정적으로 지지
+  MEDIA ca6e0495fc3c4226aaff6f8ad2662196.thumbnail.0000000000_small.jpg
+  MEDIA ca6e0495fc3c4226aaff6f8ad2662196.HD-1080p-7.2Mbps-64930494.mp4
+  MEDIA ca6e0495fc3c4226aaff6f8ad2662196.thumbnail.0000000000_small.jpg
+  MEDIA 65ca39dbc012e5295e685b25700d0384.jpg
+
+===== 14-product_view_vertical.html ===== wrapper=shopify-section section-product-view vertical
+  TXT [section-text] 싱크 틸트 의자의 핵심 메커니즘인 틸트는 등판과 좌판의 각도를 조절해 사용자가 고정된 자세에 머무르지 않고 자연스럽게 움직일 수 있도록 돕습니다. T60 AIR의 싱크 틸트는 틸팅 범위와 강도를 사
+  TXT [block--text] 싱크로나이즈드 틸팅 등판을 젖힐 때 등판과 좌판이 서로 다른 각도로 기울어져, 허리와 골반을 편안하게 지지하는 메커니즘
+  TXT [block--text] 멀티리미티드 틸팅 몰입부터 휴식까지, 상황에 따라 105°에서 130°로 범위 조절
+  TXT [block--text] 틸팅 강도 개개인의 체형과 취향에 따라 23번의 레버 회전으로 세밀하게 조절
+  MEDIA Img3_1a455ad4-adab-468d-9c31-2807c8ec5e59.jpg
+  MEDIA Img_4_3_3.jpg
+  MEDIA Img_4_3_4.jpg
+  MEDIA Img_4_3_5.jpg
+
+===== 15-product_tile_card_list.html ===== wrapper=shopify-section section-product-tile-card-list
+  TXT [title] 편안함을 완성하는 디테일
+  TXT [card--text] 우레탄 바퀴 일반 바퀴에 비해 부드럽고 이동 시 소음이 적으며 바닥 긁힘 방지
+  MEDIA Img_1_1_572cfccb-8de5-4541-beb8-cfc09915fcf6.jpg
+
+===== 16-product_wb_banner.html ===== wrapper=shopify-section section-product-wb-banner
+  CSS .section-template--25383594492194__product_wb_banner_GqqRBW .container :: color=
+  CSS .section-template--25383594492194__product_wb_banner_GqqRBW .container :: color=
+  TXT [title] T60 AIR & T50 AIR 한 눈에 비교하기
+
+===== 17-product_row_1_wide.html ===== wrapper=shopify-section section-product-row row-1 wide
+  CSS #section-template--25383594492194__product_row_1_wide_dxVgLw :: background-color=#ffffff, color=#000000
+  MEDIA 1_2948692c-e306-4ebe-98d8-6b52efc5c382.jpg
+  MEDIA T60_AIR_m4_8906988f-b15c-4536-ae46-3c570c20c847.jpg
+
+===== 18-product_row_1_wide.html ===== wrapper=shopify-section section-product-row row-1 wide
+  CSS #section-template--25383594492194__product_row_1_wide_LAMYfD :: background-color=#ffffff, color=#000000
+  MEDIA 2_6a385863-a7a4-4b81-a4ed-d6bd154802f5.jpg
+  MEDIA T60_AIR_m5_d4caf1ea-8629-49e4-afd8-3c698764aee1.jpg
+
+===== 19-product_row_1_wide.html ===== wrapper=shopify-section section-product-row row-1 wide
+  CSS #section-template--25383594492194__product_row_1_wide_Bpwejj :: background-color=#ffffff, color=#000000
+  TXT [title align-center] 교체는 쉽고, 사용은 오래
+  TXT [content--text] 의자를 장기간 사용했더라도 필요한 부품만 구매하고 손쉽게 교체하면 새 제품처럼 사용할 수 있습니다. 쉽게 고쳐 오래 쓰기, 이지리페어 *헤드레스트, 팔걸이 패드, 좌판 판매 예정
+  MEDIA 019050cb79f6485ca8675219a85e85c2.thumbnail.0000000000_small.jpg
+  MEDIA 019050cb79f6485ca8675219a85e85c2.HD-1080p-7.2Mbps-57627709.mp4
+  MEDIA 019050cb79f6485ca8675219a85e85c2.thumbnail.0000000000_small.jpg
+
+===== 20-product_find_your_fit.html ===== wrapper=shopify-section section-product-find-your-fit
+  TXT [title] FIND YOUR FIT
+  TXT [subtitle] 내 몸에 맞게 조절해 보세요
+  TXT [card--text] 사용자의 체형에 맞춰
+  TXT [description rich-text-area] 의자 높이 조절 / 좌판 깊이 조절
+  TXT [card--text] 머리와 목의 부담을 줄이도록
+  TXT [description rich-text-area] 헤드레스트 높이 / 각도 / 깊이 조절
+  TXT [card--text] 원하는대로 등판이 젖혀지도록
+  TXT [description rich-text-area] 틸팅 범위 / 강도 조절
+  TXT [card--text] 어깨와 팔을 편안하게
+  TXT [description rich-text-area] 팔걸이 높이 / 앞뒤 / 각도 조절
+  TXT [card--text] 허리를 안정적으로 지지하도록
+  TXT [description rich-text-area] 럼버서포트 높이 / 깊이 조절
+  MEDIA FIT_1.jpg
+  MEDIA FIT_2.jpg
+  MEDIA FIT_3.jpg
+  MEDIA FIT_4.jpg
+  MEDIA FIT_5.jpg
+
+===== 21-product_related.html ===== wrapper=shopify-section section-product-related
+  TXT [title] 함께 쓰면 좋은 제품
+  TXT [product-item--text] FUNGUS 펑거스
+  TXT [product-item--text] STEPO 스테포
+  TXT [product-item--text] 멀티 스프레이 150ml - INFINITY
+  MEDIA thum_FUNGUS_MN130_454B_00.jpg
+  MEDIA thum_STEPO_SB01F_MM_00_e1281e63-5a6a-47a3-9f20-b143370b89d1.jpg
+  MEDIA thum_FABRIC_SPRAY_INFINITY__01.jpg
+
+===== 22-product_easy_repair.html ===== wrapper=shopify-section section-product-easy-repair
+  TXT [title] EASY REPAIR
+  TXT [subtitle] 고쳐서 오래쓰기, 지구를 위한 작은 실천
+  TXT [product--text] T60&T60 AIR 헤드레스트 37,000원
+  TXT [product--text] T60 AIR 좌판 60,000원
+  TXT [product--text] T60&T60 AIR 팔걸이 패드 21,000원
+  TXT [product--text] 우레탄 바퀴 A형 28,000원
+  TXT [product--text] 싯브레이크 바퀴 A형 35,000원
+  MEDIA thum_T60_headrest_5H1ASG.jpg
+  MEDIA thum_T60AIR_seat_5G1CSG.jpg
+  MEDIA thum_T60_armpad_SG.jpg
+  MEDIA thum_CASTER-GLIDE_T00U0KG_BK65_01.jpg
+  MEDIA thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75efc365.jpg
+
+===== 23-product_warranty.html ===== wrapper=shopify-section section-product-warranty
+  TXT [title] T60 AIR | 5년 품질보증
+  TXT [description rich-text-area] T60 AIR와 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 5년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해, 더욱 편안한 사용을 경험
+  MEDIA WARRANTY_5.jpg
+
+===== 24-product_spec.html ===== wrapper=shopify-section section-product-spec
+  TXT [title] SPEC
+  TXT [description-1] 최대 하중 125kg / 제품 무게 약 19kg
+  TXT [description-2] *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 
+  MEDIA T60_AIR_01_08b654bd-c702-4ce4-849e-1c6f2af33504.jpg
+  MEDIA T60_AIR_02_589a61a9-5f47-4f63-a638-69c55ab30486.jpg
+
+===== 25-product_faq.html ===== wrapper=shopify-section section-product-faq section-product-information
+  TXT [title] FAQ
+  TXT [item--text] 등판을 최대로 얼마나 젖힐 수 있고, 젖힌 상태에서도 고정할 수 있나요? T60 AIR의 등판은 5단계 범위 조절을 통해 최소 105°~ 최대 130° 까지 젖힐 수 있습니다. 다만, 등판 젖힘 각
+
+===== 26-product_review.html ===== wrapper=shopify-section section-product-review
+  TXT [review-title] REVIEW
+
+===== 27-product_store_info.html ===== wrapper=shopify-section section-product-store-info
+  TXT [title] 매장에 방문해 직접 앉아보세요
+  TXT [description] 의자 위 앉는 경험을 몰입감 있게 체험할 수 있는 시디즈 더 프로그레시브 매장에서 직접 앉아보세요.
+  MEDIA shop_pc.jpg
+  MEDIA shop_mo.jpg
+
+===== 29-product-notice.html ===== wrapper=shopify-section section-product-notice
+  TXT [title] 컨택센터
+  TXT [title] 제품/배송/AS/반품 관련 문의
+  TXT [description] 전화번호 1577-5674 월~금요일 (오전 9:30 ~ 오후 5:30) *점심 시간 (오전 12:30 ~ 오후 1:30) 토요일 (오전 9:30 ~ 오후 12:30) *AS만 가능 일요일 및 공휴
+  TXT [title] AS 하자반품 안내
+  TXT [description] 품질보증기간: 구매 후 최대 15년 시디즈의 부품은 품목에 따라 1년에서 최대 15년까지 품질이 보증됩니다. 자세한 사항은 시디즈 품질 보증 정책 을 참고해 주세요. 의자에 별도로 설치하는 보조 기
+  TXT [title] 배송안내
+  TXT [title] 배송지역
+  TXT [description] 전국 무료배송입니다. (단, 제주도의 경우 추가 배송비가 부과되며, 울릉도 및 일부 도서산간 지역은 직접 배송이 불가합니다.) 제품의 특성상 묶음 배송이 불가하며, 택배 배송의 경우 제품과 수량에 
+  TXT [title] 제주도 추가 배송비
+  TXT [description] 제주도의 경우 소비자가 기준 4%의 추가 배송비가 부과됩니다.
+  TXT [title] 배송일 및 배송기간
+  TXT [description] 배송기간은 주문 확인 후 평균 4~10일 정도 소요됩니다. (주말, 공휴일 제외) 배송관련 특수상황이나 천재지변에 따라 배송이 다소 지연될 수 있습니다.
+  TXT [title] 예상 배송일 안내
+  TXT [description] 예상 배송일은 주문 완료 후 24시간 이내에 발송되는 알림톡을 통해 확인할 수 있습니다. 알림톡을 수신 받지 못한 경우 챗봇 또는 고객센터로 문의해 주세요. (주말, 공휴일 제외) 경기도 일부, 충
+  TXT [title] 배송일 변경
+  TXT [description] 주문 완료 후 배송 시작 전까지 배송일을 변경할 수 있습니다. 배송 시간은 지정할 수 없으며 배송일 전날 방문 예정 시간을 알림톡으로 안내드립니다. 배송 시간 관련 내용은 기사님에게 문의해 주세요.
+  TXT [title] 제품 수령 시 주의사항
+  TXT [description] 기존에 사용하던 제품을 폐기장으로 운반하는 서비스는 제공되지 않습니다.
+  TXT [title] 변경/취소/교환/반품 안내
+  TXT [title] 주문 변경/취소
+  TXT [description] 주문 완료 후 색상, 수량 등을 변경할 수 없으며, 취소 후 다시 주문해야 합니다. 주문 취소는 예상 배송일로부터 2일 전까지만 가능합니다. 배송일 전날부터는 주문을 취소할 수 없으며, 반품 및 환
+  TXT [title] 교환/반품 신청 기준
+  TXT [description] 교환/반품은 표준 약관에 의거하여 제품 수령 후 7일 이내에 요청할 수 있습니다. 단, 7일 이내라도 하단 [교환/반품 불가] 사유에 해당할 경우에는 제품 하자가 아니므로 교환/반품을 할 수 없습니
+  TXT [title] 교환/반품 불가
+  TXT [description] 시공이 완료되었거나 사용한 제품은 재화의 가치가 현저히 감소하여 재판매가 불가하므로 단순변심에 의한 교환/반품을 할 수 없습니다. *시공이란 고객의 승인을 받아 시공기사가 직접 방문하여 제품을 설치
+  TXT [title] 반품비(추가 배송비) 기준
+  TXT [description] 제품 수령 후 고객 변심에 의한 교환, 반품 시. (상세 기준은 위 교환/반품 신청 기준을 따름) 배송일 하루 전 또는 당일 주문 취소/변경으로 인한 물류 이동 비용 발생 시. 당일 조립 공간 미확
+  TXT [title] 반품 제품의 택배 이용 방법
+  TXT [description] 반드시 시디즈에서 예약한 지정 택배를 통해 반품해 주세요. 타 택배사를 이용하거나 별도 신청 없이 임의로 반품할 경우 추가되는 비용은 고객님에게 청구됩니다. 교환, 반품 및 피해 보상은 공정거래 위
+  TXT [title] 제품 안내
+  TXT [description] 개인의 모니터 및 모바일 설정에 따라 제품의 사진과 실제 색상이 다를 수 있습니다. 색상 차이로 인한 단순 변심은 교환/반품 대상이 아닙니다. 실물 확인이 필요한 경우 시디즈 매장을 방문해 주세요.
+  MEDIA return_shipping_fee_table.jpg
+
+===== 30-product_row_1_narrow.html ===== wrapper=shopify-section shopify-section-group-footer-group section-product-row row-1 narrow
+  CSS #section-sections--24699213840674__product_row_1_narrow_dRVQRw :: background-color=#ffffff, color=#000000

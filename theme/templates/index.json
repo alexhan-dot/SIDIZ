@@ -1,75 +1,319 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "spring_campaign": {
+      "type": "sidiz-spring-banner",
+      "settings": {
+        "enable_banner": true,
+        "product": "sidiz-t50-white-home-office-desk-chair",
+        "image_url": "shopify://shop_images/T50-RE_BG.jpg",
+        "background": "#f3f3f2",
+        "eyebrow": "Spring Arrival | Ready to ship",
+        "heading": "In-stock SIDIZ chairs, ready for what comes next.",
+        "body": "Limited T50, T50 AIR, T80 and RINGO stock, ready for dispatch from our Sydney warehouse.",
+        "show_price": false,
+        "sale_price": "399",
+        "compare_price": "899",
+        "primary_link": "/collections/spring-arrival",
+        "primary_label": "Shop Spring Arrival",
+        "secondary_link": "/pages/special-offers",
+        "secondary_label": "View all offers",
+        "disclosure": "Prices include GST. Availability is limited and subject to order allocation."
+      }
+    },
+    "preorder_banner": {
+      "type": "sidiz-spring-banner",
+      "settings": {
+        "enable_banner": true,
+        "image_url": "shopify://shop_images/sidiz-t60-air-personal-fitting-hero.jpg",
+        "background": "#eef0ef",
+        "eyebrow": "SIDIZ Australia | Pre-order programme",
+        "heading": "Reserve the next SIDIZ arrival.",
+        "body": "Selected packaging-ready models appear only after Australian allocation, price and estimated dispatch timing are confirmed.",
+        "show_price": false,
+        "primary_link": "/pages/pre-order",
+        "primary_label": "Explore pre-orders",
+        "secondary_link": "/pages/pre-order-and-delivery",
+        "secondary_label": "How pre-orders work",
+        "disclosure": "No product is open for pre-order unless its product page is marked PRE-ORDER and shows an estimated dispatch date."
+      }
+    },
+    "hero": {
+      "type": "sidiz-home-hero",
+      "settings": {
+        "video": "shopify://files/videos/sidiz-t50-air-2-hero.mp4",
+        "mobile_image": "shopify://shop_images/sidiz-t50-air-2-t50-air-second-generation-in-ash-white-front-view.png",
+        "media_fit": "contain",
+        "media_position": "center center",
+        "media_background": "#101113",
+        "desktop_height": 820,
+        "mobile_height": 700,
+        "media_alt": "T50 AIR 2nd Generation full-mesh ergonomic chair in motion",
+        "header_scheme": "dark",
+        "eyebrow": "New generation",
+        "heading": "T50 AIR 2nd Generation",
+        "body": "<p>Full-mesh comfort, refined personal fitting and a lighter way to work through every season.</p>",
+        "link_label": "Explore T50 AIR",
+        "link": "/products/sidiz-t50-air-2nd-generation-ergonomic-full-mesh-office-chair",
+        "secondary_label": "Shop all chairs",
+        "secondary_link": "/collections/all"
+      }
+    },
+    "promotion": {
+      "type": "sidiz-home-promotion",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "t50_offer": { "type": "product", "settings": { "product": "sidiz-t50-white-home-office-desk-chair" } },
+        "t50_air_offer": { "type": "product", "settings": { "product": "fursys-t50-air-home-office-desk-chair" } },
+        "t80_offer": { "type": "product", "settings": { "product": "sidiz-t80-white-home-office-desk-chair" } },
+        "ringo_offer": { "type": "product", "settings": { "product": "sidiz-ringo-kids-desk-chair" } },
+        "t25_offer": { "type": "product", "settings": { "product": "sidiz-t25-white-home-office-desk-chair" } },
+        "t40_offer": { "type": "product", "settings": { "product": "t40-se-all-new" } }
+      },
+      "block_order": ["t50_offer", "t50_air_offer", "t80_offer", "ringo_offer", "t25_offer", "t40_offer"],
+      "settings": {
+        "eyebrow": "Current offers",
+        "heading": "A better time to sit better",
+        "body": "<p>Selected SIDIZ favourites at limited-time prices, while stock lasts.</p>",
+        "show_only_discounted": true,
+        "link_label": "Shop all chairs",
+        "link": "/collections/all"
+      }
+    },
+    "fit": {
+      "type": "sidiz-home-fit",
+      "blocks": {
+        "work": { "type": "category", "settings": { "title": "Work", "caption": "Performance seating for focused days", "image_url": "shopify://shop_images/sidiz-t80-lumbar-seat-support.jpg", "image_alt": "A professional working at a desk while seated in a SIDIZ T80 chair", "media_style": "editorial", "media_position": "center center", "media_background": "#e8e3dc", "product": "t90-ergonomic-office-chair", "link": "/collections/sidiz-work" } },
+        "light": { "type": "category", "settings": { "title": "Light Work", "caption": "Agile comfort for shared spaces", "image_url": "shopify://shop_images/sidiz-muuve-muuve-light-work-chair-in-a-calm-home-workspace.jpg", "image_alt": "SIDIZ MUUVE chairs around a table in a calm home workspace", "media_style": "editorial", "media_position": "center center", "media_background": "#e9e3d8", "product": "sidiz-muuve-light-work-chair", "link": "/collections/sidiz-light-work" } },
+        "living": { "type": "category", "settings": { "title": "Living & Dining", "caption": "Everyday seating, thoughtfully resolved", "image_url": "shopify://shop_images/sidiz-plit-plit-easy-care-seat-in-a-dining-space.jpg", "image_alt": "SIDIZ PLIT chairs in a bright contemporary dining space", "media_style": "editorial", "media_position": "center center", "media_background": "#f1f0ec", "product": "sidiz-plit-easy-care-dining-chair", "link": "/collections/sidiz-living-dining" } },
+        "gaming": { "type": "category", "settings": { "title": "Gaming", "caption": "Support engineered for long sessions", "image_url": "shopify://shop_images/sidiz-gc-pro-gc-pro-gaming-tilt.jpg", "image_alt": "A gamer using the SIDIZ GC PRO chair at a multi-screen setup", "media_style": "editorial", "media_position": "center center", "media_background": "#10141f", "product": "new-in-gc-pro-gaming-chair-cooling-seat-led-lights-black", "link": "/collections/sidiz-gaming" } },
+        "study": { "type": "category", "settings": { "title": "Study", "caption": "Healthy sitting habits from the start", "image_url": "shopify://shop_images/sidiz-ible-ible-study-chair-in-a-focused-learning-space.jpg", "image_alt": "SIDIZ IBLE study chair beside a bright, organised desk", "media_style": "editorial", "media_position": "center center", "media_background": "#e8e6e0", "product": "sidiz-ible-ergonomic-study-chair", "link": "/collections/sidiz-study" } },
+        "growing": { "type": "category", "settings": { "title": "Growing", "caption": "Seating that adapts with children", "image_url": "shopify://shop_images/sidiz-atti-chair-atti-growth-stage-design.jpg", "image_alt": "Children playing and learning with SIDIZ ATTI chairs and tables", "media_style": "editorial", "media_position": "center center", "media_background": "#eef0ef", "product": "sidiz-atti-toddler-chair", "link": "/collections/sidiz-growing" } },
+        "booster": { "type": "category", "settings": { "title": "Seat Booster", "caption": "Compact support wherever it is needed", "image_url": "shopify://shop_images/sidiz-pillo-pillo-ergonomic-floor-chair-in-a-relaxed-living-space_0ee5109c-9ae7-4811-a8ef-f8b280bc7aa7.jpg", "image_alt": "SIDIZ PILLO floor chair in a relaxed contemporary living space", "media_style": "editorial", "media_position": "center center", "media_background": "#aab8c5", "product": "sidiz-pillo-ergonomic-floor-chair", "link": "/collections/sidiz-seat-booster" } },
+        "goods": { "type": "category", "settings": { "title": "The P Goods", "caption": "Useful objects for progressive living", "image_url": "shopify://shop_images/sidiz-the-p-bag-carrying-the-progressive-bag-through-the-day.jpg", "image_alt": "The Progressive Bag carried over the shoulder", "media_style": "editorial", "media_position": "center center", "media_background": "#ececef", "product": "sidiz-the-progressive-bag", "link": "/collections/sidiz-the-p-goods" } }
+      },
+      "block_order": ["work", "light", "living", "gaming", "study", "growing", "booster", "goods"],
+      "settings": {
+        "eyebrow": "Find your fit",
+        "heading": "A chair for every way you sit",
+        "body": "<p>From deep-focus work to growing study spaces, find the SIDIZ chair designed around the way you move.</p>",
+        "video": "shopify://files/videos/sidiz-t60-air-personal-fitting.mp4",
+        "video_mobile": "shopify://files/videos/sidiz-t60-air-personal-fitting-mobile.mp4",
+        "poster": "shopify://shop_images/sidiz-t60-air-personal-fitting-hero.jpg",
+        "poster_mobile": "shopify://shop_images/sidiz-t60-air-personal-fitting-hero-mobile.jpg",
+        "media_alt": "SIDIZ T60 AIR adjusted for a precise ergonomic fit",
+        "media_fit": "contain",
+        "media_background": "#111111",
+        "feature_title": "Personal fitting, made intuitive",
+        "feature_link_label": "Explore ergonomic work chairs",
+        "feature_link": "/collections/sidiz-work"
+      }
+    },
+    "showcase": {
+      "type": "sidiz-home-showcase",
+      "blocks": {
+        "t90_story": {
+          "type": "story",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "product": "t90-ergonomic-office-chair",
+            "video_asset": "sidiz-t90-hero-film-desktop-16x9.mp4",
+            "video_asset_mobile": "sidiz-t90-hero-film-mobile-9x16.mp4",
+            "image": "shopify://shop_images/sidiz-t90-sidiz-t90-in-grey-rotated-view.jpg",
+            "media_alt": "SIDIZ T90 ergonomic chair supporting focused creative work",
+            "media_fit": "cover",
+            "media_ratio_desktop": "16 / 9",
+            "media_ratio_mobile": "9 / 16",
+            "media_background": "#e9edf1",
+            "text_tone": "dark",
+            "eyebrow": "Work",
+            "title": "T90. Precision you can feel.",
+            "body": "<p>Responsive support and considered adjustment for modern, multi-device work.</p>",
+            "link_label": "Explore T90",
+            "link": "/products/t90-ergonomic-office-chair"
           }
         },
-        "button": {
-          "type": "buttons",
+        "gc_story": {
+          "type": "story",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "product": "new-in-gc-pro-gaming-chair-cooling-seat-led-lights-black",
+            "video": "shopify://files/videos/sidiz-gc-pro-for-the-pro.mp4",
+            "video_mobile": "shopify://files/videos/sidiz-gc-pro-for-the-pro-mobile.mp4",
+            "image": "shopify://shop_images/sidiz-gc-pro-gc-pro-cooling-seat-and-led-in-black-and-blue.jpg",
+            "media_alt": "GC PRO gaming chair engineered for long competitive sessions",
+            "media_fit": "contain",
+            "media_background": "#08090b",
+            "text_tone": "light",
+            "eyebrow": "Gaming",
+            "title": "Performance support, powered up.",
+            "body": "<p>Cooling-seat technology and integrated lighting meet full-session ergonomic support.</p>",
+            "link_label": "Explore GC PRO"
+          }
+        },
+        "ringo_story": {
+          "type": "story",
+          "settings": {
+            "product": "sidiz-ringo-gen2-growing-kids-chair",
+            "video": "shopify://files/videos/sidiz-ringo-gen2-dream-to-grow.mp4",
+            "video_mobile": "shopify://files/videos/sidiz-ringo-gen2-dream-to-grow-mobile.mp4",
+            "image": "shopify://shop_images/sidiz-ringo-gen2-ringo-gen2-in-greyish-beige.jpg",
+            "media_alt": "RINGO Gen2 chair supporting children as they grow",
+            "media_fit": "contain",
+            "media_background": "#eef2f5",
+            "text_tone": "dark",
+            "eyebrow": "Growing",
+            "title": "Made to grow into every idea.",
+            "body": "<p>Adaptive sitting support helps create a confident place for learning, drawing and discovery.</p>",
+            "link_label": "Explore RINGO Gen2",
+            "link": "/products/sidiz-ringo-gen2-growing-kids-chair"
           }
         }
       },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+      "block_order": ["t90_story", "gc_story", "ringo_story"],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "eyebrow": "Made for movement",
+        "heading": "Different lives. Precisely supported.",
+        "body": "<p>Purpose-built seating for focused work, immersive play and every stage of growing.</p>"
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "recommend": {
+      "type": "sidiz-product-carousel",
+      "blocks": {
+        "t90": { "type": "item", "settings": { "product": "t90-ergonomic-office-chair", "title": "SIDIZ T90 Ergonomic Office Chair", "price": "$1,199.00", "image_url": "shopify://shop_images/sidiz-t90-sidiz-t90-in-grey-rotated-view.jpg", "media_style": "product", "media_position": "center center", "subject_size": 78, "media_background": "#ebebeb", "link": "/products/t90-ergonomic-office-chair" } },
+        "t80": { "type": "item", "settings": { "product": "sidiz-t80-white-home-office-desk-chair", "title": "T80 Premium Ergonomic Office Chair", "price": "$1,049.00", "image_url": "shopify://shop_images/sidiz-t80-mesh-fabric-front.jpg", "media_style": "product", "media_position": "center center", "subject_size": 78, "media_background": "#e6e6e6", "link": "/products/sidiz-t80-white-home-office-desk-chair" } },
+        "t60": { "type": "item", "settings": { "product": "sidiz-t60-air-ergonomic-full-mesh-office-chair", "title": "SIDIZ T60 AIR Ergonomic Office Chair", "price": "$499.00", "image_url": "shopify://shop_images/sidiz-t60-air-grey-front.jpg", "media_style": "product", "media_position": "center center", "subject_size": 78, "media_background": "#e5e5e5", "link": "/products/sidiz-t60-air-ergonomic-full-mesh-office-chair" } },
+        "ible": { "type": "item", "settings": { "product": "sidiz-ible-ergonomic-study-chair", "title": "SIDIZ IBLE Ergonomic Study Chair", "price": "From $399.00", "image_url": "shopify://shop_images/sidiz-ible-ible-hybrid-glide-white-frame-and-warm-grey-upholstery.jpg", "media_style": "product", "media_position": "center center", "subject_size": 70, "media_background": "#eaeaea", "link": "/products/sidiz-ible-ergonomic-study-chair" } }
+      },
+      "block_order": ["t90", "t80", "t60", "ible"],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "source": "manual",
+        "limit": 8,
+        "eyebrow": "Recommended",
+        "heading": "Made for better sitting",
+        "body": "<p>Explore SIDIZ chairs selected for work, home and study in Australia.</p>",
+        "view_all_label": "Shop all products",
+        "view_all_link": "/collections/all",
+        "background": "#ffffff"
+      }
+    },
+    "trust": {
+      "type": "sidiz-home-trust",
+      "blocks": {
+        "returns": { "type": "item", "settings": { "icon": "returns", "eyebrow": "Try with confidence", "heading": "30-day returns", "body": "Subject to the published return conditions.", "link": "/pages/return-policy" } },
+        "warranty": { "type": "item", "settings": { "icon": "warranty", "eyebrow": "Built for daily use", "heading": "Five-year limited warranty", "body": "Unless another period is stated. ACL rights also apply.", "link": "/pages/warranty" } },
+        "support": { "type": "item", "settings": { "icon": "support", "eyebrow": "Local assistance", "heading": "Australian support", "body": "Help with products, delivery, assembly and business orders.", "link": "/pages/contact" } },
+        "showroom": { "type": "item", "settings": { "icon": "showroom", "eyebrow": "Experience SIDIZ", "heading": "Showroom by appointment", "body": "Confirm the model and visit time before travelling.", "link": "/pages/contact" } }
+      },
+      "block_order": ["returns", "warranty", "support", "showroom"],
+      "settings": { "eyebrow": "SIDIZ Australia", "heading": "Confidence, from first sit." }
+    },
+    "awards": {
+      "type": "sidiz-home-awards",
+      "blocks": {
+        "t90_award": {
+          "type": "award",
+          "settings": {
+            "award": "iF Design Award 2025 - Office Chair",
+            "product_name": "T90",
+            "body": "<p>Recognised for performance-engineered support that responds to changing posture, movement and modern work.</p>",
+            "product": "t90-ergonomic-office-chair",
+            "image_url": "shopify://shop_images/sidiz-t90-sidiz-t90-in-grey-rotated-view.jpg",
+            "media_background": "#ebebeb",
+            "media_position": "center center",
+            "subject_size": 76,
+            "link_label": "Explore T90",
+            "link": "/products/t90-ergonomic-office-chair"
+          }
+        },
+        "trevo_award": {
+          "type": "award",
+          "settings": {
+            "award": "Red Dot Award: Product Design 2025",
+            "product_name": "TREVO",
+            "body": "<p>Recognised for a refined growing-chair design that helps children sit comfortably in shared living and dining spaces.</p>",
+            "product": "sidiz-trevo-growing-high-chair",
+            "image_url": "shopify://shop_images/sidiz-trevo-trevo-in-dusty-green-view-1_46b32e4f-b19c-4f83-a7ec-1cb0acf27fb9.jpg",
+            "media_background": "#e2e2e2",
+            "media_position": "center center",
+            "subject_size": 76,
+            "link_label": "Explore TREVO",
+            "link": "/products/sidiz-trevo-growing-high-chair"
+          }
+        },
+        "gc_award": {
+          "type": "award",
+          "settings": {
+            "award": "Korea Good Design Award 2022",
+            "product_name": "GC PRO",
+            "body": "<p>Purpose-built gaming support, recognised for bringing ergonomic engineering into immersive play.</p>",
+            "product": "new-in-gc-pro-gaming-chair-cooling-seat-led-lights-black",
+            "image_url": "shopify://shop_images/sidiz-gc-pro-gc-pro-black-and-blue-front-angle.jpg",
+            "media_background": "#f5f5f5",
+            "media_position": "center center",
+            "subject_size": 76,
+            "link_label": "Explore GC PRO",
+            "link": "/products/new-in-gc-pro-gaming-chair-cooling-seat-led-lights-black"
+          }
+        }
+      },
+      "block_order": ["t90_award", "trevo_award", "gc_award"],
+      "settings": {
+        "eyebrow": "Design recognition",
+        "heading": "Designed with purpose. Recognised worldwide.",
+        "body": "<p>Independent design recognition reflects the research, engineering and care behind distinctive SIDIZ seating.</p>"
+      }
+    },
+    "guidance": {
+      "type": "sidiz-home-guidance",
+      "blocks": {
+        "compare": { "type": "action", "settings": { "eyebrow": "Compare", "heading": "See the difference at a glance", "body": "Compare dimensions, materials and adjustment features across key SIDIZ models.", "link_label": "Compare models", "link": "/pages/compare-models" } },
+        "support": { "type": "action", "settings": { "eyebrow": "Ask SIDIZ Australia", "heading": "Get help choosing your chair", "body": "Tell our Australian team about your space, work style and support preferences.", "link_label": "Contact the team", "link": "/pages/contact" } }
+      },
+      "block_order": ["compare", "support"],
+      "settings": {
+        "eyebrow": "Choose with confidence",
+        "heading": "The right chair starts with the right questions.",
+        "body": "<p>Use the comparison guide for a quick shortlist, or speak with SIDIZ Australia for more personal support.</p>"
+      }
+    },
+    "culture": {
+      "type": "sidiz-home-editorial",
+      "blocks": {
+        "story1": { "type": "story", "settings": { "label": "Ergonomics", "title": "Build a chair around the way you move", "body": "Good support starts with adjustment that feels natural, not complicated.", "image_url": "shopify://shop_images/sidiz-t90-sidiz-t90-in-grey-rotated-view.jpg", "product": "t90-ergonomic-office-chair", "link": "/blogs/guide" } },
+        "story2": { "type": "story", "settings": { "label": "Work culture", "title": "Designing a healthier rhythm for focused work", "body": "Small changes in posture and movement can make a long day feel remarkably different.", "image_url": "shopify://shop_images/sidiz-t60-air-grey-front.jpg", "product": "sidiz-t60-air-ergonomic-full-mesh-office-chair", "link": "/blogs/guide" } },
+        "story3": { "type": "story", "settings": { "label": "Growing", "title": "A study space that grows with them", "body": "Create a supportive place for learning with seating designed to adapt.", "image_url": "shopify://shop_images/sidiz-ringo-gen2-ringo-gen2-in-greyish-beige.jpg", "product": "sidiz-ringo-gen2-growing-kids-chair", "link": "/blogs/guide" } },
+        "service1": { "type": "service", "settings": { "label": "About SIDIZ", "title": "Design for progress", "link": "/collections/why-choose-sidiz" } },
+        "service2": { "type": "service", "settings": { "label": "Care", "title": "Easy Repair and support", "link": "/pages/faq" } },
+        "service3": { "type": "service", "settings": { "label": "Confidence", "title": "Warranty support", "link": "/pages/warranty" } },
+        "service4": { "type": "service", "settings": { "label": "Experience", "title": "Find a stockist", "link": "/pages/contact" } }
+      },
+      "block_order": ["story1", "story2", "story3", "service1", "service2", "service3", "service4"],
+      "settings": { "eyebrow": "S-Culture", "heading": "Ideas for better sitting", "link_label": "View all stories", "link": "/blogs/guide" }
+    },
+    "journal": {
+      "type": "sidiz-home-journal",
+      "settings": { "eyebrow": "Journal", "heading": "Guides for better sitting", "blog": "guide", "link_label": "View all guides" }
+    },
+    "brand": {
+      "type": "sidiz-home-brand",
+      "settings": {
+        "header_scheme": "light",
+        "image_url": "shopify://shop_images/sidiz-t90-sidiz-t90-in-grey-rotated-view.jpg",
+        "product": "t90-ergonomic-office-chair",
+        "image_alt": "SIDIZ ergonomic chair designed for precise personal fitting",
+        "eyebrow": "About SIDIZ",
+        "heading": "Design for the way people progress",
+        "body": "<p>SIDIZ studies how people sit, move and concentrate. That understanding becomes ergonomic seating with considered support, durable engineering and clear, intuitive adjustment.</p>",
+        "link_label": "Discover SIDIZ",
+        "link": "/collections/why-choose-sidiz"
       }
     }
   },
-  "order": [
-    "image_banner",
-    "featured_collection"
-  ]
+  "order": ["spring_campaign", "hero", "trust", "promotion", "preorder_banner", "fit", "showcase", "awards", "recommend", "guidance", "culture", "journal", "brand"]
 }

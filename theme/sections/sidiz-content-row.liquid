@@ -8,7 +8,21 @@
   if section.settings.video != blank or section.settings.image != blank
     assign has_media = true
   endif
+  comment
+    The migration pipeline hands sections media as URL strings (KR CDN first,
+    repointed to AU Files later), so the picker settings alone silently drop
+    the media. URLs are the fallback; a picker choice still wins.
+  endcomment
+  if section.settings.video_url != blank or section.settings.image_url != blank
+    assign has_media = true
+  endif
+  for block in section.blocks
+    if block.type == 'media'
+      assign has_media = true
+    endif
+  endfor
 -%}
+<script src="{{ 'sidiz-video.js' | asset_url }}" defer="defer"></script>
 
 <section
   class="sidiz-row sidiz-row--{{ width }} sidiz-row--media-{{ media_side }} sidiz-row--text-{{ section.settings.text_align }}{% unless has_media %} sidiz-row--no-media{% endunless %}"
@@ -32,7 +46,7 @@
               muted: true,
               controls: false
           }}
-        {%- else -%}
+        {%- elsif section.settings.image != blank -%}
           {{
             section.settings.image
             | image_url: width: 2400
@@ -42,7 +56,61 @@
               widths: '480,760,1100,1500,1900,2400',
               alt: section.settings.image.alt
           }}
+        {%- elsif section.settings.video_url != blank -%}
+          {% render 'sidiz-video', url: section.settings.video_url, poster: section.settings.poster_url, alt: section.settings.alt, size: 'full' %}
+        {%- elsif section.settings.image_url != blank -%}
+          <img
+            {% if section.settings.image_url_mobile != blank %}class="web"{% endif %}
+            src="{{ section.settings.image_url }}?width=2400"
+            sizes="(min-width: 834px) 60vw, 100vw"
+            width="2400"
+            height="1200"
+            loading="lazy"
+            alt="{{ section.settings.alt | escape }}"
+          >
+          {%- if section.settings.image_url_mobile != blank -%}
+            <img
+              class="mobile"
+              src="{{ section.settings.image_url_mobile }}?width=1200"
+              sizes="100vw"
+              width="1200"
+              height="1800"
+              loading="lazy"
+              alt="{{ section.settings.alt | escape }}"
+            >
+          {%- endif -%}
         {%- endif -%}
+
+        {%- comment -%}
+          Extra stacked media blocks. JSON templates cap at 25 sections, so
+          back-to-back full-bleed image rows (the T60 AIR comparison tables)
+          live in one row as blocks instead of one section each.
+        {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'media' -%}
+            <img
+              {% if block.settings.image_url_mobile != blank %}class="web"{% endif %}
+              src="{{ block.settings.image_url }}?width=2400"
+              sizes="(min-width: 834px) 60vw, 100vw"
+              width="2400"
+              height="1200"
+              loading="lazy"
+              alt="{{ block.settings.alt | escape }}"
+              {{ block.shopify_attributes }}
+            >
+            {%- if block.settings.image_url_mobile != blank -%}
+              <img
+                class="mobile"
+                src="{{ block.settings.image_url_mobile }}?width=1200"
+                sizes="100vw"
+                width="1200"
+                height="1800"
+                loading="lazy"
+                alt="{{ block.settings.alt | escape }}"
+              >
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
       </div>
     {%- endif -%}
 
@@ -59,9 +127,10 @@
         <div class="sidiz-row__text rte">{{ section.settings.body }}</div>
       {%- endif -%}
 
-      {%- if section.blocks.size > 0 -%}
+      {%- assign fact_blocks = section.blocks | where: 'type', 'fact' -%}
+      {%- if fact_blocks.size > 0 -%}
         <dl class="sidiz-row__facts">
-          {%- for block in section.blocks -%}
+          {%- for block in fact_blocks -%}
             <div class="sidiz-row__fact" {{ block.shopify_attributes }}>
               <dt>{{ block.settings.label }}</dt>
               <dd>{{ block.settings.value }}</dd>
@@ -149,6 +218,33 @@
       "info": "Takes priority over the image when set."
     },
     {
+      "type": "text",
+      "id": "image_url",
+      "label": "Image URL",
+      "info": "Fallback when no image is picked. Used by the migration pipeline."
+    },
+    {
+      "type": "text",
+      "id": "image_url_mobile",
+      "label": "Image URL (mobile)"
+    },
+    {
+      "type": "text",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "Fallback when no video is picked."
+    },
+    {
+      "type": "text",
+      "id": "poster_url",
+      "label": "Video poster URL"
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Media alt text"
+    },
+    {
       "type": "header",
       "content": "Content"
     },
@@ -207,6 +303,15 @@
       "settings": [
         { "type": "text", "id": "label", "label": "Label" },
         { "type": "text", "id": "value", "label": "Value" }
+      ]
+    },
+    {
+      "type": "media",
+      "name": "Stacked image",
+      "settings": [
+        { "type": "text", "id": "image_url", "label": "Image URL" },
+        { "type": "text", "id": "image_url_mobile", "label": "Image URL (mobile)" },
+        { "type": "text", "id": "alt", "label": "Alt text" }
       ]
     }
   ],

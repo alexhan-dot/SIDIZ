@@ -161,3 +161,11 @@
     padding-inline: var(--gutter-container);
   }
 }
+
+/* Web/mobile media split, matching the KR .web / .mobile convention used by
+   the migration pipeline when a row carries separate desktop and mobile art. */
+.sidiz-row__media .mobile { display: none; }
+@media (max-width: 1023px) {
+  .sidiz-row__media .web { display: none; }
+  .sidiz-row__media .mobile { display: block; }
+}

@@ -1,0 +1,232 @@
+{%- assign selected_blog = section.settings.blog -%}
+<section class="sidiz-journal">
+  <header class="sidiz-journal__head">
+    <div>
+      <p class="sidiz-page__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h2>{{ section.settings.heading | escape }}</h2>
+    </div>
+    {%- if selected_blog != blank -%}<a href="{{ selected_blog.url }}">{{ section.settings.link_label | escape }}</a>{%- endif -%}
+  </header>
+
+  <div class="sidiz-journal__grid">
+    {%- if selected_blog != blank -%}
+      {%- for article in selected_blog.articles limit: 3 -%}
+        <article class="sidiz-journal-card">
+          <a href="{{ article.url }}">
+            <div class="sidiz-journal-card__image">
+              {%- if article.image != blank -%}
+                {{ article.image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 801px) 33vw, 100vw', widths: '480,720,960,1200', alt: article.image.alt | default: article.title }}
+              {%- endif -%}
+            </div>
+            <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%-d %B %Y' }}</time>
+            <h3>{{ article.title | escape }}</h3>
+          </a>
+        </article>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% render 'sidiz-section-editor-controls' %}
+
+{% schema %}
+{
+  "name": "SIDIZ journal",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout and type"
+    },
+    {
+      "type": "paragraph",
+      "content": "Default preserves the section design. Turn on spacing or colour only when this section needs an override."
+    },
+    {
+      "type": "checkbox",
+      "id": "editor_spacing_override",
+      "label": "Custom section spacing",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_top",
+      "label": "Top spacing - desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_bottom",
+      "label": "Bottom spacing - desktop",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 64,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_top_mobile",
+      "label": "Top spacing - mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "editor_padding_bottom_mobile",
+      "label": "Bottom spacing - mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 56,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "editor_heading_scale",
+      "label": "Heading size",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "s",
+          "label": "S"
+        },
+        {
+          "value": "m",
+          "label": "M"
+        },
+        {
+          "value": "l",
+          "label": "L"
+        },
+        {
+          "value": "xl",
+          "label": "XL"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "editor_text_scale",
+      "label": "Text size",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "s",
+          "label": "S"
+        },
+        {
+          "value": "m",
+          "label": "M"
+        },
+        {
+          "value": "l",
+          "label": "L"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "editor_content_width",
+      "label": "Content width",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "full",
+          "label": "Full width"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "editor_text_alignment",
+      "label": "Text alignment",
+      "default": "default",
+      "options": [
+        {
+          "value": "default",
+          "label": "Section default"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "editor_apply_color_scheme",
+      "label": "Use selected colour scheme",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "editor_color_scheme",
+      "label": "Colour scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Journal"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Guides for better sitting"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "View all guides"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SIDIZ journal"
+    }
+  ]
+}
+{% endschema %}

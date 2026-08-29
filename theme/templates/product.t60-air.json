@@ -1,0 +1,631 @@
+{
+  "sections": {
+    "sticky_nav": {
+      "type": "sidiz-sticky-nav",
+      "blocks": {
+        "n1": { "type": "link", "settings": { "label": "Full mesh", "anchor": "full-mesh" } },
+        "n2": { "type": "link", "settings": { "label": "Personal fitting", "anchor": "fitting" } },
+        "n3": { "type": "link", "settings": { "label": "Comfort", "anchor": "comfort" } },
+        "n4": { "type": "link", "settings": { "label": "Tilt", "anchor": "tilt" } },
+        "n5": { "type": "link", "settings": { "label": "Compare", "anchor": "compare" } },
+        "n6": { "type": "link", "settings": { "label": "Adjustment", "anchor": "adjustment-guide" } },
+        "n7": { "type": "link", "settings": { "label": "Specifications", "anchor": "specifications" } },
+        "n8": { "type": "link", "settings": { "label": "FAQ", "anchor": "faq" } }
+      },
+      "block_order": ["n1", "n2", "n3", "n4", "n5", "n6", "n7", "n8"],
+      "settings": {
+        "label": "On this page",
+        "show_buy": true,
+        "buy_label": "Choose options"
+      }
+    },
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Estimated delivery",
+            "value": "3-7 business days for in-stock items"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Delivery type",
+            "value": "Free standard delivery Australia-wide"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Assembly",
+            "value": "Arrives fully assembled - no assembly required"
+          }
+        },
+        "i1": {
+          "type": "info",
+          "settings": {
+            "label": "Product name",
+            "value": "SIDIZ T60 AIR Ergonomic Full-Mesh Office Chair"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": { "label": "Included", "value": "Chair" }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "label": "Main materials",
+            "value": "Airflex mesh, plastic, steel"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "label": "Colours",
+            "value": "Grey\nLight Grey\nCharcoal"
+          }
+        },
+        "i5": {
+          "type": "info",
+          "settings": {
+            "label": "Warranty",
+            "value": "5 years with product registration"
+          }
+        }
+      },
+      "block_order": ["f1", "f2", "f3", "i1", "i2", "i3", "i4", "i5"],
+      "settings": {
+        "eyebrow": "Airy comfort",
+        "tagline": "Firm, breathable Airflex mesh across the seat and backrest, with fine personal fitting for cool comfort through long hours.",
+        "tax_note": "Price includes GST. Shipping calculated at checkout.",
+        "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
+        "addons_title": "Add to your setup",
+        "delivery_title": "Delivery",
+        "warranty_label": "Warranty",
+        "warranty_value": "5 years",
+        "basic_info_title": "BASIC INFO",
+        "notice_title": "Before you buy",
+        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>"
+      }
+    },
+    "hero": {
+      "type": "sidiz-pdp-hero",
+      "settings": {
+        "subtitle": "Personal Fit. Airy Comfort.",
+        "subtitle_colour": "#ffffff",
+        "heading": "T60 AIR",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Head_55475f12-39a1-417e-902a-b8633cd023a9.jpg",
+        "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/T60_m1_decdfcfe-975a-4c98-822f-dc3248275ffe.jpg",
+        "alt": "SIDIZ T60 AIR ergonomic full-mesh office chair",
+        "description": "<p>Fine personal fitting keeps you comfortable, while firm, breathable Airflex mesh completes a fresh, cool sit.</p><p>With the T60 AIR, add a crisp coolness to a fit that is yours alone.</p>",
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default"
+      }
+    },
+    "intro": {
+      "type": "sidiz-product-row",
+      "settings": {
+        "heading": "SIDIZ T60 AIR Ergonomic Office Computer Full Mesh Chair",
+        "body": "<p><strong>Personal Fitting Airy Full Mesh Chair</strong> - precise body-fitting adjustment with firm Airflex mesh across both the seat and backrest, for outstanding coolness and seating comfort. SIDIZ's high-performance office chair.</p><ul><li><strong>Infinifit Headrest &amp; Lumbar Support</strong> - a headrest with up to 125 mm height and 35 mm depth adjustment, and a lumbar pad with 7 height and 3 depth steps, for close support from head to lower spine.</li><li><strong>Airflex Full Mesh Seat &amp; Waterfall Armrest Pad</strong> - a special mesh with excellent stiffness and resilient recovery across the whole seat spreads pressure evenly and cools sweat and heat fast: an all-day comfort mechanism.</li><li><strong>Synchronised &amp; Multi-limited Tilting</strong> - backrest and seat recline at linked, different angles to support the pelvis, with a 105-130 degree tilt range and 23-step fine tension adjustment.</li></ul><p>A premium full-mesh chair optimised for offices, home offices and studios - anywhere you sit and focus for long stretches and need heat release, coolness and firm support at once.</p>",
+        "align": "left",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+    "airy_banner": {
+      "type": "sidiz-wb-banner",
+      "settings": {
+        "heading": "Full mesh, comfort that lasts<br><em class=\"caps\">Airy comfort all day long</em>",
+        "align": "left",
+        "title_colour": "#000000"
+      }
+    },
+    "full_mesh": {
+      "type": "sidiz-product-view",
+      "settings": {
+        "heading": "Full mesh, from backrest to seat",
+        "description": "<p>Mesh across the whole chair cools trapped sweat and heat fast and keeps you fresh. A structure that maximises airflow keeps sitting cool and comfortable all day, all year round.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7c581e01be3843129f1487703373da59/7c581e01be3843129f1487703373da59.HD-1080p-7.2Mbps-64920462.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/7c581e01be3843129f1487703373da59.thumbnail.0000000000_small.jpg",
+        "alt": "Airflex mesh flexing across the T60 AIR seat and backrest"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Airflex Mesh",
+            "description": "<p>A special mesh weave with outstanding stiffness and resilient recovery holds its shape through years of use, supporting the hips and the whole back firmly yet flexibly for balanced ergonomic support.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img2_f746652c-719b-4616-9a41-6d5f36fc68e0.jpg",
+            "alt": "Close view of the Airflex mesh weave"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Durable Design",
+            "description": "<p>Passing the strict BIFMA test standards, it supports loads up to 125 kg with outstanding durability. If a part wears, buy just the seat and swap it yourself for years of worry-free use.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img3_be636555-44a5-4b22-ac7d-18eea6b0bf79.jpg",
+            "alt": "T60 AIR seat structure built for durability"
+          }
+        }
+      },
+      "block_order": ["b1", "b2"]
+    },
+    "fitting_banner": {
+      "type": "sidiz-wb-scroll-banner",
+      "settings": {
+        "heading": "Every body is different, so the fit must be your own<br><em class=\"caps\">Personal fitting</em>",
+        "header_scheme": "light",
+        "tag": "",
+        "subheading": "",
+        "description": "",
+        "text_colour": "#000000",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/858954013b164fbfad7f5670438d6f8d/858954013b164fbfad7f5670438d6f8d.HD-1080p-7.2Mbps-64919396.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/858954013b164fbfad7f5670438d6f8d.thumbnail.0000000000_small.jpg",
+        "video_url_mobile": "https://kr.sidiz.com/cdn/shop/videos/c/vp/7bf60cae55914f0781b68323c16cc1d5/7bf60cae55914f0781b68323c16cc1d5.HD-1080p-7.2Mbps-64919399.mp4",
+        "poster_url_mobile": "https://kr.sidiz.com/cdn/shop/files/preview_images/7bf60cae55914f0781b68323c16cc1d5.thumbnail.0000000000_small.jpg",
+        "alt": "SIDIZ T60 AIR adjusting to different bodies"
+      }
+    },
+    "fitting_cards": {
+      "type": "sidiz-wb-scroll-card-list",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "title": "Infinifit Headrest",
+            "title_colour": "#000000",
+            "description": "<p>35 mm of depth adjustment keeps you steady whether you sit upright or lean back, and up to 125 mm of height adjustment suits shorter and taller sitters alike.</p>",
+            "description_colour": "#7c8084",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/6a46fd5f888549198ae82f66f45074d3/6a46fd5f888549198ae82f66f45074d3.HD-1080p-7.2Mbps-64919636.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/6a46fd5f888549198ae82f66f45074d3.thumbnail.0000000000_small.jpg",
+            "alt": "Infinifit headrest adjusting in height and depth"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "title": "Adjustable Lumbar Support",
+            "title_colour": "#000000",
+            "description": "<p>Height (7 steps) and depth (3 steps) tune to your body, and a wide lumbar pad with a slim slit adds flexibility.</p>",
+            "description_colour": "#7c8084",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/69c4f44846e14dbfb3296cb45aa74e70/69c4f44846e14dbfb3296cb45aa74e70.HD-1080p-7.2Mbps-64919463.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/69c4f44846e14dbfb3296cb45aa74e70.thumbnail.0000000000_small.jpg",
+            "alt": "Adjustable lumbar support moving through its steps"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "title": "3D Adjustable Armrest",
+            "title_colour": "#000000",
+            "description": "<p>Adjust height, fore-and-aft and angle to your build to ease the load on your shoulders, with smooth, refined movement.</p>",
+            "description_colour": "#7c8084",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/6df8581239724055b2ec8f089835e771/6df8581239724055b2ec8f089835e771.HD-1080p-7.2Mbps-64919466.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/6df8581239724055b2ec8f089835e771.thumbnail.0000000000_small.jpg",
+            "alt": "3D adjustable armrest gliding through positions"
+          }
+        }
+      },
+      "block_order": ["c1", "c2", "c3"],
+      "settings": {
+        "header_scheme": "light",
+        "background": "#ffffff"
+      }
+    },
+    "comfort_banner": {
+      "type": "sidiz-wb-scroll-banner",
+      "settings": {
+        "heading": "",
+        "header_scheme": "light",
+        "tag": "",
+        "subheading": "Ergonomic comfort, made by expertise<br><em class=\"caps\">Engineered comfort</em>",
+        "description": "",
+        "text_colour": "#000000",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/89581099c5d344daaf424ed8ec856d88/89581099c5d344daaf424ed8ec856d88.HD-1080p-7.2Mbps-64930428.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/89581099c5d344daaf424ed8ec856d88.thumbnail.0000000000_small.jpg",
+        "video_url_mobile": "https://kr.sidiz.com/cdn/shop/videos/c/vp/baab5ed500894baf8f24c40be0968d58/baab5ed500894baf8f24c40be0968d58.HD-1080p-7.2Mbps-64930442.mp4",
+        "poster_url_mobile": "https://kr.sidiz.com/cdn/shop/files/preview_images/baab5ed500894baf8f24c40be0968d58.thumbnail.0000000000_small.jpg",
+        "alt": "SIDIZ T60 AIR comfort details in motion"
+      }
+    },
+    "comfort_cards": {
+      "type": "sidiz-wb-scroll-card-list",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "title": "Waterfall Armrest Pad",
+            "title_colour": "#ffffff",
+            "description": "<p>A waterfall-shaped pad eases the load on your arms in any posture - on the phone, on a tablet, or leaning on one armrest to rest.</p>",
+            "description_colour": "#a4aab0",
+            "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/ca6e0495fc3c4226aaff6f8ad2662196/ca6e0495fc3c4226aaff6f8ad2662196.HD-1080p-7.2Mbps-64930494.mp4",
+            "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/ca6e0495fc3c4226aaff6f8ad2662196.thumbnail.0000000000_small.jpg",
+            "alt": "Waterfall armrest pad supporting the forearm"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "title": "Mesh Headrest",
+            "title_colour": "#ffffff",
+            "description": "<p>Mesh releases heat easily, staying fresh and cool, while a generous area steadily supports the neck and head in any posture.</p>",
+            "description_colour": "#a4aab0",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/65ca39dbc012e5295e685b25700d0384.jpg",
+            "alt": "Mesh headrest of the T60 AIR"
+          }
+        }
+      },
+      "block_order": ["c1", "c2"],
+      "settings": {
+        "header_scheme": "dark",
+        "background": "#000000"
+      }
+    },
+    "tilt": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Sync Tilt",
+        "description": "<p>The tilt - the chair's core mechanism - adjusts the angle of the backrest and seat so you keep moving naturally instead of holding one fixed posture. The T60 AIR's sync tilt tunes range and tension finely to your body and the moment, for comfort optimised to you.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Img3_1a455ad4-adab-468d-9c31-2807c8ec5e59.jpg",
+        "alt": "SIDIZ T60 AIR reclining through its sync tilt"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Synchronised tilting",
+            "description": "<p>As you recline, the backrest and seat tilt at different angles, supporting the lower back and pelvis comfortably.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_4_3_3.jpg",
+            "alt": "Backrest and seat reclining at linked angles"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Multi-limited tilting",
+            "description": "<p>From focus to rest, set the range from 105 to 130 degrees to suit the moment.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_4_3_4.jpg",
+            "alt": "Recline range set between 105 and 130 degrees"
+          }
+        },
+        "b3": {
+          "type": "feature",
+          "settings": {
+            "title": "Tilting tension",
+            "description": "<p>Fine-tune across 23 lever turns to your build and taste.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_4_3_5.jpg",
+            "alt": "Tension lever under the T60 AIR seat"
+          }
+        }
+      },
+      "block_order": ["b1", "b2", "b3"]
+    },
+    "material_tiles": {
+      "type": "sidiz-tile-card-list",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Urethane castors",
+            "description": "<p>Softer and quieter to roll than standard castors, and they guard the floor against scratches.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_1_1_572cfccb-8de5-4541-beb8-cfc09915fcf6.jpg",
+            "alt": "Urethane castors"
+          }
+        }
+      },
+      "block_order": ["t1"],
+      "settings": {
+        "heading": "Details that complete the comfort"
+      }
+    },
+    "compare_banner": {
+      "type": "sidiz-wb-banner",
+      "settings": {
+        "heading": "T60 AIR &amp; T50 AIR at a glance",
+        "align": "left",
+        "title_colour": "#000000"
+      }
+    },
+    "compare_tables": {
+      "type": "sidiz-content-row",
+      "blocks": {
+        "m1": {
+          "type": "media",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/1_2948692c-e306-4ebe-98d8-6b52efc5c382.jpg",
+            "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/T60_AIR_m4_8906988f-b15c-4536-ae46-3c570c20c847.jpg",
+            "alt": "Comparison table of the T60 AIR and T50 AIR, part one"
+          }
+        },
+        "m2": {
+          "type": "media",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/2_6a385863-a7a4-4b81-a4ed-d6bd154802f5.jpg",
+            "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/T60_AIR_m5_d4caf1ea-8629-49e4-afd8-3c698764aee1.jpg",
+            "alt": "Comparison table of the T60 AIR and T50 AIR, part two"
+          }
+        }
+      },
+      "block_order": ["m1", "m2"],
+      "settings": {
+        "width": "wide",
+        "media_side": "above",
+        "anchor_id": "compare",
+        "background": "#ffffff",
+        "text_colour": "#000000",
+        "padding_block": 0
+      }
+    },
+    "easy_repair_intro": {
+      "type": "sidiz-content-row",
+      "settings": {
+        "width": "wide",
+        "media_side": "above",
+        "text_align": "center",
+        "heading": "Easy to replace, built to last",
+        "body": "<p>Even after years of use, buy just the part you need and swap it in to make the chair feel new again. Repair it easily, keep it longer - Easy Repair.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/019050cb79f6485ca8675219a85e85c2/019050cb79f6485ca8675219a85e85c2.HD-1080p-7.2Mbps-57627709.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/019050cb79f6485ca8675219a85e85c2.thumbnail.0000000000_small.jpg",
+        "alt": "Replacing a part on a SIDIZ chair",
+        "background": "#ffffff",
+        "text_colour": "#000000",
+        "padding_block": 80
+      }
+    },
+    "find_your_fit": {
+      "type": "sidiz-find-your-fit",
+      "blocks": {
+        "s1": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Chair height / seat depth",
+            "description": "<p>Set both to your body frame.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/FIT_1.jpg",
+            "alt": "Adjusting chair height and seat depth"
+          }
+        },
+        "s2": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Headrest height / angle / depth",
+            "description": "<p>Ease the load on your head and neck.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/FIT_2.jpg",
+            "alt": "Adjusting the headrest"
+          }
+        },
+        "s3": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Tilt range / tension",
+            "description": "<p>Choose how far and how firmly the backrest reclines.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/FIT_3.jpg",
+            "alt": "Adjusting tilt range and tension"
+          }
+        },
+        "s4": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Armrest height / fore-and-aft / angle",
+            "description": "<p>Keep shoulders and arms relaxed.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/FIT_4.jpg",
+            "alt": "Adjusting the armrests"
+          }
+        },
+        "s5": {
+          "type": "adjustment",
+          "settings": {
+            "title": "Lumbar support height / depth",
+            "description": "<p>Support the lower back steadily.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/FIT_5.jpg",
+            "alt": "Adjusting the lumbar support"
+          }
+        }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5"],
+      "settings": {
+        "heading": "T60 AIR adjustment guide",
+        "subtitle": "FIND YOUR FIT. Set it up for your body",
+        "guide_label": "USER GUIDE",
+        "guide_link": "/pages/user-guide"
+      }
+    },
+    "goes_with": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "Goes well with the T60 AIR",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "easy_repair": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "T60 AIR | EASY REPAIR",
+        "subtitle": "Repair it, keep it longer",
+        "description": "<p>Even after long use, buy just the part you need and swap it in to keep the chair like new.</p>",
+        "link_label": "View all Easy Repair parts",
+        "link": "/collections/easy-repair",
+        "source": "collection",
+        "limit": 8
+      }
+    },
+    "warranty": {
+      "type": "sidiz-warranty",
+      "settings": {
+        "heading": "T60 AIR | 5-year warranty",
+        "body": "<p>So the journey with your T60 AIR continues, SIDIZ provides a 5-year warranty to customers who complete product registration. Once your chair arrives, register it before you forget, for more comfortable years ahead.</p>",
+        "note": "<p>*Warranty periods vary by component.</p>",
+        "register_label": "Register your product",
+        "register_link": "/pages/product-registration",
+        "policy_label": "Warranty terms",
+        "policy_link": "/pages/warranty",
+        "show_acl": true,
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/WARRANTY_5.jpg",
+        "alt": "SIDIZ 5-year warranty badge"
+      }
+    },
+    "specifications": {
+      "type": "sidiz-spec",
+      "blocks": {
+        "d1": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T60_AIR_01_08b654bd-c702-4ce4-849e-1c6f2af33504.jpg",
+            "alt": "Dimension drawing of the SIDIZ T60 AIR, front elevation"
+          }
+        },
+        "d2": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/T60_AIR_02_589a61a9-5f47-4f63-a638-69c55ab30486.jpg",
+            "alt": "Dimension drawing of the SIDIZ T60 AIR, side elevation"
+          }
+        }
+      },
+      "block_order": ["d1", "d2"],
+      "settings": {
+        "heading": "T60 AIR dimensions",
+        "figures": "Maximum load 125 kg / product weight approximately 19 kg.",
+        "caveats": "*Measurements may vary by plus or minus 20 mm and 1 kg depending on where and how they are taken; this is not a fault.<br>*Dimensions are measured with nobody seated.<br>*Seat height is measured at the centre of the seat."
+      }
+    },
+    "faq": {
+      "type": "sidiz-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How far does the backrest recline, and can it lock while reclined?",
+            "answer": "<p>The backrest reclines from 105 to 130 degrees across five steps. A lock that holds the backrest in the reclined position is not provided.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What is the difference between the two options?",
+            "answer": "<p>The T60 AIR comes with or without the Infinifit mesh headrest. Choose the headrest for full neck and head support; the version without suits a lower-backed setup.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "What is the difference between the T60 and the T60 AIR?",
+            "answer": "<p>The T60 pairs a cushioned foam seat with a mesh backrest; the T60 AIR applies resilient Airflex mesh to both the seat and the backrest for maximum airflow. The fitting system - headrest, lumbar support, 3D armrests and sync tilt - is shared.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "Is a full-mesh chair suitable for a warm climate?",
+            "answer": "<p>Yes. Mesh across the seat and backrest is built for airflow, releasing heat over long sittings and staying cool - well suited to Australian conditions.</p>"
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "Does it suit working from home?",
+            "answer": "<p>Yes. The T60 AIR is designed for office, home-office and studio setups where you sit and focus for long stretches.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"],
+      "settings": {
+        "heading": "Frequently asked questions",
+        "open_first": true,
+        "background": "#f5f6f7"
+      }
+    },
+    "reviews": {
+      "type": "sidiz-review",
+      "settings": {
+        "heading": "Customer reviews",
+        "body": "<p>Reviews from Australian customers. Add your review app block here to show the full list.</p>",
+        "anchor_id": "reviews",
+        "background": "#ffffff"
+      }
+    },
+    "stockists": {
+      "type": "sidiz-store-info",
+      "settings": {
+        "heading": "Sit in one before you decide",
+        "description": "Seat feel differs from body to body. Try a T60 AIR in person where you can; otherwise our returns policy is there to fall back on.",
+        "link_label": "Find a stockist",
+        "link": "/pages/contact",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/shop_pc.jpg",
+        "alt": "A SIDIZ showroom interior"
+      }
+    },
+    "recommend": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "You may also like",
+        "link_label": "View all chairs",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "notices": {
+      "type": "sidiz-contact-notice",
+      "blocks": {
+        "c1": {
+          "type": "notice",
+          "settings": {
+            "title": "Product, delivery, service and returns",
+            "body": "<p>support@sidiz.au</p><p>Monday to Friday, 9:00 am to 5:00 pm AEST<br>Closed weekends and public holidays</p>"
+          }
+        },
+        "c2": {
+          "type": "notice",
+          "settings": {
+            "title": "Warranty and faulty returns",
+            "body": "<p>Warranty period: up to 5 years from purchase, with product registration. See the <a href=\"/pages/warranty\">warranty terms</a>. Nothing here limits your rights under the Australian Consumer Law.</p>"
+          }
+        }
+      },
+      "block_order": ["c1", "c2"],
+      "settings": {
+        "heading": "Contact centre",
+        "background": "#eaedf0",
+        "title_colour": "#000000",
+        "text_colour": "#434548"
+      }
+    }
+  },
+  "order": [
+    "sticky_nav",
+    "pdp_head",
+    "hero",
+    "intro",
+    "airy_banner",
+    "full_mesh",
+    "fitting_banner",
+    "fitting_cards",
+    "comfort_banner",
+    "comfort_cards",
+    "tilt",
+    "material_tiles",
+    "compare_banner",
+    "compare_tables",
+    "easy_repair_intro",
+    "find_your_fit",
+    "goes_with",
+    "easy_repair",
+    "warranty",
+    "specifications",
+    "faq",
+    "reviews",
+    "stockists",
+    "recommend",
+    "notices"
+  ]
+}

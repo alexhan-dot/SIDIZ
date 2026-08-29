@@ -57,6 +57,35 @@
           size: 'full'
         %}
       {%- endif -%}
+
+      {%- comment -%}
+        Still-image hero. T60 and T60 AIR use a photograph (Head_…jpg) where
+        T90 uses footage; without these the background rendered empty.
+      {%- endcomment -%}
+      {%- if section.settings.video_url == blank and section.settings.image_url != blank -%}
+        <img
+          class="{% if section.settings.image_url_mobile != blank %}pc{% endif %}"
+          src="{{ section.settings.image_url }}?width=2400"
+          sizes="100vw"
+          width="2400"
+          height="1350"
+          alt="{{ section.settings.alt | escape }}"
+          loading="eager"
+          decoding="async"
+        >
+      {%- endif -%}
+      {%- if section.settings.video_url_mobile == blank and section.settings.image_url_mobile != blank -%}
+        <img
+          class="mobile"
+          src="{{ section.settings.image_url_mobile }}?width=1200"
+          sizes="100vw"
+          width="1200"
+          height="1500"
+          alt="{{ section.settings.alt | escape }}"
+          loading="lazy"
+          decoding="async"
+        >
+      {%- endif -%}
     </div>
   </div>
 
@@ -112,6 +141,8 @@
     { "type": "text", "id": "poster_url", "label": "Poster URL (desktop)" },
     { "type": "text", "id": "video_url_mobile", "label": "Video URL (mobile)" },
     { "type": "text", "id": "poster_url_mobile", "label": "Poster URL (mobile)" },
+    { "type": "text", "id": "image_url", "label": "Image URL (desktop)", "info": "Used when no video is set - the T60-family heroes are stills." },
+    { "type": "text", "id": "image_url_mobile", "label": "Image URL (mobile)" },
     { "type": "text", "id": "alt", "label": "Alt text" },
     { "type": "header", "content": "Positioning copy" },
     { "type": "richtext", "id": "description", "label": "Description" },

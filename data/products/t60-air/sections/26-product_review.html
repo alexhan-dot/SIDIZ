@@ -1,0 +1,530 @@
+<section id="shopify-section-template--25383594492194__product_review_EDHBHB" class="shopify-section section-product-review"><link href="//kr.sidiz.com/cdn/shop/t/152/assets/section-product-review.css?v=18281306327893685521747705937" rel="stylesheet" type="text/css" media="all" />
+<style>
+  .hidden {
+  display: none;
+}
+
+</style>
+<div class="review-section">
+  <div class="review-wrapper" id="prod_detail_review">
+    <div class="review-title"><p>REVIEW</p></div>
+
+    
+    <div class="best_review_box" style="display:none">
+      <div class="best-review-wrapper">
+      
+      </div>
+    </div>
+    
+
+
+    <div class="review-option-wrapper">
+      <!-- 키 옵션 필터 -->
+      
+        <div class="review-option">
+          <div class="option-value-name">키</div>
+          <div class="option-values-wrapper">
+            <div class="option-values">
+              
+                
+                  <div class="option-value-btn height-option-btn" 
+                      data-minh="1" 
+                      data-maxh="149">
+                      149cm 이하
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn height-option-btn" 
+                      data-minh="150" 
+                      data-maxh="159">
+                      150cm ~ 159cm
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn height-option-btn" 
+                      data-minh="160" 
+                      data-maxh="169">
+                      160cm ~ 169cm
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn height-option-btn" 
+                      data-minh="170" 
+                      data-maxh="179">
+                      170cm ~ 179cm
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn height-option-btn" 
+                      data-minh="180" 
+                      data-maxh="999">
+                      180cm 이상
+                  </div>
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+            </div>
+          </div>
+        </div>
+      
+      <!-- 몸무게 옵션 필터 -->
+      
+        <div class="review-option">
+          <div class="option-value-name">몸무게</div>
+          <div class="option-values-wrapper">
+            <div class="option-values">
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="1" 
+                      data-maxw="39">
+                    39kg 이하
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="40" 
+                      data-maxw="49">
+                    40kg ~ 49kg
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="50" 
+                      data-maxw="59">
+                    50kg ~ 59kg
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="60" 
+                      data-maxw="69">
+                    60kg ~ 69kg
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="70" 
+                      data-maxw="79">
+                    70kg ~ 79kg
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="80" 
+                      data-maxw="89">
+                    80kg ~ 89kg
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="90" 
+                      data-maxw="99">
+                    90kg ~ 99kg
+                  </div>
+                
+              
+                
+                  <div class="option-value-btn weight-option-btn" 
+                      data-minw="100" 
+                      data-maxw="999">
+                    100kg 이상
+                  </div>
+                
+              
+            </div>
+          </div>
+        </div>
+      
+
+    </div>
+
+    <div class="review_item">
+      <div class="product-review-loading body-2">
+        리뷰 정보를 불러오는 중입니다.
+      </div>
+      <div class="review-controller">
+        <div class="total-review_count">
+          <p>REVIEW</p>
+          <p>0</p>
+        </div>
+        <div class="total-review_rank">
+          <p class="orderBy orderBy-recommended">추천순</p>
+          <p class="orderBy orderBy-latest">최신순</p>
+        </div>
+      </div>
+
+      <div class="review-items">
+        
+      </div>
+    </div>
+
+    <div class="review-pagination"></div>
+    
+  </div>
+</div>
+<script>
+  let icon_star_solid_bk = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-star-solid-bk.svg?v=69332308931050777881747705928';
+  let icon_star_line_bk = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-star-line-bk.svg?v=133246605758361947991747705927';
+  let icon_star_review = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-star-review.png?v=1206399711594589621747705927';
+  let icon_like = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-like.svg?v=168650988591427571161747705926';
+  let icon_arrow_more = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-more.svg?v=82685834721664360791747705925';
+
+  // 전역 변수 정의
+  window.allProductReviewData = [];
+  window.reviewData = null;
+
+  // 필수 요소
+  const productName = "T60 AIR";    
+  const productId = "9847335125282";         
+  const productGid = "gid://shopify/Product/9847335125282";
+  const productHandle = "t60-air"; 
+  const productSkus = ["T61HLDAM0KK-5H1ASG","T61HLDAM0KK-5H1WW","T61HLDAM0KK-5H1BIG","T62LDAM0KK-5H1WW"];
+
+  const liquidBestReviewCount = 2;
+
+  const METAOBJECT_FILTER_ENDPOINT = "https://sidiz-shopify.sidiz.com/metaobject/filter/get";
+
+  function inferMimeTypeFromUrl(url) {
+    if (typeof url !== "string") {
+      return null;
+    }
+    try {
+      const cleanUrl = url.split("?")[0];
+      const extension = cleanUrl.substring(cleanUrl.lastIndexOf(".") + 1).toLowerCase();
+      const mimeMap = {
+        mp4: "video/mp4",
+        m4v: "video/mp4",
+        mov: "video/quicktime",
+        webm: "video/webm",
+        avi: "video/x-msvideo",
+        mpeg: "video/mpeg",
+        mpg: "video/mpeg",
+        mkv: "video/x-matroska"
+      };
+      return mimeMap[extension] || null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function resolveImageUrl(resource) {
+    if (!resource) {
+      return null;
+    }
+    if (resource.url) {
+      return resource.url;
+    }
+    if (Array.isArray(resource.media_urls)) {
+      const found = resource.media_urls.find((candidate) => typeof candidate === "string" && candidate.trim() !== "");
+      if (found) {
+        return found;
+      }
+    }
+    if (resource.image && typeof resource.image === "object") {
+      return resource.image.src || resource.image.url || null;
+    }
+    return null;
+  }
+
+  function resolveVideoPayload(resource) {
+    if (!resource) {
+      return null;
+    }
+
+    const primaryUrl =
+      resource.url ||
+      (Array.isArray(resource.media_urls)
+        ? resource.media_urls.find((entry) => typeof entry === "string" && entry.trim() !== "")
+        : null);
+
+    let sources = Array.isArray(resource.sources)
+      ? resource.sources
+          .filter((src) => src && typeof src.url === "string" && src.url)
+          .map((src) => ({
+            url: src.url,
+            mime_type: src.mimeType || src.mime_type || inferMimeTypeFromUrl(src.url) || "video/mp4",
+          }))
+      : [];
+
+    if ((!sources || sources.length === 0) && primaryUrl) {
+      sources = [
+        {
+          url: primaryUrl,
+          mime_type: inferMimeTypeFromUrl(primaryUrl) || "video/mp4",
+        },
+      ];
+    }
+
+    return {
+      media_type: "video",
+      url: primaryUrl || null,
+      sources,
+      preview_image: resource.image || resource.preview_image || null,
+    };
+  }
+
+  function normalizeMediaResource(resource) {
+    if (!resource) {
+      return null;
+    }
+
+    const mediaType = (resource.media_type || resource.shopify_type || "").toLowerCase();
+
+    if (mediaType === "image" || (!mediaType && resource.url)) {
+      return resolveImageUrl(resource);
+    }
+
+    if (mediaType === "video" || mediaType === "mediavideo") {
+      return resolveVideoPayload(resource);
+    }
+
+    if (mediaType === "external_video" || mediaType === "externalvideo") {
+      const url =
+        resource.url ||
+        resource.embeddedUrl ||
+        (Array.isArray(resource.media_urls) ? resource.media_urls[0] : null);
+      const mimeType = inferMimeTypeFromUrl(url) || "video/mp4";
+      return {
+        media_type: "video",
+        url,
+        sources: url ? [{ url, mime_type: mimeType }] : [],
+        preview_image: resource.image || resource.preview_image || null,
+      };
+    }
+
+    if (mediaType === "generic_file" || mediaType === "file" || mediaType === "mediafile" || mediaType === "genericfile") {
+      return {
+        media_type: "generic_file",
+        url: resource.url || resolveImageUrl(resource) || null,
+        gid: resource.gid || null,
+      };
+    }
+
+    const fallbackImage = resolveImageUrl(resource);
+    if (fallbackImage) {
+      return fallbackImage;
+    }
+
+    const fallbackVideo = resolveVideoPayload(resource);
+    if (fallbackVideo && fallbackVideo.url) {
+      return fallbackVideo;
+    }
+
+    return resource.url || null;
+  }
+
+  function mapMediaField(field) {
+    if (!field) {
+      return [];
+    }
+
+    const resources = Array.isArray(field.media_resources) ? field.media_resources : [];
+    const normalizedResources = resources
+      .map((resource) => normalizeMediaResource(resource))
+      .filter((value) => value !== null && value !== undefined);
+
+    if (normalizedResources.length > 0) {
+      return normalizedResources;
+    }
+
+    const rawValue = field.value;
+    if (!rawValue) {
+      return [];
+    }
+
+    if (Array.isArray(rawValue)) {
+      return rawValue;
+    }
+
+    if (typeof rawValue === "string") {
+      try {
+        const parsed = JSON.parse(rawValue);
+        if (Array.isArray(parsed)) {
+          return parsed;
+        }
+        return parsed ? [parsed] : [];
+      } catch (error) {
+        return [rawValue];
+      }
+    }
+
+    return [rawValue];
+  }
+
+  function buildFieldMap(node) {
+    const fieldMap = {};
+    (node?.fields || []).forEach((field) => {
+      if (field && field.key) {
+        fieldMap[field.key] = field;
+      }
+    });
+    return fieldMap;
+  }
+
+  function normalizeReview(node, fallbackProductName) {
+    if (!node) return null;
+
+    const fieldMap = buildFieldMap(node);
+    const mediaField = fieldMap.attach_media || fieldMap.media_list;
+    const mediaList = mapMediaField(mediaField);
+
+    const reviewIdValue = fieldMap.review_id?.value || node.id || "";
+    const starValue = fieldMap.stars?.value;
+    const parsedStars =
+      starValue !== undefined && starValue !== null && starValue !== ""
+        ? Number(starValue)
+        : 0;
+    const isHiddenValue = fieldMap.is_hidden?.value;
+    const isHidden =
+      isHiddenValue === true ||
+      isHiddenValue === "true" ||
+      isHiddenValue === 1 ||
+      isHiddenValue === "1";
+    const heightValue = fieldMap.customer_height?.value;
+    const weightValue = fieldMap.customer_weight?.value;
+
+    return {
+      attach_media: mediaField?.value ?? null,
+      created_at: fieldMap.created_at?.value || node.createdAt || new Date().toISOString(),
+      customer: fieldMap.customer?.value || fieldMap.customer_gid?.value || null,
+      customer_name: fieldMap.customer_name?.value || "",
+      product: fieldMap.product?.value || null,
+      product_name: fieldMap.product_name?.value || fallbackProductName,
+      product_sku: fieldMap.product_sku?.value || null,
+      review_id: reviewIdValue,
+      stars: Number.isFinite(parsedStars) ? parsedStars : 0,
+      text: fieldMap.text?.value || "",
+      is_liked:
+        fieldMap.is_liked?.value === true ||
+        fieldMap.is_liked?.value === "true",
+      is_hidden: isHidden,
+      media_list: mediaList,
+      customer_height:
+        heightValue !== undefined && heightValue !== null && heightValue !== ""
+          ? Number(heightValue)
+          : null,
+      customer_weight:
+        weightValue !== undefined && weightValue !== null && weightValue !== ""
+          ? Number(weightValue)
+          : null,
+      rec_cnt:
+        Number(fieldMap.rec_cnt?.value || fieldMap.like_count?.value || 0) || 0,
+    };
+  }
+
+  async function fetchReviewsByFilter(filterKey, filterValue, options = {}) {
+    const payload = {
+      type: ["review"],
+      filter_key: filterKey,
+      filter_value: filterValue,
+      ...options,
+    };
+
+    const response = await fetch("https://sidiz-shopify.sidiz.com/v2/metaobject/filter/get", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch product reviews: ${response.status}`);
+    }
+
+    const result = await response.json();
+    if (!result?.success || !Array.isArray(result.data)) {
+      return [];
+    }
+
+    const normalized = [];
+    result.data.forEach((node) => {
+      const review = normalizeReview(node, productName);
+      if (review && !review.is_hidden) {
+        normalized.push(review);
+      }
+    });
+    return normalized;
+  }
+
+  async function fetchProductReviews() {
+    window.allProductReviewData = [];
+
+    if (!productGid) {
+      return;
+    }
+
+    try {
+      const productReviews = await fetchReviewsByFilter("product", productGid, {
+        filter_reference_type: "product",
+      });
+
+      const aggregated = [];
+      const seenIds = new Set();
+
+      productReviews.forEach((review) => {
+        const idKey = review.review_id || null;
+        if (idKey && seenIds.has(idKey)) {
+          return;
+        }
+        if (idKey) seenIds.add(idKey);
+        aggregated.push(review);
+      });
+
+      window.allProductReviewData = aggregated;
+    } catch (error) {
+      console.error("[Product Review] Failed to load reviews", error);
+      window.allProductReviewData = [];
+    }
+  }
+
+  window.productReviewLoaded = fetchProductReviews().finally(() => {
+    window.dispatchEvent(new CustomEvent("product-review:loaded", {
+      detail: {
+        count: Array.isArray(window.allProductReviewData) ? window.allProductReviewData.length : 0,
+      },
+    }));
+  });
+</script>
+
+
+<script src="//kr.sidiz.com/cdn/shop/t/152/assets/section-product-review.js?v=128843525859855744101776133701" defer></script>
+
+</section>

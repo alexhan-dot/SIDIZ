@@ -43,9 +43,14 @@ Then extract the HTML of every section the page renders (get the list from
 `section_spec.py`):
 
 ```
-python scripts/extract_section_html.py <handle> <section>     # once per section
+python scripts/extract_all_sections.py <handle>               # ALL sections, NN-name.html, DOM order
 python scripts/skeleton.py <handle> <section> [<section>...]  # condensed DOM to read
 ```
+
+Use `extract_all_sections.py`, not the older single-section
+`extract_section_html.py` — a page can hold three `product_wb_banner`
+sections that all differ, and the single-section script keeps only the first.
+`section_spec.py` needs the extracted HTML to exist, so it runs after this.
 
 Do not skip the HTML extraction. Building a section from its stylesheet alone
 is guesswork and was wrong every time on T90.
@@ -237,3 +242,28 @@ These each cost real time on T90.
 13. **Theme-editor CSS caches hard.** After a CSS-only change, hard-reload
     (ctrl+shift+r) before judging; prefer inline styles for anything that must
     render regardless.
+
+14. **JSON templates cap at 25 sections** (`order: must have a maximum of 25`).
+    T60 AIR's KR page maps to 27. Fold without losing KR content: a static
+    banner directly before a scroll banner becomes the scroll banner's
+    `heading`; back-to-back full-bleed image rows become `media` blocks on one
+    `sidiz-content-row`.
+
+15. **Every media value in a template must be a setting the section actually
+    declares.** The pipeline hands URLs as strings; sections whose schema only
+    has an `image_picker`/`video` picker silently drop them — no error from
+    `theme check` or push. This is how the T60 hero, tilt rows and details
+    gallery shipped with no images. All sidiz sections now take `image_url`
+    (+ `_mobile`) and `video_url`/`poster_url` strings; when adding a section
+    to a template, grep its schema for the setting id first.
+
+16. **The theme #192452231490 is now the LIVE (MAIN) theme.** A push is a live
+    change: `--allow-live` is required, and a new `product.<handle>.json`
+    takes effect immediately for any ACTIVE product whose `templateSuffix`
+    already points at it. Confirm with the owner before the first push of a
+    session.
+
+17. **Browser-pane screenshots of KR pinned-scroll pages capture white** below
+    the fold (compositor + sticky/transform). Verify via DOM instead:
+    section heights, `img.naturalWidth`, heading/text probes — then ask the
+    owner for the visual pass.
