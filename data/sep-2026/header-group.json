@@ -1,0 +1,155 @@
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement": {
+      "type": "sidiz-announcement",
+      "settings": {
+        "text": "Spring Sale | Final stock at these prices — while they last",
+        "link": "/collections/spring-arrival",
+        "dismissible": true,
+        "background": "#000000",
+        "text_colour": "#ffffff"
+      }
+    },
+    "header": {
+      "type": "sidiz-header",
+      "blocks": {
+        "u1": {
+          "type": "utility",
+          "settings": {
+            "label": "Warranty",
+            "link": "/pages/warranty"
+          }
+        },
+        "u2": {
+          "type": "utility",
+          "settings": {
+            "label": "Commercial projects",
+            "link": "/pages/become-a-distributor?view=commercial"
+          }
+        },
+        "u3": {
+          "type": "utility",
+          "settings": {
+            "label": "Find a stockist",
+            "link": "/pages/contact"
+          }
+        },
+        "u4": {
+          "type": "utility",
+          "settings": {
+            "label": "Log in",
+            "link": "/account/login"
+          }
+        },
+        "m1": {
+          "type": "menu",
+          "settings": {
+            "label": "Shop",
+            "link": "/collections/all",
+            "submenu_layout": "catalogue",
+            "mobile_view_all": true,
+            "column_title": "Chair selection guide",
+            "guide_links": "Spring Arrival - In stock | /collections/spring-arrival\nPre-order - Incoming | /pages/pre-order\nCompare chairs | /pages/compare-models\nRecommendations by setting | /pages/chair-recommendations\nFind your chair | /pages/find-your-fit\nAll chairs at a glance | /pages/chair-overview",
+            "columns": "WORK :: Performance office chairs :: /collections/sidiz-work\nT90 [PREMIUM] | /products/t90-ergonomic-office-chair\nT80 [PREMIUM] | /products/sidiz-t80-white-home-office-desk-chair\nT60 AIR | /products/sidiz-t60-air-ergonomic-full-mesh-office-chair\nT60 | /products/t60-ergonomic-office-chair\nT50 AIR 2 | /products/sidiz-t50-air-2nd-generation-ergonomic-full-mesh-office-chair\nT50 2 | /products/sidiz-t50-2nd-generation-ergonomic-office-chair\nGX work | /products/sidiz-gx-ergonomic-gaming-office-chair\nT20 | /products/sidiz-t20-ergonomic-office-chair\nLIGHT WORK :: Compact chairs for flexible spaces :: /collections/sidiz-light-work\nMUUVE | /products/sidiz-muuve-light-work-chair\nLINIE | /products/sidiz-linie-compact-ergonomic-chair\nEGA | /products/sidiz-ega-multi-purpose-chair\nBUTTON | /products/sidiz-button-multi-purpose-chair\nLIVING DINING :: Dining and counter seating :: /collections/sidiz-living-dining\nPLIT | /products/sidiz-plit-easy-care-dining-chair\nMANE | /products/sidiz-mane-ergonomic-dining-chair\nOUI | /products/sidiz-oui-ergonomic-bar-stool\nGAMING :: Support for longer sessions :: /collections/sidiz-gaming\nGC PRO [PREMIUM] | /products/new-in-gc-pro-gaming-chair-cooling-seat-led-lights-black\nGX | /products/sidiz-gx-joy-explorer-ergonomic-gaming-chair\nSTUDY :: Focused seating for learning :: /collections/sidiz-study\nIBLE | /products/sidiz-ible-ergonomic-study-chair\nRINGO gen2 | /products/sidiz-ringo-gen2-growing-kids-chair\nTREVO | /products/sidiz-trevo-growing-high-chair\nGROWING :: Seating that adapts with children :: /collections/sidiz-growing\nATTI | /products/sidiz-atti-toddler-chair\nMOLTI | /products/sidiz-molti-convertible-baby-chair\nSEAT BOOSTER :: Compact support :: /collections/sidiz-seat-booster\nSTEPO | /products/sidiz-stepo-ergonomic-footrest\nPILLO | /products/sidiz-pillo-ergonomic-floor-chair\nFUNGUS | /products/sidiz-fungus-multipurpose-stool\nTHE P GOODS :: Objects for progressive living :: /collections/sidiz-the-p-goods\nMulti Spray INFINITY | /products/sidiz-multi-spray-infinity-150ml\nThe Progressive Bag | /products/sidiz-the-progressive-bag\nEASY REPAIR :: Genuine replacement parts :: /pages/easy-repair\nReplacement parts | /pages/easy-repair\nRE:LIFE :: Circular seating programme :: /pages/re-life\nProgramme information | /pages/re-life",
+            "banner_image_1": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/sidiz-menu-find-your-chair.jpg?v=1787740434",
+            "banner_alt_1": "SIDIZ ergonomic chair fitting guide",
+            "banner_title_1": "Find your chair",
+            "banner_link_1": "/pages/find-your-fit",
+            "banner_image_2": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/sidiz-menu-chair-recommendations.jpg?v=1787740438",
+            "banner_alt_2": "Person using a SIDIZ ergonomic chair",
+            "banner_title_2": "Recommendations by setting",
+            "banner_link_2": "/pages/chair-recommendations"
+          }
+        },
+        "m2": {
+          "type": "menu",
+          "settings": {
+            "label": "About SIDIZ",
+            "link": "/pages/about-us",
+            "submenu_layout": "compact",
+            "mobile_view_all": false,
+            "column_title": "About SIDIZ",
+            "guide_links": "Brand story | /pages/about-us\nHistory | /pages/history\nDesign and technology | /pages/design-and-technology\nAustralian showroom | /pages/australian-showroom\nTo sit is to progress | /pages/to-sit-is-to-progress",
+            "columns": "EXPLORE :: SIDIZ Australia :: /pages/about-us\nS-Culture | /blogs/s-culture\nUser guides | /pages/user-guide\nCommercial projects | /pages/become-a-distributor?view=commercial\nContact SIDIZ Australia | /pages/contact\nPRODUCT LIFE :: Care for longer use :: /pages/easy-repair\nEasy Repair | /pages/easy-repair\nRe:LIFE programme | /pages/re-life",
+            "banner_image_1": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/sidiz-menu-easy-repair.jpg?v=1787740441",
+            "banner_alt_1": "SIDIZ Easy Repair replacement component",
+            "banner_title_1": "Easy Repair parts",
+            "banner_link_1": "/pages/easy-repair",
+            "banner_image_2": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/sidiz-menu-relife.png?v=1787740445",
+            "banner_alt_2": "SIDIZ Re:LIFE ergonomic chair",
+            "banner_title_2": "Re:LIFE programme",
+            "banner_link_2": "/pages/re-life"
+          }
+        },
+        "m3": {
+          "type": "menu",
+          "settings": {
+            "label": "S-Culture",
+            "link": "/blogs/s-culture"
+          }
+        },
+        "m4": {
+          "type": "menu",
+          "settings": {
+            "label": "Special offers",
+            "link": "/collections/spring-arrival"
+          }
+        },
+        "m_preorder": {
+          "type": "menu",
+          "settings": {
+            "label": "Pre-order",
+            "link": "/pages/pre-order"
+          }
+        },
+        "m5": {
+          "type": "menu",
+          "settings": {
+            "label": "Support",
+            "link": "/pages/support",
+            "submenu_layout": "compact",
+            "mobile_view_all": true,
+            "column_title": "Product assurance",
+            "guide_links": "Product registration | /pages/product-registration\nMy registered products | /pages/my-products\nWarranty information | /pages/warranty",
+            "columns": "SUPPORT :: Help with products and orders :: /pages/support\nSupport home | /pages/support\nProduct FAQ | /pages/product-faq\nService FAQ | /pages/service-faq\nUser guides | /pages/user-guide\nSERVICE :: Repair and product care :: /pages/repairs\nRepair support | /pages/repairs\nEasy Repair parts | /pages/easy-repair\nContact SIDIZ Australia | /pages/contact\nBUSINESS :: Commercial projects :: /pages/become-a-distributor?view=commercial\nCommercial overview | /pages/become-a-distributor?view=commercial\nProject capabilities | /pages/become-a-distributor?view=commercial-capabilities\nFor architects and designers | /pages/become-a-distributor?view=design-partners\nStart a project enquiry | /pages/become-a-distributor?view=commercial-enquiry\nRetail and distribution | /pages/become-a-distributor\nFind a stockist | /pages/contact",
+            "banner_image_1": "https://cdn.shopify.com/s/files/1/0692/6689/9266/files/sidiz-menu-easy-repair.jpg?v=1787740441",
+            "banner_alt_1": "SIDIZ Easy Repair replacement component",
+            "banner_title_1": "Replace a genuine part",
+            "banner_link_1": "/pages/easy-repair",
+            "banner_image_2": "shopify://shop_images/sidiz-au-stockist-showroom.jpg",
+            "banner_alt_2": "SIDIZ Australia showroom",
+            "banner_title_2": "Talk with local support",
+            "banner_link_2": "/pages/contact"
+          }
+        },
+        "m6": {
+          "type": "menu",
+          "settings": {
+            "label": "Re:LIFE",
+            "link": "/pages/re-life"
+          }
+        }
+      },
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4",
+        "m1",
+        "m2",
+        "m3",
+        "m4",
+        "m_preorder",
+        "m5",
+        "m6"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement",
+    "header"
+  ]
+}
