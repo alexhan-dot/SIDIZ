@@ -1,0 +1,100 @@
+
+===== 05-product_row_1_wide.html =====
+  CSS #section-template--24699216331042__product_row_1_wide_j9dC :: background-color=#FFFFFF, color=#000000
+  TEXT 
+
+===== 06-product_pdp_head.html =====
+  TEXT FITS ANYWHERE, FOR ANYONE LINIE 미니멀 디자인 오토 핏 틸트 메쉬/플렉스 등판 시디즈 리니에(LINIE)는 투박한 사무용 의자의 틀에서 벗어나 공간에 자연스럽게 녹아드는 미니멀 컴퓨터·책상 의자입니다. 헤드레스트를 과감히 생략하고 등판을 낮춘 컴팩트한 구조로, 좁은 공간에서도 뛰어난 개방감과 시각적 심미성을 제공합니다.
+  MEDIA LINIE_Head.jpg
+  MEDIA LINIE_Head_M-0.jpg
+
+===== 07-product-option-compare.html =====
+  TEXT 나에게 맞는 LINIE 옵션 플렉스 플렉스 등판 메쉬 메쉬 등판 천연가죽에 대한 안내 시디즈는 천연 소가죽을 사용합니다. 천연가죽은 소가 살아온 평생의 흔적을 고스란히 간직합니다. 소가 자라면서 입은 상처와 주름, 색감의 차이는 하자가 아닌 천연가죽의 특징입니다. 인위적으로 생산되지 않은 멋스러움을 느껴보세요. 주의사항 밝은 색 천연가죽은 데님(청바지)등 진한색 의류와 마찰 시 이염 될 수 있습니다. 교환 / 환불 대상이 아닙니다 1. 가죽 표면에 상처 / 주름이 있어요 주름 / 긁힘 혈관 / 힘줄 벌레물린 자국 소의 피부에는 크고 작은 상처가 있습니다. 이러한 자국은 소가 오랜 세월 살아온 과정을 보여주며, 자국으로 인해서 가죽의 내구성이 떨어지는 결점을 보이지는 않습니다. 이러한 자국은 천연 가죽이 인조가죽이나 기타 모조품이 아니라는 증거라고 할 수 있습니다. 2. 가죽의 질감이 다르게 느껴져요 표면 무늬의 차이 소의 목, 등, 배 부분 등 부위에 따라 주름의 밀도, 피부의 질감이 다르기 때문에 표면 무늬가 균일하지 않으며 미미한 차이를 보이는 것이 천연 가죽 고유의 특성입니다. 3. 가죽의 색감이 다르게 느껴져요 표면 색감의 차이 천연가죽은 염색 시기나 부위에 따라 색감에 미세한 차이가 생길 수 있습니다. 이는 천연 소재의 고유한 특성으로, 불량이 아니며 교환·환불 대상이 아닙니다. 또한, 햇빛이 비치는 방향이나 실내 조명에 따라 색상이 다르게 보일 수 있습니다.
+  MEDIA LINIE_Option1.jpg
+  MEDIA LINIE_Option1-1.jpg
+  MEDIA LINIE_Option2.jpg
+  MEDIA LINIE_Option2-1.jpg
+  MEDIA leather_1.jpg
+  MEDIA leather_caution_1.png
+  MEDIA leather_caution_2.png
+  MEDIA leather_2.jpg
+  MEDIA leather_3.jpg
+  MEDIA leather_4.jpg
+  MEDIA leather_5.jpg
+  MEDIA leather_6.jpg
+  MEDIA leather_7.jpg
+  MEDIA leather_8.png
+
+===== 08-product_view_horizontal_1.html =====
+  TEXT 미니멀 디자인 공간에 녹아드는 미니멀 디자인 리니에는 군더더기 없는 간결함과 세련된 곡선 디자인으로 어떤 공간과도 자연스럽게 어울립니다. 세련된 곡선 디자인 사무용 의자의 투박한 틀에서 벗어나 심미적 만족감까지 채워주는 깔끔한 디자인 간결한 하부 구조 개방감을 주는 레이아웃과 레버 돌출 없이 심플한 구조
+  MAIN: ['6b0ff48d654b4cd4bac5bc7e1f34a441.HD-1080p-7.2Mbps-36792243', '6b0ff48d654b4cd4bac5bc7e1f34a441.thumbnail.0000000000_smal']
+  MEDIA 6b0ff48d654b4cd4bac5bc7e1f34a441.thumbnail.0000000000_small.jpg
+  MEDIA 6b0ff48d654b4cd4bac5bc7e1f34a441.HD-1080p-7.2Mbps-36792243.mp4
+  MEDIA LINIE_01-1.jpg
+  MEDIA LINIE_01-2.jpg
+
+===== 09-product_tile_card_list.html =====
+  TEXT 리니에로 완성하는 공간 홈오피스 생산성과 감각을 모두 놓칠 수 없는 홈오피스에서 학생방 바른 자세가 필요한 성장기 학생방에서 거실 하나의 테이블에서 다양한 활동을 하는 거실에서 좁은 공간 여러 가지 가구가 어우러져야 하는 아담한 공간에서
+  MEDIA LINIE_1_1__01.jpg
+  MEDIA LINIE_1_1__02.jpg
+  MEDIA LINIE_1_1__03.jpg
+  MEDIA LINIE_1_1__04.jpg
+
+===== 10-product_view_vertical.html =====
+  TEXT 누구나, 어디서나, 쉽게 누구나 쉽고 편리한 조작 함께 사용하는 의자는 누가 사용해도 편안하고 조작이 편리해야 합니다. 리니에는 누구나 쉽게 조작하여 사용할 수 있는 오토 핏 틸트와 공간에 구애받지 않는 디자인 레이아웃을 적용하였습니다. 알아서 맞춰 주는 오토 핏 틸트 손 쓸 필요 없이, 앉는 순간 체중에 맞춰 자동으로 최적의 강도를 찾아 조절해주는 틸트 모두에게 넉넉한 사이즈 누구에게나 넉넉한 좌판과 등허리를 지지해주는 등판으로 남녀 모두에게 편안한 사이즈 핵심만 남긴 컴팩트한 구조 좁은 공간에도 부담 없이 헤드레스트를 빼고, 등판을 낮춰 완성한 컴팩트한 구조
+  MAIN: ['LINIE_02.jpg']
+  MEDIA LINIE_02.jpg
+  MEDIA 0ce2f2fdbdbc4e5a8cdd492398cb7263.thumbnail.0000000000_small.jpg
+  MEDIA 0ce2f2fdbdbc4e5a8cdd492398cb7263.SD-480p-0.9Mbps-40950678.mp4
+  MEDIA LINIE_02-2-0.jpg
+  MEDIA LINIE_02-3.jpg
+
+===== 11-product_tile_card_list.html =====
+  TEXT 간결함 속 섬세한 디테일 메쉬 등판 탄탄한 짜임의 메쉬 등판이 사계절 내내 산뜻한 쾌적함을 선사합니다. 플렉스 등판 사용자의 움직임에 맞춰 받쳐주는 플렉스 등판은 서로 다른 굵기와 길이의 라인으로 유연하면서도 탄탄합니다. USABILITY 앉은 자리에서, 간단한 조작 앉은 자세에서 그대로, 허리 숙일 필요 없이 좌판 양쪽 측면의 레버를 사용해 틸팅 잠금과 의자 높이를 조절할 수 있습니다. STREAM LINE 무게를 분산해주는 스트림 라인 내부 프레임에 스트림 라인을 적용한 좌판은 엉덩이에 집중된 체압을 고르게 분산시켜, 오래 앉아도 허리에 부담 없이 편안합니다.
+  MEDIA LINIE_1_1__05_2bbe7b0c-aedf-400f-a502-588f3370c27d.jpg
+  MEDIA LINIE_1_1__06_37f1da99-6c7d-4042-a008-df28619fd08c.jpg
+  MEDIA LINIE_1_1__07.jpg
+
+===== 12-product_find_your_fit.html =====
+  TEXT 리니에 LINIE 조절 방법 내 몸에 맞게 조절해 보세요 USER GUIDE 사용자의 체형에 맞춰 의자 높이 조절 집중이 필요한 순간에 틸팅 잠금
+  MEDIA LINIE_FYF_01_133478ce-b5c3-431f-b798-ef0f295614cb.jpg
+  MEDIA LINIE_FYF_02.jpg
+
+===== 13-product_related.html =====
+  TEXT 함께 쓰면 좋은 제품 STEPO 스테포 54,000원~ FUNGUS 펑거스 99,000원~ 더 프로그레시브 백 15,000원
+  MEDIA thum_STEPO_SB01F_MM_00_e1281e63-5a6a-47a3-9f20-b143370b89d1.jpg
+  MEDIA thum_FUNGUS_MN130_454B_00.jpg
+  MEDIA thum_THE_PROGRESSIVE_BAG_01.jpg
+
+===== 14-product_easy_repair.html =====
+  TEXT LINIE | EASY REPAIR 이지리페어 고쳐서 오래쓰기, 지구를 위한 작은 실천 이지리페어 우레탄 바퀴 A형 28,000원 싯브레이크 바퀴 A형 35,000원 글라이드 A형 17,000원
+  MEDIA thum_CASTER-GLIDE_T00U0KG_BK65_01.jpg
+  MEDIA thum_CASTER-GLIDE_T00V1KG_BK65_01_01c6bc79-f9d9-4e2a-b156-921b75efc365.jpg
+  MEDIA thum_CASTER-GLIDE_T509G_BK_01.jpg
+
+===== 15-product_warranty.html =====
+  TEXT LINIE | 5년 품질보증 LINIE와 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 5년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해, 더욱 편안한 사용을 경험해 보세요. *제품별로 보증 기간이 상이합니다. 정품등록
+  MEDIA WARRANTY_5.jpg
+
+===== 16-product_spec.html =====
+  TEXT LINIE 제품 사이즈 최대 하중 125kg / 제품 무게 약 13.7kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다. 최대 하중 125kg / 최대 무게 약 13.2kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다. 플렉스 메쉬
+  MEDIA TXNA250NF_01_02259039-f13c-4f89-bec8-6a75063e27f1.jpg
+  MEDIA TXNA250NF_02_7da8fade-433c-4c72-8658-34cd10b766f8.jpg
+  MEDIA TXNA250F_01_e548e80f-008c-4dca-85f5-6162c915f402.jpg
+  MEDIA TXNA250F_02_18b7ddea-ccf4-494e-8c9a-460d6f2fe7d3.jpg
+
+===== 17-product_information.html =====
+  TEXT 사용 시 주의 사항 틸팅 시 주의 사항 순간적으로 과도한 힘으로 등판을 젖힐 경우, 전도의 위험이 있으니 주의해주세요.
+  MEDIA pc_1.png
+
+===== 18-product_faq.html =====
+  TEXT FAQ 키 몇 cm부터 사용이 가능한가요? LINIE의 사용 권장 신장은 150cm 이상입니다. 단, 개인의 체형에 따라 160cm 이하일 경우 뒷꿈치가 바닥에 닿지 않는 경우가 있습니다. 스테포와 같은 발받침 함께 사용하면 안정적인 자세로 앉을 수 있습니다.
+
+===== 19-product_related_article.html =====
+  TEXT 관련글 킨츠기 공예 김수미 작가의 새로운 아름다움을 만들어 가는 시선 앉아야 일어나는 오늘 | with LINIE
+  MEDIA img_sculture_5_6_520x500_520x500_520x500_67136216-9d8a-4185-b042-191d622a470b-17
+
+===== 21-product_store_info.html =====
+  TEXT 시디즈 매장에 방문해 직접 앉아보세요 의자 위 앉는 경험을 몰입감 있게 체험할 수 있는 시디즈 더 프로그레시브 매장에서 직접 앉아보세요. 매장찾기
+  MEDIA shop_pc.jpg
+  MEDIA shop_mo.jpg

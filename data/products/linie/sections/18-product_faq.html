@@ -1,0 +1,72 @@
+<section id="shopify-section-template--24699216331042__product_faq_pFJHYe" class="shopify-section section-product-faq section-product-information"><div class="container">
+  <div class="wrapper">
+    <div class="wrapper--header">
+        <style data-shopify>
+          .section-product-faq .title { margin: 0; padding: 0; }
+        </style>
+        
+        <h2 class="title">FAQ</h2>
+          
+    </div>
+      <div class="wrapper--body">
+        
+          <div class="information-list">
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">키 몇 cm부터 사용이 가능한가요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">LINIE의 사용 권장 신장은 150cm 이상입니다.<br/>단, 개인의 체형에 따라 160cm 이하일 경우 뒷꿈치가 바닥에 닿지 않는 경우가 있습니다.<br/>스테포와 같은 발받침 함께 사용하면 안정적인 자세로 앉을 수 있습니다.</div></div>
+                </div>
+              </div>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function() {
+      // 현재 섹션 FAQ 블록 + product-information에서 모은 블록(window.__faqBlocks) 통합
+      const ownFaqs = [{
+          name: "키 몇 cm부터 사용이 가능한가요?",
+          answer: "LINIE의 사용 권장 신장은 150cm 이상입니다.단, 개인의 체형에 따라 160cm 이하일 경우 뒷꿈치가 바닥에 닿지 않는 경우가 있습니다.스테포와 같은 발받침 함께 사용하면 안정적인 자세로 앉을 수 있습니다."
+        }
+];
+
+      const extraFaqs = Array.isArray(window.__faqBlocks) ? window.__faqBlocks : [];
+      const allFaqs = [...ownFaqs, ...extraFaqs].filter(q => q && q.name && q.answer);
+      if (allFaqs.length === 0) return;
+
+      const payload = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": allFaqs.map(q => ({
+          "@type": "Question",
+          "name": q.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": q.answer
+          }
+        }))
+      };
+
+      const scriptId = "merged-faq-schema-template--24699216331042__product_faq_pFJHYe";
+      const existing = document.getElementById(scriptId);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(payload);
+      document.head.appendChild(script);
+    })();
+  </script>
+
+
+
+</section>
