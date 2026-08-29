@@ -92,9 +92,13 @@ KR T50-2 페이지의 서드파티 YouTube 임베드 섹션은 복제 불가로 
 ### A. 다음 마이그레이션 대상 — 스킬로 진행
 상품은 이미 존재(ACTIVE), **템플릿만 없음** → 업데이트 경로(T60 AIR 방식):
 
-1. ~~T50 2세대~~ 완료 (2026-08-29)
-2. ~~T50 AIR 2세대~~ 완료 (2026-08-29)
-3. 순서 제안: t20 → gx(gx-work) → gx-joy → muuve → linie → ible →
+1. ~~T50 2세대~~ / ~~T50 AIR 2세대~~ / ~~T20~~ / ~~GX(gx-work)~~ /
+   ~~MUUVE~~ / ~~LINIE~~ / ~~IBLE~~ — 완료 (2026-08-29, 각각
+   product.<suffix>.json + scripts/build_*_template.py)
+2. 잔여 순서: gx-joy(주의: AU에 GX 상품 2개 존재 — sidiz-gx-joy-explorer가
+   suffix "gx"를 씀. KR엔 gx-work 페이지 하나뿐이라 중복 여부 오너 확인 필요)
+   → ringo-gen2 → trevo → atti → molti → stepo → pillo → fungus → oui →
+   mane → plit → button → ega → 굿즈(bag/spray)
    ringo-gen2 → trevo → atti → molti → stepo → pillo → fungus → oui → mane →
    plit → button → ega → 굿즈(bag/spray)
    (각각 AU 핸들은 `sidiz-*`로 존재, templateSuffix 확인 후 `product.<suffix>.json` 작성)

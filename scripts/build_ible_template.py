@@ -1,0 +1,454 @@
+"""Compose product.ible.json.
+
+IBLE is the focus/study chair: intro H1 row, image hero, a three-way option
+compare (leather guidance dropped - no leather on the AU IBLE), posture and
+mesh views, the hybrid-glide and height-adjustable views, detail and
+AI-visual tiles, a four-model chair-finder grid (KR row_2_wide pair folded
+into one tile list) and a six-drawing spec. KR user reviews are skipped (ACL)
+and the KR installer-delivery wording is not carried over.
+"""
+
+import copy
+import json
+import pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+KR = "https://kr.sidiz.com/cdn/shop"
+
+
+def img(name):
+    return f"{KR}/files/{name}"
+
+
+base = json.loads((ROOT / "theme/templates/product.t50-2.json").read_text(encoding="utf-8"))
+B = base["sections"]
+
+AI_NOTE = " *AI-generated visual; details may differ from the actual product."
+
+S = {}
+
+S["sticky_nav"] = copy.deepcopy(B["sticky_nav"])
+S["sticky_nav"]["blocks"] = {
+    "n1": {"type": "link", "settings": {"label": "Options", "anchor": "options"}},
+    "n2": {"type": "link", "settings": {"label": "Posture", "anchor": "posture"}},
+    "n3": {"type": "link", "settings": {"label": "Hybrid glide", "anchor": "hybrid"}},
+    "n4": {"type": "link", "settings": {"label": "Height adjustable", "anchor": "height-adjustable"}},
+    "n5": {"type": "link", "settings": {"label": "Which chair?", "anchor": "finder"}},
+    "n6": {"type": "link", "settings": {"label": "Specifications", "anchor": "specifications"}},
+    "n7": {"type": "link", "settings": {"label": "FAQ", "anchor": "faq"}},
+}
+S["sticky_nav"]["block_order"] = ["n1", "n2", "n3", "n4", "n5", "n6", "n7"]
+
+S["pdp_head"] = copy.deepcopy(B["pdp_head"])
+S["pdp_head"]["blocks"]["i1"]["settings"]["value"] = "SIDIZ IBLE Ergonomic Study Chair"
+S["pdp_head"]["blocks"]["i3"]["settings"]["value"] = "Mesh, fabric, moulded foam, plastic, steel"
+S["pdp_head"]["blocks"]["i4"]["settings"]["value"] = "Warm Grey\nSand Beige\nCharcoal"
+S["pdp_head"]["settings"]["subtitle"] = (
+    "The focus chair: a hybrid glide that will not slide back, an S-line mesh backrest "
+    "and a water-repellent waterfall seat, built for deep study sessions."
+)
+
+S["intro"] = {
+    "type": "sidiz-product-row",
+    "settings": {
+        "heading": "SIDIZ IBLE Ergonomic Study Chair",
+        "body": (
+            "<ul><li><strong>Hybrid glide structure</strong> - rear glides stop the chair "
+            "sliding back while front castors keep it easy to move.</li>"
+            "<li><strong>Height-adjustable option</strong> - set the height to your build, "
+            "with a choice of castors or glides.</li>"
+            "<li><strong>S-line mesh backrest</strong> - spinal support with excellent "
+            "airflow keeps posture true and sitting fresh.</li>"
+            "<li><strong>Waterfall, water-repellent seat</strong> - a curved front edge "
+            "helps circulation, and water-repellent fabric keeps the seat easy to keep "
+            "clean.</li></ul>"
+            "<p>A focus-strengthening chair, at home in study cafes, dormitories and "
+            "reading rooms.</p>"
+        ),
+        "align": "left",
+        "background": "#ffffff",
+        "text_colour": "#000000",
+    },
+}
+
+S["hero"] = {
+    "type": "sidiz-pdp-hero",
+    "settings": {
+        "subtitle": "<em class=\"caps\">Deep dive, full focus</em>",
+        "subtitle_colour": "#ffffff",
+        "heading": "IBLE",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "image_url": img("IBLE_Head.jpg"),
+        "image_url_mobile": img("IBLE_Head_M-0.jpg"),
+        "alt": "SIDIZ IBLE ergonomic study chair at a desk",
+        "description": (
+            "<p>The SIDIZ IBLE pairs a hybrid glide structure with an S-line mesh backrest "
+            "for support that never slides away, and adds a water-repellent waterfall seat "
+            "and a height-adjustable option.</p><p>Performance gear for the places where "
+            "focus matters most.</p>"
+        ),
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default",
+    },
+}
+
+S["options"] = {
+    "type": "sidiz-option-compare",
+    "blocks": {
+        "o1": {"type": "option", "settings": {
+            "title": "Hybrid Glide",
+            "description": "Rear glides + front castors, fixed height",
+            "images": img("IBLE_Option1.jpg") + "," + img("IBLE_Option1-1.jpg"),
+            "colours": "#a39c95,#d9c9b2,#36393b",
+            "alt": "SIDIZ IBLE hybrid glide model"}},
+        "o2": {"type": "option", "settings": {
+            "title": "Height Adjustable / Castors",
+            "description": "Height adjustment with castors",
+            "images": img("IBLE_Option2.jpg") + "," + img("IBLE_Option2-1.jpg"),
+            "colours": "#a39c95,#d9c9b2,#36393b",
+            "alt": "SIDIZ IBLE height-adjustable model with castors"}},
+        "o3": {"type": "option", "settings": {
+            "title": "Height Adjustable / Glides",
+            "description": "Height adjustment with fixed glides",
+            "images": img("Img1_c42f6985-3b16-4756-92f2-78942ed2fb5a.jpg") + "," + img("Img2_cc749d1c-3fb1-4d1a-9079-f5e828c09183.jpg"),
+            "colours": "#a39c95,#d9c9b2,#36393b",
+            "alt": "SIDIZ IBLE height-adjustable model with glides"}},
+    },
+    "block_order": ["o1", "o2", "o3"],
+    "settings": {"heading": "The IBLE option for you"},
+}
+
+S["focus_banner"] = {
+    "type": "sidiz-wb-banner",
+    "settings": {
+        "heading": "A functional study chair that builds learning stamina<br>and completes an unbroken flow of focus",
+        "align": "left",
+        "title_colour": "#000000",
+    },
+}
+
+S["posture_view"] = {
+    "type": "sidiz-product-view-vertical",
+    "settings": {
+        "heading": "Sustained focus decides how well you study",
+        "description": (
+            "<p>Study is not time spent sitting - it is time spent immersed. Easy on the "
+            "lower back, the IBLE minimises what breaks concentration so that a moment of "
+            "focus can hold, densely, for hours.</p>"
+        ),
+        "image_url": img("IBLE_01-0.jpg"),
+        "alt": "The IBLE supporting a long study session",
+    },
+    "blocks": {
+        "b1": {"type": "feature", "settings": {
+            "title": "An ergonomic S-line backrest for the spine's natural curve",
+            "description": "<p>An S-shaped design spreads the lumbar load, minimising lower-back fatigue through long sittings.</p>",
+            "image_url": img("IBLE_01-1.jpg"),
+            "alt": "The S-line backrest profile"}},
+        "b2": {"type": "feature", "settings": {
+            "title": "A rounded foam seat that frees the legs",
+            "description": "<p>A softly rolled front edge relieves thigh pressure and improves circulation - no pins and needles, and the best condition for focus, kept to the end.</p>",
+            "image_url": img("IBLE_01-2.jpg"),
+            "alt": "The rounded waterfall seat edge"}},
+        "b3": {"type": "feature", "settings": {
+            "title": "A high-density, high-resilience seat that holds posture",
+            "description": "<p>Neither too soft nor too firm, the seat's tension supports the pelvis squarely so posture does not collapse as the hours pass.</p>",
+            "image_url": img("IBLE_01-3.jpg"),
+            "alt": "The high-density seat holding its shape"}},
+    },
+    "block_order": ["b1", "b2", "b3"],
+}
+
+S["mesh_view"] = {
+    "type": "sidiz-product-view",
+    "settings": {
+        "heading": "Air-mesh freshness with a water-repellent, hygienic seat",
+        "description": (
+            "<p>Comfort for study, maximised: precise support and free-flowing air at once.</p>"
+        ),
+        "image_url": img("IBLE_02-0.jpg"),
+        "alt": "The IBLE's mesh backrest and fabric seat",
+    },
+    "blocks": {
+        "b1": {"type": "feature", "settings": {
+            "title": "Study-optimised pro-tension mesh",
+            "description": "<p>Durable and breathable, for a fresh sit through long sessions.</p>",
+            "image_url": img("IBLE_02-1.jpg"),
+            "alt": "The pro-tension mesh weave"}},
+        "b2": {"type": "feature", "settings": {
+            "title": "A water-repellent seat that stays clean",
+            "description": "<p>Water-repellent fabric keeps liquids from soaking in, blocking stains and keeping the seat hygienic.</p>",
+            "image_url": img("IBLE_02-2.jpg"),
+            "alt": "Liquid beading on the water-repellent seat"}},
+    },
+    "block_order": ["b1", "b2"],
+}
+
+S["duo_banner"] = {
+    "type": "sidiz-wb-banner",
+    "settings": {
+        "heading": "Two focus solutions, tuned to how you study:<br>the fixed glide and the height-adjustable swivel",
+        "align": "left",
+        "title_colour": "#000000",
+    },
+}
+
+S["hybrid_view"] = {
+    "type": "sidiz-product-view",
+    "settings": {
+        "tag": "Hybrid Glide",
+        "heading": "A focus-first hybrid of rear glides and front castors",
+        "description": (
+            "<p>Glides fix the rear legs while the chair's steady weight resists sliding - "
+            "unnecessary movement is designed out, and the environment stays set for "
+            "concentration.</p>"
+        ),
+        "image_url": img("IBLE_03-0.jpg"),
+        "alt": "The hybrid glide base of the IBLE",
+    },
+    "blocks": {
+        "b1": {"type": "feature", "settings": {
+            "title": "Rear glides for still, deep focus",
+            "description": "<p>Glides on the rear legs minimise unnecessary movement while you concentrate.</p>",
+            "image_url": img("IBLE_03-1.jpg"),
+            "alt": "The fixed rear glides"}},
+        "b2": {"type": "feature", "settings": {
+            "title": "Front castors for easy movement",
+            "description": "<p>When it is time to move, lift the chair slightly and roll it on the front castors.</p>",
+            "image_url": img("IBLE_03-2.jpg"),
+            "alt": "The front castors in motion"}},
+    },
+    "block_order": ["b1", "b2"],
+}
+
+S["heightadj_view"] = {
+    "type": "sidiz-product-view",
+    "settings": {
+        "tag": "Height Adjustable",
+        "heading": "A personal setting that completes the flow of focus",
+        "description": (
+            "<p>When your study spaces vary, the height-adjustable IBLE keeps the setup "
+            "optimal for your build and surroundings.</p>"
+        ),
+        "image_url": img("IBLE_04.jpg"),
+        "alt": "The height-adjustable IBLE at different desks",
+    },
+    "blocks": {
+        "b1": {"type": "feature", "settings": {
+            "title": "Height adjustment for your proportions",
+            "description": "<p>Set the height to your body.</p>",
+            "image_url": img("IBLE_04-1.jpg"),
+            "alt": "Adjusting the IBLE height"}},
+        "b2": {"type": "feature", "settings": {
+            "title": "Castors for easy movement",
+            "description": "<p>Move smoothly whenever you want, without interruption.</p>",
+            "image_url": img("IBLE_04-2.jpg"),
+            "alt": "The castor base rolling"}},
+        "b3": {"type": "feature", "settings": {
+            "title": "A fixed glide option",
+            "description": "<p>Glides that stay put, for a steady, settled environment.</p>",
+            "image_url": img("Img_229839a6-96be-4812-9799-95b8bd7dd613.jpg"),
+            "alt": "The glide base option"}},
+    },
+    "block_order": ["b1", "b2", "b3"],
+}
+
+S["detail_tiles"] = {
+    "type": "sidiz-tile-card-list",
+    "blocks": {
+        "t1": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "A generous wide seat for every build",
+            "description": "<p>Roomy enough for larger builds to sit comfortably. *SIDIZ average seat width 480 mm.</p>",
+            "image_url": img("IBLE_1_1__01.jpg"),
+            "alt": "The IBLE's wide seat"}},
+        "t2": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "Felt pads that protect floors and quieten movement",
+            "description": "<p>Felt on the base moves the chair without scratches or noise - considerate of the room below, too.</p>",
+            "image_url": img("IBLE_1_1__02.jpg"),
+            "alt": "The felt-finished base"}},
+    },
+    "block_order": ["t1", "t2"],
+    "settings": {"heading": "Details that add usability"},
+}
+
+S["proven_tiles"] = {
+    "type": "sidiz-tile-card-list",
+    "blocks": {
+        "t1": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "The study chair study cafes choose",
+            "description": f"<p>The S-line backrest and steady base hold posture through long study, which is why study cafes and learning spaces keep choosing it.{AI_NOTE}</p>",
+            "image_url": img("IBLE_AI__02_de3cd40e-b524-46ca-a375-572afbd60165.png"),
+            "alt": "IBLE chairs in a study cafe"}},
+        "t2": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "A study chair fitted to dormitory life",
+            "description": f"<p>It builds a focused environment while its simple design suits dormitories where space matters.{AI_NOTE}</p>",
+            "image_url": img("IBLE_AI__04_3166dadc-6c82-4d4c-aa56-b8dd075a46e2.png"),
+            "alt": "The IBLE in a dormitory room"}},
+    },
+    "block_order": ["t1", "t2"],
+    "settings": {"heading": "A proven study chair, from study cafes to libraries and dormitories"},
+}
+
+S["finder_tiles"] = {
+    "type": "sidiz-tile-card-list",
+    "blocks": {
+        "t1": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "RINGO",
+            "description": "<p>For primary students beginning self-directed study in their own room. Recommended: age 7 to primary school, height 110-160 cm.</p>",
+            "image_url": img("5_9a36585e-be44-4c38-b9c7-03a270f0c9e0.png"),
+            "alt": "The SIDIZ RINGO kids chair"}},
+        "t2": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "IBLE",
+            "description": "<p>For secondary students who need unshakeable focus at the desk. Recommended: secondary school and up, height 160 cm and above.</p>",
+            "image_url": img("4_74ebe688-caeb-4f9d-99dc-ecbb22824764.png"),
+            "alt": "The SIDIZ IBLE study chair"}},
+        "t3": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "LINIE",
+            "description": "<p>For a comfortable home-office and desk chair that suits the room. Recommended: secondary school and up, height 160 cm and above.</p>",
+            "image_url": img("3_a540ee9a-0840-46c3-a4f5-8714eff30f66.png"),
+            "alt": "The SIDIZ LINIE compact chair"}},
+        "t4": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "T20",
+            "description": "<p>For students who need tailored adjustment for long immersion. Recommended: upper primary and above, height 160 cm and above.</p>",
+            "image_url": img("1_46f8cc6c-9e40-43c6-983f-6ec8d2389ee0.png"),
+            "alt": "The SIDIZ T20 office chair"}},
+    },
+    "block_order": ["t1", "t2", "t3", "t4"],
+    "settings": {"heading": "Find the study and home-office chair for your focus"},
+}
+
+S["goes_with"] = {
+    "type": "sidiz-related-products",
+    "settings": {"heading": "Goes well with the IBLE", "source": "collection", "limit": 4},
+}
+
+S["warranty"] = copy.deepcopy(B["warranty"])
+S["warranty"]["settings"]["heading"] = "IBLE | 5-year warranty"
+S["warranty"]["settings"]["body"] = (
+    "<p>So the journey with your IBLE continues, SIDIZ provides a 5-year warranty to "
+    "customers who complete product registration. Once your chair arrives, register it "
+    "before you forget, for more comfortable years ahead.</p>"
+)
+
+S["specifications"] = copy.deepcopy(B["specifications"])
+S["specifications"]["settings"]["heading"] = "IBLE dimensions"
+S["specifications"]["settings"]["figures"] = (
+    "Maximum load 125 kg. Product weight approximately 9.4 kg (Hybrid Glide), "
+    "11.6 kg (Height Adjustable with castors) or 11.5 kg (Height Adjustable with glides)."
+)
+S["specifications"]["blocks"] = {
+    "d1": {"type": "drawing", "settings": {
+        "image_url": img("TNB501FE_01_8ecc9d68-2b29-473b-88b4-c18508dc0c6e.jpg"),
+        "alt": "Dimension drawing of the SIDIZ IBLE hybrid glide, front elevation"}},
+    "d2": {"type": "drawing", "settings": {
+        "image_url": img("TNB501FE_02_fb762c1d-05d3-4262-8bea-3efacba49b8a.jpg"),
+        "alt": "Dimension drawing of the SIDIZ IBLE hybrid glide, side elevation"}},
+    "d3": {"type": "drawing", "settings": {
+        "image_url": img("S60SFU0KK_01.jpg"),
+        "alt": "Dimension drawing of the height-adjustable IBLE with castors, front elevation"}},
+    "d4": {"type": "drawing", "settings": {
+        "image_url": img("S60SFU0KK_02.jpg"),
+        "alt": "Dimension drawing of the height-adjustable IBLE with castors, side elevation"}},
+    "d5": {"type": "drawing", "settings": {
+        "image_url": img("S60SFG0KK_01.jpg"),
+        "alt": "Dimension drawing of the height-adjustable IBLE with glides, front elevation"}},
+    "d6": {"type": "drawing", "settings": {
+        "image_url": img("S60SFG0KK_02.jpg"),
+        "alt": "Dimension drawing of the height-adjustable IBLE with glides, side elevation"}},
+}
+S["specifications"]["block_order"] = ["d1", "d2", "d3", "d4", "d5", "d6"]
+
+S["safety_info"] = {
+    "type": "sidiz-safety-info",
+    "blocks": {
+        "n1": {"type": "note", "settings": {
+            "title": "Tipping caution",
+            "body": "<p>Perching on the front edge of the seat can tip the chair forward - sit fully back in the seat.</p>",
+            "image_url": img("IBLE_NOTIC_PC.jpg"),
+            "alt": "Sitting fully back in the IBLE"}},
+        "n2": {"type": "note", "settings": {
+            "title": "Removing stains",
+            "body": "<p>If the chair frame gets marked, a melamine sponge lifts stains easily. *Rubbing hard can damage the surface.</p>",
+            "image_url": img("BLOCK-EGA-NOTICE.jpg"),
+            "alt": "Cleaning the chair frame with a melamine sponge"}},
+    },
+    "block_order": ["n1", "n2"],
+    "settings": {"heading": "Care and cautions"},
+}
+
+S["faq"] = {
+    "type": "sidiz-faq",
+    "blocks": {
+        "q1": {"type": "faq", "settings": {
+            "question": "Why is the IBLE called a focus chair?",
+            "answer": "<p>The hybrid structure puts easy-rolling castors on the front legs and fixed felt glides on the rear, so the chair does not slide back as you sit - posture stays fixed and attention stays on the work.</p>"}},
+        "q2": {"type": "faq", "settings": {
+            "question": "Can adults use it?",
+            "answer": "<p>Yes - the recommended height range is 150 to 175 cm, which covers many adults, and the wide seat suits a range of builds. Sitters under about 160 cm may find a footrest helpful; trying the chair in person is the surest check.</p>"}},
+        "q3": {"type": "faq", "settings": {
+            "question": "Will it scratch floors or make noise?",
+            "answer": "<p>The glides are finished in a soft material that minimises floor scratching and dramatically reduces dragging noise - suited to quiet study environments such as libraries and reading rooms.</p>"}},
+        "q4": {"type": "faq", "settings": {
+            "question": "Will the front castors be distracting while studying?",
+            "answer": "<p>No - the front castors ease movement before you sit, and settle under your weight once seated, damping small movements rather than adding them.</p>"}},
+        "q5": {"type": "faq", "settings": {
+            "question": "Does it need assembly?",
+            "answer": "<p>The Hybrid Glide model arrives fully assembled; the height-adjustable models require assembly.</p>"}},
+        "q6": {"type": "faq", "settings": {
+            "question": "How does the IBLE differ from the T50 series?",
+            "answer": "<p>The T50 is a multi-purpose office chair with a full set of adjustments; the IBLE specialises in stability and focus - tilting is deliberately omitted and the base is reinforced for stillness, purely for environments built around concentration.</p>"}},
+    },
+    "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"],
+    "settings": {"heading": "Frequently asked questions", "open_first": True, "background": "#f5f6f7"},
+}
+
+S["reviews"] = copy.deepcopy(B["reviews"])
+
+S["stockists"] = {
+    "type": "sidiz-store-info",
+    "settings": {
+        "heading": "Sit in one before you decide",
+        "description": "Seat feel differs from body to body. Try an IBLE in person where you can; otherwise our returns policy is there to fall back on.",
+        "link_label": "Find a stockist",
+        "link": "/pages/contact",
+        "image_url": img("shop_pc.jpg"),
+        "alt": "A SIDIZ showroom interior",
+    },
+}
+
+S["recommend"] = {
+    "type": "sidiz-related-products",
+    "settings": {
+        "heading": "You may also like",
+        "link_label": "View all chairs",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4,
+    },
+}
+
+S["notices"] = copy.deepcopy(B["notices"])
+
+order = [
+    "sticky_nav", "pdp_head", "intro", "hero", "options",
+    "focus_banner", "posture_view", "mesh_view", "duo_banner",
+    "hybrid_view", "heightadj_view", "detail_tiles", "proven_tiles",
+    "finder_tiles", "goes_with", "warranty", "specifications",
+    "safety_info", "faq", "reviews", "stockists", "recommend", "notices",
+]
+assert set(order) == set(S), set(order) ^ set(S)
+
+out = ROOT / "theme/templates/product.ible.json"
+out.write_text(json.dumps({"sections": S, "order": order}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+print("written", out.name, "sections:", len(order))

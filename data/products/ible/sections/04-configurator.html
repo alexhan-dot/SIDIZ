@@ -1,0 +1,2110 @@
+<section id="shopify-section-template--24699215642914__configurator" class="shopify-section mount-product-page mount-show-more section-product-configurator"><!-- NAVER 상품상세(view_product) SCRIPT -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type='text/javascript'>
+if(window.wcs){
+  window.scriptInfo = {
+    id: "9496943853858", // (필수) 상품 ID
+    name: "IBLE 아이블", // 상품명
+    category: "기본 카테고리", // 카테고리명 (없으면 기본값)
+    quantity: 1, // 기본 수량
+    payAmount: 189000, // 제품 가격 (콤마 제거)
+    option: "아이블 / 화이트 / 웜그레이" // 기본 옵션명
+  }
+  
+  if(!wcs_add) var wcs_add = {};
+  wcs_add["wa"] = "s_29fd958c4603"; 
+
+  var _conv = {};
+  _conv.type = 'view_product'; // (필수)
+  _conv.items = [scriptInfo];
+
+  wcs.trans(_conv);
+}
+</script>
+<!-- NAVER 상품상세(view_product) SCRIPT END -->
+
+<script>
+  // 로그인 여부와 제품 정보를 확인한 후 로컬 저장소에 저장하는 함수
+function saveProductToLocalStorage(customerId, productInfo) {
+  if (!customerId) {
+    return; // 로그인되지 않은 경우 실행하지 않음
+  }
+
+  // 로컬 저장소에서 기존 관심 제품 목록을 가져옴 (사용자별로 저장)
+  let storedData = JSON.parse(localStorage.getItem('wishlistProducts')) || {};
+
+  // 해당 고객 ID에 맞는 데이터를 찾음
+  let wishlist = storedData[customerId] || [];
+
+  // 이미 목록에 있는 제품인지 확인 (prod_id로 체크)
+  const productIndex = wishlist.findIndex(item => item.prod_id === productInfo.prod_id);
+
+  // 목록에 있으면 기존 항목을 제거하고 최상단으로 이동
+  if (productIndex !== -1) {
+    wishlist.splice(productIndex, 1);
+  }
+
+  // 새로운 제품을 최상단에 추가
+  wishlist.unshift(productInfo);
+
+  // 갱신된 데이터를 로컬 저장소에 다시 저장
+  storedData[customerId] = wishlist;
+  localStorage.setItem('wishlistProducts', JSON.stringify(storedData));
+}
+
+// 최근 본 제품 ID를 로컬 스토리지에 저장하는 함수
+function saveRecentlyViewedProduct(recentlyViewed) {
+  localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+}
+
+// 페이지 로드 시 실행되는 함수
+document.addEventListener('DOMContentLoaded', function() {
+  const productName = "IBLE 아이블";    // 현재 제품의 이름 가져오기
+  const productId = "9496943853858";         // 현재 제품의 ID 가져오기
+  const productHandle = "ible"; // 현재 제품의 핸들 가져오기
+
+  // 현재 URL 가져오기
+  const currentUrl = new URL(window.location.href);
+  const hasStoreParam = currentUrl.searchParams.has("store"); // "store" 키 존재 여부 확인
+  
+  let storedStoreCookie = getCookie("storeCode");
+  let redirectCookie = getCookie("redirectQrProdDetail");
+
+  let storedStoreParam = (!storedStoreCookie || storedStoreCookie === "null" || storedStoreCookie === "undefined")?null:storedStoreCookie;
+  let redirectParam = (!redirectCookie || redirectCookie === "null" || redirectCookie === "undefined")?null:redirectCookie;
+  
+
+  if (hasStoreParam) {
+      const storeParam = currentUrl.searchParams.get("store");
+      // ✅ store 파라미터가 있으면 sessionStorage에 저장 (로그인 후 유지용)
+      if (!customerId) {
+          // ✅ 현재 페이지 URL을 저장 (로그인 후 돌아올 경로 유지)
+          
+          document.cookie = `storeCode=${storeParam}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          document.cookie = `redirectQrProdDetail=${window.location.pathname}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          
+          setTimeout(() => {
+            location.href = "/account/login";
+          }, 300);
+          
+          // Shopify 기본 로그인 페이지로 이동
+          
+      }
+      else{
+        // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능  
+        setStoreCode(storeParam);
+      }
+  } else if (storedStoreParam) {
+    if (customerId) {
+      // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능
+      setStoreCode(storedStoreParam);
+    }
+  }
+
+  function setStoreCode(storeParam){
+    let shop_name = "";
+    
+    let offlineShopScript = document.querySelector('.offline-shop-data');
+    if (offlineShopScript != null) {
+        const offlineShops = JSON.parse(offlineShopScript.textContent).offline_shops;
+
+        // shop_code에 해당하는 행(row)을 찾기
+        const targetShop = offlineShops.find(shop => shop.shop_code === storeParam);
+
+        if (targetShop) {
+            shop_name = targetShop.shop_name;
+        }
+    }
+
+    let url = "https://sidiz-shopify.sidiz.com/api/v1/search/qr-prod-detail"
+    
+    fetch(url, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json', // JSON 형식 지정
+        },
+        body: JSON.stringify({
+            "customerMd5Hash": customerMd5Hash,
+            "store_code": storeParam,
+            "store_name": shop_name
+        })
+    })
+    .then(response => {
+        
+        document.cookie = "storeCode=; path=/; Secure; SameSite=Lax; max-age=0";
+        document.cookie = "redirectQrProdDetail=; path=/; Secure; SameSite=Lax; max-age=0";
+        
+        if(redirectParam){
+          location.href = redirectParam;
+        }
+        const currentUrl = new URL(window.location.href);
+        if (currentUrl.searchParams.has("store")) {
+            currentUrl.searchParams.delete("store"); // store 파라미터 삭제
+
+            // URL을 변경하지만 페이지를 새로고침하지 않음
+            window.history.replaceState({}, document.title, currentUrl.toString());
+        }
+    });
+  }
+
+  const recentlyViewed = {
+    name: productName,
+    id: productId,
+    handle: productHandle
+  };
+
+  saveRecentlyViewedProduct(recentlyViewed);
+  
+  const productInfo = {
+    prod_name: productName,
+    prod_id: productId
+  };
+
+  // 로그인된 고객만 로컬 저장소에 제품을 저장
+  if (customerId) {
+    saveProductToLocalStorage(customerId, productInfo);
+  }
+});
+</script>
+
+
+
+<script>
+  const variantsData = [
+    
+      {
+        sku: "S60FEGU0KK · 451MWW",
+        id: "49189297750306",
+        color_options: [
+          {"name": "프레임", "value": "화이트", "frame_rgb": "#ffffff"},{"name": "색상", "value": "웜그레이", "color_rgb": "#8b8b8b"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60FEGU0KK · 452NWW",
+        id: "49189299388706",
+        color_options: [
+          {"name": "프레임", "value": "화이트", "frame_rgb": "#ffffff"},{"name": "색상", "value": "샌드베이지", "color_rgb": "#c1b29b"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60FEGU0KK · 456BK",
+        id: "49189296898338",
+        color_options: [
+          {"name": "프레임", "value": "블랙", "frame_rgb": "#000000"},{"name": "색상", "value": "차콜", "color_rgb": "#282828"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFU0KK · 451MWW",
+        id: "49189310103842",
+        color_options: [
+          {"name": "프레임", "value": "화이트", "frame_rgb": "#ffffff"},{"name": "색상", "value": "웜그레이", "color_rgb": "#8b8b8b"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFU0KK · 452NWW",
+        id: "49189310234914",
+        color_options: [
+          {"name": "프레임", "value": "화이트", "frame_rgb": "#ffffff"},{"name": "색상", "value": "샌드베이지", "color_rgb": "#c1b29b"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFU0KK · 456BK",
+        id: "49189309776162",
+        color_options: [
+          {"name": "프레임", "value": "블랙", "frame_rgb": "#000000"},{"name": "색상", "value": "차콜", "color_rgb": "#282828"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFG0KK · 451MWW",
+        id: "50780127297826",
+        color_options: [
+          {"name": "프레임", "value": "화이트", "frame_rgb": "#ffffff"},{"name": "색상", "value": "웜그레이", "color_rgb": "#8b8b8b"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFG0KK · 452NWW",
+        id: "50780127330594",
+        color_options: [
+          {"name": "프레임", "value": "화이트", "frame_rgb": "#ffffff"},{"name": "색상", "value": "샌드베이지", "color_rgb": "#c1b29b"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFG0KK · 456BK",
+        id: "50780127363362",
+        color_options: [
+          {"name": "프레임", "value": "블랙", "frame_rgb": "#000000"},{"name": "색상", "value": "차콜", "color_rgb": "#282828"}
+        ]
+      }
+      
+    
+  ];
+  const variantsAllOptionData = [
+    
+      {
+        sku: "S60FEGU0KK-451MWW",
+        id: "49189297750306",
+        options: [
+          {"name": "옵션", "value": "아이블"},{"name": "프레임", "value": "화이트"},{"name": "색상", "value": "웜그레이"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60FEGU0KK-452NWW",
+        id: "49189299388706",
+        options: [
+          {"name": "옵션", "value": "아이블"},{"name": "프레임", "value": "화이트"},{"name": "색상", "value": "샌드베이지"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60FEGU0KK-456BK",
+        id: "49189296898338",
+        options: [
+          {"name": "옵션", "value": "아이블"},{"name": "프레임", "value": "블랙"},{"name": "색상", "value": "차콜"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFU0KK-451MWW",
+        id: "49189310103842",
+        options: [
+          {"name": "옵션", "value": "높이조절형/바퀴"},{"name": "프레임", "value": "화이트"},{"name": "색상", "value": "웜그레이"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFU0KK-452NWW",
+        id: "49189310234914",
+        options: [
+          {"name": "옵션", "value": "높이조절형/바퀴"},{"name": "프레임", "value": "화이트"},{"name": "색상", "value": "샌드베이지"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFU0KK-456BK",
+        id: "49189309776162",
+        options: [
+          {"name": "옵션", "value": "높이조절형/바퀴"},{"name": "프레임", "value": "블랙"},{"name": "색상", "value": "차콜"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFG0KK-451MWW",
+        id: "50780127297826",
+        options: [
+          {"name": "옵션", "value": "높이조절형/글라이드"},{"name": "프레임", "value": "화이트"},{"name": "색상", "value": "웜그레이"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFG0KK-452NWW",
+        id: "50780127330594",
+        options: [
+          {"name": "옵션", "value": "높이조절형/글라이드"},{"name": "프레임", "value": "화이트"},{"name": "색상", "value": "샌드베이지"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S60SFG0KK-456BK",
+        id: "50780127363362",
+        options: [
+          {"name": "옵션", "value": "높이조절형/글라이드"},{"name": "프레임", "value": "블랙"},{"name": "색상", "value": "차콜"}
+        ]
+      }
+      
+    
+  ];
+</script>
+<script defer>
+    let icon_pw_show = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-show.svg?v=61838389088702437721747705927';
+    let icon_pw_unshow = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-unshow.svg?v=177080918668616523901747705925';
+</script>
+<script src="//kr.sidiz.com/cdn/shop/t/152/assets/bookmark.js?v=118576581409273616741753146757" defer></script>
+
+<script>
+  // PLUS ZERO: view_item
+  const viewItemData = {
+    item_id: "S60FEGU0KK-451MWW",
+    item_name: "IBLE 아이블",
+    item_brand: 'SIDIZ',
+    item_category: "STUDY",
+    img_url: "thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?v=1785133595"
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // 이전 ecommerce 데이터 초기화
+    dataLayer.push({ ecommerce: null });
+    
+    window.dataLayer.push({
+      event: 'view_item',
+      page_type: '제품 상세',
+      ecommerce: {
+        items: [viewItemData]
+      }
+    });
+  }, { once: true });
+</script>
+
+<div class="modal-360 hidden" data-variant-id="49189297750306">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595" alt="아이블 Re:LIFE 의자 글라이드와 무게감으로 집중력 향상 지원" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_01_2c3a7895-b624-4a90-84ae-9d92b9d915af.jpg?crop=center&amp;v=1736300006" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_01_2c3a7895-b624-4a90-84ae-9d92b9d915af.jpg?crop=center&amp;v=1736300006&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_01_2c3a7895-b624-4a90-84ae-9d92b9d915af.jpg?crop=center&amp;v=1736300006&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_01_2c3a7895-b624-4a90-84ae-9d92b9d915af.jpg?crop=center&amp;v=1736300006&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_02_64a67c40-4b55-40e9-b465-3d652459100c.jpg?crop=center&amp;v=1736300006" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_02_64a67c40-4b55-40e9-b465-3d652459100c.jpg?crop=center&amp;v=1736300006&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_02_64a67c40-4b55-40e9-b465-3d652459100c.jpg?crop=center&amp;v=1736300006&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_02_64a67c40-4b55-40e9-b465-3d652459100c.jpg?crop=center&amp;v=1736300006&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_03_5167308b-ae03-4544-96a9-ca78908e9d8d.jpg?crop=center&amp;v=1736300006" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_03_5167308b-ae03-4544-96a9-ca78908e9d8d.jpg?crop=center&amp;v=1736300006&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_03_5167308b-ae03-4544-96a9-ca78908e9d8d.jpg?crop=center&amp;v=1736300006&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_03_5167308b-ae03-4544-96a9-ca78908e9d8d.jpg?crop=center&amp;v=1736300006&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_04_1a839417-cb8b-4673-a463-48b8bb488ecb.jpg?crop=center&amp;v=1736300006" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_04_1a839417-cb8b-4673-a463-48b8bb488ecb.jpg?crop=center&amp;v=1736300006&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_04_1a839417-cb8b-4673-a463-48b8bb488ecb.jpg?crop=center&amp;v=1736300006&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_04_1a839417-cb8b-4673-a463-48b8bb488ecb.jpg?crop=center&amp;v=1736300006&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49189299388706">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자 뒷다리 글라이드로 안정적 고정, 집중 가능한 공부 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_01_6aaf3e04-4884-45f9-8a47-f349315b79d0.jpg?crop=center&amp;v=1736300006" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_01_6aaf3e04-4884-45f9-8a47-f349315b79d0.jpg?crop=center&amp;v=1736300006&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_01_6aaf3e04-4884-45f9-8a47-f349315b79d0.jpg?crop=center&amp;v=1736300006&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_01_6aaf3e04-4884-45f9-8a47-f349315b79d0.jpg?crop=center&amp;v=1736300006&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_02_213d4001-fe9a-499d-803e-2bdc99a2309b.jpg?crop=center&amp;v=1736300007" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_02_213d4001-fe9a-499d-803e-2bdc99a2309b.jpg?crop=center&amp;v=1736300007&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_02_213d4001-fe9a-499d-803e-2bdc99a2309b.jpg?crop=center&amp;v=1736300007&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_02_213d4001-fe9a-499d-803e-2bdc99a2309b.jpg?crop=center&amp;v=1736300007&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_03_fef9271e-26b2-4654-9b21-23a6d40de4e3.jpg?crop=center&amp;v=1736300007" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_03_fef9271e-26b2-4654-9b21-23a6d40de4e3.jpg?crop=center&amp;v=1736300007&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_03_fef9271e-26b2-4654-9b21-23a6d40de4e3.jpg?crop=center&amp;v=1736300007&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_03_fef9271e-26b2-4654-9b21-23a6d40de4e3.jpg?crop=center&amp;v=1736300007&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_04_ca3e80cd-b80d-49a2-bceb-d5f10b36c923.jpg?crop=center&amp;v=1736300007" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_04_ca3e80cd-b80d-49a2-bceb-d5f10b36c923.jpg?crop=center&amp;v=1736300007&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_04_ca3e80cd-b80d-49a2-bceb-d5f10b36c923.jpg?crop=center&amp;v=1736300007&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_04_ca3e80cd-b80d-49a2-bceb-d5f10b36c923.jpg?crop=center&amp;v=1736300007&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49189296898338">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자, 글라이드와 적당한 무게로 집중력 향상 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_01_1ec44b27-cc38-4e11-bc21-76967ff9c446.jpg?crop=center&amp;v=1736300006" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_01_1ec44b27-cc38-4e11-bc21-76967ff9c446.jpg?crop=center&amp;v=1736300006&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_01_1ec44b27-cc38-4e11-bc21-76967ff9c446.jpg?crop=center&amp;v=1736300006&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_01_1ec44b27-cc38-4e11-bc21-76967ff9c446.jpg?crop=center&amp;v=1736300006&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_02_67e6143b-b1c6-4444-a143-c5eb7b6db38c.jpg?crop=center&amp;v=1736300007" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_02_67e6143b-b1c6-4444-a143-c5eb7b6db38c.jpg?crop=center&amp;v=1736300007&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_02_67e6143b-b1c6-4444-a143-c5eb7b6db38c.jpg?crop=center&amp;v=1736300007&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_02_67e6143b-b1c6-4444-a143-c5eb7b6db38c.jpg?crop=center&amp;v=1736300007&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_03_7b7b993e-0ceb-458f-9ccf-66df147628c6.jpg?crop=center&amp;v=1736300007" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_03_7b7b993e-0ceb-458f-9ccf-66df147628c6.jpg?crop=center&amp;v=1736300007&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_03_7b7b993e-0ceb-458f-9ccf-66df147628c6.jpg?crop=center&amp;v=1736300007&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_03_7b7b993e-0ceb-458f-9ccf-66df147628c6.jpg?crop=center&amp;v=1736300007&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_04_58947077-b840-4566-b9bc-8353f99fe66f.jpg?crop=center&amp;v=1736300007" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_04_58947077-b840-4566-b9bc-8353f99fe66f.jpg?crop=center&amp;v=1736300007&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_04_58947077-b840-4566-b9bc-8353f99fe66f.jpg?crop=center&amp;v=1736300007&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_04_58947077-b840-4566-b9bc-8353f99fe66f.jpg?crop=center&amp;v=1736300007&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49189310103842">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_93a8b83e-8f0d-44b1-9b47-69216a92201c.jpg?crop=center&amp;v=1737101562" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_93a8b83e-8f0d-44b1-9b47-69216a92201c.jpg?crop=center&amp;v=1737101562&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_93a8b83e-8f0d-44b1-9b47-69216a92201c.jpg?crop=center&amp;v=1737101562&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_93a8b83e-8f0d-44b1-9b47-69216a92201c.jpg?crop=center&amp;v=1737101562&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_01_1ce1625e-4bd6-4321-8a76-63f08959edac.jpg?crop=center&amp;v=1737101562" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_01_1ce1625e-4bd6-4321-8a76-63f08959edac.jpg?crop=center&amp;v=1737101562&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_01_1ce1625e-4bd6-4321-8a76-63f08959edac.jpg?crop=center&amp;v=1737101562&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_01_1ce1625e-4bd6-4321-8a76-63f08959edac.jpg?crop=center&amp;v=1737101562&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_02_9997bbd8-dac0-4a9f-afdf-3491b4c1329d.jpg?crop=center&amp;v=1737101562" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_02_9997bbd8-dac0-4a9f-afdf-3491b4c1329d.jpg?crop=center&amp;v=1737101562&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_02_9997bbd8-dac0-4a9f-afdf-3491b4c1329d.jpg?crop=center&amp;v=1737101562&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_02_9997bbd8-dac0-4a9f-afdf-3491b4c1329d.jpg?crop=center&amp;v=1737101562&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_03_4989b726-e0c0-4a21-bac8-278f4839e09c.jpg?crop=center&amp;v=1737101562" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_03_4989b726-e0c0-4a21-bac8-278f4839e09c.jpg?crop=center&amp;v=1737101562&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_03_4989b726-e0c0-4a21-bac8-278f4839e09c.jpg?crop=center&amp;v=1737101562&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_03_4989b726-e0c0-4a21-bac8-278f4839e09c.jpg?crop=center&amp;v=1737101562&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_04_9483305f-e006-4584-9b30-8c3c3a27c2ff.jpg?crop=center&amp;v=1737101562" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_04_9483305f-e006-4584-9b30-8c3c3a27c2ff.jpg?crop=center&amp;v=1737101562&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_04_9483305f-e006-4584-9b30-8c3c3a27c2ff.jpg?crop=center&amp;v=1737101562&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_04_9483305f-e006-4584-9b30-8c3c3a27c2ff.jpg?crop=center&amp;v=1737101562&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49189310234914">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_c8c26820-3dd7-4ef4-bd1a-f7d540c9d553.jpg?crop=center&amp;v=1737101637" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_c8c26820-3dd7-4ef4-bd1a-f7d540c9d553.jpg?crop=center&amp;v=1737101637&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_c8c26820-3dd7-4ef4-bd1a-f7d540c9d553.jpg?crop=center&amp;v=1737101637&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_c8c26820-3dd7-4ef4-bd1a-f7d540c9d553.jpg?crop=center&amp;v=1737101637&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_01_d6a1a59f-c320-4741-98a4-c4de17c81b21.jpg?crop=center&amp;v=1737101637" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_01_d6a1a59f-c320-4741-98a4-c4de17c81b21.jpg?crop=center&amp;v=1737101637&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_01_d6a1a59f-c320-4741-98a4-c4de17c81b21.jpg?crop=center&amp;v=1737101637&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_01_d6a1a59f-c320-4741-98a4-c4de17c81b21.jpg?crop=center&amp;v=1737101637&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_02_1db0a6fc-151d-4802-8e18-51a797751454.jpg?crop=center&amp;v=1737101637" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_02_1db0a6fc-151d-4802-8e18-51a797751454.jpg?crop=center&amp;v=1737101637&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_02_1db0a6fc-151d-4802-8e18-51a797751454.jpg?crop=center&amp;v=1737101637&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_02_1db0a6fc-151d-4802-8e18-51a797751454.jpg?crop=center&amp;v=1737101637&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_03_777c6810-ee15-4518-ae44-5062d5e7dc3d.jpg?crop=center&amp;v=1737101637" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_03_777c6810-ee15-4518-ae44-5062d5e7dc3d.jpg?crop=center&amp;v=1737101637&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_03_777c6810-ee15-4518-ae44-5062d5e7dc3d.jpg?crop=center&amp;v=1737101637&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_03_777c6810-ee15-4518-ae44-5062d5e7dc3d.jpg?crop=center&amp;v=1737101637&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_04_d0ffc040-7d6c-43bf-8a1f-a7829af58b99.jpg?crop=center&amp;v=1737101637" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_04_d0ffc040-7d6c-43bf-8a1f-a7829af58b99.jpg?crop=center&amp;v=1737101637&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_04_d0ffc040-7d6c-43bf-8a1f-a7829af58b99.jpg?crop=center&amp;v=1737101637&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_04_d0ffc040-7d6c-43bf-8a1f-a7829af58b99.jpg?crop=center&amp;v=1737101637&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49189309776162">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_93304894-5fd4-443c-b2f4-32fa2c17b2cf.jpg?crop=center&amp;v=1737101672" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_93304894-5fd4-443c-b2f4-32fa2c17b2cf.jpg?crop=center&amp;v=1737101672&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_93304894-5fd4-443c-b2f4-32fa2c17b2cf.jpg?crop=center&amp;v=1737101672&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_93304894-5fd4-443c-b2f4-32fa2c17b2cf.jpg?crop=center&amp;v=1737101672&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_01_8be674ef-288c-4eda-ab5e-d1babbe7c26d.jpg?crop=center&amp;v=1737101672" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_01_8be674ef-288c-4eda-ab5e-d1babbe7c26d.jpg?crop=center&amp;v=1737101672&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_01_8be674ef-288c-4eda-ab5e-d1babbe7c26d.jpg?crop=center&amp;v=1737101672&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_01_8be674ef-288c-4eda-ab5e-d1babbe7c26d.jpg?crop=center&amp;v=1737101672&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_02_82b9c817-65c7-43d6-b868-0dbfc333e6ff.jpg?crop=center&amp;v=1737101673" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_02_82b9c817-65c7-43d6-b868-0dbfc333e6ff.jpg?crop=center&amp;v=1737101673&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_02_82b9c817-65c7-43d6-b868-0dbfc333e6ff.jpg?crop=center&amp;v=1737101673&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_02_82b9c817-65c7-43d6-b868-0dbfc333e6ff.jpg?crop=center&amp;v=1737101673&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_03_561b9540-8743-42ce-8e7a-4665687efd9e.jpg?crop=center&amp;v=1737101672" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_03_561b9540-8743-42ce-8e7a-4665687efd9e.jpg?crop=center&amp;v=1737101672&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_03_561b9540-8743-42ce-8e7a-4665687efd9e.jpg?crop=center&amp;v=1737101672&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_03_561b9540-8743-42ce-8e7a-4665687efd9e.jpg?crop=center&amp;v=1737101672&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_04_2979a13f-833b-4f2a-b711-657ba69f10f5.jpg?crop=center&amp;v=1737101672" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_04_2979a13f-833b-4f2a-b711-657ba69f10f5.jpg?crop=center&amp;v=1737101672&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_04_2979a13f-833b-4f2a-b711-657ba69f10f5.jpg?crop=center&amp;v=1737101672&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_04_2979a13f-833b-4f2a-b711-657ba69f10f5.jpg?crop=center&amp;v=1737101672&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="50780127297826">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00_31027e0f-9fb9-4f9b-92a3-b1f023a6c145.jpg?crop=center&amp;v=1767944363" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00_31027e0f-9fb9-4f9b-92a3-b1f023a6c145.jpg?crop=center&amp;v=1767944363&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00_31027e0f-9fb9-4f9b-92a3-b1f023a6c145.jpg?crop=center&amp;v=1767944363&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00_31027e0f-9fb9-4f9b-92a3-b1f023a6c145.jpg?crop=center&amp;v=1767944363&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_01.jpg?crop=center&amp;v=1767944363" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_01.jpg?crop=center&amp;v=1767944363&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_01.jpg?crop=center&amp;v=1767944363&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_01.jpg?crop=center&amp;v=1767944363&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_02.jpg?crop=center&amp;v=1767944363" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_02.jpg?crop=center&amp;v=1767944363&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_02.jpg?crop=center&amp;v=1767944363&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_02.jpg?crop=center&amp;v=1767944363&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_03.jpg?crop=center&amp;v=1767944363" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_03.jpg?crop=center&amp;v=1767944363&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_03.jpg?crop=center&amp;v=1767944363&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_03.jpg?crop=center&amp;v=1767944363&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_04.jpg?crop=center&amp;v=1767944363" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_04.jpg?crop=center&amp;v=1767944363&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_04.jpg?crop=center&amp;v=1767944363&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_04.jpg?crop=center&amp;v=1767944363&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="50780127330594">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_dee62257-eebc-4b41-aec0-244593192354.jpg?crop=center&amp;v=1767944921" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_dee62257-eebc-4b41-aec0-244593192354.jpg?crop=center&amp;v=1767944921&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_dee62257-eebc-4b41-aec0-244593192354.jpg?crop=center&amp;v=1767944921&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_dee62257-eebc-4b41-aec0-244593192354.jpg?crop=center&amp;v=1767944921&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_01.jpg?crop=center&amp;v=1767944922" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_01.jpg?crop=center&amp;v=1767944922&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_01.jpg?crop=center&amp;v=1767944922&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_01.jpg?crop=center&amp;v=1767944922&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_02.jpg?crop=center&amp;v=1767944922" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_02.jpg?crop=center&amp;v=1767944922&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_02.jpg?crop=center&amp;v=1767944922&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_02.jpg?crop=center&amp;v=1767944922&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_03.jpg?crop=center&amp;v=1767944921" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_03.jpg?crop=center&amp;v=1767944921&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_03.jpg?crop=center&amp;v=1767944921&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_03.jpg?crop=center&amp;v=1767944921&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_04.jpg?crop=center&amp;v=1767944921" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_04.jpg?crop=center&amp;v=1767944921&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_04.jpg?crop=center&amp;v=1767944921&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_04.jpg?crop=center&amp;v=1767944921&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="50780127363362">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00_1d7f2d8b-4800-47ee-a26d-79d7341d9031.jpg?crop=center&amp;v=1767945067" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00_1d7f2d8b-4800-47ee-a26d-79d7341d9031.jpg?crop=center&amp;v=1767945067&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00_1d7f2d8b-4800-47ee-a26d-79d7341d9031.jpg?crop=center&amp;v=1767945067&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00_1d7f2d8b-4800-47ee-a26d-79d7341d9031.jpg?crop=center&amp;v=1767945067&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_01.jpg?crop=center&amp;v=1767945068" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_01.jpg?crop=center&amp;v=1767945068&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_01.jpg?crop=center&amp;v=1767945068&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_01.jpg?crop=center&amp;v=1767945068&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_02.jpg?crop=center&amp;v=1767945068" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_02.jpg?crop=center&amp;v=1767945068&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_02.jpg?crop=center&amp;v=1767945068&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_02.jpg?crop=center&amp;v=1767945068&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_03.jpg?crop=center&amp;v=1767945068" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_03.jpg?crop=center&amp;v=1767945068&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_03.jpg?crop=center&amp;v=1767945068&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_03.jpg?crop=center&amp;v=1767945068&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_04.jpg?crop=center&amp;v=1767945067" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_04.jpg?crop=center&amp;v=1767945067&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_04.jpg?crop=center&amp;v=1767945067&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_04.jpg?crop=center&amp;v=1767945067&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div>
+<template id="product-description">의자 뒷다리를 고정해주는 글라이드와 쉽게 밀리지 않는 적당한 무게감으로 불필요한 움직임은 최소화하고 집중할 수 있는 환경을 만들어줍니다.</template>
+<div class="container">
+  
+  <product-page
+    id="product-template--24699215642914__configurator"
+    data-collection=""
+    data-id="9496943853858"
+    data-availability="true"
+    data-original-price="18900000"
+    data-login="false"
+    data-sku="S60FEGU0KK-451MWW"
+    data-name="IBLE 아이블"
+    data-category="STUDY"
+    data-variant-text="아이블 / 화이트 / 웜그레이"
+    data-variant-price="18900000"
+    data-compare-at-price="0"
+  >
+    
+    
+    
+
+    
+    
+    <div class="product-title--wrapper mobile">
+      <div class="wrapper--header">
+        <h1>IBLE 아이블</h1>
+
+        <div class="button--sns">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="share">
+              <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+      <title class="product--sku">S60FEGU0KK · 451MWW</title>
+
+      
+        <div class="product-link--row">
+          <div class="button--compare btn-hover--bk" >
+            <a href="/pages/compare?product=IBLE">제품 비교</a>
+          </div>
+          <div class="button--compare btn-hover--bk">
+            <a href="/pages/product-guide-result?productCode=S60FEGU0KK&searchbar=false">제품가이드</a>
+          </div>
+          <a class="product-review-anchor product-review-anchor--inline hidden" href="#prod_detail_review" data-product-review-anchor>
+            <span class="product-review-anchor__label">리뷰</span>
+            <span class="product-review-anchor__count" data-product-review-count>0</span>
+            <span class="product-review-anchor__suffix">개</span>
+          </a>
+        </div>
+      
+    </div>
+
+    <div class="product-gallery--wrapper">
+      
+      <div class="product-gallery web">
+        <div class="product-media--wrapper">
+          <div class="product-media--item variant-media"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595" alt="아이블 Re:LIFE 의자 글라이드와 무게감으로 집중력 향상 지원" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=1200 1200w" loading="eager" class="" data-variant-id="49189297750306"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자 뒷다리 글라이드로 안정적 고정, 집중 가능한 공부 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189299388706"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자, 글라이드와 적당한 무게로 집중력 향상 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189296898338"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597" alt="아이블 Re:LIFE 집중력 향상 시디즈 공부의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189310103842"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자 집중력 향상 위한 안정적 글라이드와 적당한 무게감 특징" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189310234914"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자 뒷다리 글라이드와 무게감으로 집중력 향상 돕는 공부용 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189309776162"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612" alt="아이블 의자 글라이드와 안정적 무게로 집중력 향상 돕는 공부 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="50780127297826"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622" alt="아이블 의자 뒷다리 글라이드와 적당한 무게로 안정적 집중 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="50780127330594"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612" alt="아이블 의자 글라이드 장착으로 안정적인 공부 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="50780127363362"><div class="btn-img-360" data-variant-id="49189297750306">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item"><img src="//kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930&amp;width=1200 1200w" loading="eager"></div><div class="product-media--item"><img src="//kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930&amp;width=1200 1200w" loading="eager"></div><div class="product-media--item"><img src="//kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930&amp;width=1200 1200w" loading="eager"></div>
+        </div>
+      </div>
+      <div class="product-gallery mobile swiper">
+        <div class="wrapper__contents swiper-wrapper">
+          
+
+          
+            <div class="product-media--item variant-media swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595" alt="아이블 Re:LIFE 의자 글라이드와 무게감으로 집중력 향상 지원" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00_268446e8-bf47-4026-bc32-218d7088b200.jpg?crop=center&amp;v=1785133595&amp;width=1200 1200w" loading="eager" class="" data-variant-id="49189297750306"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자 뒷다리 글라이드로 안정적 고정, 집중 가능한 공부 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_452N_00_ae594201-5018-4d42-af78-7cf807fbe6ef.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189299388706"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자, 글라이드와 적당한 무게로 집중력 향상 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_TNA501FE_456_00_fce85b25-a37a-4c12-b337-fd11f73ad85d.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189296898338"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597" alt="아이블 Re:LIFE 집중력 향상 시디즈 공부의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_451M_00_3b6fbc7d-3c1d-40d6-ad82-b68623f33496.jpg?crop=center&amp;v=1785133597&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189310103842"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자 집중력 향상 위한 안정적 글라이드와 적당한 무게감 특징" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_452N_00_e2383a1a-13b9-4610-9ca5-b00f3cdcdb0c.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189310234914"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596" alt="아이블 Re:LIFE 의자 뒷다리 글라이드와 무게감으로 집중력 향상 돕는 공부용 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFU0KK_456B_00_0a6e6e8a-8f5e-4634-915a-461f575e0255.jpg?crop=center&amp;v=1785133596&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49189309776162"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612" alt="아이블 의자 글라이드와 안정적 무게로 집중력 향상 돕는 공부 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_451M_00.jpg?crop=center&amp;v=1785133612&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="50780127297826"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622" alt="아이블 의자 뒷다리 글라이드와 적당한 무게로 안정적 집중 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_452N_00_1d94044d-2e28-43a1-9a97-3e5727a911ff.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="50780127330594"><img src="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612" alt="아이블 의자 글라이드 장착으로 안정적인 공부 환경 제공" srcset="//kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ible_S60SFG0KK_456B_00.jpg?crop=center&amp;v=1785133612&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="50780127363362"><div class="btn-img-360" data-variant-id="49189297750306">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_1_b06d22ae-e44a-40a9-ba5c-3f57f407e62c.jpg?crop=center&amp;v=1733997930&amp;width=1200 1200w" loading="eager"></div><div class="product-media--item swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_2_af717bae-12b4-41f6-ab1b-936296e237f3.jpg?crop=center&amp;v=1733997930&amp;width=1200 1200w" loading="eager"></div><div class="product-media--item swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_3_677a74d5-e530-43d0-9b1d-007160db2bae.jpg?crop=center&amp;v=1733997930&amp;width=1200 1200w" loading="eager"></div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="product-text--wrapper">
+    
+      <div class="product-title--wrapper web">
+        <div class="wrapper--header">
+          <h1>IBLE 아이블</h1>
+
+          <div class="button--sns btn-hover--bk">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="share">
+                <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+        <title class="product--sku">S60FEGU0KK · 451MWW</title>
+
+        
+          <div class="product-link--row">
+            <div class="button--compare btn-hover--bk" >
+              <a href="/pages/compare?product=IBLE">제품 비교</a>
+            </div>
+            <div class="button--compare btn-hover--bk">
+              <a href="/pages/product-guide-result?productCode=S60FEGU0KK&searchbar=false">제품가이드</a>
+            </div>
+            <a class="product-review-anchor product-review-anchor--inline hidden" href="#prod_detail_review" data-product-review-anchor>
+              <span class="product-review-anchor__label">리뷰</span>
+              <span class="product-review-anchor__count" data-product-review-count>0</span>
+              <span class="product-review-anchor__suffix">개</span>
+            </a>
+          </div>
+        
+
+      </div>
+      
+      
+        
+            <div
+              class="product-variant--wrapper"
+              
+              
+            >
+              <product-variants
+                data-main-product-variants
+                data-variants="3"
+                data-hide-variants="
+                  true
+                "
+                data-url="/products/ible"
+                data-id="template--24699215642914__configurator"
+                data-style=""
+                
+                
+                
+                  data-has-variants
+                
+                
+              >
+                <script type="application/json">
+                  [
+                    
+                      {
+                        "title": "아이블 \/ 화이트 \/ 웜그레이",
+                        
+                        "available": true,
+                        "id": 49189297750306,
+                        "sku": "S60FEGU0KK-451MWW",
+                        "price": 18900000,
+                        "compare_at_price": 19900000,
+                        "special_price": 189000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["아이블","화이트","웜그레이"],
+                        "option1": "아이블",
+                        "option2": "화이트",
+                        "option3": "웜그레이",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "완조립",
+                            "description": "별도 조립이 필요 없는 완조립 제품입니다.\u003cbr \/\u003e\n부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "아이블 \/ 화이트 \/ 샌드베이지",
+                        
+                        "available": true,
+                        "id": 49189299388706,
+                        "sku": "S60FEGU0KK-452NWW",
+                        "price": 18900000,
+                        "compare_at_price": 19900000,
+                        "special_price": 189000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["아이블","화이트","샌드베이지"],
+                        "option1": "아이블",
+                        "option2": "화이트",
+                        "option3": "샌드베이지",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "완조립",
+                            "description": "별도 조립이 필요 없는 완조립 제품입니다.\u003cbr \/\u003e\n부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "아이블 \/ 블랙 \/ 차콜",
+                        
+                        "available": true,
+                        "id": 49189296898338,
+                        "sku": "S60FEGU0KK-456BK",
+                        "price": 18900000,
+                        "compare_at_price": 19900000,
+                        "special_price": 189000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["아이블","블랙","차콜"],
+                        "option1": "아이블",
+                        "option2": "블랙",
+                        "option3": "차콜",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "완조립",
+                            "description": "별도 조립이 필요 없는 완조립 제품입니다.\u003cbr \/\u003e\n부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "높이조절형\/바퀴 \/ 화이트 \/ 웜그레이",
+                        
+                        "available": true,
+                        "id": 49189310103842,
+                        "sku": "S60SFU0KK-451MWW",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["높이조절형\/바퀴","화이트","웜그레이"],
+                        "option1": "높이조절형\/바퀴",
+                        "option2": "화이트",
+                        "option3": "웜그레이",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "높이조절형\/바퀴 \/ 화이트 \/ 샌드베이지",
+                        
+                        "available": true,
+                        "id": 49189310234914,
+                        "sku": "S60SFU0KK-452NWW",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["높이조절형\/바퀴","화이트","샌드베이지"],
+                        "option1": "높이조절형\/바퀴",
+                        "option2": "화이트",
+                        "option3": "샌드베이지",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "높이조절형\/바퀴 \/ 블랙 \/ 차콜",
+                        
+                        "available": true,
+                        "id": 49189309776162,
+                        "sku": "S60SFU0KK-456BK",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["높이조절형\/바퀴","블랙","차콜"],
+                        "option1": "높이조절형\/바퀴",
+                        "option2": "블랙",
+                        "option3": "차콜",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "높이조절형\/글라이드 \/ 화이트 \/ 웜그레이",
+                        
+                        "available": true,
+                        "id": 50780127297826,
+                        "sku": "S60SFG0KK-451MWW",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["높이조절형\/글라이드","화이트","웜그레이"],
+                        "option1": "높이조절형\/글라이드",
+                        "option2": "화이트",
+                        "option3": "웜그레이",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 7
+                      },
+                    
+                      {
+                        "title": "높이조절형\/글라이드 \/ 화이트 \/ 샌드베이지",
+                        
+                        "available": true,
+                        "id": 50780127330594,
+                        "sku": "S60SFG0KK-452NWW",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["높이조절형\/글라이드","화이트","샌드베이지"],
+                        "option1": "높이조절형\/글라이드",
+                        "option2": "화이트",
+                        "option3": "샌드베이지",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 7
+                      },
+                    
+                      {
+                        "title": "높이조절형\/글라이드 \/ 블랙 \/ 차콜",
+                        
+                        "available": true,
+                        "id": 50780127363362,
+                        "sku": "S60SFG0KK-456BK",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["높이조절형\/글라이드","블랙","차콜"],
+                        "option1": "높이조절형\/글라이드",
+                        "option2": "블랙",
+                        "option3": "차콜",
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "직접배송",
+                            "assembly_type": "시공서비스 제공",
+                            "description": "부재 시 배송이 어려울 수 있습니다."
+                          },
+                        
+                        "expected_at": 7
+                      }
+                    
+                  ]
+                </script>
+                <div
+                  class="product-variants no-js-hidden"
+                  
+                  
+                >
+                  
+                    
+
+                    <div
+                      class="product-variant depth-1"
+                      data-option="option"
+                      data-js-product-variant
+                    >
+                      
+
+                      <div
+                        class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap"
+                        data-js-product-variant-container="radio"
+                      >
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-option-template--24699215642914__configurator"
+                              id="ible-option-option-1-template--24699215642914__configurator"
+                              value="아이블"
+                              
+                                checked
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-option-1-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="option"
+                              data-option-value="아이블"
+                            >
+                              
+                              <div class="option-name">아이블</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-option-template--24699215642914__configurator"
+                              id="ible-option-option-2-template--24699215642914__configurator"
+                              value="높이조절형/바퀴"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-option-2-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="option"
+                              data-option-value="높이조절형/바퀴"
+                            >
+                              
+                              <div class="option-name">높이조절형/바퀴</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-option-template--24699215642914__configurator"
+                              id="ible-option-option-3-template--24699215642914__configurator"
+                              value="높이조절형/글라이드"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-option-3-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="option"
+                              data-option-value="높이조절형/글라이드"
+                            >
+                              
+                              <div class="option-name">높이조절형/글라이드</div>
+                            </label>
+                          </div>
+                        
+                      </div>
+                    </div>
+                  
+                    
+
+                    <div
+                      class="product-variant depth-2"
+                      data-option="frame"
+                      data-js-product-variant
+                    >
+                      
+                        <span class="product-variant__name">프레임</span>
+                      
+
+                      <div
+                        class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap"
+                        data-js-product-variant-container="radio"
+                      >
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-frame-template--24699215642914__configurator"
+                              id="ible-option-frame-1-template--24699215642914__configurator"
+                              value="화이트"
+                              
+                                checked
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-frame-1-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="frame"
+                              data-option-value="화이트"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">화이트</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-frame-template--24699215642914__configurator"
+                              id="ible-option-frame-2-template--24699215642914__configurator"
+                              value="블랙"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-frame-2-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="frame"
+                              data-option-value="블랙"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">블랙</div>
+                            </label>
+                          </div>
+                        
+                      </div>
+                    </div>
+                  
+                    
+
+                    <div
+                      class="product-variant depth-3"
+                      data-option="color"
+                      data-js-product-variant
+                    >
+                      
+                        <span class="product-variant__name">색상</span>
+                      
+
+                      <div
+                        class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap"
+                        data-js-product-variant-container="radio"
+                      >
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699215642914__configurator"
+                              id="ible-option-color-1-template--24699215642914__configurator"
+                              value="웜그레이"
+                              
+                                checked
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-color-1-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="웜그레이"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">웜그레이</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699215642914__configurator"
+                              id="ible-option-color-2-template--24699215642914__configurator"
+                              value="샌드베이지"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-color-2-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="샌드베이지"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">샌드베이지</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699215642914__configurator"
+                              id="ible-option-color-3-template--24699215642914__configurator"
+                              value="차콜"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ible-option-color-3-template--24699215642914__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="차콜"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">차콜</div>
+                            </label>
+                          </div>
+                        
+                      </div>
+                    </div>
+                  
+                </div>
+
+                <noscript>
+                  <label
+                    for="Variants-template--24699215642914__configurator"
+                    class="text-size--small"
+                    style="display:block;margin-bottom:.75rem"
+                  >변</label>
+                  <select
+                    name="id"
+                    id="Variants-template--24699215642914__configurator"
+                    class="productSelect"
+                    
+                    form="product-form-template--24699215642914__configurator"
+                  >
+                    
+                      <option
+                        
+                          selected="selected"
+                        
+                        
+                        value="49189297750306"
+                      >
+                        아이블 / 화이트 / 웜그레이
+                        
+                        - 189,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49189299388706"
+                      >
+                        아이블 / 화이트 / 샌드베이지
+                        
+                        - 189,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49189296898338"
+                      >
+                        아이블 / 블랙 / 차콜
+                        
+                        - 189,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49189310103842"
+                      >
+                        높이조절형/바퀴 / 화이트 / 웜그레이
+                        
+                        - 199,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49189310234914"
+                      >
+                        높이조절형/바퀴 / 화이트 / 샌드베이지
+                        
+                        - 199,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49189309776162"
+                      >
+                        높이조절형/바퀴 / 블랙 / 차콜
+                        
+                        - 199,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="50780127297826"
+                      >
+                        높이조절형/글라이드 / 화이트 / 웜그레이
+                        
+                        - 199,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="50780127330594"
+                      >
+                        높이조절형/글라이드 / 화이트 / 샌드베이지
+                        
+                        - 199,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="50780127363362"
+                      >
+                        높이조절형/글라이드 / 블랙 / 차콜
+                        
+                        - 199,000
+                      </option>
+                    
+                  </select>
+                </noscript>
+              </product-variants>
+              <a class="product-review-anchor product-review-anchor--option hidden" href="#prod_detail_review" data-product-review-anchor>
+                <span class="product-review-anchor__label">리뷰</span>
+                <span class="product-review-anchor__count" data-product-review-count>0</span>
+                <span class="product-review-anchor__suffix">개 보기</span>
+              </a>
+            </div>
+
+          
+      
+        
+            <div class="product-price--wrapper" data-js-product-price-compact >
+              <div id="product-price-template--24699215642914__configurator" class="product-price">
+  <div class="product-discount--wrapper">
+    <div class="member--discount">
+      <div class="discount--title">회원 할인가</div>
+      <div class="discount--details">
+        <div class="discount--details-top">
+          <div class="product-discount--percent"></div>
+          <div class="product-price--best"></div>
+        </div>
+        <div class="product-price--original"></div>
+      </div>
+    </div>
+
+    <details class="max--discount">
+      <summary class="discount--header">
+        <div class="discount-header--content">
+          <div class="discount-header--text">
+            <div class="discount--title q--popup">
+              <span>최대 혜택가</span>
+              <div class="button--popup" data-type="price">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+              </div>
+            </div>
+            <div class="product-price--coupon"></div>
+          </div>
+
+          <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.1875 4.8125L7 9.625L11.8125 4.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="popup--wrapper hidden" data-type="price">
+          <div class="popup--content">
+            <ul>
+              <li>보유 쿠폰의 최대 할인 혜택이 적용된 금액입니다.</li>
+              <li>쿠폰은 주문 단계에서 적용/변경할 수 있습니다.</li>
+            </ul>
+          </div>
+          <div class="popup--close">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+          </div>
+        </div>
+      </summary>
+
+      
+      <div class="discount--body">
+        <div class="title">쿠폰 할인</div>
+        
+        <div class="coupon--wrapper"></div>
+      </div>
+    </details>
+  </div>
+</div>
+
+            </div>
+          
+      
+        
+            <div class="button--cardNoInterestInfo btn-hover--bk">
+              <a href="https://www.mainpay.co.kr/intFreeInfo/popup/all.do?mbr_no=116833">카드 무이자 정보</a>
+            </div>
+          
+      
+        
+            
+              <div class="product-complementary--wrapper" data-js-complementary-wrapper >
+                <div class="wrapper--header">
+                  <div class="title">별도 구매 (선택)</div>
+                </div>
+                <div class="wrapper--body">
+                  <div class="complementary--content">
+                    <div class="swiper product-complementary--swiper">
+                      <div class="swiper-wrapper">
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/stepo-footrest">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614" alt="스테포 발받침 인체공학 디자인 바른 자세 유지" srcset="//kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?crop=center&amp;v=1785133614&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="STEPO 스테포"
+                                data-product-handle="stepo-footrest"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "STEPO 스테포",                                  "handle": "stepo-footrest",                                  "url": "\/products\/stepo-footrest",                                  "category": "SEAT BOOSTER",                                  "options": [{                                        "name": "옵션",                                        "position": 1,                                        "values": [{                                              "name": "스테포 커버형",                                              "id": 4167579762978},{                                              "name": "스테포",                                              "id": 4167577436450}]                                      },{                                        "name": "색상",                                        "position": 2,                                        "values": [{                                              "name": "차콜그레이",                                              "id": 4167579861282,"rgb": "#292926"},{                                              "name": "베이지",                                              "id": 4167580156194,"rgb": "#b9ab9e"},{                                              "name": "민트그린",                                              "id": 4167580385570,"rgb": "#3d5343"},{                                              "name": "그레이",                                              "id": 4167577469218,"rgb": "#a3a2a7"}]                                      }],                                  "variants": [{                                        "title": "스테포 커버형 \/ 차콜그레이",                                        "id": 49189318099234,                                        "sku": "SB01F1-3D1","inventory_quantity": 99587,                                        "available": true,                                        "price": 72000,                                        "special_price": "72,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "79,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F1_3D1_00_5087b664-393e-4886-b390-3a71d00a4708.jpg?v=1785133614",                                                                                "options": ["스테포 커버형","차콜그레이"],                                        "option1": "스테포 커버형",                                        "option2": "차콜그레이",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#292926"                                      },{                                        "title": "스테포 커버형 \/ 베이지",                                        "id": 49189318361378,                                        "sku": "SB01F1-3D2","inventory_quantity": 99889,                                        "available": true,                                        "price": 72000,                                        "special_price": "72,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "79,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F1_3D2_00_e5799dc0-57ac-4e8c-b58f-0ac979bafebc.jpg?v=1745822296",                                                                                "options": ["스테포 커버형","베이지"],                                        "option1": "스테포 커버형",                                        "option2": "베이지",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#b9ab9e"                                      },{                                        "title": "스테포 커버형 \/ 민트그린",                                        "id": 49189318459682,                                        "sku": "SB01F1-3D7","inventory_quantity": 99924,                                        "available": true,                                        "price": 72000,                                        "special_price": "72,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "79,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F1_3D7_00_f9ea52bb-d8a1-4dd6-bc3c-957b0e1f766c.jpg?v=1745822297",                                                                                "options": ["스테포 커버형","민트그린"],                                        "option1": "스테포 커버형",                                        "option2": "민트그린",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#3d5343"                                      },{                                        "title": "스테포 \/ 그레이",                                        "id": 49189315313954,                                        "sku": "SB01F-MM","inventory_quantity": 99634,                                        "available": true,                                        "price": 54000,                                        "special_price": "54,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "60,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_STEPO_SB01F_MM_00_e1281e63-5a6a-47a3-9f20-b143370b89d1.jpg?v=1787151589",                                                                                "options": ["스테포","그레이"],                                        "option1": "스테포",                                        "option2": "그레이",                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#a3a2a7"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">STEPO 스테포</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">54,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">60,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/fungus">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309" alt="FUNGUS - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="FUNGUS 펑거스"
+                                data-product-handle="fungus"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "FUNGUS 펑거스",                                  "handle": "fungus",                                  "url": "\/products\/fungus",                                  "category": "SEAT BOOSTER",                                  "options": [{                                        "name": "옵션",                                        "position": 1,                                        "values": [{                                              "name": "펑거스",                                              "id": 4167580844322},{                                              "name": "펑거스 바퀴형",                                              "id": 4167588118818},{                                              "name": "펑거스 바퀴형(토트넘 에디션)",                                              "id": 4864265355554}]                                      },{                                        "name": "프레임",                                        "position": 2,                                        "values": [{                                              "name": "블랙",                                              "id": 4167580877090,"rgb": "#000000"},{                                              "name": "화이트",                                              "id": 4167582351650,"rgb": "#ffffff"}]                                      },{                                        "name": "색상",                                        "position": 3,                                        "values": [{                                              "name": "워터리블루",                                              "id": 4167580909858,"rgb": "#2f8699"},{                                              "name": "차콜",                                              "id": 4167581892898,"rgb": "#514f4f"},{                                              "name": "브릭오렌지",                                              "id": 4167582089506,"rgb": "#b64a26"},{                                              "name": "그레이",                                              "id": 4167582548258,"rgb": "#b1b1b1"},{                                              "name": "블루",                                              "id": 4167587201314,"rgb": "#405a70"},{                                              "name": "애쉬그린",                                              "id": 4167587594530,"rgb": "#92aaa6"},{                                              "name": "스타디움",                                              "id": 4864265716002,"rgb": "#2e3345"},{                                              "name": "7 SON",                                              "id": 4864265748770,"rgb": "#2e3345"},{                                              "name": "10 MADDISON",                                              "id": 4864265781538,"rgb": "#2e3345"},{                                              "name": "1 VICARIO",                                              "id": 4864265814306,"rgb": "#2e3345"},{                                              "name": "37 VAN DE VEN",                                              "id": 4864265847074,"rgb": "#2e3345"},{                                              "name": "14 GRAY",                                              "id": 4864265879842,"rgb": "#2e3345"}]                                      }],                                  "variants": [{                                        "title": "펑거스 \/ 블랙 \/ 워터리블루",                                        "id": 49189318852898,                                        "sku": "M130-454","inventory_quantity": 999972,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?v=1745822309",                                                                                "options": ["펑거스","블랙","워터리블루"],                                        "option1": "펑거스",                                        "option2": "블랙",                                        "option3": "워터리블루",                                        "frame_rgb": "#000000",                                        "color_rgb": "#2f8699"                                      },{                                        "title": "펑거스 \/ 블랙 \/ 차콜",                                        "id": 49189319803170,                                        "sku": "M130-456","inventory_quantity": 999964,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130_456_00_3963bb03-faa1-4b78-9b76-5328a1b4093a.jpg?v=1785134412",                                                                                "options": ["펑거스","블랙","차콜"],                                        "option1": "펑거스",                                        "option2": "블랙",                                        "option3": "차콜",                                        "frame_rgb": "#000000",                                        "color_rgb": "#514f4f"                                      },{                                        "title": "펑거스 \/ 블랙 \/ 브릭오렌지",                                        "id": 49189319868706,                                        "sku": "M130-458","inventory_quantity": 999977,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130_458_00_8f65569d-2a81-4b4a-bb1c-9e8069094bca.jpg?v=1776732479",                                                                                "options": ["펑거스","블랙","브릭오렌지"],                                        "option1": "펑거스",                                        "option2": "블랙",                                        "option3": "브릭오렌지",                                        "frame_rgb": "#000000",                                        "color_rgb": "#b64a26"                                      },{                                        "title": "펑거스 \/ 화이트 \/ 그레이",                                        "id": 49189319999778,                                        "sku": "MN130-451L","inventory_quantity": 999941,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130_451L_00_c1e761b8-d6f6-46db-b3ec-34a728ebedbe.jpg?v=1745822306",                                                                                "options": ["펑거스","화이트","그레이"],                                        "option1": "펑거스",                                        "option2": "화이트",                                        "option3": "그레이",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#b1b1b1"                                      },{                                        "title": "펑거스 \/ 화이트 \/ 블루",                                        "id": 49189320327458,                                        "sku": "MN130-454B","inventory_quantity": 999966,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130_454B_00_86fa1eae-68b6-406c-99f9-590e696a6f76.jpg?v=1785134412",                                                                                "options": ["펑거스","화이트","블루"],                                        "option1": "펑거스",                                        "option2": "화이트",                                        "option3": "블루",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#405a70"                                      },{                                        "title": "펑거스 \/ 화이트 \/ 애쉬그린",                                        "id": 49189327667490,                                        "sku": "MN130-457L","inventory_quantity": 999970,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_457L_00_19bf248a-3fc2-4620-84bd-979371aa6db9.jpg?v=1745822315",                                                                                "options": ["펑거스","화이트","애쉬그린"],                                        "option1": "펑거스",                                        "option2": "화이트",                                        "option3": "애쉬그린",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#92aaa6"                                      },{                                        "title": "펑거스 바퀴형 \/ 블랙 \/ 워터리블루",                                        "id": 49189327929634,                                        "sku": "M130Y-454","inventory_quantity": 999986,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130_454_00_acd68f3f-2563-4ad1-8018-ca7d0a102264.jpg?v=1745822302",                                                                                "options": ["펑거스 바퀴형","블랙","워터리블루"],                                        "option1": "펑거스 바퀴형",                                        "option2": "블랙",                                        "option3": "워터리블루",                                        "frame_rgb": "#000000",                                        "color_rgb": "#2f8699"                                      },{                                        "title": "펑거스 바퀴형 \/ 블랙 \/ 차콜",                                        "id": 49189328027938,                                        "sku": "M130Y-456","inventory_quantity": 999973,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130Y_456_00_ed7ec138-14c0-4131-8e68-ab07b7510248.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형","블랙","차콜"],                                        "option1": "펑거스 바퀴형",                                        "option2": "블랙",                                        "option3": "차콜",                                        "frame_rgb": "#000000",                                        "color_rgb": "#514f4f"                                      },{                                        "title": "펑거스 바퀴형 \/ 블랙 \/ 브릭오렌지",                                        "id": 49189328159010,                                        "sku": "M130Y-458","inventory_quantity": 999974,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130Y_458_00_5d07ae31-6f31-4b35-be75-7829806fb468.jpg?v=1776732483",                                                                                "options": ["펑거스 바퀴형","블랙","브릭오렌지"],                                        "option1": "펑거스 바퀴형",                                        "option2": "블랙",                                        "option3": "브릭오렌지",                                        "frame_rgb": "#000000",                                        "color_rgb": "#b64a26"                                      },{                                        "title": "펑거스 바퀴형 \/ 화이트 \/ 그레이",                                        "id": 49189328978210,                                        "sku": "MN130Y-451L","inventory_quantity": 999910,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_451L_00_35d30ede-a1e8-4ba1-8e90-27f1c073afb8.jpg?v=1776732493",                                                                                "options": ["펑거스 바퀴형","화이트","그레이"],                                        "option1": "펑거스 바퀴형",                                        "option2": "화이트",                                        "option3": "그레이",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#b1b1b1"                                      },{                                        "title": "펑거스 바퀴형 \/ 화이트 \/ 블루",                                        "id": 49189329305890,                                        "sku": "MN130Y-454B","inventory_quantity": 999960,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_454B_00_12d45277-c586-4e2f-8cd7-245a2ef7b667.jpg?v=1776732478",                                                                                "options": ["펑거스 바퀴형","화이트","블루"],                                        "option1": "펑거스 바퀴형",                                        "option2": "화이트",                                        "option3": "블루",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#405a70"                                      },{                                        "title": "펑거스 바퀴형 \/ 화이트 \/ 애쉬그린",                                        "id": 49189329404194,                                        "sku": "MN130Y-457L","inventory_quantity": 999945,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_457L_00_87183940-1344-45c4-a0bc-6a6645997b88.jpg?v=1785134409",                                                                                "options": ["펑거스 바퀴형","화이트","애쉬그린"],                                        "option1": "펑거스 바퀴형",                                        "option2": "화이트",                                        "option3": "애쉬그린",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#92aaa6"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 스타디움",                                        "id": 50016894484770,                                        "sku": "MN130YCC4-TOT","inventory_quantity": 999977,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_Stadium_02_7d43f2cd-36cc-4aee-9ae7-518571ffae43.jpg?v=1776732491",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","스타디움"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "스타디움",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 7 SON",                                        "id": 50016894517538,                                        "sku": "MN130YCC4-TOT07S","inventory_quantity": 0,                                        "available": false,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_7SON_02_68cf36b5-19e3-4d3f-97b7-670154505e00.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","7 SON"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "7 SON",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 10 MADDISON",                                        "id": 50016894550306,                                        "sku": "MN130YCC4-TOT10M","inventory_quantity": 999994,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_10MADDISON_02_5bd6c772-ba04-499b-8298-ea8bf5804d74.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","10 MADDISON"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "10 MADDISON",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 1 VICARIO",                                        "id": 50016894583074,                                        "sku": "MN130YCC4-TOT01V","inventory_quantity": 999996,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_1VICARIO_02_ae63fdfd-d6b5-434e-8792-46410af87181.jpg?v=1776732488",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","1 VICARIO"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "1 VICARIO",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 37 VAN DE VEN",                                        "id": 50016894615842,                                        "sku": "MN130YCC4-TOT37V","inventory_quantity": 999997,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_37VANDEVEN_02_25752418-355d-47a4-a53e-2bd8ecf9922e.jpg?v=1776732495",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","37 VAN DE VEN"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "37 VAN DE VEN",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 14 GRAY",                                        "id": 50016894648610,                                        "sku": "MN130YCC4-TOT14G","inventory_quantity": 999998,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_14GRAY_02_990705e1-6c4f-426d-84fd-f30449a36605.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","14 GRAY"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "14 GRAY",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">FUNGUS 펑거스</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">99,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">143,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/the-p-bag">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_THE_PROGRESSIVE_BAG_01.jpg?crop=center&amp;v=1779715336" alt="더 프로그레시브 백 타이벡 소재 가볍고 견고한 친환경 가방" srcset="//kr.sidiz.com/cdn/shop/files/thum_THE_PROGRESSIVE_BAG_01.jpg?crop=center&amp;v=1779715336&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_THE_PROGRESSIVE_BAG_01.jpg?crop=center&amp;v=1779715336&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_THE_PROGRESSIVE_BAG_01.jpg?crop=center&amp;v=1779715336&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="더 프로그레시브 백"
+                                data-product-handle="the-p-bag"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "더 프로그레시브 백",                                  "handle": "the-p-bag",                                  "url": "\/products\/the-p-bag",                                  "category": "THE P GOODS",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "실버",                                              "id": 5829679874338,"rgb": "#d1d5da"}]                                      }],                                  "variants": [{                                        "title": "실버",                                        "id": 50376369275170,                                        "sku": "PACBAG2507-XX","inventory_quantity": 9999947,                                        "available": true,                                        "price": 15000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_THE_PROGRESSIVE_BAG_01.jpg?v=1779715336",                                                                                "options": ["실버"],                                        "option1": "실버",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": "#d1d5da",                                        "color_rgb": "#d1d5da"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">더 프로그레시브 백</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  <div class="discount-price">15,000원</div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/totteham-fungus">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936" alt="토트넘 홋스퍼 아이덴티티 담은 시디즈X토트넘 펑거스 감각적 그래픽 디자인 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="시디즈X토트넘 홋스퍼 펑거스"
+                                data-product-handle="totteham-fungus"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "시디즈X토트넘 홋스퍼 펑거스",                                  "handle": "totteham-fungus",                                  "url": "\/products\/totteham-fungus",                                  "category": "SEAT BOOSTER",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "스타디움",                                              "id": 4851387793698,"rgb": "#2e3345"},{                                              "name": "10 MADDISON",                                              "id": 4851387859234,"rgb": "#2e3345"},{                                              "name": "1 VICARIO",                                              "id": 4851387892002,"rgb": "#2e3345"},{                                              "name": "37 VAN DE VEN",                                              "id": 4851387924770,"rgb": "#2e3345"},{                                              "name": "14 GRAY",                                              "id": 4851387957538,"rgb": "#2e3345"}]                                      }],                                  "variants": [{                                        "title": "스타디움",                                        "id": 50002113986850,                                        "sku": "MN130YCC4-TOT","inventory_quantity": 999975,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_Stadium_02.jpg?v=1779602936",                                                                                "options": ["스타디움"],                                        "option1": "스타디움",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "10 MADDISON",                                        "id": 50002114052386,                                        "sku": "MN130YCC4-TOT10M","inventory_quantity": 999999,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_10MADDISON_02.jpg?v=1779602898",                                                                                "options": ["10 MADDISON"],                                        "option1": "10 MADDISON",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "1 VICARIO",                                        "id": 50002114085154,                                        "sku": "MN130YCC4-TOT01V","inventory_quantity": 999998,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_1VICARIO_02.jpg?v=1779602900",                                                                                "options": ["1 VICARIO"],                                        "option1": "1 VICARIO",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "37 VAN DE VEN",                                        "id": 50002114117922,                                        "sku": "MN130YCC4-TOT37V","inventory_quantity": 999999,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_37VANDEVEN_02.jpg?v=1779602898",                                                                                "options": ["37 VAN DE VEN"],                                        "option1": "37 VAN DE VEN",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "14 GRAY",                                        "id": 50002114150690,                                        "sku": "MN130YCC4-TOT14G","inventory_quantity": 99995,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_14GRAY_02.jpg?v=1779602899",                                                                                "options": ["14 GRAY"],                                        "option1": "14 GRAY",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">시디즈X토트넘 홋스퍼 펑거스</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">99,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">143,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/sidiz_tottenham_olly">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_olly_b_01.jpg?crop=center&amp;v=1777084609" alt="시디즈X토트넘 휴대용 피크닉 체어 올리 제품 이미지" srcset="//kr.sidiz.com/cdn/shop/files/thum_olly_b_01.jpg?crop=center&amp;v=1777084609&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_olly_b_01.jpg?crop=center&amp;v=1777084609&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_olly_b_01.jpg?crop=center&amp;v=1777084609&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="[한정 수량 소진]시디즈X토트넘 홋스퍼 올리"
+                                data-product-handle="sidiz_tottenham_olly"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "[한정 수량 소진]시디즈X토트넘 홋스퍼 올리",                                  "handle": "sidiz_tottenham_olly",                                  "url": "\/products\/sidiz_tottenham_olly",                                  "category": "SEAT BOOSTER",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "스퍼스네이비",                                              "id": 4752247816482,"rgb": "#2e3345"},{                                              "name": "릴리화이트",                                              "id": 4752247554338,"rgb": "#e9e9e9"}]                                      }],                                  "variants": [{                                        "title": "스퍼스네이비",                                        "id": 49879813816610,                                        "sku": "PACPCHACC5-TOT1","inventory_quantity": 734,                                        "available": true,                                        "price": 34900,                                        "special_price": "34,900",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "39,900",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_olly_b_01.jpg?v=1777084609",                                                                                "options": ["스퍼스네이비"],                                        "option1": "스퍼스네이비",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "릴리화이트",                                        "id": 49879813783842,                                        "sku": "PACPCHACC5-TOT2","inventory_quantity": 0,                                        "available": false,                                        "price": 34900,                                        "special_price": "34,900",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "39,900",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_olly_w_01.jpg?v=1777084629",                                                                                "options": ["릴리화이트"],                                        "option1": "릴리화이트",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#e9e9e9"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">[한정 수량 소진]시디즈X토트넘 홋스퍼 올리</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">34,900원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">39,900원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                      </div>
+                    </div>
+                    
+                      <div class="complementary-navigation">
+                        <div class="navigation-prev">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="left">
+                              <path id="Vector" d="M9.1875 2.1875L4.375 7L9.1875 11.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+                            </g>
+                          </svg>
+                        </div>
+                        
+                        <div class="navigation-next">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="right">
+                              <path id="Vector" d="M4.8125 2.1875L9.625 7L4.8125 11.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+                            </g>
+                          </svg>
+                        </div>
+                      </div>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+      
+        
+            <div class="product-buttons--wrapper">
+              <div class="product-favorite">
+                <div class="button-favorite" data-item-name="IBLE 아이블" data-item-category="STUDY" data-item-img="//kr.sidiz.com/cdn/shop/files/thum_ible_TNB501FE_451M_00.jpg?v=1777355540">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-line-wh-28.svg?v=149835505164352560671747705926" alt="북마크 아이콘" width="28" height="28"
+                        data-bookmark="false" data-id="9496943853858" data-handle="ible" 
+                        onclick="addBookmark(event.target)" class="bookmark-false">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-solid-wh-28.svg?v=32384455147906168021747705924" alt="북마크 아이콘" width="28" height="28" 
+                        data-bookmark="true" data-id="9496943853858" data-handle="ible" 
+                        onclick="removeBookmark(event.target)" class="bookmark-true hidden"> 
+                </div>
+              </div>
+
+              <div class="product-actions" >
+                <product-form
+                  id="add-to-cart-template--24699215642914__configurator"
+                  class="product-form"
+                  data-ajax-cart
+                  data-js-product-form
+                >
+                  <form method="post" action="/cart/add" id="product-form-template--24699215642914__configurator" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product" /><input type="hidden" name="utf8" value="✓" />
+                    <input type="hidden" name="id" value="49189297750306">
+                    <div class="product__cart-functions">
+                      <div class="button__cart-div">
+                        <button
+                          type="submit"
+                          name="add"
+                          class="
+                            add-to-cart button button--solid button--product button--loader button--move
+                            
+                            
+                          "
+                          data-js-product-add-to-cart
+                          data-main-product-add-to-cart
+                        >
+                          <span class="button__text" data-js-product-add-to-cart-text>
+                            장바구니 담기
+                          </span>
+                          <span class="button__preloader">
+                            <svg class="button__preloader-element" viewBox="25 25 50 50">
+                              <circle cx="50" cy="50" r="20" fill="none" stroke-width="4"/>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  <input type="hidden" name="product-id" value="9496943853858" /><input type="hidden" name="section-id" value="template--24699215642914__configurator" /></form>
+                </product-form>
+              </div>
+            </div>
+            
+          
+      
+        
+            
+            
+
+          
+      
+        
+            
+            
+            <div class="product-delivery-and-warranty--wrapper" >
+              <div class="product-delivery--wrapper">
+                <div class="delivery--header">
+                  <div class="delivery--title">배송 정보</div>
+                </div>
+
+                <div class="delivery--body">
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>예상 배송일</span>
+                      <div class="button--popup" data-type="deli_date">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="expected-at"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_date">
+                      <div class="popup--content">
+                        <ul>
+                          <li>
+                            <span>수도권 평균 배송일 기준으로 산정된 예상 배송일이며 지역 및 재고 상황에 따라 달라질 수 있습니다.</span>
+                          </li>
+                          <li>
+                            <span>실제 배송일은 주문 완료 후 확인할 수 있습니다.</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>배송 유형</span>
+                      <div class="button--popup" data-type="deli_type">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="delivery-type"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_type">
+                      <div class="popup--content">
+                        <span>제주도는 소비자가의 4% 추가 배송비가 부과됩니다.</span>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title" data-detail="assembly-type"></div>
+                    <div class="data--text" data-detail="description"></div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="product-warranty--wrapper">
+                <div class="product--data warranty--period">
+                  <div class="data--title">품질보증</div>
+                  <div class="data--text">5년</div>
+                </div>
+              </div>
+            </div>
+
+          
+      
+        
+            <div class="notice--title product-notice--title">구매 전 확인사항</div>
+            <div id="notice_FbCWzF" class="product-notice--wrapper" >
+              
+              
+
+              <div class="notice--content rich-text-area"><div class="size-13">중심봉 내구성을 높이기 위해 열처리 방식을 적용함에 따라 색상이 크롬에서 블랙으로 변경되었습니다.</div></div>
+
+              <style data-shopify>
+                #notice_FbCWzF {
+                  background-color: #eaedf0;
+                }
+                #notice_FbCWzF .notice--title {
+                  color: #000000;
+                }
+                #notice_FbCWzF .notice--content {
+                  color: #434548;
+                }
+              </style>
+            </div>
+          
+      
+        
+            <div class="product-basic-info--wrapper" >
+              <details>
+                <summary class="basic-info--header">
+                  <div class="basic-info--title">BASIC INFO</div>
+
+                  <div class="arrow">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_7818_13448)">
+                        <path d="M13 4L7 10L1 4" stroke="#434548" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_7818_13448">
+                          <rect width="14" height="14" fill="white" transform="translate(14) rotate(90)"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </summary>
+
+                <div class="basic-info--body">
+                  <div class="product--data">
+                    <div class="data--title">제품명</div>
+                    <div class="data--text">시디즈 아이블 학생 공부 의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">KC 인증필유무</div>
+                    <div class="data--text">해당사항 없음</div>
+                  </div>
+                  <div class="product--data color--data">
+                    <div class="data--title">색상</div>
+                    <div class="data--text">
+                      <ul>
+                        
+                          <li>웜그레이</li>
+                        
+                          <li>샌드베이지</li>
+                        
+                          <li>차콜</li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">구성품</div>
+                    <div class="data--text">의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">주요 소재</div>
+                    <div class="data--text">메쉬, 패브릭, 발포스폰지, PP, 나일론, 플라스틱, STEEL</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조사</div>
+                    <div class="data--text">시디즈</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조국</div>
+                    <div class="data--text">대한민국</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">크기</div>
+                    <div class="data--text">상세페이지 참조</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">배송비</div>
+                    <div class="data--text">무료배송(제주도 추가 배송비 부과)</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">품질 보증 기준</div>
+                    <div class="data--text">5년</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">AS 책임자 및 연락처</div>
+                    <div class="data--text">컨택센터 1577-5674</div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          
+      
+    </div>
+  </product-page>
+</div>
+
+<script>
+  const PRODUCT_GUIDE_FILTER_ENDPOINT = "https://sidiz-shopify.sidiz.com/metaobject/filter/get";
+  const pageProductCode = "S60FEGU0KK";
+
+  async function fetchHasGuideByProductCode(productCode) {
+    if (!productCode) {
+      return false;
+    }
+
+    try {
+      const response = await fetch(PRODUCT_GUIDE_FILTER_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          type: ["product_guide_code_mapping"],
+          filter_key: "product_code",
+          filter_value: productCode,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error(`[product-guide] Filter API error: ${response.status}`);
+        return false;
+      }
+
+      const result = await response.json();
+      if (result?.success && Array.isArray(result.data)) {
+        return result.data.length > 0;
+      }
+    } catch (error) {
+      console.error("[product-guide] Failed to fetch guide mapping:", error);
+    }
+
+    return false;
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const hasGuide = await fetchHasGuideByProductCode(pageProductCode);
+
+    let findYourFitBtn = document.querySelector('.find-your-fit-btn');
+    if(findYourFitBtn){
+      if(hasGuide) {
+        findYourFitBtn.classList.remove('hidden');
+        findYourFitBtn.querySelector('a').setAttribute('href', `/pages/product-guide-result?productCode=${encodeURIComponent(pageProductCode)}&searchbar=true`);
+      }
+      else {
+        findYourFitBtn.classList.add('hidden');
+      }
+    }
+    document.querySelectorAll('a[data-popup-url]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const url = this.dataset.popupUrl;
+      const popupType = this.dataset.popupType;
+
+      const popup = window.open(
+        url,
+        `popup_${popupType}`,
+        'scrollbars=yes,resizable=yes'
+      );
+
+      if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+        alert("팝업 차단이 설정되어 있습니다. 팝업을 허용해주세요.");
+      }
+    });
+  });
+  })
+</script>
+
+
+</section>
