@@ -99,8 +99,6 @@ KR T50-2 페이지의 서드파티 YouTube 임베드 섹션은 복제 불가로 
    suffix "gx"를 씀. KR엔 gx-work 페이지 하나뿐이라 중복 여부 오너 확인 필요)
    → ringo-gen2 → trevo → atti → molti → stepo → pillo → fungus → oui →
    mane → plit → button → ega → 굿즈(bag/spray)
-   ringo-gen2 → trevo → atti → molti → stepo → pillo → fungus → oui → mane →
-   plit → button → ega → 굿즈(bag/spray)
    (각각 AU 핸들은 `sidiz-*`로 존재, templateSuffix 확인 후 `product.<suffix>.json` 작성)
 
 ### B. 신규 생성 대상 (KR에만 있음 — DRAFT로 생성)
