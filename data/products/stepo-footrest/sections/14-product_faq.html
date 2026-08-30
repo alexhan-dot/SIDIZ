@@ -1,0 +1,85 @@
+<section id="shopify-section-template--24699216167202__product_faq_pFJHYe" class="shopify-section section-product-faq section-product-information"><div class="container">
+  <div class="wrapper">
+    <div class="wrapper--header">
+        <style data-shopify>
+          .section-product-faq .title { margin: 0; padding: 0; }
+        </style>
+        
+        <h2 class="title">FAQ</h2>
+          
+    </div>
+      <div class="wrapper--body">
+        
+          <div class="information-list">
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">키 몇 cm부터 사용이 가능한가요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">스테포는 어린 아이부터 성인까지 누구나 사용할 수 있도록 디자인 되었습니다.</div></div>
+                </div>
+              </div>
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">패딩 커버만 구매할 수 있나요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">패딩 커버만 단독으로 구매하거나 교체를 원하신다면 챗봇 또는 컨택센터로 문의해 주세요.</div></div>
+                </div>
+              </div>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function() {
+      // 현재 섹션 FAQ 블록 + product-information에서 모은 블록(window.__faqBlocks) 통합
+      const ownFaqs = [{
+          name: "키 몇 cm부터 사용이 가능한가요?",
+          answer: "스테포는 어린 아이부터 성인까지 누구나 사용할 수 있도록 디자인 되었습니다."
+        },
+{
+          name: "패딩 커버만 구매할 수 있나요?",
+          answer: "패딩 커버만 단독으로 구매하거나 교체를 원하신다면 챗봇 또는 컨택센터로 문의해 주세요."
+        }
+];
+
+      const extraFaqs = Array.isArray(window.__faqBlocks) ? window.__faqBlocks : [];
+      const allFaqs = [...ownFaqs, ...extraFaqs].filter(q => q && q.name && q.answer);
+      if (allFaqs.length === 0) return;
+
+      const payload = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": allFaqs.map(q => ({
+          "@type": "Question",
+          "name": q.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": q.answer
+          }
+        }))
+      };
+
+      const scriptId = "merged-faq-schema-template--24699216167202__product_faq_pFJHYe";
+      const existing = document.getElementById(scriptId);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(payload);
+      document.head.appendChild(script);
+    })();
+  </script>
+
+
+
+</section>
