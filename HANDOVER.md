@@ -92,14 +92,14 @@ KR T50-2 페이지의 서드파티 YouTube 임베드 섹션은 복제 불가로 
 ### A. 다음 마이그레이션 대상 — 스킬로 진행
 상품은 이미 존재(ACTIVE), **템플릿만 없음** → 업데이트 경로(T60 AIR 방식):
 
-1. ~~T50 2세대~~ / ~~T50 AIR 2세대~~ / ~~T20~~ / ~~GX(gx-work)~~ /
-   ~~MUUVE~~ / ~~LINIE~~ / ~~IBLE~~ — 완료 (2026-08-29, 각각
-   product.<suffix>.json + scripts/build_*_template.py)
-2. 잔여 순서: gx-joy(주의: AU에 GX 상품 2개 존재 — sidiz-gx-joy-explorer가
-   suffix "gx"를 씀. KR엔 gx-work 페이지 하나뿐이라 중복 여부 오너 확인 필요)
-   → ringo-gen2 → trevo → atti → molti → stepo → pillo → fungus → oui →
-   mane → plit → button → ega → 굿즈(bag/spray)
-   (각각 AU 핸들은 `sidiz-*`로 존재, templateSuffix 확인 후 `product.<suffix>.json` 작성)
+**전 메인 모델 + 굿즈 완료 (2026-08-30).** 총 21개 템플릿:
+t90, t60, t60-air, t50-2, t50-air-2, t20, gx-work, muuve, linie, ible,
+ringo-gen2, trevo, atti-chair, molti, stepo-footrest, pillo, fungus, oui,
+mane, plit, button, ega, the-p-bag, multispray-infinity.
+각각 product.<suffix>.json + scripts/build_*_template.py, 라이브 검증 완료.
+
+잔여: gx-joy(주의: AU에 GX 상품 2개 — sidiz-gx-joy-explorer가 suffix "gx".
+KR엔 gx-work 페이지 하나뿐이라 중복 여부 오너 확인 후 처리).
 
 ### B. 신규 생성 대상 (KR에만 있음 — DRAFT로 생성)
 - `plit-cover` (PLIT 좌판 커버 — 파츠형)
@@ -113,6 +113,11 @@ KR T50-2 페이지의 서드파티 YouTube 임베드 섹션은 복제 불가로 
   → `repoint_videos_to_au.py`). 이미지도 동일 파이프라인.
 
 ### D. 오너 승인/응답 대기 중 (임의 진행 금지)
+- **⚠️ Multi Spray INFINITY 컴플라이언스**: 상품 설명에 숨어 있던 내부 메모가
+  "호주 라벨링·성분·안전지침·SDS·운송분류·가격 승인 전 게시 금지"였으나 상품은
+  ACTIVE로 판매 중. 규제 확인 전 DRAFT 전환 여부 오너 결정 필요.
+- **레거시 ringo/US계열 상품 카피**: 임페리얼 단위, 30일 트라이얼/3년 워런티
+  등 미국 문구가 라이브 (AU 5년 워런티 메시지와 충돌) — 재작성 여부 결정 필요.
 - **Re:LIFE 9건, Tottenham 3건**: 스킬 Phase 0 제외 대상 — 승인 후 진행
 - **법무 문서 26건**: KR vs AU 비교표 작성 → 차이 승인 → 반영 (미착수)
 - **T60 가격 붕괴**: KR 469k/439k 두 옵션이 모두 $499로 수렴(헤드레스트 무료꼴)

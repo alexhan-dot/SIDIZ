@@ -1,0 +1,307 @@
+{
+  "sections": {
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Estimated delivery",
+            "value": "3-7 business days for in-stock items"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Delivery type",
+            "value": "Free standard delivery Australia-wide"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Assembly",
+            "value": "Arrives fully assembled - no assembly required"
+          }
+        },
+        "i1": {
+          "type": "info",
+          "settings": {
+            "label": "Product name",
+            "value": "SIDIZ The Progressive Bag"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "label": "Included",
+            "value": "Bag"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "label": "Main materials",
+            "value": "DuPont Tyvek (high-density polyethylene)"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "label": "Colours",
+            "value": "Ash White\nCarbon Black\nMineral Grey"
+          }
+        },
+        "i5": {
+          "type": "info",
+          "settings": {
+            "label": "Warranty",
+            "value": "See product care notes"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "i1",
+        "i2",
+        "i3",
+        "i5"
+      ],
+      "settings": {
+        "tax_note": "Price includes GST. Shipping calculated at checkout.",
+        "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
+        "addons_title": "Add to your setup",
+        "delivery_title": "Delivery",
+        "warranty_label": "Warranty",
+        "warranty_value": "-",
+        "basic_info_title": "BASIC INFO",
+        "notice_title": "Before you buy",
+        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>",
+        "subtitle": "A reusable everyday bag in 100 per cent recyclable Tyvek - light as paper, tough enough to retire the single-use shopping bag."
+      }
+    },
+    "hero": {
+      "type": "sidiz-pdp-hero",
+      "settings": {
+        "subtitle": "<em class=\"caps\">To sit is to progress</em>",
+        "subtitle_colour": "#ffffff",
+        "heading": "THE PROGRESSIVE BAG",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Head_15060548-648e-41fc-9d8c-9e731b761934.jpg",
+        "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/Head_M_ed367a6d-ccdf-40bf-af35-6305df458796.jpg",
+        "alt": "The SIDIZ Progressive Bag carried over a shoulder",
+        "description": "<p>Beyond good chairs and the act of sitting, SIDIZ proposes a sustainable lifestyle that coexists with the planet. Made from 100 per cent recyclable Tyvek, the Progressive Bag is light as paper yet powerfully durable - a long-term companion in place of the single-use shopping bag.</p><p>Small acts add up: SIDIZ leads the circulation of resources and considered consumption toward a sustainable future.</p>",
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default"
+      }
+    },
+    "intro": {
+      "type": "sidiz-product-row",
+      "settings": {
+        "heading": "SIDIZ The Progressive Bag: the Eco-Lifestyle Reusable Bag",
+        "body": "<ul><li><strong>Eco-friendly Tyvek</strong> - DuPont high-density polyethylene, 100 per cent recyclable and burning without leaving harmful residues, easing the load on the planet.</li><li><strong>High durability and water resistance</strong> - light as paper but hard to tear, and unbothered by water, so rain and everyday mess hold no fear.</li><li><strong>A comfort shoulder strap</strong> - generously long for a stable, comfortable carry, hour after hour.</li><li><strong>Easy, compact storage</strong> - room for pouches, wallets and A4 documents or books, folding flat when the day is done.</li></ul><p>A daily side bag, an eco shopping bag, a commuting sub-bag - a reusable bag for a lighter, more sustainable everyday.</p>",
+        "align": "left",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+    "brand_banner": {
+      "type": "sidiz-wb-banner",
+      "settings": {
+        "heading": "Sit, and become yourself<br><em class=\"caps\">To sit is to progress</em>",
+        "align": "left",
+        "title_colour": "#000000"
+      }
+    },
+    "brand_view": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "",
+        "description": "<p>SIDIZ goes beyond making good chairs to talk about the people and lives above them. Sitting, we deliberate, concentrate, try things every which way, and inch forward. Time spent sitting is our most intense and dynamic time - and all those seated moments, gathered, make a self. Our sitting is a journey toward being more ourselves.</p>",
+        "video_url": "https://kr.sidiz.com/cdn/shop/videos/c/vp/0084afd6a7ab49fc973de9e37f9da8f8/0084afd6a7ab49fc973de9e37f9da8f8.HD-1080p-7.2Mbps-58544034.mp4",
+        "poster_url": "https://kr.sidiz.com/cdn/shop/files/preview_images/0084afd6a7ab49fc973de9e37f9da8f8.thumbnail.0000000000_small.jpg",
+        "alt": "The Progressive Bag in daily life"
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "material_view": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Light on the day, light on the planet",
+        "description": "<p>The Progressive Bag is made from DuPont Tyvek: high-density polyethylene that recycles fully and burns without leaving harmful residues. Light, tough, and made with sustainability in mind.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_8f360215-1535-4f13-9d2b-6ba0e76bda44.jpg",
+        "alt": "The Tyvek material up close"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "A light, tough daily partner",
+            "description": "<p>Light as paper but hard to tear, and unbothered by water - useful all through the day.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_6a267143-484a-4a41-af56-73ad0e59b7a6.jpg",
+            "alt": "The bag holding its shape in use"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Better looking as time passes",
+            "description": "<p>Tyvek's paper-like texture gains natural creases with use - character that grows on you.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img2_224db752-528e-471d-af82-a4689438021a.jpg",
+            "alt": "The natural creases of worn Tyvek"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    },
+    "convenience_view": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "The convenience you keep reaching for",
+        "description": "<p>A generously long shoulder strap carries without strain, and the light, compact body suits a side bag or the shopping run - handy in all the situations a day brings.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Img3_d73536dc-ee81-4817-a01e-7b37c1edf5e7.jpg",
+        "alt": "The Progressive Bag worn on the shoulder"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Light things, straight in",
+            "description": "<p>From pouches to A4 documents, everyday items fit with room to spare.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/unnamed.jpg",
+            "alt": "A4 documents sliding into the bag"
+          }
+        }
+      },
+      "block_order": [
+        "b1"
+      ]
+    },
+    "specifications": {
+      "type": "sidiz-spec",
+      "blocks": {
+        "d1": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/sidiz_dimension_THE_PROGRESSIVE_BAG.jpg",
+            "alt": "Dimension drawing of the SIDIZ Progressive Bag"
+          }
+        }
+      },
+      "block_order": [
+        "d1"
+      ],
+      "settings": {
+        "heading": "The Progressive Bag dimensions",
+        "figures": "",
+        "caveats": "*Measurements may vary by plus or minus 20 mm depending on how they are taken; this is not a fault."
+      }
+    },
+    "faq": {
+      "type": "sidiz-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I clean the Tyvek bag?",
+            "answer": "<p>Tyvek is water-resistant by nature, so avoid machine washing and dry cleaning. For light marks, wipe gently with running water, a damp cloth or a wet wipe, then air-dry in a well-ventilated, shaded spot and it stays clean for years without damaging the material.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "How much does it hold? Does A4 fit?",
+            "answer": "<p>The bag folds flat yet holds A4 paper, a small tablet, a cosmetics pouch or a tumbler with room to spare - an ideal size for a light commuting side bag or second bag. See the dimension drawing below for exact measurements.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "It looks like crumpled paper - will it tear easily?",
+            "answer": "<p>Tyvek's paper-like, analogue texture belies a highly functional material with real tensile strength. It resists tearing from pointed items and everyday knocks, and recovers well from getting wet, keeping its water resistance on rainy days - lighter than paper, tough as leather.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "heading": "Frequently asked questions",
+        "open_first": true,
+        "background": "#f5f6f7"
+      }
+    },
+    "reviews": {
+      "type": "sidiz-review",
+      "settings": {
+        "heading": "Customer reviews",
+        "body": "<p>Reviews from Australian customers. Add your review app block here to show the full list.</p>",
+        "anchor_id": "reviews",
+        "background": "#ffffff"
+      }
+    },
+    "recommend": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "You may also like",
+        "link_label": "View all products",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "notices": {
+      "type": "sidiz-contact-notice",
+      "blocks": {
+        "c1": {
+          "type": "notice",
+          "settings": {
+            "title": "Product, delivery, service and returns",
+            "body": "<p>support@sidiz.au</p><p>Monday to Friday, 9:00 am to 5:00 pm AEST<br>Closed weekends and public holidays</p>"
+          }
+        },
+        "c2": {
+          "type": "notice",
+          "settings": {
+            "title": "Warranty and faulty returns",
+            "body": "<p>Warranty period: up to 5 years from purchase, with product registration. See the <a href=\"/pages/warranty\">warranty terms</a>. Nothing here limits your rights under the Australian Consumer Law.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {
+        "heading": "Contact centre",
+        "background": "#eaedf0",
+        "title_colour": "#000000",
+        "text_colour": "#434548"
+      }
+    }
+  },
+  "order": [
+    "pdp_head",
+    "hero",
+    "intro",
+    "brand_banner",
+    "brand_view",
+    "material_view",
+    "convenience_view",
+    "specifications",
+    "faq",
+    "reviews",
+    "recommend",
+    "notices"
+  ]
+}

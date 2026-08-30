@@ -1,0 +1,296 @@
+{
+  "sections": {
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Estimated delivery",
+            "value": "3-7 business days for in-stock items"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Delivery type",
+            "value": "Free standard delivery Australia-wide"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Assembly",
+            "value": "Arrives fully assembled - no assembly required"
+          }
+        },
+        "i1": {
+          "type": "info",
+          "settings": {
+            "label": "Product name",
+            "value": "SIDIZ Multi Spray INFINITY 150 mL"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "label": "Included",
+            "value": "Fabric and room spray, 150 mL"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "label": "Main materials",
+            "value": "See packaging for ingredients"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "label": "Colours",
+            "value": "Ash White\nCarbon Black\nMineral Grey"
+          }
+        },
+        "i5": {
+          "type": "info",
+          "settings": {
+            "label": "Warranty",
+            "value": "5 years with product registration"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "i1",
+        "i2",
+        "i3"
+      ],
+      "settings": {
+        "tax_note": "Price includes GST. Shipping calculated at checkout.",
+        "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
+        "addons_title": "Add to your setup",
+        "delivery_title": "Delivery",
+        "warranty_label": "Warranty",
+        "warranty_value": "5 years",
+        "basic_info_title": "BASIC INFO",
+        "notice_title": "Before you buy",
+        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>",
+        "subtitle": "A premium fabric deodorising and room spray, blended with Pale Blue Dot - citrus top notes settling into a soft musk."
+      }
+    },
+    "hero": {
+      "type": "sidiz-pdp-hero",
+      "settings": {
+        "subtitle": "Premium fabric &amp; room spray",
+        "subtitle_colour": "#ffffff",
+        "heading": "MULTI SPRAY INFINITY",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Head_380b5047-4714-4596-af51-1ca2935decaf.jpg",
+        "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/Head_M_1376240a-1e06-4794-9537-36b2bbf3cf8f.jpg",
+        "alt": "The SIDIZ Multi Spray INFINITY bottle",
+        "description": "<p>The SIDIZ Multi Spray INFINITY is a premium fabric deodorising and room spray, made to deepen the immersion of the spaces where you work and rest.</p>",
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default"
+      }
+    },
+    "intro": {
+      "type": "sidiz-product-row",
+      "settings": {
+        "heading": "SIDIZ INFINITY Fabric Multi Spray",
+        "body": "<ul><li><strong>Deodorising made for fabric and mesh</strong> - excellent deodorising tuned to chairs, curtains, bedding and other fabric and mesh surfaces.</li><li><strong>A considered scent</strong> - citrus top notes flowing into a soft musk base, in a distinctive composition.</li><li><strong>Sustainable packaging</strong> - a top-grade recyclable clear PET bottle, a fully removable label and certified eco-friendly paper packaging.</li></ul>",
+        "align": "left",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+    "usage_view": {
+      "type": "sidiz-product-view",
+      "settings": {
+        "tag": "Why does a chair brand make a spray?",
+        "heading": "Multi-deodorising, from chairs to bedding",
+        "description": "<p>Spray lightly two or three times wherever you would like the scent - bedding, curtains, chairs. The deodorising action keeps fabric and mesh surfaces fresh.</p><p>*Do not spray directly on the body, or near eyes and skin. *If discolouration is a concern, test a small hidden area first. *Do not spray directly onto leather.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/INFINITY_06f660ae-8814-4636-9869-98570faefaee.png",
+        "alt": "Spraying INFINITY onto a mesh chair"
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "scent_view": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Complete your universe with scent",
+        "description": "<p>A long-lasting citrus musk: INFINITY cheers on the boundless possibility that expands past every boundary. It opens on light citrus notes and leaves a soft, lingering musk. TOP: bergamot, grapefruit, orange, lemon, spearmint. MIDDLE: rose, jasmine, geranium, ivy. BASE: muscone, musk. *10 per cent fragrance concentration; lasts around 4-5 hours, varying with temperature and environment.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/INFINITY.png",
+        "alt": "The INFINITY scent pyramid"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "A collaboration with Pale Blue Dot",
+            "description": "<p>SIDIZ, proposing the journey toward being yourself, meets Pale Blue Dot, recording travel's moments in scent - a fragrance for adventurers who value experience.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img2_d90e4475-0a63-4d0c-9be4-90a4de6baa46.jpg",
+            "alt": "The SIDIZ and Pale Blue Dot collaboration"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "The scent of The Progressive stores",
+            "description": "<p>The perfumer's craft and the comfort of chairs, distilled: the mood of SIDIZ's The Progressive stores in Korea, captured as a scent.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img3_4a445753-bb31-4245-bdc7-ba29bf2b151b.jpg",
+            "alt": "The scent in a Progressive store"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    },
+    "packaging_view": {
+      "type": "sidiz-product-view",
+      "settings": {
+        "heading": "100 per cent recyclable packaging",
+        "description": "<p>Peel the label and the bottle recycles completely - top-grade clear PET, in a box of certified eco-friendly paper. So the everyday leads on to the sustainable, SIDIZ keeps the circle turning. *The pump is a composite material and goes in general waste.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Img5.jpg",
+        "alt": "The INFINITY bottle and its packaging"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "A fully removable label",
+            "description": "<p>Reuse the bottle any time, and recycle it without fuss.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img6.jpg",
+            "alt": "Peeling the removable label"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Top-grade recyclable PET",
+            "description": "<p>No needless finishing to hinder recycling - clear, high-purity material for the best recovery.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img7.jpg",
+            "alt": "The clear PET bottle"
+          }
+        },
+        "b3": {
+          "type": "feature",
+          "settings": {
+            "title": "Certified eco-friendly paper",
+            "description": "<p>FSC-certified, chlorine-free, acid-free paper from sustainably managed forests.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img8_6a89a295-db5e-43a0-a6fa-02649f78c39e.jpg",
+            "alt": "The eco-friendly paper box"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "faq": {
+      "type": "sidiz-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I keep a mesh or fabric chair smelling fresh?",
+            "answer": "<p>Spray INFINITY lightly two or three times on the backrest, seat or wherever you would like the scent - it deodorises and keeps mesh and fabric fresh for a long while, and works on bedding and curtains too.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What does it smell like, and how long does it last?",
+            "answer": "<p>A premium fragrance blended with Pale Blue Dot at 10 per cent concentration, lasting around 4-5 hours. It opens on light citrus - bergamot and orange - and settles into a calm, steady musk, well suited to home offices and other spaces built for focus.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I recycle the empty bottle?",
+            "answer": "<p>Peel off the fully removable label and recycle the bottle as clear PET. The spray pump is a composite material and goes in general waste. The box is FSC-certified eco-friendly paper. Do not spray directly onto leather.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "heading": "Frequently asked questions",
+        "open_first": true,
+        "background": "#f5f6f7"
+      }
+    },
+    "reviews": {
+      "type": "sidiz-review",
+      "settings": {
+        "heading": "Customer reviews",
+        "body": "<p>Reviews from Australian customers. Add your review app block here to show the full list.</p>",
+        "anchor_id": "reviews",
+        "background": "#ffffff"
+      }
+    },
+    "recommend": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "You may also like",
+        "link_label": "View all products",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "notices": {
+      "type": "sidiz-contact-notice",
+      "blocks": {
+        "c1": {
+          "type": "notice",
+          "settings": {
+            "title": "Product, delivery, service and returns",
+            "body": "<p>support@sidiz.au</p><p>Monday to Friday, 9:00 am to 5:00 pm AEST<br>Closed weekends and public holidays</p>"
+          }
+        },
+        "c2": {
+          "type": "notice",
+          "settings": {
+            "title": "Warranty and faulty returns",
+            "body": "<p>Warranty period: up to 5 years from purchase, with product registration. See the <a href=\"/pages/warranty\">warranty terms</a>. Nothing here limits your rights under the Australian Consumer Law.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {
+        "heading": "Contact centre",
+        "background": "#eaedf0",
+        "title_colour": "#000000",
+        "text_colour": "#434548"
+      }
+    }
+  },
+  "order": [
+    "pdp_head",
+    "hero",
+    "intro",
+    "usage_view",
+    "scent_view",
+    "packaging_view",
+    "faq",
+    "reviews",
+    "recommend",
+    "notices"
+  ]
+}
