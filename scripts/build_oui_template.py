@@ -1,0 +1,266 @@
+"""Compose product.oui.json.
+
+OUI is the premium bar stool: image hero, a four-way option compare (height x
+seat finish; leather guidance dropped), height tiles, the stability and
+ergonomics vertical views, and a compact tail with an eight-drawing spec.
+"""
+
+import copy
+import json
+import pathlib
+
+ROOT = pathlib.Path(__file__).resolve().parents[1]
+KR = "https://kr.sidiz.com/cdn/shop"
+
+
+def img(name):
+    return f"{KR}/files/{name}"
+
+
+base = json.loads((ROOT / "theme/templates/product.t50-2.json").read_text(encoding="utf-8"))
+B = base["sections"]
+
+S = {}
+
+S["sticky_nav"] = copy.deepcopy(B["sticky_nav"])
+S["sticky_nav"]["blocks"] = {
+    "n1": {"type": "link", "settings": {"label": "Options", "anchor": "options"}},
+    "n2": {"type": "link", "settings": {"label": "Heights", "anchor": "heights"}},
+    "n3": {"type": "link", "settings": {"label": "Stability", "anchor": "stability"}},
+    "n4": {"type": "link", "settings": {"label": "Ergonomics", "anchor": "ergonomics"}},
+    "n5": {"type": "link", "settings": {"label": "Specifications", "anchor": "specifications"}},
+}
+S["sticky_nav"]["block_order"] = ["n1", "n2", "n3", "n4", "n5"]
+
+S["pdp_head"] = copy.deepcopy(B["pdp_head"])
+S["pdp_head"]["blocks"]["i1"]["settings"]["value"] = "SIDIZ OUI Ergonomic Bar Stool"
+S["pdp_head"]["blocks"]["i3"]["settings"]["value"] = "Beech wood, fabric, plastic, steel"
+S["pdp_head"]["blocks"]["i4"]["settings"]["value"] = "Black frame\nWhite frame"
+S["pdp_head"]["settings"]["subtitle"] = (
+    "A premium ergonomic bar stool for island benches and multi-purpose tables - in "
+    "550 mm and 680 mm heights, with a plain or padded fabric seat."
+)
+
+S["hero"] = {
+    "type": "sidiz-pdp-hero",
+    "settings": {
+        "subtitle": "The premium bar stool series",
+        "subtitle_colour": "#ffffff",
+        "heading": "OUI",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "image_url": img("Head_0ff0bcc6-7dd8-4690-87b9-bcca2f23aca7.jpg"),
+        "image_url_mobile": img("Head_M_832eeb34-2e71-4502-b681-882fde67f62a.jpg"),
+        "alt": "SIDIZ OUI bar stools at an island bench",
+        "description": (
+            "<p>The OUI is a premium bar stool series, made to pair with island benches "
+            "and multi-purpose tables for meals, reading and rest alike.</p>"
+        ),
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default",
+    },
+}
+
+S["options"] = {
+    "type": "sidiz-option-compare",
+    "blocks": {
+        "o1": {"type": "option", "settings": {
+            "title": "Standard / 550 mm",
+            "description": "Plain seat, 550 mm legs - for 800-850 mm desks and mini island benches",
+            "images": img("Img1_f950241b-5828-4686-996f-671dc3c3286e.jpg") + "," + img("Img2_c3991644-543b-44d4-a55e-3e1925670232.jpg"),
+            "colours": "#2c2d2f,#f4f4f4",
+            "alt": "The OUI standard seat at 550 mm"}},
+        "o2": {"type": "option", "settings": {
+            "title": "Standard / 680 mm",
+            "description": "Plain seat, 680 mm legs - for 930-980 mm standard island benches",
+            "images": img("Img1_28e03b66-248f-4270-86f3-eaac421982d4.jpg") + "," + img("Img2_010de9ff-1f3d-4498-96b0-cb45641884c2.jpg"),
+            "colours": "#2c2d2f,#f4f4f4",
+            "alt": "The OUI standard seat at 680 mm"}},
+        "o3": {"type": "option", "settings": {
+            "title": "Fabric / 550 mm",
+            "description": "Padded fabric seat, 550 mm legs - for 800-850 mm desks and mini island benches",
+            "images": img("Img1_9cd1c950-afdf-4f20-af3c-6d4cafc90cc3.jpg") + "," + img("Img2_23c05dba-5e37-444a-bb8d-7a6e1965cc5c.jpg"),
+            "colours": "#2c2d2f,#f4f4f4",
+            "alt": "The OUI fabric seat at 550 mm"}},
+        "o4": {"type": "option", "settings": {
+            "title": "Fabric / 680 mm",
+            "description": "Padded fabric seat, 680 mm legs - for 930-980 mm standard island benches",
+            "images": img("Img1_7d78df68-48d4-4152-b3c1-0d31e063feb0.jpg") + "," + img("Img2_25eebdd1-cc8a-4d9a-88a6-1be5a026859c.jpg"),
+            "colours": "#2c2d2f,#f4f4f4",
+            "alt": "The OUI fabric seat at 680 mm"}},
+    },
+    "block_order": ["o1", "o2", "o3", "o4"],
+    "settings": {"heading": "The OUI option for you"},
+}
+
+S["height_tiles"] = {
+    "type": "sidiz-tile-card-list",
+    "blocks": {
+        "t1": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "550 mm, sized for the home island bench",
+            "description": "<p>Matched to the most common 800-900 mm island tables at home. A lowered centre of gravity maximises stability, and the seat height suits the table without pressing on knees or legs.</p>",
+            "image_url": img("SIDIZ_211112_OUI___BW_1.jpg"),
+            "alt": "The 550 mm OUI at a home island bench"}},
+        "t2": {"type": "tile", "settings": {
+            "ratio": "4/5",
+            "title": "680 mm, sized for the standard bar table",
+            "description": "<p>Made for the 930-980 mm bar tables of cafes, restaurants and shared offices - trend-ready spaces and easy moments of rest, without disturbing the interior mood.</p>",
+            "image_url": img("SIDIZ_211217___OUI_MN174E_MID____371LBW_1.jpg"),
+            "alt": "The 680 mm OUI at a standard bar table"}},
+    },
+    "block_order": ["t1", "t2"],
+    "settings": {"heading": "From extended islands to standard bars: the right height for the space"},
+}
+
+S["stability_view"] = {
+    "type": "sidiz-product-view-vertical",
+    "settings": {
+        "heading": "Stability finished in the details you cannot see",
+        "description": (
+            "<p>The OUI engineers away the wobble tall chairs are known for, down to "
+            "details the eye never catches - selected materials and precise finishing "
+            "for a steady, comfortable seat in every moment of the day.</p>"
+        ),
+        "image_url": img("Img_a1382eec-afa8-470b-8859-610f3956dba3.jpg"),
+        "alt": "The OUI's construction details",
+    },
+    "blocks": {
+        "b1": {"type": "feature", "settings": {
+            "title": "A beech frame that will not bow",
+            "description": "<p>Dense, even-grained hardwood beech steadies the high centre of gravity a bar stool carries. The timber's density and natural spring resist warping and hold firm support through years of use.</p>",
+            "image_url": img("3_4d0ba866-213f-43df-b2b9-b3740790f7a0.jpg"),
+            "alt": "The OUI's beech wood frame"}},
+        "b2": {"type": "feature", "settings": {
+            "title": "A padded seat option that ends the hard-stool ache",
+            "description": "<p>A padding layer inside the seat absorbs the load flexibly, resolving the pressure-point ache of hard bar stools and holding its cushioning through long sittings.</p>",
+            "image_url": img("SIDIZ_160310_M17_____452_1.jpg"),
+            "alt": "The OUI's padded fabric seat"}},
+        "b3": {"type": "feature", "settings": {
+            "title": "Glides that move quietly and spare the floor",
+            "description": "<p>Friction-minimising glides under the legs cut the noise of moving the stool and prevent floor damage.</p>",
+            "image_url": img("4_2f75fe3c-8b55-4611-8aaf-999540f75b70.jpg"),
+            "alt": "The glides under the OUI's legs"}},
+    },
+    "block_order": ["b1", "b2", "b3"],
+}
+
+S["ergonomics_view"] = {
+    "type": "sidiz-product-view-vertical",
+    "settings": {
+        "heading": "A premium ergonomic bar stool for island benches and beyond",
+        "description": (
+            "<p>The minimal OUI series is an interior bar chair for modern living - from "
+            "the island bench of an open kitchen to the home bar and the study's "
+            "multi-purpose desk, comfortable through meals, work and rest alike.</p>"
+        ),
+        "image_url": img("SIDIZ_211216___OUI_MN174E_MID____371LBW_1.jpg"),
+        "alt": "The OUI across living spaces",
+    },
+    "blocks": {
+        "b1": {"type": "feature", "settings": {
+            "title": "A one-piece shell that spreads the pressure",
+            "description": "<p>A single shell supports from lower back to pelvis in balance; its unbroken curve holds the body firmly, so posture stays true even at bar height.</p>",
+            "image_url": img("1_f37f0206-0d2d-40d1-94bd-fb75455bb2bb.jpg"),
+            "alt": "The OUI's one-piece shell"}},
+        "b2": {"type": "feature", "settings": {
+            "title": "A waterfall seat that thinks of circulation",
+            "description": "<p>The seat's front edge curves away in a waterfall form, easing inner-thigh pressure and helping blood flow, whether you sit deep or perch lightly.</p>",
+            "image_url": img("2_4a7fe014-d9d0-46ee-855c-b7b25889c01f.jpg"),
+            "alt": "The OUI's waterfall seat edge"}},
+        "b3": {"type": "feature", "settings": {
+            "title": "An integrated steel footrest",
+            "description": "<p>A steel footrest bonded into the frame supports the legs steadily, spreading the load from knees and lower body so long sittings stay composed.</p>",
+            "image_url": img("SIDIZ_220824_26_M174E.jpg"),
+            "alt": "The OUI's integrated steel footrest"}},
+    },
+    "block_order": ["b1", "b2", "b3"],
+}
+
+S["goes_with"] = {
+    "type": "sidiz-related-products",
+    "settings": {"heading": "Goes well with the OUI", "source": "collection", "limit": 4},
+}
+
+S["warranty"] = copy.deepcopy(B["warranty"])
+S["warranty"]["settings"]["heading"] = "OUI | 5-year warranty"
+S["warranty"]["settings"]["body"] = (
+    "<p>So the journey with your OUI continues, SIDIZ provides a 5-year warranty to "
+    "customers who complete product registration. Once your stool arrives, register it "
+    "before you forget, for more comfortable years ahead.</p>"
+)
+
+S["specifications"] = copy.deepcopy(B["specifications"])
+S["specifications"]["settings"]["heading"] = "OUI dimensions"
+S["specifications"]["settings"]["figures"] = (
+    "Maximum load 115 kg. Product weight approximately 6 kg (550 mm) or 6.5 kg "
+    "(550 mm fabric), 10 kg (680 mm) or 10.5 kg (680 mm fabric)."
+)
+S["specifications"]["blocks"] = {
+    "d1": {"type": "drawing", "settings": {
+        "image_url": img("M171EZ_01.jpg"),
+        "alt": "Dimension drawing of the 550 mm OUI, front elevation"}},
+    "d2": {"type": "drawing", "settings": {
+        "image_url": img("M171EZ_02.jpg"),
+        "alt": "Dimension drawing of the 550 mm OUI, side elevation"}},
+    "d3": {"type": "drawing", "settings": {
+        "image_url": img("M171EZ_fabric_01.jpg"),
+        "alt": "Dimension drawing of the 550 mm fabric OUI, front elevation"}},
+    "d4": {"type": "drawing", "settings": {
+        "image_url": img("M171EZ_fabric_02.jpg"),
+        "alt": "Dimension drawing of the 550 mm fabric OUI, side elevation"}},
+    "d5": {"type": "drawing", "settings": {
+        "image_url": img("M174E_01_7e1b9296-7c10-473a-935b-5b33e9e683ac.jpg"),
+        "alt": "Dimension drawing of the 680 mm OUI, front elevation"}},
+    "d6": {"type": "drawing", "settings": {
+        "image_url": img("M174E_02_ea060322-c749-4c27-ba08-3354e264ab09.jpg"),
+        "alt": "Dimension drawing of the 680 mm OUI, side elevation"}},
+    "d7": {"type": "drawing", "settings": {
+        "image_url": img("M174E_fabric_01.jpg"),
+        "alt": "Dimension drawing of the 680 mm fabric OUI, front elevation"}},
+    "d8": {"type": "drawing", "settings": {
+        "image_url": img("M174E_fabric_02.jpg"),
+        "alt": "Dimension drawing of the 680 mm fabric OUI, side elevation"}},
+}
+S["specifications"]["block_order"] = ["d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8"]
+
+S["reviews"] = copy.deepcopy(B["reviews"])
+
+S["stockists"] = {
+    "type": "sidiz-store-info",
+    "settings": {
+        "heading": "Try one before you decide",
+        "description": "Seat feel differs from body to body. Try an OUI in person where you can; otherwise our returns policy is there to fall back on.",
+        "link_label": "Find a stockist",
+        "link": "/pages/contact",
+        "image_url": img("shop_pc.jpg"),
+        "alt": "A SIDIZ showroom interior",
+    },
+}
+
+S["recommend"] = {
+    "type": "sidiz-related-products",
+    "settings": {
+        "heading": "You may also like",
+        "link_label": "View all chairs",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4,
+    },
+}
+
+S["notices"] = copy.deepcopy(B["notices"])
+
+order = [
+    "sticky_nav", "pdp_head", "hero", "options",
+    "height_tiles", "stability_view", "ergonomics_view",
+    "goes_with", "warranty", "specifications",
+    "reviews", "stockists", "recommend", "notices",
+]
+assert set(order) == set(S), set(order) ^ set(S)
+
+out = ROOT / "theme/templates/product.oui.json"
+out.write_text(json.dumps({"sections": S, "order": order}, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+print("written", out.name, "sections:", len(order))
