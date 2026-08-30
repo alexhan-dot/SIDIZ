@@ -1,0 +1,444 @@
+{
+  "sections": {
+    "sticky_nav": {
+      "type": "sidiz-sticky-nav",
+      "blocks": {
+        "n1": {
+          "type": "link",
+          "settings": {
+            "label": "Options",
+            "anchor": "options"
+          }
+        },
+        "n2": {
+          "type": "link",
+          "settings": {
+            "label": "Ergonomics",
+            "anchor": "ergonomics"
+          }
+        },
+        "n3": {
+          "type": "link",
+          "settings": {
+            "label": "Design",
+            "anchor": "design"
+          }
+        },
+        "n4": {
+          "type": "link",
+          "settings": {
+            "label": "Specifications",
+            "anchor": "specifications"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4"
+      ],
+      "settings": {
+        "label": "On this page",
+        "show_buy": true,
+        "buy_label": "Choose options"
+      }
+    },
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Estimated delivery",
+            "value": "3-7 business days for in-stock items"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Delivery type",
+            "value": "Free standard delivery Australia-wide"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Assembly",
+            "value": "Arrives fully assembled - no assembly required"
+          }
+        },
+        "i1": {
+          "type": "info",
+          "settings": {
+            "label": "Product name",
+            "value": "SIDIZ PILLO Ergonomic Floor Chair"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "label": "Included",
+            "value": "Chair"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "label": "Main materials",
+            "value": "Fabric or synthetic leather, sponge, plastic"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "label": "Colours",
+            "value": "Dark Grey\nBeige\nMandarin Orange\nMustard"
+          }
+        },
+        "i5": {
+          "type": "info",
+          "settings": {
+            "label": "Warranty",
+            "value": "5 years with product registration"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5"
+      ],
+      "settings": {
+        "tax_note": "Price includes GST. Shipping calculated at checkout.",
+        "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
+        "addons_title": "Add to your setup",
+        "delivery_title": "Delivery",
+        "warranty_label": "Warranty",
+        "warranty_value": "5 years",
+        "basic_info_title": "BASIC INFO",
+        "notice_title": "Before you buy",
+        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>",
+        "subtitle": "The start of healthy floor sitting - an S-Curve backrest, flexible tilting and a thick sponge seat bring ergonomic support down to floor level."
+      }
+    },
+    "hero": {
+      "type": "sidiz-pdp-hero",
+      "settings": {
+        "subtitle": "The start of healthy floor sitting",
+        "subtitle_colour": "#ffffff",
+        "heading": "PILLO",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Head_vw55.jpg",
+        "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/pillo_HEAD_M.jpg",
+        "alt": "The SIDIZ PILLO floor chair in a living space",
+        "description": "<p>With ergonomic design and considerate usability, the PILLO makes floor sitting more comfortable and healthier.</p>",
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default"
+      }
+    },
+    "options": {
+      "type": "sidiz-option-compare",
+      "blocks": {
+        "o1": {
+          "type": "option",
+          "settings": {
+            "title": "Fabric",
+            "description": "Fabric seat",
+            "images": "https://kr.sidiz.com/cdn/shop/files/Pillo_option_1.jpg,https://kr.sidiz.com/cdn/shop/files/Pillo_option_1-2.jpg",
+            "colours": "#5a5d60,#d9c9b2,#c96f3f,#c9a13f",
+            "alt": "The PILLO with the fabric seat"
+          }
+        },
+        "o2": {
+          "type": "option",
+          "settings": {
+            "title": "Vegan Leather",
+            "description": "Synthetic leather seat",
+            "images": "https://kr.sidiz.com/cdn/shop/files/Pillo_option_2.jpg,https://kr.sidiz.com/cdn/shop/files/Pillo_option_2-1.jpg",
+            "colours": "#5a5d60,#d9c9b2",
+            "alt": "The PILLO with the synthetic leather seat"
+          }
+        }
+      },
+      "block_order": [
+        "o1",
+        "o2"
+      ],
+      "settings": {
+        "heading": "The PILLO option for you"
+      }
+    },
+    "ergonomics_view": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Ergonomics, even on the floor",
+        "description": "<p>So floor sitting never costs you posture or comfort, the PILLO carries ergonomic thinking through every part - easy on the body, hour after hour.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/content_1.jpg",
+        "alt": "The PILLO supporting an upright floor sit"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "A backrest shaped like the spine",
+            "description": "<p>An S-Curve form gives the lower back its most natural support, comfortable through long sittings.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/content_2.jpg",
+            "alt": "The PILLO's S-Curve backrest"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Flexible backrest tilting",
+            "description": "<p>The backrest leans naturally with your movement, keeping lumbar fatigue to a minimum.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/content_3.jpg",
+            "alt": "The PILLO backrest tilting"
+          }
+        },
+        "b3": {
+          "type": "feature",
+          "settings": {
+            "title": "A thick sponge seat",
+            "description": "<p>Generous sponge with a latex-like cushioning for a settled, comfortable sit.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/content_4.jpg",
+            "alt": "The PILLO's thick sponge seat"
+          }
+        },
+        "b4": {
+          "type": "feature",
+          "settings": {
+            "title": "A springy, fresh double-raschel back",
+            "description": "<p>Two layers of mesh double the spring and durability while keeping the airflow.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/content_5.jpg",
+            "alt": "The double-raschel mesh backrest"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "design_banner": {
+      "type": "sidiz-wb-banner",
+      "settings": {
+        "heading": "Design that keeps caring",
+        "description": "<p>Considerate detail for when the PILLO is in use, when it is put away - and for everything after.</p>",
+        "align": "left",
+        "title_colour": "#ffffff",
+        "description_colour": "#ffffff",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/article_1_eb918cb9-cf3a-4745-9e18-b9c3137b1369.jpg",
+        "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/pillo_Type_B-2_M.jpg",
+        "alt": "The PILLO folded away neatly"
+      }
+    },
+    "design_cards": {
+      "type": "sidiz-wb-card-list",
+      "blocks": {
+        "c1": {
+          "type": "card",
+          "settings": {
+            "title": "Glides made for real floors",
+            "title_colour": "#000000",
+            "description": "<p>Felt glides minimise friction, sparing floors from scratches and rooms from noise.</p>",
+            "description_colour": "#7c8084",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/article1.jpg",
+            "alt": "The PILLO's felt glides"
+          }
+        },
+        "c2": {
+          "type": "card",
+          "settings": {
+            "title": "A folding backrest that saves space",
+            "title_colour": "#000000",
+            "description": "<p>Folds flat to slide under a desk or stand against the wall. *Fits floor desks 280 mm and higher.</p>",
+            "description_colour": "#7c8084",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/article2.jpg",
+            "alt": "The PILLO folded for storage"
+          }
+        },
+        "c3": {
+          "type": "card",
+          "settings": {
+            "title": "A replaceable seat",
+            "title_colour": "#000000",
+            "description": "<p>The seat swaps easily, keeping the chair like new for years. *Available through our support team.</p>",
+            "description_colour": "#7c8084",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/article3.jpg",
+            "alt": "Replacing the PILLO seat"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "heading": ""
+      }
+    },
+    "finish_tiles": {
+      "type": "sidiz-tile-card-list",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Fabric seat",
+            "description": "<p>Soft and snug to sit on, in a choice of four colours to suit your taste and space.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/article2_1.jpg",
+            "alt": "The PILLO fabric seat colours"
+          }
+        }
+      },
+      "block_order": [
+        "t1"
+      ],
+      "settings": {
+        "heading": "A finish to suit your taste"
+      }
+    },
+    "goes_with": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "Goes well with the PILLO",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "specifications": {
+      "type": "sidiz-spec",
+      "blocks": {
+        "d1": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/M090_01.jpg",
+            "alt": "Dimension drawing of the SIDIZ PILLO, front elevation"
+          }
+        },
+        "d2": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/M090_02.jpg",
+            "alt": "Dimension drawing of the SIDIZ PILLO, side elevation"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2"
+      ],
+      "settings": {
+        "heading": "PILLO dimensions",
+        "figures": "Product weight approximately 4.4 kg.",
+        "caveats": "*Measurements may vary by plus or minus 20 mm and 1 kg depending on where and how they are taken; this is not a fault.<br>*Dimensions are measured with nobody seated."
+      }
+    },
+    "safety_info": {
+      "type": "sidiz-safety-info",
+      "blocks": {
+        "n1": {
+          "type": "note",
+          "settings": {
+            "title": "Removing stains from the frame",
+            "body": "<p>If the frame gets marked, a melamine sponge lifts stains easily. *Rubbing hard can damage the surface.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "n1"
+      ],
+      "settings": {
+        "heading": "Care and cautions"
+      }
+    },
+    "reviews": {
+      "type": "sidiz-review",
+      "settings": {
+        "heading": "Customer reviews",
+        "body": "<p>Reviews from Australian customers. Add your review app block here to show the full list.</p>",
+        "anchor_id": "reviews",
+        "background": "#ffffff"
+      }
+    },
+    "stockists": {
+      "type": "sidiz-store-info",
+      "settings": {
+        "heading": "Try one before you decide",
+        "description": "Seat feel differs from body to body. Try a PILLO in person where you can; otherwise our returns policy is there to fall back on.",
+        "link_label": "Find a stockist",
+        "link": "/pages/contact",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/shop_pc.jpg",
+        "alt": "A SIDIZ showroom interior"
+      }
+    },
+    "recommend": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "You may also like",
+        "link_label": "View all chairs",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "notices": {
+      "type": "sidiz-contact-notice",
+      "blocks": {
+        "c1": {
+          "type": "notice",
+          "settings": {
+            "title": "Product, delivery, service and returns",
+            "body": "<p>support@sidiz.au</p><p>Monday to Friday, 9:00 am to 5:00 pm AEST<br>Closed weekends and public holidays</p>"
+          }
+        },
+        "c2": {
+          "type": "notice",
+          "settings": {
+            "title": "Warranty and faulty returns",
+            "body": "<p>Warranty period: up to 5 years from purchase, with product registration. See the <a href=\"/pages/warranty\">warranty terms</a>. Nothing here limits your rights under the Australian Consumer Law.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {
+        "heading": "Contact centre",
+        "background": "#eaedf0",
+        "title_colour": "#000000",
+        "text_colour": "#434548"
+      }
+    }
+  },
+  "order": [
+    "sticky_nav",
+    "pdp_head",
+    "hero",
+    "options",
+    "ergonomics_view",
+    "design_banner",
+    "design_cards",
+    "finish_tiles",
+    "goes_with",
+    "specifications",
+    "safety_info",
+    "reviews",
+    "stockists",
+    "recommend",
+    "notices"
+  ]
+}
