@@ -1,0 +1,520 @@
+{
+  "sections": {
+    "sticky_nav": {
+      "type": "sidiz-sticky-nav",
+      "blocks": {
+        "n1": {
+          "type": "link",
+          "settings": {
+            "label": "Options",
+            "anchor": "options"
+          }
+        },
+        "n2": {
+          "type": "link",
+          "settings": {
+            "label": "Styling",
+            "anchor": "styling"
+          }
+        },
+        "n3": {
+          "type": "link",
+          "settings": {
+            "label": "Ergonomics",
+            "anchor": "ergonomics"
+          }
+        },
+        "n4": {
+          "type": "link",
+          "settings": {
+            "label": "Finishes",
+            "anchor": "finishes"
+          }
+        },
+        "n5": {
+          "type": "link",
+          "settings": {
+            "label": "Specifications",
+            "anchor": "specifications"
+          }
+        }
+      },
+      "block_order": [
+        "n1",
+        "n2",
+        "n3",
+        "n4",
+        "n5"
+      ],
+      "settings": {
+        "label": "On this page",
+        "show_buy": true,
+        "buy_label": "Choose options"
+      }
+    },
+    "pdp_head": {
+      "type": "sidiz-pdp-head",
+      "blocks": {
+        "f1": {
+          "type": "fact",
+          "settings": {
+            "label": "Estimated delivery",
+            "value": "3-7 business days for in-stock items"
+          }
+        },
+        "f2": {
+          "type": "fact",
+          "settings": {
+            "label": "Delivery type",
+            "value": "Free standard delivery Australia-wide"
+          }
+        },
+        "f3": {
+          "type": "fact",
+          "settings": {
+            "label": "Assembly",
+            "value": "Arrives fully assembled - no assembly required"
+          }
+        },
+        "i1": {
+          "type": "info",
+          "settings": {
+            "label": "Product name",
+            "value": "SIDIZ MANE Ergonomic Dining Chair"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "label": "Included",
+            "value": "Chair"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "label": "Main materials",
+            "value": "Plastic or synthetic leather, sponge, steel"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "label": "Colours",
+            "value": "Plastic in four colours\nTan Brown vegan leather"
+          }
+        },
+        "i5": {
+          "type": "info",
+          "settings": {
+            "label": "Warranty",
+            "value": "5 years with product registration"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "i5"
+      ],
+      "settings": {
+        "tax_note": "Price includes GST. Shipping calculated at checkout.",
+        "payment_note": "<p>Pay in four with Afterpay or Zip at checkout.</p>",
+        "addons_title": "Add to your setup",
+        "delivery_title": "Delivery",
+        "warranty_label": "Warranty",
+        "warranty_value": "5 years",
+        "basic_info_title": "BASIC INFO",
+        "notice_title": "Before you buy",
+        "notice": "<p>Images on this page are styled photographs and may differ from actual product specifications. Please refer to the thumbnail images for detailed specifications.</p>",
+        "subtitle": "Minimal comfort at the dining table: an S-curve backrest, responsive tension tilting and a waterfall seat in a clean dining silhouette."
+      }
+    },
+    "intro": {
+      "type": "sidiz-product-row",
+      "settings": {
+        "heading": "SIDIZ MANE Dining Chair",
+        "body": "<ul><li><strong>Ergonomic S-Curve backrest</strong> - supports the spine's natural curve completely, holding posture upright and comfortable.</li><li><strong>Flexible tension tilting</strong> - responds softly to your movement, easing lumbar fatigue through meals and daily life.</li><li><strong>A pressure-easing waterfall seat</strong> - the front edge slopes away so circulation flows freely through long sittings.</li></ul><p>A dining interior chair with the fit of an ergonomic seat and the footprint of a dining classic.</p>",
+        "align": "left",
+        "background": "#ffffff",
+        "text_colour": "#000000"
+      }
+    },
+    "hero": {
+      "type": "sidiz-pdp-hero",
+      "settings": {
+        "subtitle": "<em class=\"caps\">Minimal comfort</em>",
+        "subtitle_colour": "#ffffff",
+        "heading": "MANE",
+        "heading_colour": "#ffffff",
+        "text_align": "center",
+        "header_scheme": "dark",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Head_e1464329-8260-4b29-880e-e4b25db9611a.jpg",
+        "image_url_mobile": "https://kr.sidiz.com/cdn/shop/files/Head_M_9cfbc09d-eadc-4127-953b-bdfecdfbd8da.jpg",
+        "alt": "SIDIZ MANE dining chairs at a table",
+        "description": "<p>The SIDIZ MANE pairs a composed design with S-curve ergonomics that support the spine - comfort with nothing wasted.</p><p>Tension tilting, rare in a dining chair, responds softly as you move, and the waterfall seat keeps pressure off the legs through long sittings.</p>",
+        "description_colour": "#000000",
+        "description_align": "left",
+        "product_type": "default"
+      }
+    },
+    "options": {
+      "type": "sidiz-option-compare",
+      "blocks": {
+        "o1": {
+          "type": "option",
+          "settings": {
+            "title": "Plastic",
+            "description": "Plastic back and seat",
+            "images": "https://kr.sidiz.com/cdn/shop/files/MANE_Option1.jpg,https://kr.sidiz.com/cdn/shop/files/MANE_Option1-1.jpg",
+            "colours": "#f4f4f4,#9aa694,#d9c9b2,#36393b",
+            "alt": "The MANE in easy-care plastic"
+          }
+        },
+        "o2": {
+          "type": "option",
+          "settings": {
+            "title": "Vegan Leather",
+            "description": "Synthetic leather back and seat",
+            "images": "https://kr.sidiz.com/cdn/shop/files/1_7793aeb9-8598-4980-9c96-3d9a29879baf.jpg,https://kr.sidiz.com/cdn/shop/files/2_b42c8d5a-4c95-40ff-911a-8766cd3db144.jpg",
+            "colours": "#835740",
+            "alt": "The MANE in Tan Brown vegan leather"
+          }
+        }
+      },
+      "block_order": [
+        "o1",
+        "o2"
+      ],
+      "settings": {
+        "heading": "The MANE option for you"
+      }
+    },
+    "styling_tiles": {
+      "type": "sidiz-tile-card-list",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Warm leather against a sleek black table",
+            "description": "<p>The MANE's camel leather grain and refined steel legs play against a modern black table - a touch of mid-century modern for every day. *AI-generated visual; details may differ from the actual product.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/AI_MANE_05.png",
+            "alt": "The leather MANE at a black table"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Natural timber with lively colour",
+            "description": "<p>Against warm timber, the MANE's colours make the dining space you face every day feel special. *AI-generated visual; details may differ from the actual product.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/AI_MANE_08.png",
+            "alt": "Colourful MANE chairs at a timber table"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "White against black, cleanly modern",
+            "description": "<p>A deep, dark table with the MANE's clean white shell and simple leg line - a composed, minimal dining setting. *AI-generated visual; details may differ from the actual product.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/AI_MANE_10.png",
+            "alt": "White MANE chairs at a dark table"
+          }
+        },
+        "t4": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "A white table filled with colour",
+            "description": "<p>Soft pastel MANEs around a clean white table bring an easy energy to the whole room. *AI-generated visual; details may differ from the actual product.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/AI_MANE_09.png",
+            "alt": "Pastel MANE chairs at a white table"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "settings": {
+        "heading": "A minimal design that balances any table"
+      }
+    },
+    "ergonomics_view": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Ergonomics, with only the essentials kept",
+        "description": "<p>The MANE supports the body's curve through its S-curve design, with nothing wasted. Tension tilting responds to your movement, lowering the lumbar fatigue of meals and daily life alike. *AI-generated visual; details may differ from the actual product.</p>",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/AI_MANE_04.png",
+        "alt": "The MANE supporting an upright sit at the table"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "An S-curve structure that supports the spine",
+            "description": "<p>Drawn along the lumbar curve, the backrest line eases the spine's load and holds the lower back steadily.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/MANE_01-1.jpg",
+            "alt": "The MANE's S-curve backrest line"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Flexible tension tilting",
+            "description": "<p>It responds to the smallest movement - a comfortable spring the moment you lean back.</p>"
+          }
+        },
+        "b3": {
+          "type": "feature",
+          "settings": {
+            "title": "A waterfall seat that frees the legs",
+            "description": "<p>The front edge rounds away downward, so long sittings never block circulation.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/MANE_01-3.jpg",
+            "alt": "The MANE's waterfall seat edge"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "finish_view": {
+      "type": "sidiz-product-view-vertical",
+      "settings": {
+        "heading": "Simple but considered: two finishes for every lifestyle",
+        "description": "",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_6be420c0-722e-43b1-8d31-9bf8aa448b2c.jpg",
+        "alt": "The MANE's two finishes side by side"
+      },
+      "blocks": {
+        "b1": {
+          "type": "feature",
+          "settings": {
+            "title": "Hygienic, durable plastic",
+            "description": "<p>Strong against everyday marks and simple to wash, holding its shape for years.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/1_7522236a-3c75-47a8-9db9-a1421e46e9bf.jpg",
+            "alt": "The plastic-finish MANE"
+          }
+        },
+        "b2": {
+          "type": "feature",
+          "settings": {
+            "title": "Refined vegan leather on a steel frame",
+            "description": "<p>A natural embossed grain and deep colour set a refined mood, over a stain-resistant surface with sponge cushioning for a comfortable sit.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/3_2b2b3146-6694-47c0-a9be-837ef682c22d.jpg",
+            "alt": "The vegan leather MANE on its steel frame"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    },
+    "detail_tiles": {
+      "type": "sidiz-tile-card-list",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "A weight that sits just right",
+            "description": "<p>A shared chair should be neither too heavy nor too light - at 4.9 kg, the MANE is steady for everyone.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/Img_3_9003a4c1-f638-4b4a-b389-d17e2f1e9de8.jpg",
+            "alt": "Lifting the MANE with one hand"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "ratio": "4/5",
+            "title": "Roll-on glides for smooth moves",
+            "description": "<p>They level themselves naturally and move flexibly, with felt facing that prevents friction and noise.</p>",
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/MANE_1_1__04.jpg",
+            "alt": "The MANE's roll-on glides"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2"
+      ],
+      "settings": {
+        "heading": "Comfortable enough to forget you are sitting"
+      }
+    },
+    "goes_with": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "Goes well with the MANE",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "warranty": {
+      "type": "sidiz-warranty",
+      "settings": {
+        "heading": "MANE | 5-year warranty",
+        "body": "<p>So the journey with your MANE continues, SIDIZ provides a 5-year warranty to customers who complete product registration. Once your chair arrives, register it before you forget, for more comfortable years ahead.</p>",
+        "note": "<p>*Warranty periods vary by component.</p>",
+        "register_label": "Register your product",
+        "register_link": "/pages/product-registration",
+        "show_acl": true,
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/WARRANTY_5.jpg",
+        "alt": "SIDIZ 5-year warranty badge"
+      }
+    },
+    "specifications": {
+      "type": "sidiz-spec",
+      "blocks": {
+        "d1": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/MN021E_01_5de30485-ac11-4a80-9d2a-2e880dc73916.jpg",
+            "alt": "Dimension drawing of the plastic MANE, front elevation"
+          }
+        },
+        "d2": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/MN021E_02_ba43ed4f-c884-4466-9eef-cdea867bc2b3.jpg",
+            "alt": "Dimension drawing of the plastic MANE, side elevation"
+          }
+        },
+        "d3": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/M071E_01_638ac3bc-c7c3-4b0f-86f8-8b5ef660b94d.jpg",
+            "alt": "Dimension drawing of the vegan leather MANE, front elevation"
+          }
+        },
+        "d4": {
+          "type": "drawing",
+          "settings": {
+            "image_url": "https://kr.sidiz.com/cdn/shop/files/M071E_02_ca0a0bf7-2306-489a-ba18-ca25a4b84494.jpg",
+            "alt": "Dimension drawing of the vegan leather MANE, side elevation"
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3",
+        "d4"
+      ],
+      "settings": {
+        "heading": "MANE dimensions",
+        "figures": "Maximum load 125 kg. Product weight approximately 4.6 kg (plastic) or 5.5 kg (vegan leather).",
+        "caveats": "*Measurements may vary by plus or minus 20 mm and 1 kg depending on where and how they are taken; this is not a fault.<br>*Dimensions are measured with nobody seated.<br>*Seat height is measured at the centre of the seat."
+      }
+    },
+    "safety_info": {
+      "type": "sidiz-safety-info",
+      "blocks": {
+        "n1": {
+          "type": "note",
+          "settings": {
+            "title": "Removing stains from the frame",
+            "body": "<p>If the frame gets marked during assembly or use, a melamine sponge lifts stains easily. *Rubbing hard can damage the surface.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "n1"
+      ],
+      "settings": {
+        "heading": "Care and cautions"
+      }
+    },
+    "reviews": {
+      "type": "sidiz-review",
+      "settings": {
+        "heading": "Customer reviews",
+        "body": "<p>Reviews from Australian customers. Add your review app block here to show the full list.</p>",
+        "anchor_id": "reviews",
+        "background": "#ffffff"
+      }
+    },
+    "stockists": {
+      "type": "sidiz-store-info",
+      "settings": {
+        "heading": "Try one before you decide",
+        "description": "Seat feel differs from body to body. Try a MANE in person where you can; otherwise our returns policy is there to fall back on.",
+        "link_label": "Find a stockist",
+        "link": "/pages/contact",
+        "image_url": "https://kr.sidiz.com/cdn/shop/files/shop_pc.jpg",
+        "alt": "A SIDIZ showroom interior"
+      }
+    },
+    "recommend": {
+      "type": "sidiz-related-products",
+      "settings": {
+        "heading": "You may also like",
+        "link_label": "View all chairs",
+        "link": "/collections/all",
+        "source": "collection",
+        "limit": 4
+      }
+    },
+    "notices": {
+      "type": "sidiz-contact-notice",
+      "blocks": {
+        "c1": {
+          "type": "notice",
+          "settings": {
+            "title": "Product, delivery, service and returns",
+            "body": "<p>support@sidiz.au</p><p>Monday to Friday, 9:00 am to 5:00 pm AEST<br>Closed weekends and public holidays</p>"
+          }
+        },
+        "c2": {
+          "type": "notice",
+          "settings": {
+            "title": "Warranty and faulty returns",
+            "body": "<p>Warranty period: up to 5 years from purchase, with product registration. See the <a href=\"/pages/warranty\">warranty terms</a>. Nothing here limits your rights under the Australian Consumer Law.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2"
+      ],
+      "settings": {
+        "heading": "Contact centre",
+        "background": "#eaedf0",
+        "title_colour": "#000000",
+        "text_colour": "#434548"
+      }
+    }
+  },
+  "order": [
+    "sticky_nav",
+    "pdp_head",
+    "intro",
+    "hero",
+    "options",
+    "styling_tiles",
+    "ergonomics_view",
+    "finish_view",
+    "detail_tiles",
+    "goes_with",
+    "warranty",
+    "specifications",
+    "safety_info",
+    "reviews",
+    "stockists",
+    "recommend",
+    "notices"
+  ]
+}
