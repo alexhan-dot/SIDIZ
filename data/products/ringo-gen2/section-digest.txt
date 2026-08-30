@@ -1,0 +1,121 @@
+
+===== 05-product_row_1_wide.html =====
+  CSS #section-template--24699214954786__product_row_1_wide_DD6e :: background-color=#ffffff, color=#000000
+  TEXT 시디즈 링고 초등학생 그로잉 의자 히든 버튼 그로잉 조절 기능 - 아이 스스로도 등판 높이와 좌판 깊이를 4단계로 조절 하체 지지 전용 발받침 - 하체 하중을 안정적으로 지지하여 바른 자세를 유도 라운드 폼 디자인 - 전반적으로 부드러운 곡선형 프레임을 채택하여 모서리의 위험 요소를 제거 아동의 성장 단계에 맞춘 그로잉 메커니즘으로 바른 자세 형성과 심리적 안정을 통해 최적의 학습 몰입 환경을 완성하는 인체공학적 성장 솔루션
+
+===== 06-product_pdp_head.html =====
+  TEXT DREAM TO GROW RINGO 아이들의 성장은 단순한 신체 변화를 넘어 무한한 가능성을 찾아가는 여정입니다. 시디즈 링고는 아이들의 신체적 변화와 사고의 확장을 지지하며 자신만의 길을 만들어가는 모든 순간을 함께합니다. 아동의 성장 단계에 맞춰 등판과 좌판을 동시에 최적화하는 그로잉 메커니즘으로 바른 자세와 심리적 안정을 선사하며, 아이의 성장에 유연하게 대응하는 최적의 학습 몰입 환경을 완성합니다.
+  MEDIA 18bc780b16ae4e9982b3a4e02f9807cb.thumbnail.0000000000_small.jpg
+  MEDIA 18bc780b16ae4e9982b3a4e02f9807cb.HD-1080p-4.8Mbps-40951610.mp4
+  MEDIA b67a41864418473bb90f6f7c2ad987ee.thumbnail.0000000000_small.jpg
+  MEDIA b67a41864418473bb90f6f7c2ad987ee.HD-1080p-4.8Mbps-40951608.mp4
+
+===== 07-product_wb_scroll_banner.html =====
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  TEXT 초등 입학부터 졸업까지 아이의 성장에 맞춰 조절되는 등·좌판 설계로, 전 과정 바른 자세를 유지 아이들의 성장 과정을 섬세하게 관찰하여 설계된 링고는 신체와 사고가 확장되는 모든 순간에 아이가 편안하게 몰입할 수 있도록 합니다.
+  MEDIA Group_1000006327_fc6d763c-f916-43c2-99d3-5a3a79f571af.jpg
+  MEDIA RINGO2_M_64bf61f1-215c-43af-ad7e-8d16d3b69356.jpg
+
+===== 08-product_wb_card_list.html =====
+  CSS .block-video_DxPkWH .card--text .title :: color=#000000
+  CSS .block-video_DxPkWH .card--text .description :: color=#7c8084
+  CSS .block-image_hqGk3g .card--text .title :: color=#000000
+  CSS .block-image_hqGk3g .card--text .description :: color=#7c8084
+  CSS .block-image_Hx6y3D .card--text .title :: color=#000000
+  CSS .block-image_Hx6y3D .card--text .description :: color=#7c8084
+  TEXT 등판과 좌판을 동시에, 성장에 맞춘 2WAY 그로잉 25º사선으로 등판의 높이와 좌판의 깊이가 동시에 확장되어 성장하는 아이들을 자연스럽게 지지해주는 시디즈만의 2way growing* * 특허 번호 : 10-2014-0094938 저학년부터 고학년까지, 체격 변화에 맞춘 4단계 그로잉 조절 아이들의 성장 단계에 따라 조절되어 더욱 밀착된 편안함을 제공할 수 있도록 설계된 4단계 그로잉 1단계: 110-125cm 2단계: 125-135cm 3단계: 135-150cm 4단계: 150-160cm 아이 스스로 쉽고 안전하게 조절하는 원터치 히든 그로잉 버튼 스스로 자신에게 맞는 자세를 찾을 수 있으면서 사선으로 확장되는 그로잉이 가장 자연스러울 수 있도록 손잡이 안쪽에 위치한 그로잉 버튼
+  MEDIA cffe9eb0747642d7a0ffdedaaec421ed.thumbnail.0000000000_small.jpg
+  MEDIA cffe9eb0747642d7a0ffdedaaec421ed.SD-480p-1.5Mbps-40611002.mp4
+
+===== 09-product_wb_scroll_banner.html =====
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000, background-color=#eaedf0
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  CSS .section-template--24699214954786__product_wb_scroll_banne :: color=#000000
+  TEXT 정교한 신체 지지로 완성하는 바른 자세, 아이의 성취를 돕는 탄탄한 기본기 모든 성장과 성취는 기본기에서 시작되며, 바른 자세는 창의력과 상상력을 키워줄 수 있는 든든한 출발점이 됩니다. 등판과 발판의 안정적인 지지와 높이조절 기능을 통해 탄탄한 기반을 마련하고, 그 위에서 무한한 가능성을 펼쳐보세요.
+  MEDIA 0675e0dc7ab44898ab4e3209b0e2b5ed.thumbnail.0000000000_small.jpg
+  MEDIA 0675e0dc7ab44898ab4e3209b0e2b5ed.HD-1080p-4.8Mbps-40951798.mp4
+  MEDIA 5ba22d5763294d14be24adfc1feeb4f8.thumbnail.0000000000_small.jpg
+  MEDIA 5ba22d5763294d14be24adfc1feeb4f8.HD-1080p-4.8Mbps-40951797.mp4
+
+===== 10-product_wb_card_list.html =====
+  CSS .block-image_GRnVz9 .card--text .title :: color=#000000
+  CSS .block-image_GRnVz9 .card--text .description :: color=#7c8084
+  CSS .block-image_9jTyQN .card--text .title :: color=#000000
+  CSS .block-image_9jTyQN .card--text .description :: color=#7c8084
+  CSS .block-image_pczFyF .card--text .title :: color=#000000
+  CSS .block-image_pczFyF .card--text .description :: color=#7c8084
+  TEXT 성장 단계별 정밀 높이 조절로 완성하는 최적의 바른 자세 습관 편안한 자세를 위해선 팔꿈치와 어깨의 위치가 중요하며, 이를 위해 책상과의 적절한 높이를 조절해 주는 버튼 하중 분산과 정서적 안정을 돕는 하체 지지 전용 안심 발받침 책상에 맞춰 높이를 조절한 의자에 앉은 아이들의 발이 지면에 닿지 못할 경우 다리를 지지해 주어 안정적이고 바른 자세를 유지할 수 있게 도와주는 발받침 체형을 포근하게 감싸주어 들썩임 없이 편안한 라운드 등판 디자인 탄탄하고 두께감이 있어 자연스럽게 허리를 지지하여 오랜 시간 편안하게 집중할 수 있도록 설계된 등판
+  MEDIA dsc7203.png
+  MEDIA DSC7130.png
+
+===== 11-product_tile_card_list.html =====
+  TEXT 어린이 의자를 위한 시디즈 링고의자의 디테일 어린이 안전 특별법(KC) 기준을 통과한 유해물질 걱정 없는 안심 소재 시디즈 링고는 유해물질, 안전한 형태 등을 시험하는 한국제품안전협회의 기준인 어린이 안전 특별법(KC인증)을 취득하였습니다. 모서리 충돌 위험을 최소화한 라운드 프레임과 돌출 없는 안전 설계 활동성이 많은 아이가 안전하게 사용할 수 있도록 돌출 레버들을 모두 제거하고 전체적으로 둥근 모서리를 적용하였습니다. 회전을 방지하여 산만함을 잡고 학습 몰입을 돕는 고정형 중심봉 좌우 회전이 되지 않는 고정 중심봉으로 아이가 자연스럽게 집중할 수 있도록 도와줍니다. 생활 오염도 간편하게 닦아내어 위생적인 관리가 가능한 고내구성 인조가죽 액체를 쏟거나 음식물이 묻어도 닦아내기 편한 소재를 사용했습니다. 학습 습관에 맞춰 바퀴만 따로! 싯브레이크 바퀴 별도 구매 지원 앉으면 하중으로 인해 쉽게 구르지 않는 싯브레이크 바퀴를 별도 구매하여 교체 가능합니다. 탈부착이 간편한 분리형 패브릭 커버로 언제나 새 가구처럼 위생적인 관리 가능 제품을 오염으로 부터 보호하는 패브릭 커버는 쉽게 세탁할 수 있도록 간편하게 탈부착 가능합니다.
+  MEDIA RINGO2__1_1__01_493b1080-30cf-4fe2-b611-97f7014d0cf3.jpg
+  MEDIA DSC7269_d61ebf65-4fec-4a1f-b95d-d178236bdb96.png
+  MEDIA RINGO2_03-3.jpg
+  MEDIA RINGO2__1_1__05.jpg
+  MEDIA RINGO2_03-6_01ee5875-5fc2-4c6d-a025-2c55f790b969.jpg
+
+===== 12-product_view_vertical.html =====
+  TEXT 이지리페어 오래도록 새것처럼, 주요 부품 교체형 설계로 실현하는 경제적인 장기 사용 시디즈 링고는 시간이 흐르면서 자연스럽게 해지는 부품만 교체해서 새것처럼 사용할 수 있도록 세심하게 디자인 되고 설계되었습니다. 도구 없이 간편하게, 오염 시 즉시 교체 가능한 이지 케어 좌판 별도의 공구 없이 탈부착이 가능하도록 스냅방식으로 체결된 좌판 볼트 하나로 손쉬운 교체, 언제나 새것 같은 컨디션의 등판 볼트 1개로 분리, 부착되는 등판 성장에 맞춰 자유롭게, 탈부착이 간편한 발받침 설계 아이가 성장하여 발받침이 필요 없어졌을 때 볼트를 분리하여 탈착 가능한 발받침 ※ 체결 방식이 상이한 기존 발받침과 혼용되어 출고됩니다. 조립 구조가 일부 변경되었으나, 제품의 성능과 품질에는 차이가 없습니다. 전용 도구로 쏙! 환경에 맞춰 언제든 교체 가능한 바퀴 바퀴 구매 시 제공되는 전용 스패너로 손쇱게 분리 가능한 바퀴
+  MAIN: ['RINGO2.jpg']
+  MEDIA RINGO2.jpg
+  MEDIA 83fd851c93704cf19addf88e1de510fc.thumbnail.0000000000_small.jpg
+  MEDIA 83fd851c93704cf19addf88e1de510fc.SD-480p-0.9Mbps-40953278.mp4
+
+===== 13-product_tile_card_list.html =====
+  TEXT 조절부터 관리까지, 링고 1세대를 넘어선 압도적 진화 성장기 체형을 부드럽게 감싸는 등·좌판 레이어 보강으로 바른 자세 유지력 강화 간결하고 날렵한 디자인의 1세대 등판, 2세대는 25mm 두꺼워진 등판과 20mm 두꺼워진 좌판으로 착좌감을 개선한 디자인 공간의 조화를 고려한 프리미엄 톤온톤 컬러로 감각적인 아이방 인테리어 완성 1세대 링고의 아이들의 상상력을 자극할 수 있는 밝은 색상에서 2세대 링고의 공간과 조화롭게 어울리는 뉴트럴한 컬러로. 직관적인 형태의 1세대 조절 레버 잡기 쉬운 돌출형 구조와 직관적인 디자인으로 만들어진 1세대 조절 레버 외관 돌출을 최소화한 '히든 그로잉 버튼'으로 디자인의 간결함과 안전성 동시 확보 돌출부를 제거함으로써 안전사고를 예방하고, 깔끔하고 간결한 외관을 완성하는 매립 형식의 2세대 조절 버튼 도구 없이 간편한 '이지 셀프 케어' 구조로 처음의 컨디션을 유지하는 지속 가능성 좌판은 스냅구조로, 등판은 하나의 볼트로 탈부착이 가능하여 오래되고 해진 부분만 쉽게 교체
+  MEDIA RINGO2_05-1.jpg
+  MEDIA RINGO2_05-2.jpg
+  MEDIA RINGO2_05-3.jpg
+  MEDIA b6b32917b3e54142853dcf8c21ea101c.thumbnail.0000000000_small.jpg
+  MEDIA b6b32917b3e54142853dcf8c21ea101c.HD-720p-1.6Mbps-40945621.mp4
+
+===== 14-product_assembly_guide.html =====
+  TEXT RINGO 실제 사용자 리뷰 첫 아이방에 함께하게 된 링고 아이가 처음으로 독립된 공간에서 공부를 시작했는데, 딱 필요한 의자였어요. 발받침 덕분에 높이를 조절해도 발이 뜨지 않아 안심됩니다. 그로잉 기능으로 아이 몸에 딱 맞아요 등판과 좌판이 함께 조절되는 그로잉 기능으로 등판에 허리가 딱 닿아서 자세가 안정적이에요. 딱 맞는 커버로 오염에도 안심 전용 커버를 따로 구매할 수 있어서 오염에도 비교적 안심이에요.
+  MEDIA ringo1.jpg
+  MEDIA ringo2_b519bc0d-056f-4c36-a1be-b299bf6aef3f.jpg
+  MEDIA ringo3.jpg
+
+===== 15-product_related.html =====
+  TEXT 함께 쓰면 좋은 제품 TREVO 트레보 145,000원 FUNGUS 펑거스 99,000원~ 더 프로그레시브 백 15,000원
+  MEDIA thum_TREVO_WW_00.jpg
+  MEDIA thum_FUNGUS_MN130_454B_00.jpg
+  MEDIA thum_THE_PROGRESSIVE_BAG_01.jpg
+
+===== 16-product_easy_repair.html =====
+  TEXT RINGO | EASY REPAIR 이지리페어 고쳐서 오래쓰기, 지구를 위한 작은 실천 이지리페어 우레탄 바퀴 B형 20,000원 싯브레이크 바퀴 B형 25,000원 글라이드 B형 17,000원
+  MEDIA thum_CASTER-GLIDE_S00U0KG_SG50_01__B.jpg
+  MEDIA thum_CASTER-GLIDE_S00V0KG_SG50_01_b2cb1526-0efc-4291-bbbf-b2b7f78f4ea8.jpg
+  MEDIA thum_CASTER-GLIDE_S00G0KG_SG_01_958e0724-7aa4-404c-ad75-74e48a098ea3.jpg
+
+===== 17-product_warranty.html =====
+  TEXT RINGO | 5년 품질보증 RINGO와 함께하는 가치 있는 여정이 계속되도록 시디즈는 정품 등록 완료 고객에게 5년 품질 보증 혜택을 제공합니다. 제품을 받으셨다면 잊기 전에 정품 등록을 완료해, 더욱 편안한 사용을 경험해 보세요. *제품별로 보증 기간이 상이합니다. 정품등록
+  MEDIA WARRANTY_5.jpg
+
+===== 18-product_spec.html =====
+  TEXT RINGO 제품 사이즈 최대 하중 100kg / 최대 무게 약 11kg *측정 방법 및 부위에 따라 ±20mm, ±1kg 오차가 있을 수 있으며, 이는 제품 불량이 아닙니다. *제품 사이즈는 사람이 앉지 않았을 때를 기준으로 측정했습니다. *좌판 높이는 좌판의 중앙을 기준으로 측정했습니다.
+  MEDIA ringo_2__01_73d328a2-2024-436e-a1a7-c8e15c91bf03.jpg
+  MEDIA ringo_2__02_632cc804-385a-43ed-83d2-173910e99fca.jpg
+
+===== 19-product_information.html =====
+  TEXT 사용 시 주의 사항 안전한 지지력을 위한 첫 단추, 발받침 조립 방향 확인 의자 조립 시 의자 바디 정면이 발받침 쪽을 향하도록 방향을 맞춘 후 조립해 주세요.고정중심봉 조립 후 바디를 회전시킬 경우 고장의 원인이 됩니다. 언제나 쾌적한 학습 환경을 위한 패브릭 커버 세탁 가이드 물 온도 40°C로 약하게 세탁해주세요. 산소표백제를 사용하실 수 없습니다. 다림질을 할 경우에는 80~120°C사이에서 해주세요. 드라이클리닝은 불가능합니다. 뉘어서 그늘에 건조해주세요. 표면 손상 없이 깨끗하게, 의자 프레임 오염 제거와 올바른 관리법 의자 조립 및 사용 시 의자 프레임이 오염되었을 경우, 매직블럭을 활용하면 얼룩을 간편히 제거할 수 있습니다. *매직블럭을 과도한 힘으로 문지르면, 표면이 손상될 수 있습니다.
+  MEDIA RINGO-2-NOTICE.jpg
+  MEDIA TREVO_NOTIC.jpg
+  MEDIA BLOCK-RING-NOTICE.jpg
+
+===== 20-product_faq.html =====
+  TEXT FAQ 링고 2세대는 몇 살까지 사용할 수 있나요? 링고의 권장 사용 신장은 110~160cm로, 이는 소아청소년 신체 발육 표준 데이터를 바탕으로 만 6세에서 13세에 적합하도록 설계되었습니다. 다만, 아이 성장 속도에 따라 다를 수 있는 점 참고해주세요. 발받침 사용을 권장하는 적정 키(신장)가 궁금해요. 발받침 사용 권장 신장은 110cm~140cm입니다. 발받침을 딛고 서있을 경우 바퀴가 구르거나 의자가 전도될 수 있습니다. 아이가 안전하게 의자를 사용할 수 있도록 주의해 주세요. 고정과 회전이 모두 되는 바퀴(캐스터)는 없나요? 싯브레이크 바퀴를 사용하면 25kg 이상의 사용자가 앉았을 때 쉽게 구르지 않으며 시디즈닷컴에서 별도로 구매할 수 있습니다. 의자를 새것처럼 오래 사용하는 유지 관리 팁이 있나요? 인조가죽 소재로 관리가 용이하나 지속적인 오염에 노출된 경우 등좌판 교체가 가능합니다. 또한 세탁 가능한 패브릭 커버를 시디즈닷컴에서 별도로 구매할 수 있습니다. 중심봉이 회전되는데 불량인가요? ① 중심봉과 의자 바디가 잘 체결되도록 의자에 앉아 충분히 무게를 가해주세요. ② 조립 후에는 의자를 무리하게 회전시키지 마세요. 무리한 힘으로 회전된 의자는 작은 힘에도 쉽게 회전할 수 있습니다.
+
+===== 22-product_store_info.html =====
+  TEXT 시디즈 매장에 방문해 직접 앉아보세요 의자 위 앉는 경험을 몰입감 있게 체험할 수 있는 시디즈 더 프로그레시브 매장에서 직접 앉아보세요.
+  MEDIA shop_pc.jpg
+  MEDIA shop_mo.jpg

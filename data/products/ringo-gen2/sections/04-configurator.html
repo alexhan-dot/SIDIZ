@@ -1,0 +1,1530 @@
+<section id="shopify-section-template--24699214954786__configurator" class="shopify-section mount-product-page mount-show-more section-product-configurator"><!-- NAVER 상품상세(view_product) SCRIPT -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type='text/javascript'>
+if(window.wcs){
+  window.scriptInfo = {
+    id: "9496943296802", // (필수) 상품 ID
+    name: "RINGO 링고 2세대", // 상품명
+    category: "기본 카테고리", // 카테고리명 (없으면 기본값)
+    quantity: 1, // 기본 수량
+    payAmount: 199000, // 제품 가격 (콤마 제거)
+    option: "그레이쉬베이지" // 기본 옵션명
+  }
+  
+  if(!wcs_add) var wcs_add = {};
+  wcs_add["wa"] = "s_29fd958c4603"; 
+
+  var _conv = {};
+  _conv.type = 'view_product'; // (필수)
+  _conv.items = [scriptInfo];
+
+  wcs.trans(_conv);
+}
+</script>
+<!-- NAVER 상품상세(view_product) SCRIPT END -->
+
+<script>
+  // 로그인 여부와 제품 정보를 확인한 후 로컬 저장소에 저장하는 함수
+function saveProductToLocalStorage(customerId, productInfo) {
+  if (!customerId) {
+    return; // 로그인되지 않은 경우 실행하지 않음
+  }
+
+  // 로컬 저장소에서 기존 관심 제품 목록을 가져옴 (사용자별로 저장)
+  let storedData = JSON.parse(localStorage.getItem('wishlistProducts')) || {};
+
+  // 해당 고객 ID에 맞는 데이터를 찾음
+  let wishlist = storedData[customerId] || [];
+
+  // 이미 목록에 있는 제품인지 확인 (prod_id로 체크)
+  const productIndex = wishlist.findIndex(item => item.prod_id === productInfo.prod_id);
+
+  // 목록에 있으면 기존 항목을 제거하고 최상단으로 이동
+  if (productIndex !== -1) {
+    wishlist.splice(productIndex, 1);
+  }
+
+  // 새로운 제품을 최상단에 추가
+  wishlist.unshift(productInfo);
+
+  // 갱신된 데이터를 로컬 저장소에 다시 저장
+  storedData[customerId] = wishlist;
+  localStorage.setItem('wishlistProducts', JSON.stringify(storedData));
+}
+
+// 최근 본 제품 ID를 로컬 스토리지에 저장하는 함수
+function saveRecentlyViewedProduct(recentlyViewed) {
+  localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+}
+
+// 페이지 로드 시 실행되는 함수
+document.addEventListener('DOMContentLoaded', function() {
+  const productName = "RINGO 링고 2세대";    // 현재 제품의 이름 가져오기
+  const productId = "9496943296802";         // 현재 제품의 ID 가져오기
+  const productHandle = "ringo-gen2"; // 현재 제품의 핸들 가져오기
+
+  // 현재 URL 가져오기
+  const currentUrl = new URL(window.location.href);
+  const hasStoreParam = currentUrl.searchParams.has("store"); // "store" 키 존재 여부 확인
+  
+  let storedStoreCookie = getCookie("storeCode");
+  let redirectCookie = getCookie("redirectQrProdDetail");
+
+  let storedStoreParam = (!storedStoreCookie || storedStoreCookie === "null" || storedStoreCookie === "undefined")?null:storedStoreCookie;
+  let redirectParam = (!redirectCookie || redirectCookie === "null" || redirectCookie === "undefined")?null:redirectCookie;
+  
+
+  if (hasStoreParam) {
+      const storeParam = currentUrl.searchParams.get("store");
+      // ✅ store 파라미터가 있으면 sessionStorage에 저장 (로그인 후 유지용)
+      if (!customerId) {
+          // ✅ 현재 페이지 URL을 저장 (로그인 후 돌아올 경로 유지)
+          
+          document.cookie = `storeCode=${storeParam}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          document.cookie = `redirectQrProdDetail=${window.location.pathname}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          
+          setTimeout(() => {
+            location.href = "/account/login";
+          }, 300);
+          
+          // Shopify 기본 로그인 페이지로 이동
+          
+      }
+      else{
+        // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능  
+        setStoreCode(storeParam);
+      }
+  } else if (storedStoreParam) {
+    if (customerId) {
+      // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능
+      setStoreCode(storedStoreParam);
+    }
+  }
+
+  function setStoreCode(storeParam){
+    let shop_name = "";
+    
+    let offlineShopScript = document.querySelector('.offline-shop-data');
+    if (offlineShopScript != null) {
+        const offlineShops = JSON.parse(offlineShopScript.textContent).offline_shops;
+
+        // shop_code에 해당하는 행(row)을 찾기
+        const targetShop = offlineShops.find(shop => shop.shop_code === storeParam);
+
+        if (targetShop) {
+            shop_name = targetShop.shop_name;
+        }
+    }
+
+    let url = "https://sidiz-shopify.sidiz.com/api/v1/search/qr-prod-detail"
+    
+    fetch(url, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json', // JSON 형식 지정
+        },
+        body: JSON.stringify({
+            "customerMd5Hash": customerMd5Hash,
+            "store_code": storeParam,
+            "store_name": shop_name
+        })
+    })
+    .then(response => {
+        
+        document.cookie = "storeCode=; path=/; Secure; SameSite=Lax; max-age=0";
+        document.cookie = "redirectQrProdDetail=; path=/; Secure; SameSite=Lax; max-age=0";
+        
+        if(redirectParam){
+          location.href = redirectParam;
+        }
+        const currentUrl = new URL(window.location.href);
+        if (currentUrl.searchParams.has("store")) {
+            currentUrl.searchParams.delete("store"); // store 파라미터 삭제
+
+            // URL을 변경하지만 페이지를 새로고침하지 않음
+            window.history.replaceState({}, document.title, currentUrl.toString());
+        }
+    });
+  }
+
+  const recentlyViewed = {
+    name: productName,
+    id: productId,
+    handle: productHandle
+  };
+
+  saveRecentlyViewedProduct(recentlyViewed);
+  
+  const productInfo = {
+    prod_name: productName,
+    prod_id: productId
+  };
+
+  // 로그인된 고객만 로컬 저장소에 제품을 저장
+  if (customerId) {
+    saveProductToLocalStorage(customerId, productInfo);
+  }
+});
+</script>
+
+
+
+<script>
+  const variantsData = [
+    
+      {
+        sku: "S51ACF1VG · A442BW",
+        id: "49461646557474",
+        color_options: [
+          {"name": "색상", "value": "그레이쉬베이지", "color_rgb": "#dbd7d1"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S51ACF1VG · A447BW",
+        id: "49461646590242",
+        color_options: [
+          {"name": "색상", "value": "그레이쉬그린", "color_rgb": "#b6baa9"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S51ACF1VG · A443BW",
+        id: "49461646623010",
+        color_options: [
+          {"name": "색상", "value": "그레이쉬핑크", "color_rgb": "#d0c1b7"}
+        ]
+      }
+      
+    
+  ];
+  const variantsAllOptionData = [
+    
+      {
+        sku: "S51ACF1VG-A442BW",
+        id: "49461646557474",
+        options: [
+          {"name": "색상", "value": "그레이쉬베이지"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S51ACF1VG-A447BW",
+        id: "49461646590242",
+        options: [
+          {"name": "색상", "value": "그레이쉬그린"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "S51ACF1VG-A443BW",
+        id: "49461646623010",
+        options: [
+          {"name": "색상", "value": "그레이쉬핑크"}
+        ]
+      }
+      
+    
+  ];
+</script>
+<script defer>
+    let icon_pw_show = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-show.svg?v=61838389088702437721747705927';
+    let icon_pw_unshow = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-unshow.svg?v=177080918668616523901747705925';
+</script>
+<script src="//kr.sidiz.com/cdn/shop/t/152/assets/bookmark.js?v=118576581409273616741753146757" defer></script>
+
+<script>
+  // PLUS ZERO: view_item
+  const viewItemData = {
+    item_id: "S51ACF1VG-A442BW",
+    item_name: "RINGO 링고 2세대",
+    item_brand: 'SIDIZ',
+    item_category: "STUDY",
+    img_url: "thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?v=1776744786"
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // 이전 ecommerce 데이터 초기화
+    dataLayer.push({ ecommerce: null });
+    
+    window.dataLayer.push({
+      event: 'view_item',
+      page_type: '제품 상세',
+      ecommerce: {
+        items: [viewItemData]
+      }
+    });
+  }, { once: true });
+</script>
+
+<div class="modal-360 hidden" data-variant-id="49461646557474">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_a45c6c76-3b52-418d-b156-2944721da2b2.jpg?crop=center&amp;v=1760507053" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_a45c6c76-3b52-418d-b156-2944721da2b2.jpg?crop=center&amp;v=1760507053&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_a45c6c76-3b52-418d-b156-2944721da2b2.jpg?crop=center&amp;v=1760507053&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_a45c6c76-3b52-418d-b156-2944721da2b2.jpg?crop=center&amp;v=1760507053&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_01_a40bf3e5-0ee3-4f2c-a08b-db5e1311254d.jpg?crop=center&amp;v=1785133615" alt="링고 2세대 국민초등학생의자 바른 자세와 집중력 향상 돕는 성장형 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_01_a40bf3e5-0ee3-4f2c-a08b-db5e1311254d.jpg?crop=center&amp;v=1785133615&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_01_a40bf3e5-0ee3-4f2c-a08b-db5e1311254d.jpg?crop=center&amp;v=1785133615&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_01_a40bf3e5-0ee3-4f2c-a08b-db5e1311254d.jpg?crop=center&amp;v=1785133615&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_02_1b07e6b5-82b5-4130-8077-482ee0b05d93.jpg?crop=center&amp;v=1785133622" alt="링고 2세대 국민초등학생의자 바른자세 집중력향상 기능" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_02_1b07e6b5-82b5-4130-8077-482ee0b05d93.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_02_1b07e6b5-82b5-4130-8077-482ee0b05d93.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_02_1b07e6b5-82b5-4130-8077-482ee0b05d93.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_03_440f85de-97e7-4e96-a346-b8d518ec37de.jpg?crop=center&amp;v=1785134424" alt="링고 2세대 국민초등학생의자 성장 맞춤 바른 자세 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_03_440f85de-97e7-4e96-a346-b8d518ec37de.jpg?crop=center&amp;v=1785134424&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_03_440f85de-97e7-4e96-a346-b8d518ec37de.jpg?crop=center&amp;v=1785134424&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_03_440f85de-97e7-4e96-a346-b8d518ec37de.jpg?crop=center&amp;v=1785134424&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_04_d454da0e-0881-4dff-9b70-9c1b163e3156.jpg?crop=center&amp;v=1785134424" alt="링고 2세대 국민초등학생의자 바른자세 성장기능" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_04_d454da0e-0881-4dff-9b70-9c1b163e3156.jpg?crop=center&amp;v=1785134424&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_04_d454da0e-0881-4dff-9b70-9c1b163e3156.jpg?crop=center&amp;v=1785134424&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_04_d454da0e-0881-4dff-9b70-9c1b163e3156.jpg?crop=center&amp;v=1785134424&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49461646590242">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622" alt="링고 2세대 국민초등학생의자 아이 자세교정 기능 포함" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_01_87903c5e-7c8d-4329-8756-4f8a7c1f94a9.jpg?crop=center&amp;v=1785134424" alt="성장하는 아이 체형에 맞춘 링고 2세대 국민 초등학생 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_01_87903c5e-7c8d-4329-8756-4f8a7c1f94a9.jpg?crop=center&amp;v=1785134424&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_01_87903c5e-7c8d-4329-8756-4f8a7c1f94a9.jpg?crop=center&amp;v=1785134424&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_01_87903c5e-7c8d-4329-8756-4f8a7c1f94a9.jpg?crop=center&amp;v=1785134424&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_03_8b855ab3-a4ed-4052-b4aa-31bf6b7fcaf7.jpg?crop=center&amp;v=1785134424" alt="링고 2세대 아이 체형 맞춤 국민초등학생 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_03_8b855ab3-a4ed-4052-b4aa-31bf6b7fcaf7.jpg?crop=center&amp;v=1785134424&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_03_8b855ab3-a4ed-4052-b4aa-31bf6b7fcaf7.jpg?crop=center&amp;v=1785134424&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_03_8b855ab3-a4ed-4052-b4aa-31bf6b7fcaf7.jpg?crop=center&amp;v=1785134424&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_04_66eb1fd0-cdef-4db6-aba5-b9dfe18ca8b8.jpg?crop=center&amp;v=1785133612" alt="국민초등학생의자 링고 2세대 성장 맞춤 디자인" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_04_66eb1fd0-cdef-4db6-aba5-b9dfe18ca8b8.jpg?crop=center&amp;v=1785133612&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_04_66eb1fd0-cdef-4db6-aba5-b9dfe18ca8b8.jpg?crop=center&amp;v=1785133612&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_04_66eb1fd0-cdef-4db6-aba5-b9dfe18ca8b8.jpg?crop=center&amp;v=1785133612&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_02_50de3747-70ec-49fa-b1eb-3780ba1d21fa.jpg?crop=center&amp;v=1785133612" alt="국민초등학생용 링고 2세대 성장 맞춤 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_02_50de3747-70ec-49fa-b1eb-3780ba1d21fa.jpg?crop=center&amp;v=1785133612&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_02_50de3747-70ec-49fa-b1eb-3780ba1d21fa.jpg?crop=center&amp;v=1785133612&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_02_50de3747-70ec-49fa-b1eb-3780ba1d21fa.jpg?crop=center&amp;v=1785133612&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49461646623010">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_5efc1d41-d795-44ac-a8bf-7bb64c332f84.jpg?crop=center&amp;v=1760507182" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_5efc1d41-d795-44ac-a8bf-7bb64c332f84.jpg?crop=center&amp;v=1760507182&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_5efc1d41-d795-44ac-a8bf-7bb64c332f84.jpg?crop=center&amp;v=1760507182&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_5efc1d41-d795-44ac-a8bf-7bb64c332f84.jpg?crop=center&amp;v=1760507182&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_01_66337292-cd30-4b5d-9d02-84ca7db1f02a.jpg?crop=center&amp;v=1785133616" alt="링고 2세대 초등학생 의자 바른 자세 집중력 향상 기능" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_01_66337292-cd30-4b5d-9d02-84ca7db1f02a.jpg?crop=center&amp;v=1785133616&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_01_66337292-cd30-4b5d-9d02-84ca7db1f02a.jpg?crop=center&amp;v=1785133616&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_01_66337292-cd30-4b5d-9d02-84ca7db1f02a.jpg?crop=center&amp;v=1785133616&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_03_bdb114d3-bc08-4752-a025-e9097402e337.jpg?crop=center&amp;v=1776744755" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_03_bdb114d3-bc08-4752-a025-e9097402e337.jpg?crop=center&amp;v=1776744755&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_03_bdb114d3-bc08-4752-a025-e9097402e337.jpg?crop=center&amp;v=1776744755&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_03_bdb114d3-bc08-4752-a025-e9097402e337.jpg?crop=center&amp;v=1776744755&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_04_d3311fae-6231-4c3f-9495-d56dca4d1b52.jpg?crop=center&amp;v=1776744746" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_04_d3311fae-6231-4c3f-9495-d56dca4d1b52.jpg?crop=center&amp;v=1776744746&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_04_d3311fae-6231-4c3f-9495-d56dca4d1b52.jpg?crop=center&amp;v=1776744746&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_04_d3311fae-6231-4c3f-9495-d56dca4d1b52.jpg?crop=center&amp;v=1776744746&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_02_0b8eae3d-ad7a-4aba-815c-e3c1a1ff4608.jpg?crop=center&amp;v=1785133622" alt="링고 2세대 국민초등학생의자 아이 체형 맞춤 바른 자세 유지" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_02_0b8eae3d-ad7a-4aba-815c-e3c1a1ff4608.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_02_0b8eae3d-ad7a-4aba-815c-e3c1a1ff4608.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_02_0b8eae3d-ad7a-4aba-815c-e3c1a1ff4608.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div>
+<template id="product-description"> #국민초등학생의자 링고는 그로잉 기능으로 자라나는 아이의 체형에 맞는 바른 자세를 유지시켜주고, 집중력 향상에 도움을 줍니다. </template>
+<div class="container">
+  
+  <product-page
+    id="product-template--24699214954786__configurator"
+    data-collection=""
+    data-id="9496943296802"
+    data-availability="true"
+    data-original-price="19900000"
+    data-login="false"
+    data-sku="S51ACF1VG-A442BW"
+    data-name="RINGO 링고 2세대"
+    data-category="STUDY"
+    data-variant-text="그레이쉬베이지"
+    data-variant-price="19900000"
+    data-compare-at-price="0"
+  >
+    
+    
+    
+
+    
+    
+    <div class="product-title--wrapper mobile">
+      <div class="wrapper--header">
+        <h1>RINGO 링고 2세대</h1>
+
+        <div class="button--sns">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="share">
+              <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+      <title class="product--sku">S51ACF1VG · A442BW</title>
+
+      
+        <div class="product-link--row">
+          <div class="button--compare btn-hover--bk" >
+            <a href="/pages/compare?product=RINGO">제품 비교</a>
+          </div>
+          <div class="button--compare btn-hover--bk">
+            <a href="/pages/product-guide-result?productCode=S51ACF1VG&searchbar=false">제품가이드</a>
+          </div>
+          <a class="product-review-anchor product-review-anchor--inline hidden" href="#prod_detail_review" data-product-review-anchor>
+            <span class="product-review-anchor__label">리뷰</span>
+            <span class="product-review-anchor__count" data-product-review-count>0</span>
+            <span class="product-review-anchor__suffix">개</span>
+          </a>
+        </div>
+      
+    </div>
+
+    <div class="product-gallery--wrapper">
+      
+      <div class="product-gallery web">
+        <div class="product-media--wrapper">
+          <div class="product-media--item variant-media"><img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786" alt="링고 2세대 국민초등학생 의자 바른 자세 집중력 향상" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786&amp;width=1200 1200w" loading="eager" class="" data-variant-id="49461646557474"><img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622" alt="링고 2세대 국민초등학생의자 아이 자세교정 기능 포함" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49461646590242"><img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622" alt="링고 2세대 국민초등학생의자 바른 자세 집중력 향상" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49461646623010"><div class="btn-img-360" data-variant-id="49461646557474">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item"><video playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted" preload="auto" poster="//kr.sidiz.com/cdn/shop/files/preview_images/2433086ab679486287836ae2fe26a522.thumbnail.0000000000_small.jpg?v=1735782617"><source src="//kr.sidiz.com/cdn/shop/videos/c/vp/2433086ab679486287836ae2fe26a522/2433086ab679486287836ae2fe26a522.HD-1080p-7.2Mbps-40394332.mp4?v=0" type="video/mp4"><img src="//kr.sidiz.com/cdn/shop/files/preview_images/2433086ab679486287836ae2fe26a522.thumbnail.0000000000_small.jpg?v=1735782617"></video></div><div class="product-media--item"><video playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted" preload="auto" poster="//kr.sidiz.com/cdn/shop/files/preview_images/c02161b076754f38ad373db6f521d9ca.thumbnail.0000000000_small.jpg?v=1735782617"><source src="//kr.sidiz.com/cdn/shop/videos/c/vp/c02161b076754f38ad373db6f521d9ca/c02161b076754f38ad373db6f521d9ca.HD-1080p-7.2Mbps-40394331.mp4?v=0" type="video/mp4"><img src="//kr.sidiz.com/cdn/shop/files/preview_images/c02161b076754f38ad373db6f521d9ca.thumbnail.0000000000_small.jpg?v=1735782617"></video></div><div class="product-media--item"><video playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted" preload="auto" poster="//kr.sidiz.com/cdn/shop/files/preview_images/52bdda23ff6e4750a090551ce0cbe0bd.thumbnail.0000000000_small.jpg?v=1735782617"><source src="//kr.sidiz.com/cdn/shop/videos/c/vp/52bdda23ff6e4750a090551ce0cbe0bd/52bdda23ff6e4750a090551ce0cbe0bd.HD-1080p-7.2Mbps-40394330.mp4?v=0" type="video/mp4"><img src="//kr.sidiz.com/cdn/shop/files/preview_images/52bdda23ff6e4750a090551ce0cbe0bd.thumbnail.0000000000_small.jpg?v=1735782617"></video></div>
+        </div>
+      </div>
+      <div class="product-gallery mobile swiper">
+        <div class="wrapper__contents swiper-wrapper">
+          
+
+          
+            <div class="product-media--item variant-media swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786" alt="링고 2세대 국민초등학생 의자 바른 자세 집중력 향상" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?crop=center&amp;v=1776744786&amp;width=1200 1200w" loading="eager" class="" data-variant-id="49461646557474"><img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622" alt="링고 2세대 국민초등학생의자 아이 자세교정 기능 포함" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A447B_00_000c3596-0e7c-4d21-887e-6c547d5af1b8.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49461646590242"><img src="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622" alt="링고 2세대 국민초등학생의자 바른 자세 집중력 향상" srcset="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A443B_00_462266ee-c633-4500-adb6-9ea6193ce264.jpg?crop=center&amp;v=1785133622&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49461646623010"><div class="btn-img-360" data-variant-id="49461646557474">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item swiper-slide"><video playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted" preload="auto" poster="//kr.sidiz.com/cdn/shop/files/preview_images/2433086ab679486287836ae2fe26a522.thumbnail.0000000000_small.jpg?v=1735782617"><source src="//kr.sidiz.com/cdn/shop/videos/c/vp/2433086ab679486287836ae2fe26a522/2433086ab679486287836ae2fe26a522.HD-1080p-7.2Mbps-40394332.mp4?v=0" type="video/mp4"><img src="//kr.sidiz.com/cdn/shop/files/preview_images/2433086ab679486287836ae2fe26a522.thumbnail.0000000000_small.jpg?v=1735782617"></video></div><div class="product-media--item swiper-slide"><video playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted" preload="auto" poster="//kr.sidiz.com/cdn/shop/files/preview_images/c02161b076754f38ad373db6f521d9ca.thumbnail.0000000000_small.jpg?v=1735782617"><source src="//kr.sidiz.com/cdn/shop/videos/c/vp/c02161b076754f38ad373db6f521d9ca/c02161b076754f38ad373db6f521d9ca.HD-1080p-7.2Mbps-40394331.mp4?v=0" type="video/mp4"><img src="//kr.sidiz.com/cdn/shop/files/preview_images/c02161b076754f38ad373db6f521d9ca.thumbnail.0000000000_small.jpg?v=1735782617"></video></div><div class="product-media--item swiper-slide"><video playsinline="playsinline" autoplay="autoplay" loop="loop" muted="muted" preload="auto" poster="//kr.sidiz.com/cdn/shop/files/preview_images/52bdda23ff6e4750a090551ce0cbe0bd.thumbnail.0000000000_small.jpg?v=1735782617"><source src="//kr.sidiz.com/cdn/shop/videos/c/vp/52bdda23ff6e4750a090551ce0cbe0bd/52bdda23ff6e4750a090551ce0cbe0bd.HD-1080p-7.2Mbps-40394330.mp4?v=0" type="video/mp4"><img src="//kr.sidiz.com/cdn/shop/files/preview_images/52bdda23ff6e4750a090551ce0cbe0bd.thumbnail.0000000000_small.jpg?v=1735782617"></video></div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="product-text--wrapper">
+    
+      <div class="product-title--wrapper web">
+        <div class="wrapper--header">
+          <h1>RINGO 링고 2세대</h1>
+
+          <div class="button--sns btn-hover--bk">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="share">
+                <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+        <title class="product--sku">S51ACF1VG · A442BW</title>
+
+        
+          <div class="product-link--row">
+            <div class="button--compare btn-hover--bk" >
+              <a href="/pages/compare?product=RINGO">제품 비교</a>
+            </div>
+            <div class="button--compare btn-hover--bk">
+              <a href="/pages/product-guide-result?productCode=S51ACF1VG&searchbar=false">제품가이드</a>
+            </div>
+            <a class="product-review-anchor product-review-anchor--inline hidden" href="#prod_detail_review" data-product-review-anchor>
+              <span class="product-review-anchor__label">리뷰</span>
+              <span class="product-review-anchor__count" data-product-review-count>0</span>
+              <span class="product-review-anchor__suffix">개</span>
+            </a>
+          </div>
+        
+
+      </div>
+      
+      
+        
+            <div
+              class="product-variant--wrapper"
+              
+              
+            >
+              <product-variants
+                data-main-product-variants
+                data-variants="1"
+                data-hide-variants="
+                  true
+                "
+                data-url="/products/ringo-gen2"
+                data-id="template--24699214954786__configurator"
+                data-style=""
+                
+                
+                
+                  data-has-variants
+                
+                
+              >
+                <script type="application/json">
+                  [
+                    
+                      {
+                        "title": "그레이쉬베이지",
+                        
+                        "available": true,
+                        "id": 49461646557474,
+                        "sku": "S51ACF1VG-A442BW",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["그레이쉬베이지"],
+                        "option1": "그레이쉬베이지",
+                        "option2": null,
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "택배",
+                            "assembly_type": "DIY",
+                            "description": "고객님이 직접 조립하는 DIY 제품입니다."
+                          },
+                        
+                        "expected_at": 3
+                      },
+                    
+                      {
+                        "title": "그레이쉬그린",
+                        
+                        "available": true,
+                        "id": 49461646590242,
+                        "sku": "S51ACF1VG-A447BW",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["그레이쉬그린"],
+                        "option1": "그레이쉬그린",
+                        "option2": null,
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "택배",
+                            "assembly_type": "DIY",
+                            "description": "고객님이 직접 조립하는 DIY 제품입니다."
+                          },
+                        
+                        "expected_at": 2
+                      },
+                    
+                      {
+                        "title": "그레이쉬핑크",
+                        
+                        "available": true,
+                        "id": 49461646623010,
+                        "sku": "S51ACF1VG-A443BW",
+                        "price": 19900000,
+                        "compare_at_price": 20900000,
+                        "special_price": 199000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["그레이쉬핑크"],
+                        "option1": "그레이쉬핑크",
+                        "option2": null,
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "택배",
+                            "assembly_type": "DIY",
+                            "description": "고객님이 직접 조립하는 DIY 제품입니다."
+                          },
+                        
+                        "expected_at": 3
+                      }
+                    
+                  ]
+                </script>
+                <div
+                  class="product-variants no-js-hidden"
+                  
+                  
+                >
+                  
+                    
+
+                    <div
+                      class="product-variant depth-1"
+                      data-option="color"
+                      data-js-product-variant
+                    >
+                      
+                        <span class="product-variant__name">색상</span>
+                      
+
+                      <div
+                        class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap"
+                        data-js-product-variant-container="radio"
+                      >
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699214954786__configurator"
+                              id="ringo-gen2-option-color-1-template--24699214954786__configurator"
+                              value="그레이쉬베이지"
+                              
+                                checked
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ringo-gen2-option-color-1-template--24699214954786__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="그레이쉬베이지"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">그레이쉬베이지</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699214954786__configurator"
+                              id="ringo-gen2-option-color-2-template--24699214954786__configurator"
+                              value="그레이쉬그린"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ringo-gen2-option-color-2-template--24699214954786__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="그레이쉬그린"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">그레이쉬그린</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699214954786__configurator"
+                              id="ringo-gen2-option-color-3-template--24699214954786__configurator"
+                              value="그레이쉬핑크"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="ringo-gen2-option-color-3-template--24699214954786__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="그레이쉬핑크"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">그레이쉬핑크</div>
+                            </label>
+                          </div>
+                        
+                      </div>
+                    </div>
+                  
+                </div>
+
+                <noscript>
+                  <label
+                    for="Variants-template--24699214954786__configurator"
+                    class="text-size--small"
+                    style="display:block;margin-bottom:.75rem"
+                  >변</label>
+                  <select
+                    name="id"
+                    id="Variants-template--24699214954786__configurator"
+                    class="productSelect"
+                    
+                    form="product-form-template--24699214954786__configurator"
+                  >
+                    
+                      <option
+                        
+                          selected="selected"
+                        
+                        
+                        value="49461646557474"
+                      >
+                        그레이쉬베이지
+                        
+                        - 199,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49461646590242"
+                      >
+                        그레이쉬그린
+                        
+                        - 199,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49461646623010"
+                      >
+                        그레이쉬핑크
+                        
+                        - 199,000
+                      </option>
+                    
+                  </select>
+                </noscript>
+              </product-variants>
+              <a class="product-review-anchor product-review-anchor--option hidden" href="#prod_detail_review" data-product-review-anchor>
+                <span class="product-review-anchor__label">리뷰</span>
+                <span class="product-review-anchor__count" data-product-review-count>0</span>
+                <span class="product-review-anchor__suffix">개 보기</span>
+              </a>
+            </div>
+
+          
+      
+        
+            <div class="product-price--wrapper" data-js-product-price-compact >
+              <div id="product-price-template--24699214954786__configurator" class="product-price">
+  <div class="product-discount--wrapper">
+    <div class="member--discount">
+      <div class="discount--title">회원 할인가</div>
+      <div class="discount--details">
+        <div class="discount--details-top">
+          <div class="product-discount--percent"></div>
+          <div class="product-price--best"></div>
+        </div>
+        <div class="product-price--original"></div>
+      </div>
+    </div>
+
+    <details class="max--discount">
+      <summary class="discount--header">
+        <div class="discount-header--content">
+          <div class="discount-header--text">
+            <div class="discount--title q--popup">
+              <span>최대 혜택가</span>
+              <div class="button--popup" data-type="price">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+              </div>
+            </div>
+            <div class="product-price--coupon"></div>
+          </div>
+
+          <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.1875 4.8125L7 9.625L11.8125 4.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="popup--wrapper hidden" data-type="price">
+          <div class="popup--content">
+            <ul>
+              <li>보유 쿠폰의 최대 할인 혜택이 적용된 금액입니다.</li>
+              <li>쿠폰은 주문 단계에서 적용/변경할 수 있습니다.</li>
+            </ul>
+          </div>
+          <div class="popup--close">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+          </div>
+        </div>
+      </summary>
+
+      
+      <div class="discount--body">
+        <div class="title">쿠폰 할인</div>
+        
+        <div class="coupon--wrapper"></div>
+      </div>
+    </details>
+  </div>
+</div>
+
+            </div>
+          
+      
+        
+            <div class="button--cardNoInterestInfo btn-hover--bk">
+              <a href="https://www.mainpay.co.kr/intFreeInfo/popup/all.do?mbr_no=116833">카드 무이자 정보</a>
+            </div>
+          
+      
+        
+            
+              <div class="product-complementary--wrapper" data-js-complementary-wrapper >
+                <div class="wrapper--header">
+                  <div class="title">별도 구매 (선택)</div>
+                </div>
+                <div class="wrapper--body">
+                  <div class="complementary--content">
+                    <div class="swiper product-complementary--swiper">
+                      <div class="swiper-wrapper">
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/ringo-2-cover">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_RINGO_SJC2___5F1D.jpg?crop=center&amp;v=1785134409" alt="링고 2세대 초등학생 의자 패브릭 커버 교체 모습" srcset="//kr.sidiz.com/cdn/shop/files/thum_RINGO_SJC2___5F1D.jpg?crop=center&amp;v=1785134409&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_RINGO_SJC2___5F1D.jpg?crop=center&amp;v=1785134409&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_RINGO_SJC2___5F1D.jpg?crop=center&amp;v=1785134409&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="링고 2세대 등/좌판 패브릭 커버"
+                                data-product-handle="ringo-2-cover"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "링고 2세대 등\/좌판 패브릭 커버",                                  "handle": "ringo-2-cover",                                  "url": "\/products\/ringo-2-cover",                                  "category": "EASY REPAIR",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "더스티그레이",                                              "id": 4461271351586,"rgb": "#e5e2d8"},{                                              "name": "더스티핑크",                                              "id": 4461272170786,"rgb": "#d0c1b7"},{                                              "name": "더스티그린",                                              "id": 4461272039714,"rgb": "#b6baa9"}]                                      }],                                  "variants": [{                                        "title": "더스티그레이",                                        "id": 49494633742626,                                        "sku": "S51ND2KG-5F1","inventory_quantity": 999399,                                        "available": true,                                        "price": 31000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_RINGO_SJC2___5F1D.jpg?v=1785134409",                                                                                "options": ["더스티그레이"],                                        "option1": "더스티그레이",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#e5e2d8"                                      },{                                        "title": "더스티핑크",                                        "id": 49494633775394,                                        "sku": "S51ND2KG-5F3","inventory_quantity": 999593,                                        "available": true,                                        "price": 31000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_RINGO_SJC2___5F3D.jpg?v=1745822322",                                                                                "options": ["더스티핑크"],                                        "option1": "더스티핑크",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#d0c1b7"                                      },{                                        "title": "더스티그린",                                        "id": 49494633808162,                                        "sku": "S51ND2KG-5F7","inventory_quantity": 999826,                                        "available": true,                                        "price": 31000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_RINGO_SJC2___5F7D.jpg?v=1785133622",                                                                                "options": ["더스티그린"],                                        "option1": "더스티그린",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#b6baa9"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">링고 2세대 등/좌판 패브릭 커버</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  <div class="discount-price">31,000원</div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/sitbreak-caster-b">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00V0KG_SG50_01_b2cb1526-0efc-4291-bbbf-b2b7f78f4ea8.jpg?crop=center&amp;v=1754365871" alt="싯브레이크 바퀴 B형 - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00V0KG_SG50_01_b2cb1526-0efc-4291-bbbf-b2b7f78f4ea8.jpg?crop=center&amp;v=1754365871&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00V0KG_SG50_01_b2cb1526-0efc-4291-bbbf-b2b7f78f4ea8.jpg?crop=center&amp;v=1754365871&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00V0KG_SG50_01_b2cb1526-0efc-4291-bbbf-b2b7f78f4ea8.jpg?crop=center&amp;v=1754365871&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="싯브레이크 바퀴 B형"
+                                data-product-handle="sitbreak-caster-b"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "싯브레이크 바퀴 B형",                                  "handle": "sitbreak-caster-b",                                  "url": "\/products\/sitbreak-caster-b",                                  "category": "EASY REPAIR",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "그레이",                                              "id": 4288285376802,"rgb": null}]                                      }],                                  "variants": [{                                        "title": "그레이",                                        "id": 50199183032610,                                        "sku": "S00V1KG-SG50","inventory_quantity": 997363,                                        "available": true,                                        "price": 25000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_CASTER-GLIDE_S00V0KG_SG50_01_b2cb1526-0efc-4291-bbbf-b2b7f78f4ea8.jpg?v=1754365871",                                                                                "options": ["그레이"],                                        "option1": "그레이",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": null                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">싯브레이크 바퀴 B형</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  <div class="discount-price">25,000원</div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/glide-b">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00G0KG_SG_01_958e0724-7aa4-404c-ad75-74e48a098ea3.jpg?crop=center&amp;v=1787151407" alt="시디즈 글라이드 B형 의자 바닥 고정용 부품" srcset="//kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00G0KG_SG_01_958e0724-7aa4-404c-ad75-74e48a098ea3.jpg?crop=center&amp;v=1787151407&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00G0KG_SG_01_958e0724-7aa4-404c-ad75-74e48a098ea3.jpg?crop=center&amp;v=1787151407&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_CASTER-GLIDE_S00G0KG_SG_01_958e0724-7aa4-404c-ad75-74e48a098ea3.jpg?crop=center&amp;v=1787151407&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="글라이드 B형"
+                                data-product-handle="glide-b"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "글라이드 B형",                                  "handle": "glide-b",                                  "url": "\/products\/glide-b",                                  "category": "EASY REPAIR",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "그레이",                                              "id": 4288282853666,"rgb": null}]                                      }],                                  "variants": [{                                        "title": "그레이",                                        "id": 50199183098146,                                        "sku": "S00G1KG-SG","inventory_quantity": 995191,                                        "available": true,                                        "price": 17000,                                        "special_price": "0",                                        "event_start_dt": "",                                        "event_end_dt": "",                                        "compare_at_price": "0",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_CASTER-GLIDE_S00G0KG_SG_01_958e0724-7aa4-404c-ad75-74e48a098ea3.jpg?v=1787151407",                                                                                "options": ["그레이"],                                        "option1": "그레이",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": null                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">글라이드 B형</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  <div class="discount-price">17,000원</div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/trevo">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_TREVO_WW_00.jpg?crop=center&amp;v=1745822421" alt="TREVO - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_TREVO_WW_00.jpg?crop=center&amp;v=1745822421&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_TREVO_WW_00.jpg?crop=center&amp;v=1745822421&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_TREVO_WW_00.jpg?crop=center&amp;v=1745822421&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="TREVO 트레보"
+                                data-product-handle="trevo"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "TREVO 트레보",                                  "handle": "trevo",                                  "url": "\/products\/trevo",                                  "category": "STUDY",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "화이트",                                              "id": 4375812964642,"rgb": "#eeeeee"},{                                              "name": "더스티핑크",                                              "id": 4345748193570,"rgb": "#dfcfc0"},{                                              "name": "더스티그린",                                              "id": 4345748226338,"rgb": "#b4baac"}]                                      }],                                  "variants": [{                                        "title": "화이트",                                        "id": 49403159085346,                                        "sku": "S40DNE0KK-WW","inventory_quantity": 999114,                                        "available": true,                                        "price": 145000,                                        "special_price": "145,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "155,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_TREVO_WW_00.jpg?v=1745822421",                                                                                "options": ["화이트"],                                        "option1": "화이트",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#eeeeee"                                      },{                                        "title": "더스티핑크",                                        "id": 49403159118114,                                        "sku": "S40DNE0KK-DSP","inventory_quantity": 999868,                                        "available": true,                                        "price": 145000,                                        "special_price": "145,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "155,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_TREVO_DSP_00.jpg?v=1745822422",                                                                                "options": ["더스티핑크"],                                        "option1": "더스티핑크",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#dfcfc0"                                      },{                                        "title": "더스티그린",                                        "id": 49403159150882,                                        "sku": "S40DNE0KK-DSG","inventory_quantity": 999882,                                        "available": true,                                        "price": 145000,                                        "special_price": "145,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "155,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_TREVO_DSG_00_44c19815-4521-4dfc-9128-e0f4dd2f7f23.jpg?v=1745822423",                                                                                "options": ["더스티그린"],                                        "option1": "더스티그린",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#b4baac"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">TREVO 트레보</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">145,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">155,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/fungus">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309" alt="FUNGUS - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?crop=center&amp;v=1745822309&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="FUNGUS 펑거스"
+                                data-product-handle="fungus"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "FUNGUS 펑거스",                                  "handle": "fungus",                                  "url": "\/products\/fungus",                                  "category": "SEAT BOOSTER",                                  "options": [{                                        "name": "옵션",                                        "position": 1,                                        "values": [{                                              "name": "펑거스",                                              "id": 4167580844322},{                                              "name": "펑거스 바퀴형",                                              "id": 4167588118818},{                                              "name": "펑거스 바퀴형(토트넘 에디션)",                                              "id": 4864265355554}]                                      },{                                        "name": "프레임",                                        "position": 2,                                        "values": [{                                              "name": "블랙",                                              "id": 4167580877090,"rgb": "#000000"},{                                              "name": "화이트",                                              "id": 4167582351650,"rgb": "#ffffff"}]                                      },{                                        "name": "색상",                                        "position": 3,                                        "values": [{                                              "name": "워터리블루",                                              "id": 4167580909858,"rgb": "#2f8699"},{                                              "name": "차콜",                                              "id": 4167581892898,"rgb": "#514f4f"},{                                              "name": "브릭오렌지",                                              "id": 4167582089506,"rgb": "#b64a26"},{                                              "name": "그레이",                                              "id": 4167582548258,"rgb": "#b1b1b1"},{                                              "name": "블루",                                              "id": 4167587201314,"rgb": "#405a70"},{                                              "name": "애쉬그린",                                              "id": 4167587594530,"rgb": "#92aaa6"},{                                              "name": "스타디움",                                              "id": 4864265716002,"rgb": "#2e3345"},{                                              "name": "7 SON",                                              "id": 4864265748770,"rgb": "#2e3345"},{                                              "name": "10 MADDISON",                                              "id": 4864265781538,"rgb": "#2e3345"},{                                              "name": "1 VICARIO",                                              "id": 4864265814306,"rgb": "#2e3345"},{                                              "name": "37 VAN DE VEN",                                              "id": 4864265847074,"rgb": "#2e3345"},{                                              "name": "14 GRAY",                                              "id": 4864265879842,"rgb": "#2e3345"}]                                      }],                                  "variants": [{                                        "title": "펑거스 \/ 블랙 \/ 워터리블루",                                        "id": 49189318852898,                                        "sku": "M130-454","inventory_quantity": 999972,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130Y_454_00_7fcf680b-8f48-4135-aaf2-6e2d3378fa72.jpg?v=1745822309",                                                                                "options": ["펑거스","블랙","워터리블루"],                                        "option1": "펑거스",                                        "option2": "블랙",                                        "option3": "워터리블루",                                        "frame_rgb": "#000000",                                        "color_rgb": "#2f8699"                                      },{                                        "title": "펑거스 \/ 블랙 \/ 차콜",                                        "id": 49189319803170,                                        "sku": "M130-456","inventory_quantity": 999964,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130_456_00_3963bb03-faa1-4b78-9b76-5328a1b4093a.jpg?v=1785134412",                                                                                "options": ["펑거스","블랙","차콜"],                                        "option1": "펑거스",                                        "option2": "블랙",                                        "option3": "차콜",                                        "frame_rgb": "#000000",                                        "color_rgb": "#514f4f"                                      },{                                        "title": "펑거스 \/ 블랙 \/ 브릭오렌지",                                        "id": 49189319868706,                                        "sku": "M130-458","inventory_quantity": 999977,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130_458_00_8f65569d-2a81-4b4a-bb1c-9e8069094bca.jpg?v=1776732479",                                                                                "options": ["펑거스","블랙","브릭오렌지"],                                        "option1": "펑거스",                                        "option2": "블랙",                                        "option3": "브릭오렌지",                                        "frame_rgb": "#000000",                                        "color_rgb": "#b64a26"                                      },{                                        "title": "펑거스 \/ 화이트 \/ 그레이",                                        "id": 49189319999778,                                        "sku": "MN130-451L","inventory_quantity": 999941,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130_451L_00_c1e761b8-d6f6-46db-b3ec-34a728ebedbe.jpg?v=1745822306",                                                                                "options": ["펑거스","화이트","그레이"],                                        "option1": "펑거스",                                        "option2": "화이트",                                        "option3": "그레이",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#b1b1b1"                                      },{                                        "title": "펑거스 \/ 화이트 \/ 블루",                                        "id": 49189320327458,                                        "sku": "MN130-454B","inventory_quantity": 999966,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130_454B_00_86fa1eae-68b6-406c-99f9-590e696a6f76.jpg?v=1785134412",                                                                                "options": ["펑거스","화이트","블루"],                                        "option1": "펑거스",                                        "option2": "화이트",                                        "option3": "블루",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#405a70"                                      },{                                        "title": "펑거스 \/ 화이트 \/ 애쉬그린",                                        "id": 49189327667490,                                        "sku": "MN130-457L","inventory_quantity": 999970,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_457L_00_19bf248a-3fc2-4620-84bd-979371aa6db9.jpg?v=1745822315",                                                                                "options": ["펑거스","화이트","애쉬그린"],                                        "option1": "펑거스",                                        "option2": "화이트",                                        "option3": "애쉬그린",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#92aaa6"                                      },{                                        "title": "펑거스 바퀴형 \/ 블랙 \/ 워터리블루",                                        "id": 49189327929634,                                        "sku": "M130Y-454","inventory_quantity": 999986,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130_454_00_acd68f3f-2563-4ad1-8018-ca7d0a102264.jpg?v=1745822302",                                                                                "options": ["펑거스 바퀴형","블랙","워터리블루"],                                        "option1": "펑거스 바퀴형",                                        "option2": "블랙",                                        "option3": "워터리블루",                                        "frame_rgb": "#000000",                                        "color_rgb": "#2f8699"                                      },{                                        "title": "펑거스 바퀴형 \/ 블랙 \/ 차콜",                                        "id": 49189328027938,                                        "sku": "M130Y-456","inventory_quantity": 999973,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130Y_456_00_ed7ec138-14c0-4131-8e68-ab07b7510248.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형","블랙","차콜"],                                        "option1": "펑거스 바퀴형",                                        "option2": "블랙",                                        "option3": "차콜",                                        "frame_rgb": "#000000",                                        "color_rgb": "#514f4f"                                      },{                                        "title": "펑거스 바퀴형 \/ 블랙 \/ 브릭오렌지",                                        "id": 49189328159010,                                        "sku": "M130Y-458","inventory_quantity": 999974,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_M130Y_458_00_5d07ae31-6f31-4b35-be75-7829806fb468.jpg?v=1776732483",                                                                                "options": ["펑거스 바퀴형","블랙","브릭오렌지"],                                        "option1": "펑거스 바퀴형",                                        "option2": "블랙",                                        "option3": "브릭오렌지",                                        "frame_rgb": "#000000",                                        "color_rgb": "#b64a26"                                      },{                                        "title": "펑거스 바퀴형 \/ 화이트 \/ 그레이",                                        "id": 49189328978210,                                        "sku": "MN130Y-451L","inventory_quantity": 999910,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_451L_00_35d30ede-a1e8-4ba1-8e90-27f1c073afb8.jpg?v=1776732493",                                                                                "options": ["펑거스 바퀴형","화이트","그레이"],                                        "option1": "펑거스 바퀴형",                                        "option2": "화이트",                                        "option3": "그레이",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#b1b1b1"                                      },{                                        "title": "펑거스 바퀴형 \/ 화이트 \/ 블루",                                        "id": 49189329305890,                                        "sku": "MN130Y-454B","inventory_quantity": 999960,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_454B_00_12d45277-c586-4e2f-8cd7-245a2ef7b667.jpg?v=1776732478",                                                                                "options": ["펑거스 바퀴형","화이트","블루"],                                        "option1": "펑거스 바퀴형",                                        "option2": "화이트",                                        "option3": "블루",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#405a70"                                      },{                                        "title": "펑거스 바퀴형 \/ 화이트 \/ 애쉬그린",                                        "id": 49189329404194,                                        "sku": "MN130Y-457L","inventory_quantity": 999945,                                        "available": true,                                        "price": 119000,                                        "special_price": "119,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "129,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_MN130Y_457L_00_87183940-1344-45c4-a0bc-6a6645997b88.jpg?v=1785134409",                                                                                "options": ["펑거스 바퀴형","화이트","애쉬그린"],                                        "option1": "펑거스 바퀴형",                                        "option2": "화이트",                                        "option3": "애쉬그린",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#92aaa6"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 스타디움",                                        "id": 50016894484770,                                        "sku": "MN130YCC4-TOT","inventory_quantity": 999977,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_Stadium_02_7d43f2cd-36cc-4aee-9ae7-518571ffae43.jpg?v=1776732491",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","스타디움"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "스타디움",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 7 SON",                                        "id": 50016894517538,                                        "sku": "MN130YCC4-TOT07S","inventory_quantity": 0,                                        "available": false,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_7SON_02_68cf36b5-19e3-4d3f-97b7-670154505e00.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","7 SON"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "7 SON",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 10 MADDISON",                                        "id": 50016894550306,                                        "sku": "MN130YCC4-TOT10M","inventory_quantity": 999993,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_10MADDISON_02_5bd6c772-ba04-499b-8298-ea8bf5804d74.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","10 MADDISON"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "10 MADDISON",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 1 VICARIO",                                        "id": 50016894583074,                                        "sku": "MN130YCC4-TOT01V","inventory_quantity": 999996,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_1VICARIO_02_ae63fdfd-d6b5-434e-8792-46410af87181.jpg?v=1776732488",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","1 VICARIO"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "1 VICARIO",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 37 VAN DE VEN",                                        "id": 50016894615842,                                        "sku": "MN130YCC4-TOT37V","inventory_quantity": 999997,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_37VANDEVEN_02_25752418-355d-47a4-a53e-2bd8ecf9922e.jpg?v=1776732495",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","37 VAN DE VEN"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "37 VAN DE VEN",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      },{                                        "title": "펑거스 바퀴형(토트넘 에디션) \/ 화이트 \/ 14 GRAY",                                        "id": 50016894648610,                                        "sku": "MN130YCC4-TOT14G","inventory_quantity": 999998,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_14GRAY_02_990705e1-6c4f-426d-84fd-f30449a36605.jpg?v=1785134412",                                                                                "options": ["펑거스 바퀴형(토트넘 에디션)","화이트","14 GRAY"],                                        "option1": "펑거스 바퀴형(토트넘 에디션)",                                        "option2": "화이트",                                        "option3": "14 GRAY",                                        "frame_rgb": "#ffffff",                                        "color_rgb": "#2e3345"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">FUNGUS 펑거스</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">99,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">143,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/totteham-fungus">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936" alt="토트넘 홋스퍼 아이덴티티 담은 시디즈X토트넘 펑거스 감각적 그래픽 디자인 의자" srcset="//kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_FUNGUS_Stadium_02.jpg?crop=center&amp;v=1779602936&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="시디즈X토트넘 홋스퍼 펑거스"
+                                data-product-handle="totteham-fungus"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "시디즈X토트넘 홋스퍼 펑거스",                                  "handle": "totteham-fungus",                                  "url": "\/products\/totteham-fungus",                                  "category": "SEAT BOOSTER",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "스타디움",                                              "id": 4851387793698,"rgb": "#2e3345"},{                                              "name": "10 MADDISON",                                              "id": 4851387859234,"rgb": "#2e3345"},{                                              "name": "1 VICARIO",                                              "id": 4851387892002,"rgb": "#2e3345"},{                                              "name": "37 VAN DE VEN",                                              "id": 4851387924770,"rgb": "#2e3345"},{                                              "name": "14 GRAY",                                              "id": 4851387957538,"rgb": "#2e3345"}]                                      }],                                  "variants": [{                                        "title": "스타디움",                                        "id": 50002113986850,                                        "sku": "MN130YCC4-TOT","inventory_quantity": 999975,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_Stadium_02.jpg?v=1779602936",                                                                                "options": ["스타디움"],                                        "option1": "스타디움",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "10 MADDISON",                                        "id": 50002114052386,                                        "sku": "MN130YCC4-TOT10M","inventory_quantity": 999999,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_10MADDISON_02.jpg?v=1779602898",                                                                                "options": ["10 MADDISON"],                                        "option1": "10 MADDISON",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "1 VICARIO",                                        "id": 50002114085154,                                        "sku": "MN130YCC4-TOT01V","inventory_quantity": 999998,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_1VICARIO_02.jpg?v=1779602900",                                                                                "options": ["1 VICARIO"],                                        "option1": "1 VICARIO",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "37 VAN DE VEN",                                        "id": 50002114117922,                                        "sku": "MN130YCC4-TOT37V","inventory_quantity": 999999,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_37VANDEVEN_02.jpg?v=1779602898",                                                                                "options": ["37 VAN DE VEN"],                                        "option1": "37 VAN DE VEN",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      },{                                        "title": "14 GRAY",                                        "id": 50002114150690,                                        "sku": "MN130YCC4-TOT14G","inventory_quantity": 99995,                                        "available": true,                                        "price": 99000,                                        "special_price": "99,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "143,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_FUNGUS_14GRAY_02.jpg?v=1779602899",                                                                                "options": ["14 GRAY"],                                        "option1": "14 GRAY",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": "#2e3345"                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">시디즈X토트넘 홋스퍼 펑거스</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">99,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">143,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                      </div>
+                    </div>
+                    
+                      <div class="complementary-navigation">
+                        <div class="navigation-prev">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="left">
+                              <path id="Vector" d="M9.1875 2.1875L4.375 7L9.1875 11.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+                            </g>
+                          </svg>
+                        </div>
+                        
+                        <div class="navigation-next">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="right">
+                              <path id="Vector" d="M4.8125 2.1875L9.625 7L4.8125 11.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+                            </g>
+                          </svg>
+                        </div>
+                      </div>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+      
+        
+            <div class="product-buttons--wrapper">
+              <div class="product-favorite">
+                <div class="button-favorite" data-item-name="RINGO 링고 2세대" data-item-category="STUDY" data-item-img="//kr.sidiz.com/cdn/shop/files/thum_ringo_SJC2_A442BW_00_f76b89d3-304f-4353-a5a6-c47d15966900.jpg?v=1776744786">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-line-wh-28.svg?v=149835505164352560671747705926" alt="북마크 아이콘" width="28" height="28"
+                        data-bookmark="false" data-id="9496943296802" data-handle="ringo-gen2" 
+                        onclick="addBookmark(event.target)" class="bookmark-false">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-solid-wh-28.svg?v=32384455147906168021747705924" alt="북마크 아이콘" width="28" height="28" 
+                        data-bookmark="true" data-id="9496943296802" data-handle="ringo-gen2" 
+                        onclick="removeBookmark(event.target)" class="bookmark-true hidden"> 
+                </div>
+              </div>
+
+              <div class="product-actions" >
+                <product-form
+                  id="add-to-cart-template--24699214954786__configurator"
+                  class="product-form"
+                  data-ajax-cart
+                  data-js-product-form
+                >
+                  <form method="post" action="/cart/add" id="product-form-template--24699214954786__configurator" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product" /><input type="hidden" name="utf8" value="✓" />
+                    <input type="hidden" name="id" value="49461646557474">
+                    <div class="product__cart-functions">
+                      <div class="button__cart-div">
+                        <button
+                          type="submit"
+                          name="add"
+                          class="
+                            add-to-cart button button--solid button--product button--loader button--move
+                            
+                            
+                          "
+                          data-js-product-add-to-cart
+                          data-main-product-add-to-cart
+                        >
+                          <span class="button__text" data-js-product-add-to-cart-text>
+                            장바구니 담기
+                          </span>
+                          <span class="button__preloader">
+                            <svg class="button__preloader-element" viewBox="25 25 50 50">
+                              <circle cx="50" cy="50" r="20" fill="none" stroke-width="4"/>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  <input type="hidden" name="product-id" value="9496943296802" /><input type="hidden" name="section-id" value="template--24699214954786__configurator" /></form>
+                </product-form>
+              </div>
+            </div>
+            
+          
+      
+        
+            
+            
+
+          
+      
+        
+            
+            
+            <div class="product-delivery-and-warranty--wrapper" >
+              <div class="product-delivery--wrapper">
+                <div class="delivery--header">
+                  <div class="delivery--title">배송 정보</div>
+                </div>
+
+                <div class="delivery--body">
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>예상 배송일</span>
+                      <div class="button--popup" data-type="deli_date">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="expected-at"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_date">
+                      <div class="popup--content">
+                        <ul>
+                          <li>
+                            <span>수도권 평균 배송일 기준으로 산정된 예상 배송일이며 지역 및 재고 상황에 따라 달라질 수 있습니다.</span>
+                          </li>
+                          <li>
+                            <span>실제 배송일은 주문 완료 후 확인할 수 있습니다.</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>배송 유형</span>
+                      <div class="button--popup" data-type="deli_type">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="delivery-type"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_type">
+                      <div class="popup--content">
+                        <span>제주도는 소비자가의 4% 추가 배송비가 부과됩니다.</span>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title" data-detail="assembly-type"></div>
+                    <div class="data--text" data-detail="description"></div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="product-warranty--wrapper">
+                <div class="product--data warranty--period">
+                  <div class="data--title">품질보증</div>
+                  <div class="data--text">5년</div>
+                </div>
+              </div>
+            </div>
+
+          
+      
+        
+            <div class="product-announcement--wrapper" >
+              <div class="announcement--title">품질보증 정책 안내</div>
+              <a class="announcement--button" href="https://kr.sidiz.com/pages/product-registration">바로가기</a>
+            </div>
+        
+      
+        
+            <div class="notice--title product-notice--title">구매 전 확인사항</div>
+            <div id="notice_TAHBDn" class="product-notice--wrapper" >
+              
+                <div class="notice--sub-title product-notice--sub-title">발받침&amp;우레탄 바퀴 포함</div>
+              
+              
+                <div class="notice--image">
+                  <img src="//kr.sidiz.com/cdn/shop/files/ringo2_front_notice_2.jpg?crop=center&amp;v=1760505673" alt="" srcset="//kr.sidiz.com/cdn/shop/files/ringo2_front_notice_2.jpg?crop=center&amp;v=1760505673&amp;width=352 352w">
+                </div>
+              
+
+              <div class="notice--content rich-text-area"><div class="size-15">발받침과 우레탄 바퀴 기본 구성품에 포함되어 있습니다.</div></div>
+
+              <style data-shopify>
+                #notice_TAHBDn {
+                  background-color: #eaedf0;
+                }
+                #notice_TAHBDn .notice--title {
+                  color: #000000;
+                }
+                #notice_TAHBDn .notice--content {
+                  color: #434548;
+                }
+              </style>
+            </div>
+          
+      
+        
+            <div class="notice--title product-notice--title"></div>
+            <div id="notice_GQ8PQx" class="product-notice--wrapper" >
+              
+                <div class="notice--sub-title product-notice--sub-title">표면자국 안내</div>
+              
+              
+                <div class="notice--image">
+                  <img src="//kr.sidiz.com/cdn/shop/files/TREVO_6eb22018-16b5-4b9c-b436-c47b4ae28365.jpg?crop=center&amp;v=1746592819" alt="" srcset="//kr.sidiz.com/cdn/shop/files/TREVO_6eb22018-16b5-4b9c-b436-c47b4ae28365.jpg?crop=center&amp;v=1746592819&amp;width=352 352w">
+                </div>
+              
+
+              <div class="notice--content rich-text-area"><div class="size-13">해당 흔적은 제품 제작 시 원료가 주입되는 자연스러운 공정 자국입니다. 제품의 기능이나 내구성과는 무관한 정상 제품이오니 안심하고 사용하셔도 됩니다.</div></div>
+
+              <style data-shopify>
+                #notice_GQ8PQx {
+                  background-color: #eaedf0;
+                }
+                #notice_GQ8PQx .notice--title {
+                  color: #000000;
+                }
+                #notice_GQ8PQx .notice--content {
+                  color: #434548;
+                }
+              </style>
+            </div>
+          
+      
+        
+            <div class="product-basic-info--wrapper" >
+              <details>
+                <summary class="basic-info--header">
+                  <div class="basic-info--title">BASIC INFO</div>
+
+                  <div class="arrow">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_7818_13448)">
+                        <path d="M13 4L7 10L1 4" stroke="#434548" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_7818_13448">
+                          <rect width="14" height="14" fill="white" transform="translate(14) rotate(90)"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </summary>
+
+                <div class="basic-info--body">
+                  <div class="product--data">
+                    <div class="data--title">제품명</div>
+                    <div class="data--text">시디즈 링고 초등학생 의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">KC 인증필유무</div>
+                    <div class="data--text">KC 어린이제품 안전 특별법</div>
+                  </div>
+                  <div class="product--data color--data">
+                    <div class="data--title">색상</div>
+                    <div class="data--text">
+                      <ul>
+                        
+                          <li>그레이쉬베이지</li>
+                        
+                          <li>그레이쉬그린</li>
+                        
+                          <li>그레이쉬핑크</li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">구성품</div>
+                    <div class="data--text">초등학생 의자, 어린이 의자, 학생 의자, 초등 의자, 공부 의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">주요 소재</div>
+                    <div class="data--text">합성가죽, 발포스폰지, 플라스틱, 폴리우레탄, STEEL</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조사</div>
+                    <div class="data--text">시디즈VN</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조국</div>
+                    <div class="data--text">베트남</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">크기</div>
+                    <div class="data--text">상세페이지 참조</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">배송비</div>
+                    <div class="data--text">무료배송(제주도 추가 배송비 부과)</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">품질 보증 기준</div>
+                    <div class="data--text">5년</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">AS 책임자 및 연락처</div>
+                    <div class="data--text">컨택센터 1577-5674</div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          
+      
+    </div>
+  </product-page>
+</div>
+
+<script>
+  const PRODUCT_GUIDE_FILTER_ENDPOINT = "https://sidiz-shopify.sidiz.com/metaobject/filter/get";
+  const pageProductCode = "S51ACF1VG";
+
+  async function fetchHasGuideByProductCode(productCode) {
+    if (!productCode) {
+      return false;
+    }
+
+    try {
+      const response = await fetch(PRODUCT_GUIDE_FILTER_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          type: ["product_guide_code_mapping"],
+          filter_key: "product_code",
+          filter_value: productCode,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error(`[product-guide] Filter API error: ${response.status}`);
+        return false;
+      }
+
+      const result = await response.json();
+      if (result?.success && Array.isArray(result.data)) {
+        return result.data.length > 0;
+      }
+    } catch (error) {
+      console.error("[product-guide] Failed to fetch guide mapping:", error);
+    }
+
+    return false;
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const hasGuide = await fetchHasGuideByProductCode(pageProductCode);
+
+    let findYourFitBtn = document.querySelector('.find-your-fit-btn');
+    if(findYourFitBtn){
+      if(hasGuide) {
+        findYourFitBtn.classList.remove('hidden');
+        findYourFitBtn.querySelector('a').setAttribute('href', `/pages/product-guide-result?productCode=${encodeURIComponent(pageProductCode)}&searchbar=true`);
+      }
+      else {
+        findYourFitBtn.classList.add('hidden');
+      }
+    }
+    document.querySelectorAll('a[data-popup-url]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const url = this.dataset.popupUrl;
+      const popupType = this.dataset.popupType;
+
+      const popup = window.open(
+        url,
+        `popup_${popupType}`,
+        'scrollbars=yes,resizable=yes'
+      );
+
+      if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+        alert("팝업 차단이 설정되어 있습니다. 팝업을 허용해주세요.");
+      }
+    });
+  });
+  })
+</script>
+
+
+</section>
