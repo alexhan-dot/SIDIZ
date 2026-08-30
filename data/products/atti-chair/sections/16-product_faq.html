@@ -1,0 +1,85 @@
+<section id="shopify-section-template--24699216003362__product_faq_pFJHYe" class="shopify-section section-product-faq section-product-information"><div class="container">
+  <div class="wrapper">
+    <div class="wrapper--header">
+        <style data-shopify>
+          .section-product-faq .title { margin: 0; padding: 0; }
+        </style>
+        
+        <h2 class="title">FAQ</h2>
+          
+    </div>
+      <div class="wrapper--body">
+        
+          <div class="information-list">
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">몇 살까지 사용 가능한가요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">아띠 시리즈의 권장 사용 연령은 만 18개월 부터 만 5세 입니다. 다만, 아이 성장 속도에 따라 다를 수 있는 점 참고해주세요.</div></div>
+                </div>
+              </div>
+            
+              <div class="information-item" >
+                <div class="item--text">
+                  
+                  <h3 class="title">직접 조립해야 하나요?</h3>
+                    
+                  <div class="description rich-text-area"><div class="size-15">아띠 의자와 아띠 책상은 직접 조립해야하는 DIY 제품입니다.</div></div>
+                </div>
+              </div>
+            
+          </div>
+        
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    (function() {
+      // 현재 섹션 FAQ 블록 + product-information에서 모은 블록(window.__faqBlocks) 통합
+      const ownFaqs = [{
+          name: "몇 살까지 사용 가능한가요?",
+          answer: "아띠 시리즈의 권장 사용 연령은 만 18개월 부터 만 5세 입니다. 다만, 아이 성장 속도에 따라 다를 수 있는 점 참고해주세요."
+        },
+{
+          name: "직접 조립해야 하나요?",
+          answer: "아띠 의자와 아띠 책상은 직접 조립해야하는 DIY 제품입니다."
+        }
+];
+
+      const extraFaqs = Array.isArray(window.__faqBlocks) ? window.__faqBlocks : [];
+      const allFaqs = [...ownFaqs, ...extraFaqs].filter(q => q && q.name && q.answer);
+      if (allFaqs.length === 0) return;
+
+      const payload = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": allFaqs.map(q => ({
+          "@type": "Question",
+          "name": q.name,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": q.answer
+          }
+        }))
+      };
+
+      const scriptId = "merged-faq-schema-template--24699216003362__product_faq_pFJHYe";
+      const existing = document.getElementById(scriptId);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(payload);
+      document.head.appendChild(script);
+    })();
+  </script>
+
+
+
+</section>

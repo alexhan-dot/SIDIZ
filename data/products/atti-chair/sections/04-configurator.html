@@ -1,0 +1,1249 @@
+<section id="shopify-section-template--24699216003362__configurator" class="shopify-section mount-product-page mount-show-more section-product-configurator"><!-- NAVER 상품상세(view_product) SCRIPT -->
+<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script type='text/javascript'>
+if(window.wcs){
+  window.scriptInfo = {
+    id: "9526832005410", // (필수) 상품 ID
+    name: "ATTI 아띠 의자", // 상품명
+    category: "유아의자", // 카테고리명 (없으면 기본값)
+    quantity: 1, // 기본 수량
+    payAmount: 73000, // 제품 가격 (콤마 제거)
+    option: "소이밀크" // 기본 옵션명
+  }
+  
+  if(!wcs_add) var wcs_add = {};
+  wcs_add["wa"] = "s_29fd958c4603"; 
+
+  var _conv = {};
+  _conv.type = 'view_product'; // (필수)
+  _conv.items = [scriptInfo];
+
+  wcs.trans(_conv);
+}
+</script>
+<!-- NAVER 상품상세(view_product) SCRIPT END -->
+
+<script>
+  // 로그인 여부와 제품 정보를 확인한 후 로컬 저장소에 저장하는 함수
+function saveProductToLocalStorage(customerId, productInfo) {
+  if (!customerId) {
+    return; // 로그인되지 않은 경우 실행하지 않음
+  }
+
+  // 로컬 저장소에서 기존 관심 제품 목록을 가져옴 (사용자별로 저장)
+  let storedData = JSON.parse(localStorage.getItem('wishlistProducts')) || {};
+
+  // 해당 고객 ID에 맞는 데이터를 찾음
+  let wishlist = storedData[customerId] || [];
+
+  // 이미 목록에 있는 제품인지 확인 (prod_id로 체크)
+  const productIndex = wishlist.findIndex(item => item.prod_id === productInfo.prod_id);
+
+  // 목록에 있으면 기존 항목을 제거하고 최상단으로 이동
+  if (productIndex !== -1) {
+    wishlist.splice(productIndex, 1);
+  }
+
+  // 새로운 제품을 최상단에 추가
+  wishlist.unshift(productInfo);
+
+  // 갱신된 데이터를 로컬 저장소에 다시 저장
+  storedData[customerId] = wishlist;
+  localStorage.setItem('wishlistProducts', JSON.stringify(storedData));
+}
+
+// 최근 본 제품 ID를 로컬 스토리지에 저장하는 함수
+function saveRecentlyViewedProduct(recentlyViewed) {
+  localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
+}
+
+// 페이지 로드 시 실행되는 함수
+document.addEventListener('DOMContentLoaded', function() {
+  const productName = "ATTI 아띠 의자";    // 현재 제품의 이름 가져오기
+  const productId = "9526832005410";         // 현재 제품의 ID 가져오기
+  const productHandle = "atti-chair"; // 현재 제품의 핸들 가져오기
+
+  // 현재 URL 가져오기
+  const currentUrl = new URL(window.location.href);
+  const hasStoreParam = currentUrl.searchParams.has("store"); // "store" 키 존재 여부 확인
+  
+  let storedStoreCookie = getCookie("storeCode");
+  let redirectCookie = getCookie("redirectQrProdDetail");
+
+  let storedStoreParam = (!storedStoreCookie || storedStoreCookie === "null" || storedStoreCookie === "undefined")?null:storedStoreCookie;
+  let redirectParam = (!redirectCookie || redirectCookie === "null" || redirectCookie === "undefined")?null:redirectCookie;
+  
+
+  if (hasStoreParam) {
+      const storeParam = currentUrl.searchParams.get("store");
+      // ✅ store 파라미터가 있으면 sessionStorage에 저장 (로그인 후 유지용)
+      if (!customerId) {
+          // ✅ 현재 페이지 URL을 저장 (로그인 후 돌아올 경로 유지)
+          
+          document.cookie = `storeCode=${storeParam}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          document.cookie = `redirectQrProdDetail=${window.location.pathname}; path=/; Secure; SameSite=Lax; max-age=${24 * 60 * 60}`;
+          
+          setTimeout(() => {
+            location.href = "/account/login";
+          }, 300);
+          
+          // Shopify 기본 로그인 페이지로 이동
+          
+      }
+      else{
+        // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능  
+        setStoreCode(storeParam);
+      }
+  } else if (storedStoreParam) {
+    if (customerId) {
+      // ✅ store 파라미터가 없어도 sessionStorage에 저장된 값이 있으면 활용 가능
+      setStoreCode(storedStoreParam);
+    }
+  }
+
+  function setStoreCode(storeParam){
+    let shop_name = "";
+    
+    let offlineShopScript = document.querySelector('.offline-shop-data');
+    if (offlineShopScript != null) {
+        const offlineShops = JSON.parse(offlineShopScript.textContent).offline_shops;
+
+        // shop_code에 해당하는 행(row)을 찾기
+        const targetShop = offlineShops.find(shop => shop.shop_code === storeParam);
+
+        if (targetShop) {
+            shop_name = targetShop.shop_name;
+        }
+    }
+
+    let url = "https://sidiz-shopify.sidiz.com/api/v1/search/qr-prod-detail"
+    
+    fetch(url, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json', // JSON 형식 지정
+        },
+        body: JSON.stringify({
+            "customerMd5Hash": customerMd5Hash,
+            "store_code": storeParam,
+            "store_name": shop_name
+        })
+    })
+    .then(response => {
+        
+        document.cookie = "storeCode=; path=/; Secure; SameSite=Lax; max-age=0";
+        document.cookie = "redirectQrProdDetail=; path=/; Secure; SameSite=Lax; max-age=0";
+        
+        if(redirectParam){
+          location.href = redirectParam;
+        }
+        const currentUrl = new URL(window.location.href);
+        if (currentUrl.searchParams.has("store")) {
+            currentUrl.searchParams.delete("store"); // store 파라미터 삭제
+
+            // URL을 변경하지만 페이지를 새로고침하지 않음
+            window.history.replaceState({}, document.title, currentUrl.toString());
+        }
+    });
+  }
+
+  const recentlyViewed = {
+    name: productName,
+    id: productId,
+    handle: productHandle
+  };
+
+  saveRecentlyViewedProduct(recentlyViewed);
+  
+  const productInfo = {
+    prod_name: productName,
+    prod_id: productId
+  };
+
+  // 로그인된 고객만 로컬 저장소에 제품을 저장
+  if (customerId) {
+    saveProductToLocalStorage(customerId, productInfo);
+  }
+});
+</script>
+
+
+
+<script>
+  const variantsData = [
+    
+      {
+        sku: "K30F1KG · A441P",
+        id: "49287205257506",
+        color_options: [
+          {"name": "색상", "value": "소이밀크", "color_rgb": "#d1c7af"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "K30F1KG · A443S",
+        id: "49287205290274",
+        color_options: [
+          {"name": "색상", "value": "멜로우피치", "color_rgb": "#dfc2ac"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "K30F1KG · A444D",
+        id: "49287205323042",
+        color_options: [
+          {"name": "색상", "value": "세이지민트", "color_rgb": "#c0c7b9"}
+        ]
+      }
+      
+    
+  ];
+  const variantsAllOptionData = [
+    
+      {
+        sku: "K30F1KG-A441P",
+        id: "49287205257506",
+        options: [
+          {"name": "색상", "value": "소이밀크"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "K30F1KG-A443S",
+        id: "49287205290274",
+        options: [
+          {"name": "색상", "value": "멜로우피치"}
+        ]
+      }
+      ,
+    
+      {
+        sku: "K30F1KG-A444D",
+        id: "49287205323042",
+        options: [
+          {"name": "색상", "value": "세이지민트"}
+        ]
+      }
+      
+    
+  ];
+</script>
+<script defer>
+    let icon_pw_show = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-show.svg?v=61838389088702437721747705927';
+    let icon_pw_unshow = '//kr.sidiz.com/cdn/shop/t/152/assets/icon-pw-unshow.svg?v=177080918668616523901747705925';
+</script>
+<script src="//kr.sidiz.com/cdn/shop/t/152/assets/bookmark.js?v=118576581409273616741753146757" defer></script>
+
+<script>
+  // PLUS ZERO: view_item
+  const viewItemData = {
+    item_id: "K30F1KG-A441P",
+    item_name: "ATTI 아띠 의자",
+    item_brand: 'SIDIZ',
+    item_category: "GROWING",
+    img_url: "thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?v=1745822416"
+  };
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // 이전 ecommerce 데이터 초기화
+    dataLayer.push({ ecommerce: null });
+    
+    window.dataLayer.push({
+      event: 'view_item',
+      page_type: '제품 상세',
+      ecommerce: {
+        items: [viewItemData]
+      }
+    });
+  }, { once: true });
+</script>
+
+<div class="modal-360 hidden" data-variant-id="49287205257506">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_587b38d9-e6a7-4e35-a56a-08ef9308307e.jpg?crop=center&amp;v=1732007286" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_587b38d9-e6a7-4e35-a56a-08ef9308307e.jpg?crop=center&amp;v=1732007286&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_587b38d9-e6a7-4e35-a56a-08ef9308307e.jpg?crop=center&amp;v=1732007286&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_587b38d9-e6a7-4e35-a56a-08ef9308307e.jpg?crop=center&amp;v=1732007286&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_01_2be55760-1f52-436f-b7a7-878472dc5cd1.jpg?crop=center&amp;v=1732007286" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_01_2be55760-1f52-436f-b7a7-878472dc5cd1.jpg?crop=center&amp;v=1732007286&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_01_2be55760-1f52-436f-b7a7-878472dc5cd1.jpg?crop=center&amp;v=1732007286&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_01_2be55760-1f52-436f-b7a7-878472dc5cd1.jpg?crop=center&amp;v=1732007286&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_02_a8868e2d-a841-428f-8652-3a57664e36e2.jpg?crop=center&amp;v=1732007285" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_02_a8868e2d-a841-428f-8652-3a57664e36e2.jpg?crop=center&amp;v=1732007285&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_02_a8868e2d-a841-428f-8652-3a57664e36e2.jpg?crop=center&amp;v=1732007285&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_02_a8868e2d-a841-428f-8652-3a57664e36e2.jpg?crop=center&amp;v=1732007285&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_03_cf09c1aa-24eb-4c27-96d9-0ed438d6f458.jpg?crop=center&amp;v=1732007286" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_03_cf09c1aa-24eb-4c27-96d9-0ed438d6f458.jpg?crop=center&amp;v=1732007286&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_03_cf09c1aa-24eb-4c27-96d9-0ed438d6f458.jpg?crop=center&amp;v=1732007286&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_03_cf09c1aa-24eb-4c27-96d9-0ed438d6f458.jpg?crop=center&amp;v=1732007286&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_04_494eaa37-ed97-4fdf-80fb-84e670ecd131.jpg?crop=center&amp;v=1732007285" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_04_494eaa37-ed97-4fdf-80fb-84e670ecd131.jpg?crop=center&amp;v=1732007285&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_04_494eaa37-ed97-4fdf-80fb-84e670ecd131.jpg?crop=center&amp;v=1732007285&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_04_494eaa37-ed97-4fdf-80fb-84e670ecd131.jpg?crop=center&amp;v=1732007285&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49287205290274">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_6313d1b3-cda9-4458-9baa-f4b3b41f19ba.jpg?crop=center&amp;v=1732007308" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_6313d1b3-cda9-4458-9baa-f4b3b41f19ba.jpg?crop=center&amp;v=1732007308&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_6313d1b3-cda9-4458-9baa-f4b3b41f19ba.jpg?crop=center&amp;v=1732007308&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_6313d1b3-cda9-4458-9baa-f4b3b41f19ba.jpg?crop=center&amp;v=1732007308&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_01.jpg?crop=center&amp;v=1732007308" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_01.jpg?crop=center&amp;v=1732007308&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_01.jpg?crop=center&amp;v=1732007308&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_01.jpg?crop=center&amp;v=1732007308&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_02.jpg?crop=center&amp;v=1732007308" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_02.jpg?crop=center&amp;v=1732007308&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_02.jpg?crop=center&amp;v=1732007308&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_02.jpg?crop=center&amp;v=1732007308&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_03.jpg?crop=center&amp;v=1732007308" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_03.jpg?crop=center&amp;v=1732007308&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_03.jpg?crop=center&amp;v=1732007308&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_03.jpg?crop=center&amp;v=1732007308&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_04.jpg?crop=center&amp;v=1732007307" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_04.jpg?crop=center&amp;v=1732007307&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_04.jpg?crop=center&amp;v=1732007307&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_04.jpg?crop=center&amp;v=1732007307&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div><div class="modal-360 hidden" data-variant-id="49287205323042">
+    <div class="close--button btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="28" height="28" />
+    </div>
+
+    <div class="swiper modal-360--swiper">
+        <div class="swiper-wrapper"><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_113b1ae0-e734-4529-af4a-7f033a2e74a3.jpg?crop=center&amp;v=1732007339" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_113b1ae0-e734-4529-af4a-7f033a2e74a3.jpg?crop=center&amp;v=1732007339&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_113b1ae0-e734-4529-af4a-7f033a2e74a3.jpg?crop=center&amp;v=1732007339&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_113b1ae0-e734-4529-af4a-7f033a2e74a3.jpg?crop=center&amp;v=1732007339&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_01.jpg?crop=center&amp;v=1732007339" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_01.jpg?crop=center&amp;v=1732007339&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_01.jpg?crop=center&amp;v=1732007339&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_01.jpg?crop=center&amp;v=1732007339&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_02.jpg?crop=center&amp;v=1732007339" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_02.jpg?crop=center&amp;v=1732007339&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_02.jpg?crop=center&amp;v=1732007339&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_02.jpg?crop=center&amp;v=1732007339&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_03.jpg?crop=center&amp;v=1732007339" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_03.jpg?crop=center&amp;v=1732007339&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_03.jpg?crop=center&amp;v=1732007339&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_03.jpg?crop=center&amp;v=1732007339&amp;width=1200 1200w">
+                </div><div class="swiper-slide image-360">
+                    <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_04.jpg?crop=center&amp;v=1732007339" alt="" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_04.jpg?crop=center&amp;v=1732007339&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_04.jpg?crop=center&amp;v=1732007339&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_04.jpg?crop=center&amp;v=1732007339&amp;width=1200 1200w">
+                </div></div>
+    </div>
+
+    <div class="navigation-360">
+        <div class="navigation-prev btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-left-line-bk-28.svg?v=36409951064833658691747705927" width="28" height="28">
+            
+        </div>
+        
+        <div class="navigation-next btn-hover--bk">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-arrow-right-line-bk-28.svg?v=34060955623746659201747705927" width="28" height="28">
+            
+        </div>
+    </div>
+</div>
+<template id="product-description">처음으로 책상 앞의 시간을 갖기 시작한 아이를 위한 아띠는, 아이의 성장에 맞춰 높이 조절이 가능해 안정적이고 바른 자세를 유지하도록 도와줍니다.</template>
+<div class="container">
+  
+  <product-page
+    id="product-template--24699216003362__configurator"
+    data-collection=""
+    data-id="9526832005410"
+    data-availability="true"
+    data-original-price="7300000"
+    data-login="false"
+    data-sku="K30F1KG-A441P"
+    data-name="ATTI 아띠 의자"
+    data-category="GROWING"
+    data-variant-text="소이밀크"
+    data-variant-price="7300000"
+    data-compare-at-price="0"
+  >
+    
+    
+    
+
+    
+    
+    <div class="product-title--wrapper mobile">
+      <div class="wrapper--header">
+        <h1>ATTI 아띠 의자</h1>
+
+        <div class="button--sns">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g id="share">
+              <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+      <title class="product--sku">K30F1KG · A441P</title>
+
+      
+    </div>
+
+    <div class="product-gallery--wrapper">
+      
+      <div class="product-gallery web">
+        <div class="product-media--wrapper">
+          <div class="product-media--item variant-media"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416" alt="ATTI - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=1200 1200w" loading="eager" class="" data-variant-id="49287205257506"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421" alt="아띠 의자 유아용 높이 조절 어린이 책상 의자 안정적인 자세 지원" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49287205290274"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418" alt="ATTI - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49287205323042"><div class="btn-img-360" data-variant-id="49287205257506">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item"><img src="//kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=1200 1200w" loading="eager"></div>
+        </div>
+      </div>
+      <div class="product-gallery mobile swiper">
+        <div class="wrapper__contents swiper-wrapper">
+          
+
+          
+            <div class="product-media--item variant-media swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416" alt="ATTI - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=1200 1200w" loading="eager" class="" data-variant-id="49287205257506"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421" alt="아띠 의자 유아용 높이 조절 어린이 책상 의자 안정적인 자세 지원" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49287205290274"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418" alt="ATTI - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49287205323042"><div class="btn-img-360" data-variant-id="49287205257506">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=1200 1200w" loading="eager"></div>
+          
+            <div class="product-media--item variant-media swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416" alt="ATTI - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?crop=center&amp;v=1745822416&amp;width=1200 1200w" loading="eager" class="" data-variant-id="49287205257506"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421" alt="아띠 의자 유아용 높이 조절 어린이 책상 의자 안정적인 자세 지원" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A443S_00_fd2608e1-f375-4db1-b270-431020c618cd.jpg?crop=center&amp;v=1785134421&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49287205290274"><img src="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418" alt="ATTI - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_A444D_00_ced609c8-8b2b-4252-80a5-4a0a0aff72a3.jpg?crop=center&amp;v=1745822418&amp;width=1200 1200w" loading="eager" class="hidden" data-variant-id="49287205323042"><div class="btn-img-360" data-variant-id="49287205257506">
+  <div class="btn--icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8.0084 3C3.4394 3 0 4.75342 0 7.08007C0 9.38986 3.38882 11.1264 7.89038 11.1601L6.96309 12.0874C6.65962 12.3909 6.65962 12.8798 6.96309 13.1833C7.11483 13.3351 7.31715 13.4025 7.50261 13.4025C7.70492 13.4025 7.90724 13.3182 8.04212 13.1665L10.2845 10.9241C10.5879 10.6206 10.5879 10.1317 10.2845 9.82821L8.04212 7.61958C7.73864 7.31611 7.24971 7.31611 6.94623 7.61958C6.64276 7.92306 6.64276 8.41199 6.94623 8.71547L7.87352 9.64276C4.24867 9.60904 1.53424 8.29397 1.53424 7.09693C1.53424 5.89988 4.29925 4.5511 7.99154 4.5511C11.6838 4.5511 14.4488 5.89988 14.4488 7.09693C14.4488 7.70388 13.6901 8.37827 12.4762 8.86721C12.0885 9.01894 11.8862 9.47416 12.0547 9.87879C12.2065 10.2666 12.6617 10.4689 13.0663 10.3003C14.9546 9.5416 15.9999 8.39513 15.9999 7.09693C16.0168 4.75342 12.5774 3 8.0084 3Z" fill="#242526"/>
+    </svg>
+  </div>
+  <div class="btn--text">360 VIEW</div>
+</div>
+</div><div class="product-media--item swiper-slide"><img src="//kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124" alt="" srcset="//kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/IMG_1_9f27166f-fb84-42b2-bb89-4d7a04da5167.jpg?crop=center&amp;v=1730372124&amp;width=1200 1200w" loading="eager"></div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="product-text--wrapper">
+    
+      <div class="product-title--wrapper web">
+        <div class="wrapper--header">
+          <h1>ATTI 아띠 의자</h1>
+
+          <div class="button--sns btn-hover--bk">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="share">
+                <path id="Vector" d="M1.97949 10C1.97949 10.7092 2.2612 11.3893 2.76265 11.8907C3.26409 12.3922 3.9442 12.6739 4.65335 12.6739C5.3625 12.6739 6.0426 12.3922 6.54405 11.8907C7.04549 11.3893 7.3272 10.7092 7.3272 10C7.3272 9.29088 7.04549 8.61077 6.54405 8.10933C6.0426 7.60788 5.3625 7.32617 4.65335 7.32617C3.9442 7.32617 3.26409 7.60788 2.76265 8.10933C2.2612 8.61077 1.97949 9.29088 1.97949 10Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_2" d="M12.6729 4.65237C12.6729 5.36152 12.9546 6.04163 13.456 6.54307C13.9575 7.04451 14.6376 7.32622 15.3467 7.32622C16.0559 7.32622 16.736 7.04451 17.2374 6.54307C17.7389 6.04163 18.0206 5.36152 18.0206 4.65237C18.0206 3.94322 17.7389 3.26311 17.2374 2.76167C16.736 2.26022 16.0559 1.97852 15.3467 1.97852C14.6376 1.97852 13.9575 2.26022 13.456 2.76167C12.9546 3.26311 12.6729 3.94322 12.6729 4.65237Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_3" d="M12.6729 15.3477C12.6729 16.0568 12.9546 16.7369 13.456 17.2384C13.9575 17.7398 14.6376 18.0215 15.3467 18.0215C16.0559 18.0215 16.736 17.7398 17.2374 17.2384C17.7389 16.7369 18.0206 16.0568 18.0206 15.3477C18.0206 14.6385 17.7389 13.9584 17.2374 13.457C16.736 12.9555 16.0559 12.6738 15.3467 12.6738C14.6376 12.6738 13.9575 12.9555 13.456 13.457C12.9546 13.9584 12.6729 14.6385 12.6729 15.3477Z" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+                <path id="Vector_4" d="M7.04223 8.80516L12.9587 5.84766M12.9616 14.1551L7.04004 11.1939" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>
+              </g>
+            </svg>
+        </div>
+        <div class="popup--sns hidden">
+    <div class="sns--content">
+        <div class="sns--share btn-hover--bk" data-sns="kakao">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-kakao.svg?v=31699249073415741071747705927" width="28" height="28">
+            </div>
+            <div class="sns--title">카카오톡</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="meta">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-meta.svg?v=12638264478371187911747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">페이스북</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="x">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-x.svg?v=12077837706396259491747705925" width="28" height="28">
+            </div>
+            <div class="sns--title">엑스</div>
+        </div>
+        <div class="sns--share btn-hover--bk" data-sns="link">
+            <div class="sns--img">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-sns-link.svg?v=151576145008710206661747705924" width="28" height="28">
+            </div>
+            <div class="sns--title">URL 복사</div>
+        </div>
+    </div>
+
+    <div class="popup--close btn-hover--bk">
+        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+    </div>
+</div>
+      </div>
+
+      
+
+        <title class="product--sku">K30F1KG · A441P</title>
+
+        
+
+      </div>
+      
+      
+        
+            <div
+              class="product-variant--wrapper"
+              
+              
+            >
+              <product-variants
+                data-main-product-variants
+                data-variants="1"
+                data-hide-variants="
+                  true
+                "
+                data-url="/products/atti-chair"
+                data-id="template--24699216003362__configurator"
+                data-style=""
+                
+                
+                
+                  data-has-variants
+                
+                
+              >
+                <script type="application/json">
+                  [
+                    
+                      {
+                        "title": "소이밀크",
+                        
+                        "available": true,
+                        "id": 49287205257506,
+                        "sku": "K30F1KG-A441P",
+                        "price": 7300000,
+                        "compare_at_price": 7900000,
+                        "special_price": 73000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["소이밀크"],
+                        "option1": "소이밀크",
+                        "option2": null,
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "택배",
+                            "assembly_type": "DIY",
+                            "description": "고객님이 직접 조립하는 DIY 제품입니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "멜로우피치",
+                        
+                        "available": true,
+                        "id": 49287205290274,
+                        "sku": "K30F1KG-A443S",
+                        "price": 7300000,
+                        "compare_at_price": 7900000,
+                        "special_price": 73000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["멜로우피치"],
+                        "option1": "멜로우피치",
+                        "option2": null,
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "택배",
+                            "assembly_type": "DIY",
+                            "description": "고객님이 직접 조립하는 DIY 제품입니다."
+                          },
+                        
+                        "expected_at": 4
+                      },
+                    
+                      {
+                        "title": "세이지민트",
+                        
+                        "available": true,
+                        "id": 49287205323042,
+                        "sku": "K30F1KG-A444D",
+                        "price": 7300000,
+                        "compare_at_price": 7900000,
+                        "special_price": 73000,
+                        "event_start_dt": "2026-07-31T15:30:00Z",
+                        "event_end_dt": "2026-08-31T15:30:00Z",
+                        "options": ["세이지민트"],
+                        "option1": "세이지민트",
+                        "option2": null,
+                        "option3": null,
+                        
+                        
+                          "deli_assembly_info": {
+                            "delivery_type": "택배",
+                            "assembly_type": "DIY",
+                            "description": "고객님이 직접 조립하는 DIY 제품입니다."
+                          },
+                        
+                        "expected_at": 4
+                      }
+                    
+                  ]
+                </script>
+                <div
+                  class="product-variants no-js-hidden"
+                  
+                  
+                >
+                  
+                    
+
+                    <div
+                      class="product-variant depth-1"
+                      data-option="color"
+                      data-js-product-variant
+                    >
+                      
+                        <span class="product-variant__name">색상</span>
+                      
+
+                      <div
+                        class="product-variant__container product-variant__container--radio product-variant__container--radio--wrap"
+                        data-js-product-variant-container="radio"
+                      >
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699216003362__configurator"
+                              id="atti-chair-option-color-1-template--24699216003362__configurator"
+                              value="소이밀크"
+                              
+                                checked
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="atti-chair-option-color-1-template--24699216003362__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="소이밀크"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">소이밀크</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699216003362__configurator"
+                              id="atti-chair-option-color-2-template--24699216003362__configurator"
+                              value="멜로우피치"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="atti-chair-option-color-2-template--24699216003362__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="멜로우피치"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">멜로우피치</div>
+                            </label>
+                          </div>
+                        
+                          <div class="product-variant__item product-variant__item--radio">
+                            <input
+                              type="radio"
+                              name="product-color-template--24699216003362__configurator"
+                              id="atti-chair-option-color-3-template--24699216003362__configurator"
+                              value="세이지민트"
+                              
+                              class="product-variant__input product-variant-value" 
+                            >
+
+                            <label
+                              for="atti-chair-option-color-3-template--24699216003362__configurator"
+                              class="product-variant__label"
+                              data-option-name="color"
+                              data-option-value="세이지민트"
+                            >
+                              
+                                <div class="color-chip">
+                                  <div></div>
+                                </div>
+                              
+                              <div class="option-name">세이지민트</div>
+                            </label>
+                          </div>
+                        
+                      </div>
+                    </div>
+                  
+                </div>
+
+                <noscript>
+                  <label
+                    for="Variants-template--24699216003362__configurator"
+                    class="text-size--small"
+                    style="display:block;margin-bottom:.75rem"
+                  >변</label>
+                  <select
+                    name="id"
+                    id="Variants-template--24699216003362__configurator"
+                    class="productSelect"
+                    
+                    form="product-form-template--24699216003362__configurator"
+                  >
+                    
+                      <option
+                        
+                          selected="selected"
+                        
+                        
+                        value="49287205257506"
+                      >
+                        소이밀크
+                        
+                        - 73,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49287205290274"
+                      >
+                        멜로우피치
+                        
+                        - 73,000
+                      </option>
+                    
+                      <option
+                        
+                        
+                        value="49287205323042"
+                      >
+                        세이지민트
+                        
+                        - 73,000
+                      </option>
+                    
+                  </select>
+                </noscript>
+              </product-variants>
+              <a class="product-review-anchor product-review-anchor--option hidden" href="#prod_detail_review" data-product-review-anchor>
+                <span class="product-review-anchor__label">리뷰</span>
+                <span class="product-review-anchor__count" data-product-review-count>0</span>
+                <span class="product-review-anchor__suffix">개 보기</span>
+              </a>
+            </div>
+
+          
+      
+        
+            <div class="product-price--wrapper" data-js-product-price-compact >
+              <div id="product-price-template--24699216003362__configurator" class="product-price">
+  <div class="product-discount--wrapper">
+    <div class="member--discount">
+      <div class="discount--title">회원 할인가</div>
+      <div class="discount--details">
+        <div class="discount--details-top">
+          <div class="product-discount--percent"></div>
+          <div class="product-price--best"></div>
+        </div>
+        <div class="product-price--original"></div>
+      </div>
+    </div>
+
+    <details class="max--discount">
+      <summary class="discount--header">
+        <div class="discount-header--content">
+          <div class="discount-header--text">
+            <div class="discount--title q--popup">
+              <span>최대 혜택가</span>
+              <div class="button--popup" data-type="price">
+                <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+              </div>
+            </div>
+            <div class="product-price--coupon"></div>
+          </div>
+
+          <div class="arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2.1875 4.8125L7 9.625L11.8125 4.8125" stroke="black" stroke-width="1.2" stroke-linecap="square"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="popup--wrapper hidden" data-type="price">
+          <div class="popup--content">
+            <ul>
+              <li>보유 쿠폰의 최대 할인 혜택이 적용된 금액입니다.</li>
+              <li>쿠폰은 주문 단계에서 적용/변경할 수 있습니다.</li>
+            </ul>
+          </div>
+          <div class="popup--close">
+            <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+          </div>
+        </div>
+      </summary>
+
+      
+      <div class="discount--body">
+        <div class="title">쿠폰 할인</div>
+        
+        <div class="coupon--wrapper"></div>
+      </div>
+    </details>
+  </div>
+</div>
+
+            </div>
+          
+      
+        
+            <div class="button--cardNoInterestInfo btn-hover--bk">
+              <a href="https://www.mainpay.co.kr/intFreeInfo/popup/all.do?mbr_no=116833">카드 무이자 정보</a>
+            </div>
+          
+      
+        
+            
+              <div class="product-complementary--wrapper" data-js-complementary-wrapper >
+                <div class="wrapper--header">
+                  <div class="title">별도 구매 (선택)</div>
+                </div>
+                <div class="wrapper--body">
+                  <div class="complementary--content">
+                    <div class="swiper product-complementary--swiper">
+                      <div class="swiper-wrapper">
+                        
+                          <div class="product-item-compact swiper-slide" data-js-product-item>      
+                            <div class="product-item--image">
+                              <a href="/products/atti-desk">
+                                
+                                
+                                  <img src="//kr.sidiz.com/cdn/shop/files/thum_atti_K30X1KG_WW_00_5fab6b75-be8c-4270-949d-bb3524e54ed7.jpg?crop=center&amp;v=1754392310" alt="ATTI 책상 - SIDIZ" srcset="//kr.sidiz.com/cdn/shop/files/thum_atti_K30X1KG_WW_00_5fab6b75-be8c-4270-949d-bb3524e54ed7.jpg?crop=center&amp;v=1754392310&amp;width=352 352w, //kr.sidiz.com/cdn/shop/files/thum_atti_K30X1KG_WW_00_5fab6b75-be8c-4270-949d-bb3524e54ed7.jpg?crop=center&amp;v=1754392310&amp;width=832 832w, //kr.sidiz.com/cdn/shop/files/thum_atti_K30X1KG_WW_00_5fab6b75-be8c-4270-949d-bb3524e54ed7.jpg?crop=center&amp;v=1754392310&amp;width=1200 1200w">
+                                
+                              </a>
+                              
+                              <div class="button__plus"
+                                data-js-sidebar-handle
+                                data-js-complementary-btn
+                                aria-expanded="false"
+                                aria-controls="product-complementary-sidebar"
+                                data-comp-title="ATTI 아띠 책상"
+                                data-product-handle="atti-desk"
+                                role="button"
+                              ><script class="comp-data" type="application/json">{                                  "title": "ATTI 아띠 책상",                                  "handle": "atti-desk",                                  "url": "\/products\/atti-desk",                                  "category": "GROWING",                                  "options": [{                                        "name": "색상",                                        "position": 1,                                        "values": [{                                              "name": "화이트",                                              "id": 4396197544226,"rgb": null}]                                      }],                                  "variants": [{                                        "title": "화이트",                                        "id": 50200054071586,                                        "sku": "K30X1KG-WW","inventory_quantity": 1999851,                                        "available": true,                                        "price": 94000,                                        "special_price": "94,000",                                        "event_start_dt": "2026-07-31T15:30:00Z",                                        "event_end_dt": "2026-08-31T15:30:00Z",                                        "compare_at_price": "99,000",                                        "image": "\/\/kr.sidiz.com\/cdn\/shop\/files\/thum_atti_K30X1KG_WW_00_5fab6b75-be8c-4270-949d-bb3524e54ed7.jpg?v=1754392310",                                                                                "options": ["화이트"],                                        "option1": "화이트",                                        "option2": null,                                        "option3": null,                                        "frame_rgb": null,                                        "color_rgb": null                                      }]                                }</script>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                  <path d="M8 3V13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                  <path d="M3 8H13" stroke="black" stroke-width="1.2" stroke-linecap="square" stroke-linejoin="round"/>
+                                </svg>
+                              </div>
+                            </div>
+      
+                            <div class="product-item-details">
+                              <div class="title">ATTI 아띠 책상</div>
+                              
+                              
+                     
+                              
+
+                              <div class="product-item-price">
+                                
+                                  
+                                    <div class="discount-title">회원 할인가</div>
+                                    <div class="discount-price">94,000원</div>
+                                    <div class="origin-price" style="text-decoration: line-through;">99,000원</div>
+                                  
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            
+          
+      
+        
+            <div class="product-buttons--wrapper">
+              <div class="product-favorite">
+                <div class="button-favorite" data-item-name="ATTI 아띠 의자" data-item-category="GROWING" data-item-img="//kr.sidiz.com/cdn/shop/files/thum_atti_A441P_00_0ac74bfd-1bea-4f2a-b59f-7478d3557e63.jpg?v=1745822416">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-line-wh-28.svg?v=149835505164352560671747705926" alt="북마크 아이콘" width="28" height="28"
+                        data-bookmark="false" data-id="9526832005410" data-handle="atti-chair" 
+                        onclick="addBookmark(event.target)" class="bookmark-false">
+                  <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-bookmark-solid-wh-28.svg?v=32384455147906168021747705924" alt="북마크 아이콘" width="28" height="28" 
+                        data-bookmark="true" data-id="9526832005410" data-handle="atti-chair" 
+                        onclick="removeBookmark(event.target)" class="bookmark-true hidden"> 
+                </div>
+              </div>
+
+              <div class="product-actions" >
+                <product-form
+                  id="add-to-cart-template--24699216003362__configurator"
+                  class="product-form"
+                  data-ajax-cart
+                  data-js-product-form
+                >
+                  <form method="post" action="/cart/add" id="product-form-template--24699216003362__configurator" accept-charset="UTF-8" class="form" enctype="multipart/form-data" novalidate="novalidate" data-type="add-to-cart-form"><input type="hidden" name="form_type" value="product" /><input type="hidden" name="utf8" value="✓" />
+                    <input type="hidden" name="id" value="49287205257506">
+                    <div class="product__cart-functions">
+                      <div class="button__cart-div">
+                        <button
+                          type="submit"
+                          name="add"
+                          class="
+                            add-to-cart button button--solid button--product button--loader button--move
+                            
+                            
+                          "
+                          data-js-product-add-to-cart
+                          data-main-product-add-to-cart
+                        >
+                          <span class="button__text" data-js-product-add-to-cart-text>
+                            장바구니 담기
+                          </span>
+                          <span class="button__preloader">
+                            <svg class="button__preloader-element" viewBox="25 25 50 50">
+                              <circle cx="50" cy="50" r="20" fill="none" stroke-width="4"/>
+                            </svg>
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  <input type="hidden" name="product-id" value="9526832005410" /><input type="hidden" name="section-id" value="template--24699216003362__configurator" /></form>
+                </product-form>
+              </div>
+            </div>
+            
+          
+      
+        
+            
+            
+
+          
+      
+        
+            
+            
+            <div class="product-delivery-and-warranty--wrapper" >
+              <div class="product-delivery--wrapper">
+                <div class="delivery--header">
+                  <div class="delivery--title">배송 정보</div>
+                </div>
+
+                <div class="delivery--body">
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>예상 배송일</span>
+                      <div class="button--popup" data-type="deli_date">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="expected-at"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_date">
+                      <div class="popup--content">
+                        <ul>
+                          <li>
+                            <span>수도권 평균 배송일 기준으로 산정된 예상 배송일이며 지역 및 재고 상황에 따라 달라질 수 있습니다.</span>
+                          </li>
+                          <li>
+                            <span>실제 배송일은 주문 완료 후 확인할 수 있습니다.</span>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="product--data">
+                    <div class="data--title q--popup">
+                      <span>배송 유형</span>
+                      <div class="button--popup" data-type="deli_type">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-question-circle.svg?v=130703323062637247241747705925" width="24" height="24" />
+                      </div>
+                    </div>
+                    <div class="data--text" data-detail="delivery-type"></div>
+
+                    <div class="popup--wrapper hidden" data-type="deli_type">
+                      <div class="popup--content">
+                        <span>제주도는 소비자가의 4% 추가 배송비가 부과됩니다.</span>
+                      </div>
+                      <div class="popup--close">
+                        <img src="//kr.sidiz.com/cdn/shop/t/152/assets/icon-close-line-bk.svg?v=86136148669221608301747705927" width="18" height="18" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title" data-detail="assembly-type"></div>
+                    <div class="data--text" data-detail="description"></div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="product-warranty--wrapper">
+                <div class="product--data warranty--period">
+                  <div class="data--title">품질보증</div>
+                  <div class="data--text">5년</div>
+                </div>
+              </div>
+            </div>
+
+          
+      
+        
+            <div class="notice--title product-notice--title">구매 전 확인사항</div>
+            <div id="notice_TAHBDn" class="product-notice--wrapper" >
+              
+              
+                <div class="notice--image">
+                  <img src="//kr.sidiz.com/cdn/shop/files/ATTI_NOTIC_chair.jpg?crop=center&amp;v=1730272891" alt="" srcset="//kr.sidiz.com/cdn/shop/files/ATTI_NOTIC_chair.jpg?crop=center&amp;v=1730272891&amp;width=352 352w">
+                </div>
+              
+
+              <div class="notice--content rich-text-area"><div class="size-15">제품 표면의 검은 점은 블로우 사출품 생산 과정에서 생기는 자연스러운 현상입니다. 불량 제품이 아니므로 안심하셔도 됩니다.</div></div>
+
+              <style data-shopify>
+                #notice_TAHBDn {
+                  background-color: #eaedf0;
+                }
+                #notice_TAHBDn .notice--title {
+                  color: #000000;
+                }
+                #notice_TAHBDn .notice--content {
+                  color: #434548;
+                }
+              </style>
+            </div>
+          
+      
+        
+            <div class="product-basic-info--wrapper" >
+              <details>
+                <summary class="basic-info--header">
+                  <div class="basic-info--title">BASIC INFO</div>
+
+                  <div class="arrow">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_7818_13448)">
+                        <path d="M13 4L7 10L1 4" stroke="#434548" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_7818_13448">
+                          <rect width="14" height="14" fill="white" transform="translate(14) rotate(90)"/>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                </summary>
+
+                <div class="basic-info--body">
+                  <div class="product--data">
+                    <div class="data--title">제품명</div>
+                    <div class="data--text">시디즈 아띠 유아 의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">KC 인증필유무</div>
+                    <div class="data--text">어린이제품 안전 특별법(공급자적합성확인 대상)</div>
+                  </div>
+                  <div class="product--data color--data">
+                    <div class="data--title">색상</div>
+                    <div class="data--text">
+                      <ul>
+                        
+                          <li>소이밀크</li>
+                        
+                          <li>멜로우피치</li>
+                        
+                          <li>세이지민트</li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">구성품</div>
+                    <div class="data--text">아기 의자, 유아 의자, 아이 의자, 유아 식탁 의자, 어린이 의자, 학습지 의자, 어린이집 의자</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">주요 소재</div>
+                    <div class="data--text">인조가죽, 플라스틱, 스펀지, 기타</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조사</div>
+                    <div class="data--text">시디즈</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">제조국</div>
+                    <div class="data--text">대한민국</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">크기</div>
+                    <div class="data--text">상세페이지 참조</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">배송비</div>
+                    <div class="data--text">무료배송(제주도 추가 배송비 부과)</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">품질 보증 기준</div>
+                    <div class="data--text">5년</div>
+                  </div>
+                  <div class="product--data">
+                    <div class="data--title">AS 책임자 및 연락처</div>
+                    <div class="data--text">컨택센터 1577-5674</div>
+                  </div>
+                </div>
+              </details>
+            </div>
+          
+      
+    </div>
+  </product-page>
+</div>
+
+<script>
+  const PRODUCT_GUIDE_FILTER_ENDPOINT = "https://sidiz-shopify.sidiz.com/metaobject/filter/get";
+  const pageProductCode = "K30F1KG";
+
+  async function fetchHasGuideByProductCode(productCode) {
+    if (!productCode) {
+      return false;
+    }
+
+    try {
+      const response = await fetch(PRODUCT_GUIDE_FILTER_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          type: ["product_guide_code_mapping"],
+          filter_key: "product_code",
+          filter_value: productCode,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error(`[product-guide] Filter API error: ${response.status}`);
+        return false;
+      }
+
+      const result = await response.json();
+      if (result?.success && Array.isArray(result.data)) {
+        return result.data.length > 0;
+      }
+    } catch (error) {
+      console.error("[product-guide] Failed to fetch guide mapping:", error);
+    }
+
+    return false;
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const hasGuide = await fetchHasGuideByProductCode(pageProductCode);
+
+    let findYourFitBtn = document.querySelector('.find-your-fit-btn');
+    if(findYourFitBtn){
+      if(hasGuide) {
+        findYourFitBtn.classList.remove('hidden');
+        findYourFitBtn.querySelector('a').setAttribute('href', `/pages/product-guide-result?productCode=${encodeURIComponent(pageProductCode)}&searchbar=true`);
+      }
+      else {
+        findYourFitBtn.classList.add('hidden');
+      }
+    }
+    document.querySelectorAll('a[data-popup-url]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      const url = this.dataset.popupUrl;
+      const popupType = this.dataset.popupType;
+
+      const popup = window.open(
+        url,
+        `popup_${popupType}`,
+        'scrollbars=yes,resizable=yes'
+      );
+
+      if (!popup || popup.closed || typeof popup.closed == 'undefined') {
+        alert("팝업 차단이 설정되어 있습니다. 팝업을 허용해주세요.");
+      }
+    });
+  });
+  })
+</script>
+
+
+</section>
